@@ -7,6 +7,7 @@ public class PantallaVenta extends javax.swing.JFrame {
      */
     public PantallaVenta() {
         initComponents();
+        
     }
 
     /**
