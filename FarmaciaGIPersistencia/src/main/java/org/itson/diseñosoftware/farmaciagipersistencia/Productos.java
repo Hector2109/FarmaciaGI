@@ -1,7 +1,6 @@
 package org.itson.diseñosoftware.farmaciagipersistencia;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,9 +24,6 @@ public class Productos{
     public void agregarInventario(){
         agregarListaProductos();
     }
-    
-    
-    
     
     private void agregarListaProductos(){
         
@@ -116,7 +112,6 @@ public class Productos{
         
     }
     
-    
     public List<Producto> buscarProductoId(String id){
         List <Producto> productosSemejantes = new ArrayList<>();
         
@@ -130,10 +125,13 @@ public class Productos{
         return productosSemejantes;
         
     }
-    
-    
-    
-    
-    
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
     
 }

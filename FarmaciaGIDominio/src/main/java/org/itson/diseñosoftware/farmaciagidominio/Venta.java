@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagidominio;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 /**
  *
@@ -57,5 +58,11 @@ public class Venta {
         this.fecha = fecha;
     }
     
-    
+     public Float calcularCosto() {
+        total = 0F; 
+        for (Producto producto : productos.getProductos()) {
+            total += producto.getCosto();
+        }
+        return total;
+    }
 }
