@@ -1,5 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+
 /**
  *
  * @author FarmaciaGI
@@ -9,8 +11,14 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     /**
      * Creates new form DlgBuscarProducto
      */
-    public DlgBuscarProducto(java.awt.Frame parent, boolean modal) {
+    
+    private Productos proeductosInventario;
+    private Productos productosBuscados;
+    
+    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos productos) {
         super(parent, modal);
+        this.proeductosInventario = productos;
+        this.productosBuscados = new Productos ();
         initComponents();
     }
 
@@ -33,9 +41,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         txtNombreIdProducto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(812, 560));
         setMinimumSize(new java.awt.Dimension(812, 560));
-        setPreferredSize(new java.awt.Dimension(812, 560));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
@@ -96,6 +102,11 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
         txtNombreIdProducto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtNombreIdProducto.setPreferredSize(new java.awt.Dimension(36, 37));
+        txtNombreIdProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreIdProductoActionPerformed(evt);
+            }
+        });
         fondo.add(txtNombreIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 670, -1));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 812, 600));
@@ -111,6 +122,10 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void txtNombreIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreIdProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreIdProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
