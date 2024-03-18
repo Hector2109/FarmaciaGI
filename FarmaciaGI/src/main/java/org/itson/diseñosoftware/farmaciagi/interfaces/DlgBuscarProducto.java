@@ -1,5 +1,6 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import javax.swing.JOptionPane;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 /**
@@ -11,14 +12,13 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     /**
      * Creates new form DlgBuscarProducto
      */
-    
-    private Productos proeductosInventario;
+    private Productos productosInventario;
     private Productos productosBuscados;
-    
+
     public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos productos) {
         super(parent, modal);
-        this.proeductosInventario = productos;
-        this.productosBuscados = new Productos ();
+        this.productosInventario = productos;
+        this.productosBuscados = new Productos();
         initComponents();
     }
 
@@ -116,11 +116,18 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        // TODO add your handling code here:
+        if (!txtNombreIdProducto.getText().isBlank()) {
+            productosBuscados.setProductos(productosInventario.buscarProductoNombre(txtNombreIdProducto.getText()));
+            if (productosBuscados.getProductos().isEmpty()){
+                productosBuscados.setProductos(productosInventario.buscarProductoId(txtNombreIdProducto.getText()));
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre o clave del producto", "Asegurate de no tener la casila vacía", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void txtNombreIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreIdProductoActionPerformed
