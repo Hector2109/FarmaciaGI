@@ -68,6 +68,11 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         btnContinuar.setBorder(null);
         btnContinuar.setMaximumSize(new java.awt.Dimension(100, 30));
         btnContinuar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
         fondo.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, 142, 37));
 
         btnCancelar.setBackground(new java.awt.Color(191, 191, 191));
@@ -106,6 +111,10 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContinuarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
