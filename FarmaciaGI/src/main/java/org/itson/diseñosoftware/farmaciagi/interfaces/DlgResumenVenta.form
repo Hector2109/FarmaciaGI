@@ -110,9 +110,9 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtCantidad" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                                              <Component id="txtTotal" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -129,7 +129,7 @@
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="592" max="32767" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFecha" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -150,8 +150,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -159,7 +159,7 @@
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFecha" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="453" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -207,17 +207,17 @@
                 <Property name="text" type="java.lang.String" value="TOTAL"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="txtCantidad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel4"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="txtFecha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel4"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
+            <Component class="javax.swing.JLabel" name="txtTotal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel4"/>
               </Properties>

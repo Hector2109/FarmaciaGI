@@ -36,9 +36,9 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
         btnImprimirTicket = new javax.swing.JButton();
 
@@ -69,11 +69,11 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setText("TOTAL");
 
-        jLabel4.setText("jLabel4");
+        txtCantidad.setText("jLabel4");
 
-        jLabel5.setText("jLabel4");
+        txtFecha.setText("jLabel4");
 
-        jLabel6.setText("jLabel4");
+        txtTotal.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,9 +93,9 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4)
-                                        .addGap(74, 74, 74)
-                                        .addComponent(jLabel6)
+                                        .addComponent(txtCantidad)
+                                        .addGap(142, 142, 142)
+                                        .addComponent(txtTotal)
                                         .addGap(61, 61, 61))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -104,7 +104,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(592, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
+                    .addComponent(txtFecha)
                     .addGap(100, 100, 100)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,13 +122,13 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel6)))
+                        .addComponent(txtCantidad)
+                        .addComponent(txtTotal)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(33, 33, 33)
-                    .addComponent(jLabel5)
+                    .addComponent(txtFecha)
                     .addContainerGap(453, Short.MAX_VALUE)))
         );
 
@@ -208,13 +208,13 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel txtCantidad;
+    private javax.swing.JLabel txtFecha;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 }

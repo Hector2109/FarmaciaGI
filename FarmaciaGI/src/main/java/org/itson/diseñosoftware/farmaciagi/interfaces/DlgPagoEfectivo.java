@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 /**
@@ -62,6 +58,11 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         btnCancelar.setText("CANCELAR");
         btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(191, 191, 191), 1, true));
         btnCancelar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnAceptar.setBackground(new java.awt.Color(191, 191, 191));
         btnAceptar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -150,6 +151,10 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,8 +1,6 @@
-package org.itson.diseñosoftware.farmaciagidominio;
-
+package org.itson.diseñosoftware.farmaciagipersistencia;
 import java.util.GregorianCalendar;
-import java.util.List;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagidominio.Producto;
 /**
  *
  * @author Enrique Rodriguez
@@ -12,6 +10,7 @@ public class Venta {
     private Productos productos;
     private Float total;
     private GregorianCalendar fecha;
+    
 
     public Venta(Integer idVenta, Productos productos, Float total, GregorianCalendar fecha) {
         this.idVenta = idVenta;
