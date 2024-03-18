@@ -1,6 +1,13 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import java.util.List;
 import javax.accessibility.AccessibleState;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import org.itson.diseñosoftware.farmaciagidominio.Producto;
+import org.itson.diseñosoftware.farmaciagipersistencia.PersistenciaException;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
@@ -9,7 +16,7 @@ public class PantallaVenta extends javax.swing.JFrame {
      */
     public PantallaVenta() {
         initComponents();
-        
+        llenarTabla();
     }
 
     /**
@@ -281,6 +288,31 @@ public class PantallaVenta extends javax.swing.JFrame {
                 new PantallaVenta().setVisible(true);
             }
         });
+    }
+
+    //Métodos 
+    private void llenarTabla() {
+        List<Producto> listaProductos;
+        Productos productos = new Productos();
+        
+        listaProductos = productos.getProductos();
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("ARTICULO");
+        modelo.addColumn("CANTIDAD");
+        modelo.addColumn("IMPORTE");
+        
+        for (Producto producto : listaProductos) {
+            Object[] fila = {
+                producto.getId(),
+                "Cantidad",
+                producto.getCosto()
+            };
+            modelo.addRow(fila);
+        }
+        tblVenta.setModel(modelo);
+        TableColumnModel columnModel = tblVenta.getColumnModel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
