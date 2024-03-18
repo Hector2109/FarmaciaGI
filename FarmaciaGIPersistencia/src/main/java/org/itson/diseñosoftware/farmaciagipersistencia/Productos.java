@@ -3,6 +3,8 @@ package org.itson.diseñosoftware.farmaciagipersistencia;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 
 /**
@@ -13,23 +15,72 @@ public class Productos{
     
     List <Producto> productos = new ArrayList<>();
 
+    /**
+     * Constructor que nos ayudará a harcodear el inventario
+     */
     public Productos() {
+        
+    }
+    
+    public void agregarInventario(){
         agregarListaProductos();
     }
     
     
+    
+    
     private void agregarListaProductos(){
         
-        productos.add(new Producto ("Paracetamol", 8.21F, "Ultra", "PCO-001"));
-        productos.add(new Producto ("Sildenafil", 25.04F, "Ultra", "SLD-541"));
-        productos.add(new Producto ("Naproxeno", 30.19F, "Amsa", "NPX-649"));
-        productos.add(new Producto ("Treda", 35.21F, "Amsa", "TDA-874"));
-        productos.add(new Producto ("Rebotril", 500F, "Psychopath", "RPL-871"));
-        productos.add(new Producto ("Ventanilo", 54.98F, "Psychopath", "VLP-405"));
-        productos.add(new Producto ("Simi Paletas", 40.87F, "Simi", "SMP-408"));
-        productos.add(new Producto ("Simi Fibra", 299.5F, "Simi", "SMF-740"));
-        productos.add(new Producto ("Diclofenaco", 84F, "Amsa", "DCA-471"));
-        productos.add(new Producto ("Proctoacid", 121.04F, "Ultra", "PRD-450"));
+        try {
+            agregarProducto(new Producto ("Paracetamol", 8.21F, "Ultra", "PCO-001"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Sildenafil", 25.04F, "Ultra", "SLD-541"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Naproxeno", 30.19F, "Amsa", "NPX-649"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Treda", 35.21F, "Amsa", "TDA-874"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Rebotril", 500F, "Psychopath", "RPL-871"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Ventanilo", 54.98F, "Psychopath", "VLP-405"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Simi Paletas", 40.87F, "Simi", "SMP-408"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Simi Fibra", 299.5F, "Simi", "SMF-740"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Diclofenaco", 84F, "Amsa", "DCA-471"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            agregarProducto(new Producto ("Proctoacid", 121.04F, "Ultra", "PRD-450"));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     
