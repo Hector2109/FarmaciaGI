@@ -1,5 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import javax.accessibility.AccessibleState;
+
 public class PantallaVenta extends javax.swing.JFrame {
 
     /**
@@ -35,6 +37,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("Pantalla Venta"); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(216, 215, 255));
 
@@ -153,6 +156,11 @@ public class PantallaVenta extends javax.swing.JFrame {
         btnContinuar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnContinuar.setText("CONTINUAR");
         btnContinuar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -227,11 +235,18 @@ public class PantallaVenta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        // TODO add your handling code here:
+        DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, rootPaneCheckingEnabled);
+        busquedaProducto.setVisible(true);
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        DlgTipoPago pago = new DlgTipoPago(this, rootPaneCheckingEnabled);
+        pago.setVisible(true);
+    }//GEN-LAST:event_btnContinuarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,7 +293,6 @@ public class PantallaVenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
