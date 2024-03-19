@@ -1,10 +1,6 @@
 package org.itson.diseñosoftware.farmaciagipersistencia;
 
-/**
- *
- * @author MiFarmaciaGI
- */
-public class PersistenciaException extends Exception{
+public class PersistenciaException extends Exception {
 
     public PersistenciaException() {
     }
@@ -12,7 +8,5 @@ public class PersistenciaException extends Exception{
     public PersistenciaException(String message) {
         super(message);
     }
-    
-    
-    
+
 }
