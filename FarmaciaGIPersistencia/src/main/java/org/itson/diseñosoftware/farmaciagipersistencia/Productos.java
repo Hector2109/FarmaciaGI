@@ -129,5 +129,16 @@ public class Productos {
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
+    
+    
+    public Integer obtenerIndiceProducto (Producto producto){
+        for (int i = 0; i < getProductos().size(); i++) {        
+            if (productos.contains(producto)){
+                return i;
+            }
+            
+        }
+        return null;
+    }
 
 }
