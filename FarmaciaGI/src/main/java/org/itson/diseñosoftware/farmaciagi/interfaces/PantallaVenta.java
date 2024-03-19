@@ -12,14 +12,13 @@ public class PantallaVenta extends javax.swing.JFrame {
     
     private Productos productosInventario;
     private Productos productosVenta;
-    private Float total, sumaTotal;
+    private Float total;
     
     public PantallaVenta(Productos inventario) {
         initComponents();
         this.productosInventario = inventario;
         this.productosVenta = new Productos();
         this.total = 0.0F;
-        this.sumaTotal = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
         llenarTabla();
@@ -256,7 +255,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (total != 0.0F) {
-            DlgTipoPago pago = new DlgTipoPago(this, true, total);
+            DlgTipoPago pago = new DlgTipoPago(this, true, total, this.productosVenta);
             pago.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.", 
@@ -286,6 +285,8 @@ public class PantallaVenta extends javax.swing.JFrame {
     }
     
     private void establecerTotal(){
+        Float sumaTotal = 0.0F;
+        
         for (Producto producto : productosVenta.getProductos()) {
             sumaTotal += producto.getCantidad() * producto.getCosto();
         }

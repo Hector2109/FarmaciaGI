@@ -2,17 +2,19 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Frame;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class DlgTipoPago extends javax.swing.JDialog {
 
-    Float total;
+    private Float total;
+    private Productos productosVenta;
     
     /**
      * Creates new form DlgTipoPago
      * @param parent
      * @param modal
      */
-    public DlgTipoPago(java.awt.Frame parent, boolean modal, Float total) {
+    public DlgTipoPago(java.awt.Frame parent, boolean modal, Float total, Productos productosVenta) {
         super(parent, modal);
         this.parent = parent;
         initComponents();
@@ -20,6 +22,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
         btnEfectivo.setBackground(Color.WHITE);
         jLabel1.setForeground(Color.WHITE);
         this.total = total;
+        this.productosVenta = productosVenta;
     }
 
     /**
@@ -116,7 +119,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
 
     private void btnEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectivoActionPerformed
         dispose();
-        DlgPagoEfectivo pagoEfectivo = new DlgPagoEfectivo(parent, true, total);
+        DlgPagoEfectivo pagoEfectivo = new DlgPagoEfectivo(parent, true, total, productosVenta);
         pagoEfectivo.setVisible(true);
     }//GEN-LAST:event_btnEfectivoActionPerformed
 

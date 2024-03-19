@@ -4,19 +4,52 @@
  */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import javax.swing.table.DefaultTableModel;
+import org.itson.diseñosoftware.farmaciagidominio.Producto;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+
 /**
  *
- * @author renec
+ * @author MiFarmacia GI
  */
 public class DlgResumenVenta extends javax.swing.JDialog {
 
+    private Float total;
+    private Productos productosVenta;
+    
     /**
      * Creates new form DlgResumenVenta
      */
-    public DlgResumenVenta(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DlgResumenVenta(Productos productosVenta, Float total) {
+        this.total = total;
+        this.productosVenta = productosVenta;
         initComponents();
+        llenarTabla();
+        
     }
+    
+    
+    
+    
+    
+    private void llenarTabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("ARTICULO");
+        modelo.addColumn("CANTIDAD");
+        modelo.addColumn("IMPORTE");
+
+        for (Producto producto : productosVenta.getProductos()) {
+                Object[] fila = {
+                    producto.getNombre(),
+                    producto.getCantidad(),
+                    producto.getCantidad()*producto.getCosto()
+                };
+                modelo.addRow(fila);
+        }
+        tablaVenta.setModel(modelo);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +66,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVenta = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JLabel();
@@ -50,7 +83,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("RESUMEN DE VENTA");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -61,7 +94,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                 "ARTICULO", "CANTIDAD", "IMPORTE"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaVenta);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("FECHA");
@@ -194,6 +227,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirTicketActionPerformed
@@ -201,6 +235,8 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnImprimirTicketActionPerformed
 
 
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnImprimirTicket;
@@ -212,7 +248,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaVenta;
     private javax.swing.JLabel txtCantidad;
     private javax.swing.JLabel txtFecha;
     private javax.swing.JLabel txtTotal;

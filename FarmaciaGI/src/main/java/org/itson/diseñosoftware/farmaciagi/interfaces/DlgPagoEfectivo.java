@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 /**
  *
@@ -14,12 +15,14 @@ import javax.swing.Timer;
  */
 public class DlgPagoEfectivo extends javax.swing.JDialog {
 
-    Float total;
+    private Float total;
+    private Productos productosVenta;
+    
     
     /**
      * Creates new form DlgPagoEfectivo
      */
-    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total) {
+    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total, Productos productosVenta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
@@ -27,6 +30,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         btnCancelar.setBackground(Color.WHITE);
         this.total = total;
         txtMontoTotal.setText(Float.toString(total));
+        this.productosVenta = productosVenta;
     }
     
     /**
@@ -198,16 +202,9 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         } else {
             Float cambio = pago - total;
             txtCambio.setText(Float.toString(cambio));
-            
-            Timer timer = new Timer(5000, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    dispose();
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
-            
+            DlgResumenVenta venta = new DlgResumenVenta (productosVenta, total);
+            venta.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
