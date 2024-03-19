@@ -1,6 +1,13 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import org.itson.diseñosoftware.farmaciagidominio.Producto;
+import org.itson.diseñosoftware.farmaciagipersistencia.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 /**
@@ -37,7 +44,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         btnContinuar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBusqueda = new javax.swing.JTable();
         txtNombreIdProducto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -84,7 +91,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         btnCancelar.setPreferredSize(new java.awt.Dimension(173, 48));
         fondo.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 142, 37));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBusqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -95,8 +102,8 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
                 "ARTICULO", "MARCA", "COSTO"
             }
         ));
-        jTable1.setName("Busqueda Producto"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
+        tblBusqueda.setName("Busqueda Producto"); // NOI18N
+        jScrollPane1.setViewportView(tblBusqueda);
 
         fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 112, 760, 353));
 
@@ -118,21 +125,69 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         if (!txtNombreIdProducto.getText().isBlank()) {
             productosBuscados.setProductos(productosInventario.buscarProductoNombre(txtNombreIdProducto.getText()));
-            if (productosBuscados.getProductos().isEmpty()){
+            llenarTabla();
+            if (productosBuscados.getProductos().isEmpty()) {
                 productosBuscados.setProductos(productosInventario.buscarProductoId(txtNombreIdProducto.getText()));
-            }
-        }else{
+            } 
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre o clave del producto", "Asegurate de no tener la casila vacía", JOptionPane.INFORMATION_MESSAGE);
+        } 
+        if (!productosBuscados.getProductos().isEmpty()) {
+            llenarTabla();
         }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        
+
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void txtNombreIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreIdProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreIdProductoActionPerformed
+    //Métodos 
+    private void llenarTabla() {
+        List<Producto> listaProductos;
+        listaProductos = productosBuscados.getProductos();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("ARTICULO");
+        modelo.addColumn("MARCA");
+        modelo.addColumn("COSTO");
+        modelo.addColumn("CANTIDAD");
+        modelo.addColumn("AGREGAR");
+
+        for (Producto producto : listaProductos) {
+            Object[] fila = {
+                producto.getId(),
+                "Cantidad",
+                producto.getCosto()
+            };
+            modelo.addRow(fila);
+        }
+        tblBusqueda.setModel(modelo);
+        TableColumnModel columnModel = tblBusqueda.getColumnModel();
+
+        ButtonColumn modificarButtonColumn = new ButtonColumn("CANTIDAD", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        ButtonColumn eliminarButtonColumn = new ButtonColumn("AGREGAR", new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        columnModel.getColumn(3).setCellRenderer(modificarButtonColumn);
+        columnModel.getColumn(3).setCellEditor(modificarButtonColumn);
+
+        columnModel.getColumn(4).setCellRenderer(eliminarButtonColumn);
+        columnModel.getColumn(4).setCellEditor(eliminarButtonColumn);
+
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -142,7 +197,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblBusqueda;
     private javax.swing.JTextField txtNombreIdProducto;
     // End of variables declaration//GEN-END:variables
 }

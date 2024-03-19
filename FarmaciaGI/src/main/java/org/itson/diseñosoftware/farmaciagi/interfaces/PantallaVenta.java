@@ -21,7 +21,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     
     public PantallaVenta(Productos productos) {
         initComponents();
-        this.productosInventario.agregarInventario();
+        this.productosInventario = productos;
         this.productosVenta = new Productos();
         llenarTabla();
     }
@@ -263,7 +263,6 @@ public class PantallaVenta extends javax.swing.JFrame {
         DlgTipoPago pago = new DlgTipoPago(this, rootPaneCheckingEnabled);
         pago.setVisible(true);
     }//GEN-LAST:event_btnContinuarActionPerformed
-
 
     //Métodos 
     private void llenarTabla() {
