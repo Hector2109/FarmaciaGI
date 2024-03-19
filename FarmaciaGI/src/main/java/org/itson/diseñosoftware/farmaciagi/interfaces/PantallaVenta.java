@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
@@ -251,8 +252,13 @@ public class PantallaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        DlgTipoPago pago = new DlgTipoPago(this, true);
-        pago.setVisible(true);
+        if (total != 0.0F) {
+            DlgTipoPago pago = new DlgTipoPago(this, true);
+            pago.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.", 
+                    "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     //Métodos 
