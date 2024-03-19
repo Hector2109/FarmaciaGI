@@ -1,17 +1,22 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import java.awt.Frame;
 
 public class DlgTipoPago extends javax.swing.JDialog {
 
     /**
      * Creates new form DlgTipoPago
+     * @param parent
+     * @param modal
      */
     public DlgTipoPago(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
         btnTarjeta.setBackground(Color.WHITE);
         btnEfectivo.setBackground(Color.WHITE);
+        jLabel1.setForeground(Color.WHITE);
     }
 
     /**
@@ -33,6 +38,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
         fondo.setBackground(new java.awt.Color(216, 215, 255));
         fondo.setPreferredSize(new java.awt.Dimension(300, 250));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("TIPO DE PAGO");
@@ -51,6 +57,11 @@ public class DlgTipoPago extends javax.swing.JDialog {
         btnEfectivo.setText("EFECTIVO");
         btnEfectivo.setMaximumSize(new java.awt.Dimension(100, 30));
         btnEfectivo.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnEfectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEfectivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -95,9 +106,16 @@ public class DlgTipoPago extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true);
+        pagoTarjeta.setVisible(true);
     }//GEN-LAST:event_btnTarjetaActionPerformed
 
+    private void btnEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectivoActionPerformed
+        dispose();
+        DlgPagoEfectivo pagoEfectivo = new DlgPagoEfectivo(parent, true);
+        pagoEfectivo.setVisible(true);
+    }//GEN-LAST:event_btnEfectivoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEfectivo;
@@ -105,4 +123,5 @@ public class DlgTipoPago extends javax.swing.JDialog {
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+    private Frame parent;
 }

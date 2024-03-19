@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
-/**
- *
- * @author renec
- */
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+
 public class DlgPagoTarjeta extends javax.swing.JDialog {
 
     /**
@@ -16,6 +13,25 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     public DlgPagoTarjeta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        centraCuadroDialogo(parent);
+        btnAceptar.setBackground(Color.WHITE);
+        btnCancelar.setBackground(Color.WHITE);
+    }
+    
+    /**
+     * Este método centra el cuadro de dialogo sobre la ventana de la
+     * aplicación.
+     *
+     * @param parent Ventana sobre la que aparecerá el cuadro de diálogo
+     */
+    private void centraCuadroDialogo(java.awt.Frame parent) {
+        // Obtiene el tamaño y posición de la ventana de la aplicación
+        Dimension frameSize = parent.getSize();
+        Point loc = parent.getLocation();
+        // Obtiene el tamaño del cuadro de diálogo
+        Dimension dlgSize = getPreferredSize();
+        // Centra el cuadro de diálogo sobre la ventana padre
+        setLocation((frameSize.width - dlgSize.width) / 2 + loc.x, (frameSize.height - dlgSize.height) / 2 + loc.y);
     }
 
     /**
@@ -28,76 +44,76 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     private void initComponents() {
 
         fondo = new javax.swing.JPanel();
-        btnAceptar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
-
-        btnAceptar.setBackground(new java.awt.Color(191, 191, 191));
-        btnAceptar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnAceptar.setText("ACEPTAR");
-        btnAceptar.setBorder(null);
-        btnAceptar.setMaximumSize(new java.awt.Dimension(100, 30));
-        btnAceptar.setPreferredSize(new java.awt.Dimension(173, 48));
-
-        btnCancelar.setBackground(new java.awt.Color(191, 191, 191));
-        btnCancelar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(191, 191, 191), 1, true));
-        btnCancelar.setPreferredSize(new java.awt.Dimension(173, 48));
 
         jTextField2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jTextField2.setPreferredSize(new java.awt.Dimension(36, 37));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(77, 77, 77));
-        jLabel3.setText("MONTO I");
+        jLabel3.setText("MONTO ");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("PAGO CON TARJETA");
+
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        btnAceptar.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        btnAceptar.setText("ACEPTAR");
+        btnAceptar.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnAceptar.setPreferredSize(new java.awt.Dimension(173, 48));
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoLayout.createSequentialGroup()
-                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, fondoLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(fondoLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(186, 186, 186))
+                .addGap(217, 217, 217))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(36, 36, 36)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -108,11 +124,15 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

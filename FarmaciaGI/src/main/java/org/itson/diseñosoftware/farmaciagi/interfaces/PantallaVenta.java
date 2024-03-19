@@ -1,5 +1,6 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -15,6 +16,8 @@ public class PantallaVenta extends javax.swing.JFrame {
         initComponents();
         this.productosInventario = productos;
         this.productosVenta = new Productos();
+        btnBuscarProducto.setBackground(Color.WHITE);
+        btnContinuar.setBackground(Color.WHITE);
         llenarTabla();
     }
 
@@ -40,7 +43,6 @@ public class PantallaVenta extends javax.swing.JFrame {
         txtTotal = new javax.swing.JTextField();
         btnBuscarProducto = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Pantalla Venta"); // NOI18N
@@ -174,10 +176,6 @@ public class PantallaVenta extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.setPreferredSize(new java.awt.Dimension(173, 48));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -191,10 +189,8 @@ public class PantallaVenta extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarProducto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -229,7 +225,6 @@ public class PantallaVenta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnBuscarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
@@ -286,7 +281,6 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProducto;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnVenta;
     private javax.swing.JLabel jLabel1;
