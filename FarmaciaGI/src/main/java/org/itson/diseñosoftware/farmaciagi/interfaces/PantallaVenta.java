@@ -11,7 +11,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     Productos productosInventario;
     Productos productosVenta;
     
-    public PantallaVenta() {
+    public PantallaVenta(Productos productos) {
         initComponents();
         this.productosInventario = productos;
         this.productosVenta = new Productos();
