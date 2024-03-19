@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -11,13 +12,14 @@ public class PantallaVenta extends javax.swing.JFrame {
     
     private Productos productosInventario;
     private Productos productosVenta;
-    private Float total;
+    private Float total, sumaTotal;
     
     public PantallaVenta(Productos inventario) {
         initComponents();
         this.productosInventario = inventario;
         this.productosVenta = new Productos();
         this.total = 0.0F;
+        this.sumaTotal = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
         llenarTabla();
@@ -254,7 +256,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (total != 0.0F) {
-            DlgTipoPago pago = new DlgTipoPago(this, true);
+            DlgTipoPago pago = new DlgTipoPago(this, true, total);
             pago.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.", 
@@ -285,8 +287,10 @@ public class PantallaVenta extends javax.swing.JFrame {
     
     private void establecerTotal(){
         for (Producto producto : productosVenta.getProductos()) {
-            total += producto.getCantidad() * producto.getCosto();
+            sumaTotal += producto.getCantidad() * producto.getCosto();
         }
+        float decimal = (float) Math.pow(10, 2);
+        total = Math.round(sumaTotal * decimal)/decimal;
         txtTotal.setText(total.toString());
     }
 

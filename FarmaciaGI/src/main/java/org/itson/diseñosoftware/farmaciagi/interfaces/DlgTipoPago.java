@@ -5,18 +5,21 @@ import java.awt.Frame;
 
 public class DlgTipoPago extends javax.swing.JDialog {
 
+    Float total;
+    
     /**
      * Creates new form DlgTipoPago
      * @param parent
      * @param modal
      */
-    public DlgTipoPago(java.awt.Frame parent, boolean modal) {
+    public DlgTipoPago(java.awt.Frame parent, boolean modal, Float total) {
         super(parent, modal);
         this.parent = parent;
         initComponents();
         btnTarjeta.setBackground(Color.WHITE);
         btnEfectivo.setBackground(Color.WHITE);
         jLabel1.setForeground(Color.WHITE);
+        this.total = total;
     }
 
     /**
@@ -113,7 +116,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
 
     private void btnEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectivoActionPerformed
         dispose();
-        DlgPagoEfectivo pagoEfectivo = new DlgPagoEfectivo(parent, true);
+        DlgPagoEfectivo pagoEfectivo = new DlgPagoEfectivo(parent, true, total);
         pagoEfectivo.setVisible(true);
     }//GEN-LAST:event_btnEfectivoActionPerformed
 

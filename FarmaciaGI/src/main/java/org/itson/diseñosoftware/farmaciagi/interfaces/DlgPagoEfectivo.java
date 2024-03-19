@@ -10,15 +10,19 @@ import java.awt.Point;
  */
 public class DlgPagoEfectivo extends javax.swing.JDialog {
 
+    Float total;
+    
     /**
      * Creates new form DlgPagoEfectivo
      */
-    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal) {
+    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
         btnAceptar.setBackground(Color.WHITE);
         btnCancelar.setBackground(Color.WHITE);
+        this.total = total;
+        txtMontoTotal.setText(Float.toString(total));
     }
     
     /**
@@ -48,9 +52,9 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
 
         fondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtCambio = new javax.swing.JTextField();
+        txtMontoTotal = new javax.swing.JTextField();
+        txtPago = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -65,20 +69,20 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("PAGO EN EFECTIVO");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jTextField1.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        jTextField1.setEnabled(false);
-        jTextField1.setPreferredSize(new java.awt.Dimension(36, 37));
+        txtCambio.setEditable(false);
+        txtCambio.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtCambio.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtCambio.setEnabled(false);
+        txtCambio.setPreferredSize(new java.awt.Dimension(36, 37));
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jTextField2.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        jTextField2.setEnabled(false);
-        jTextField2.setPreferredSize(new java.awt.Dimension(36, 37));
+        txtMontoTotal.setEditable(false);
+        txtMontoTotal.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtMontoTotal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtMontoTotal.setEnabled(false);
+        txtMontoTotal.setPreferredSize(new java.awt.Dimension(36, 37));
 
-        jTextField3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jTextField3.setPreferredSize(new java.awt.Dimension(36, 37));
+        txtPago.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtPago.setPreferredSize(new java.awt.Dimension(36, 37));
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -113,7 +117,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
                         .addGap(30, 30, 30)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -127,8 +131,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
@@ -143,15 +147,15 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(30, 30, 30)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(30, 30, 30)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(54, 54, 54)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -186,8 +190,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtCambio;
+    private javax.swing.JTextField txtMontoTotal;
+    private javax.swing.JTextField txtPago;
     // End of variables declaration//GEN-END:variables
 }
