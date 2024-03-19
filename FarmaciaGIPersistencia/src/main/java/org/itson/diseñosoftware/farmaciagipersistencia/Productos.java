@@ -26,61 +26,67 @@ public class Productos {
 
     private void agregarListaProductos() {
         try {
-            agregarProducto(new Producto("Paracetamol", 8.21F, "Ultra", "PCO-001"));
+            agregarProducto(new Producto("Paracetamol", 8.21F, "Ultra", "PCO-001", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Sildenafil", 25.04F, "Ultra", "SLD-541"));
+            agregarProducto(new Producto("Sildenafil", 25.04F, "Ultra", "SLD-541", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Naproxeno", 30.19F, "Amsa", "NPX-649"));
+            agregarProducto(new Producto("Naproxeno", 30.19F, "Amsa", "NPX-649", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Treda", 35.21F, "Amsa", "TDA-874"));
+            agregarProducto(new Producto("Treda", 35.21F, "Amsa", "TDA-874", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Rebotril", 500F, "Psychopath", "RPL-871"));
+            agregarProducto(new Producto("Rebotril", 500F, "Psychopath", "RPL-871", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Ventanilo", 54.98F, "Psychopath", "VLP-405"));
+            agregarProducto(new Producto("Ventanilo", 54.98F, "Psychopath", "VLP-405", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Simi Paletas", 40.87F, "Simi", "SMP-408"));
+            agregarProducto(new Producto("Simi Paletas", 40.87F, "Simi", "SMP-408", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Simi Fibra", 299.5F, "Simi", "SMF-740"));
+            agregarProducto(new Producto("Simi Fibra", 299.5F, "Simi", "SMF-740", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Diclofenaco", 84F, "Amsa", "DCA-471"));
+            agregarProducto(new Producto("Diclofenaco", 84F, "Amsa", "DCA-471", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agregarProducto(new Producto("Proctoacid", 121.04F, "Ultra", "PRD-450"));
+            agregarProducto(new Producto("Proctoacid", 121.04F, "Ultra", "PRD-450", 10));
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    }
+    
+    public Producto obtenerProducto(Producto producto){
+        if (productos.contains(producto)){
+            return productos.get(productos.indexOf(producto));
+        }
+        return null;
     }
 
     public void agregarProducto(Producto producto) throws PersistenciaException {
         if (productos.contains(producto)) {
-            throw new PersistenciaException("El prdocuto ya se encuentra en el inventario");
+            throw new PersistenciaException("El producto ya se encuentra en el inventario");
         } else {
             productos.add(producto);
         }
@@ -95,31 +101,25 @@ public class Productos {
             throw new PersistenciaException("El producto no se encuentra en la lista");
         }
     }
-
+ 
     public List<Producto> buscarProductoNombre(String nombre) {
         List<Producto> productosSemejantes = new ArrayList<>();
-
         for (Producto p : productos) {
             if (p.getNombre().contains(nombre)) {
                 productosSemejantes.add(p);
             }
         }
-
         return productosSemejantes;
-
     }
 
     public List<Producto> buscarProductoId(String id) {
         List<Producto> productosSemejantes = new ArrayList<>();
-
         for (Producto p : productos) {
             if (p.getId().contains(id)) {
                 productosSemejantes.add(p);
             }
         }
-
         return productosSemejantes;
-
     }
 
     public List<Producto> getProductos() {

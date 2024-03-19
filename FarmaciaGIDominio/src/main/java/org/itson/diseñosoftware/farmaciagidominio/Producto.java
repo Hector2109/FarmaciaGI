@@ -9,9 +9,10 @@ import java.util.Objects;
 public class Producto {
 
     private String nombre;
-    private float costo;
+    private Float costo;
     private String marca;
     private String id;
+    private Integer cantidad;
 
     /**
      * Constructor para crear un producto
@@ -19,12 +20,15 @@ public class Producto {
      * @param nombre
      * @param costo
      * @param marca
+     * @param id
+     * @param cantidad
      */
-    public Producto(String nombre, float costo, String marca, String id) {
+    public Producto(String nombre, Float costo, String marca, String id, Integer cantidad) {
         this.nombre = nombre;
         this.costo = costo;
         this.marca = marca;
         this.id = id;
+        this.cantidad = cantidad;
     }
 
     /**
@@ -50,7 +54,7 @@ public class Producto {
      *
      * @return costo del producto
      */
-    public float getCosto() {
+    public Float getCosto() {
         return costo;
     }
 
@@ -59,7 +63,7 @@ public class Producto {
      *
      * @param costo costo del producto
      */
-    public void setCosto(float costo) {
+    public void setCosto(Float costo) {
         this.costo = costo;
     }
 
@@ -97,6 +101,24 @@ public class Producto {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    /**
+     * Permite obtener la cantidad del producto
+     *
+     * @return La cantidad del producto
+     */
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * Permite establecer la cantidad del producto
+     *
+     * @param cantidad La cantidad el producto
+     */
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     @Override

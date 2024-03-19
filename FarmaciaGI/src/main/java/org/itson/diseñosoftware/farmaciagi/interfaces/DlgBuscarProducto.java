@@ -4,21 +4,26 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
+import org.itson.diseñosoftware.farmaciagipersistencia.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
-    private Productos productosInventario;
+    private Productos inventario;
     private Productos productosBuscados;
+    private Productos productosVenta;
 
-    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos productos) {
+    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos inventario, Productos productosVenta) {
         super(parent, modal);
-        this.productosInventario = productos;
+        this.inventario = inventario;
         this.productosBuscados = new Productos();
+        this.productosVenta = productosVenta;
         initComponents();
         btnCerrar.setBackground(Color.WHITE);
         btnBuscarProducto.setBackground(Color.WHITE);
@@ -171,9 +176,9 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         if (!txtBuscar.getText().isBlank()) {
-            productosBuscados.setProductos(productosInventario.buscarProductoNombre(txtBuscar.getText()));
+            productosBuscados.setProductos(inventario.buscarProductoNombre(txtBuscar.getText()));
             if (productosBuscados.getProductos().isEmpty()) {
-                productosBuscados.setProductos(productosInventario.buscarProductoId(txtBuscar.getText()));
+                productosBuscados.setProductos(inventario.buscarProductoId(txtBuscar.getText()));
             }
         }
         if (!productosBuscados.getProductos().isEmpty()) {
@@ -199,22 +204,39 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         modelo.addColumn("MARCA");
         modelo.addColumn("COSTO");
         modelo.addColumn("CANTIDAD");
-        modelo.addColumn("");
+        modelo.addColumn("AGREGAR");
 
         for (Producto producto : listaProductos) {
-            Object[] fila = {
-                producto.getNombre(),
-                producto.getMarca(),
-                producto.getCosto()
-            };
-            modelo.addRow(fila);
+            if (producto.getCantidad() > 0) {
+                Object[] fila = {
+                    producto.getNombre(),
+                    producto.getMarca(),
+                    producto.getCosto(),
+                    producto.getCantidad()
+                };
+                modelo.addRow(fila);
+            }
         }
         tblBusqueda.setModel(modelo);
         TableColumnModel columnModel = tblBusqueda.getColumnModel();
 
         ButtonColumn buttonColumn = new ButtonColumn("AGREGAR", (e) -> {
             int fila = tblBusqueda.convertRowIndexToModel(tblBusqueda.getSelectedRow());
-                llenarTabla();
+            Producto producto = listaProductos.get(fila);
+            if (productosVenta.obtenerProducto(producto) == null) {
+                try {
+                    productosVenta.agregarProducto(producto);
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                productosVenta.obtenerProducto(producto).setCantidad(productosVenta.obtenerProducto(producto).getCantidad() + 1);
+            }
+            producto.setCantidad(producto.getCantidad() - 1);
+            if (producto.getCantidad() == 0) {
+                listaProductos.remove(producto);
+            } 
+            llenarTabla();
         });
 
         tblBusqueda.getColumnModel().getColumn(tblBusqueda.getColumnCount() - 1).setCellRenderer(buttonColumn);
