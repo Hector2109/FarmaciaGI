@@ -110,7 +110,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
 
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
         dispose();
-        DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true);
+        DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true,total);
         pagoTarjeta.setVisible(true);
     }//GEN-LAST:event_btnTarjetaActionPerformed
 

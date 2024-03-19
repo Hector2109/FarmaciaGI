@@ -7,15 +7,19 @@ import java.awt.Point;
 
 public class DlgPagoTarjeta extends javax.swing.JDialog {
 
+    Float total;
+    
     /**
      * Creates new form DlgPagoTarjeta
      */
-    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal) {
+    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, float total) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
         btnAceptar.setBackground(Color.WHITE);
         btnCancelar.setBackground(Color.WHITE);
+        this.total = total;
+        txtMontoTotal.setText(Float.toString(total));
     }
     
     /**
@@ -44,7 +48,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     private void initComponents() {
 
         fondo = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        txtMontoTotal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
@@ -54,8 +58,9 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jTextField2.setPreferredSize(new java.awt.Dimension(36, 37));
+        txtMontoTotal.setEditable(false);
+        txtMontoTotal.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtMontoTotal.setPreferredSize(new java.awt.Dimension(36, 37));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(77, 77, 77));
@@ -93,7 +98,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
                     .addGroup(fondoLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -107,7 +112,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
                 .addComponent(jLabel1)
                 .addGap(36, 36, 36)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -140,6 +145,6 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtMontoTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,10 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -71,7 +75,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
 
         txtCambio.setEditable(false);
         txtCambio.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        txtCambio.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtCambio.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtCambio.setEnabled(false);
         txtCambio.setPreferredSize(new java.awt.Dimension(36, 37));
 
@@ -97,6 +101,11 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         btnAceptar.setText("ACEPTAR");
         btnAceptar.setMaximumSize(new java.awt.Dimension(100, 30));
         btnAceptar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("PAGO");
@@ -181,6 +190,26 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        Float pago = Float.parseFloat(txtPago.getText());
+        if (pago < total) {
+            JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
+        } else {
+            Float cambio = pago - total;
+            txtCambio.setText(Float.toString(cambio));
+            
+            Timer timer = new Timer(5000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+            
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
