@@ -2,27 +2,25 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Point;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
-import org.itson.diseñosoftware.farmaciagipersistencia.PersistenciaException;
+import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
     private Productos inventario;
-    private Productos productosBuscados;
     private Productos productosVenta;
 
     public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos inventario, Productos productosVenta) {
         super(parent, modal);
         this.inventario = inventario;
-        this.productosBuscados = new Productos();
         this.productosVenta = productosVenta;
         initComponents();
         btnCerrar.setBackground(Color.WHITE);
@@ -97,10 +95,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         tblBusqueda.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         tblBusqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ARTICULO", "MARCA", "COSTO", "CANTIDAD", ""
@@ -175,17 +170,21 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
+        Productos productosBuscados = new Productos();
         if (!txtBuscar.getText().isBlank()) {
-            productosBuscados.setProductos(inventario.buscarProductoNombre(txtBuscar.getText()));
+            productosBuscados.setProductos(inventario.buscarProductosPorNombre(txtBuscar.getText()));
             if (productosBuscados.getProductos().isEmpty()) {
-                productosBuscados.setProductos(inventario.buscarProductoId(txtBuscar.getText()));
+                productosBuscados.setProductos(inventario.buscarProductosPorId(txtBuscar.getText()));
             }
-        }
-        if (!productosBuscados.getProductos().isEmpty()) {
-            llenarTabla();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre o clave del producto",
                     "Asegurate de no tener la casila vacía", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (!productosBuscados.getProductos().isEmpty()) {
+            llenarTabla(productosBuscados);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No hay productos en el inventario.",
+                    "Inventario vacío", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
@@ -194,9 +193,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     //Métodos 
-    private void llenarTabla() {
-        List<Producto> listaProductos;
-        listaProductos = productosBuscados.getProductos();
+    private void llenarTabla(Productos productosBuscados) {
 
         DefaultTableModel modelo = new DefaultTableModel();
 
@@ -204,15 +201,16 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         modelo.addColumn("MARCA");
         modelo.addColumn("COSTO");
         modelo.addColumn("CANTIDAD");
-        modelo.addColumn("AGREGAR");
+        modelo.addColumn("");
 
-        for (Producto producto : listaProductos) {
+        for (Producto producto : productosBuscados.getProductos()) {
             if (producto.getCantidad() > 0) {
                 Object[] fila = {
                     producto.getNombre(),
                     producto.getMarca(),
                     producto.getCosto(),
-                    producto.getCantidad()
+                    producto.getCantidad(),
+                    "AGREGAR"
                 };
                 modelo.addRow(fila);
             }
@@ -222,26 +220,38 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
         ButtonColumn buttonColumn = new ButtonColumn("AGREGAR", (e) -> {
             int fila = tblBusqueda.convertRowIndexToModel(tblBusqueda.getSelectedRow());
-            Producto producto = listaProductos.get(fila);
-            if (productosVenta.obtenerProducto(producto) == null) {
+            Producto producto = productosBuscados.getProductos().get(fila);
+
+            agregarProductoVenta(producto);
+
+            producto.setCantidad(producto.getCantidad() - 1);
+            if (producto.getCantidad() == 0) {
                 try {
-                    productosVenta.agregarProducto(producto);
+                    productosBuscados.elminarProducto(producto);
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                productosVenta.obtenerProducto(producto).setCantidad(productosVenta.obtenerProducto(producto).getCantidad() + 1);
             }
-            producto.setCantidad(producto.getCantidad() - 1);
-            if (producto.getCantidad() == 0) {
-                listaProductos.remove(producto);
-            } 
-            llenarTabla();
+            llenarTabla(productosBuscados);
         });
 
         tblBusqueda.getColumnModel().getColumn(tblBusqueda.getColumnCount() - 1).setCellRenderer(buttonColumn);
         tblBusqueda.getColumnModel().getColumn(tblBusqueda.getColumnCount() - 1).setCellEditor(buttonColumn);
 
+    }
+
+    private void agregarProductoVenta(Producto producto) {
+        if (productosVenta.obtenerProducto(producto) == null) {
+            Producto productoNuevo = new Producto(producto);
+            productoNuevo.setCantidad(1);
+            try {
+                productosVenta.agregarProducto(productoNuevo);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            productosVenta.obtenerProducto(producto).setCantidad(productosVenta.obtenerProducto(producto).getCantidad() + 1);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

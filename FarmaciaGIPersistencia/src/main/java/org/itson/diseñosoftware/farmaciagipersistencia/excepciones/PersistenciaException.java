@@ -1,4 +1,4 @@
-package org.itson.diseñosoftware.farmaciagipersistencia;
+package org.itson.diseñosoftware.farmaciagipersistencia.excepciones;
 
 public class PersistenciaException extends Exception {
 

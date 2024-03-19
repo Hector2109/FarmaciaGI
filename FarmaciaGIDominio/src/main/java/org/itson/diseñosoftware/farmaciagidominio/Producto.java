@@ -8,10 +8,10 @@ import java.util.Objects;
  */
 public class Producto {
 
+    private String codigo;
     private String nombre;
     private Float costo;
     private String marca;
-    private String id;
     private Integer cantidad;
 
     /**
@@ -20,15 +20,41 @@ public class Producto {
      * @param nombre
      * @param costo
      * @param marca
-     * @param id
+     * @param codigo
      * @param cantidad
      */
-    public Producto(String nombre, Float costo, String marca, String id, Integer cantidad) {
+    public Producto(String nombre, Float costo, String marca, String codigo, Integer cantidad) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.costo = costo;
         this.marca = marca;
-        this.id = id;
         this.cantidad = cantidad;
+    }
+    
+    public Producto(Producto producto) {
+        this.codigo = producto.getCodigo();
+        this.nombre = producto.getNombre();
+        this.marca = producto.getMarca();
+        this.costo = producto.getCosto();
+        this.cantidad = producto.getCantidad();
+    }
+    
+    /**
+     * Método para obtener el id del producto
+     *
+     * @return regresa id del producto
+     */
+    public String getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * Método para modificar el id del producto
+     *
+     * @param codigo id del producto
+     */
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     /**
@@ -85,23 +111,6 @@ public class Producto {
         this.marca = marca;
     }
 
-    /**
-     * Método para obtener el id del producto
-     *
-     * @return regresa id del producto
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Método para modificar el id del producto
-     *
-     * @param id id del producto
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
 
     /**
      * Permite obtener la cantidad del producto
@@ -124,7 +133,7 @@ public class Producto {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.codigo);
         return hash;
     }
 
@@ -140,7 +149,20 @@ public class Producto {
             return false;
         }
         final Producto other = (Producto) obj;
-        return this.id.equalsIgnoreCase(other.id);
+        return this.codigo.equalsIgnoreCase(other.codigo);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Producto{");
+        sb.append("codigo=").append(codigo);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", costo=").append(costo);
+        sb.append(", marca=").append(marca);
+        sb.append(", cantidad=").append(cantidad);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

@@ -1,36 +1,34 @@
 package org.itson.diseñosoftware.farmaciagipersistencia;
+
 import java.util.GregorianCalendar;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
-/**
- *
- * @author Enrique Rodriguez
- */
+
 public class Venta {
-    private Integer idVenta;
+
+    private Integer codigo;
     private Productos productos;
     private Float total;
     private GregorianCalendar fecha;
-    
 
-    public Venta(Integer idVenta, Productos productos, Float total, GregorianCalendar fecha) {
-        this.idVenta = idVenta;
+    public Venta(Integer codigo, Productos productos, Float total, GregorianCalendar fecha) {
+        this.codigo = codigo;
         this.productos = productos;
         this.total = total;
         this.fecha = fecha;
     }
-    
+
     public Venta(Productos productos, Float total, GregorianCalendar fecha) {
         this.productos = productos;
         this.total = total;
         this.fecha = fecha;
     }
 
-    public Integer getIdVenta() {
-        return idVenta;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setIdVenta(Integer idVenta) {
-        this.idVenta = idVenta;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public Productos getProductos() {
@@ -56,13 +54,13 @@ public class Venta {
     public void setFecha(GregorianCalendar fecha) {
         this.fecha = fecha;
     }
-    
-     public Float calcularCosto() {
-        total = 0F; 
+
+    public Float calcularCosto() {
+        total = 0F;
         for (Producto producto : productos.getProductos()) {
             total += producto.getCosto();
         }
         return total;
     }
-    
+
 }

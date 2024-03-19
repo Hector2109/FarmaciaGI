@@ -1,7 +1,6 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
@@ -9,13 +8,15 @@ import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
     
-    Productos productosInventario;
-    Productos productosVenta;
+    private Productos productosInventario;
+    private Productos productosVenta;
+    private Float total;
     
-    public PantallaVenta(Productos productos) {
+    public PantallaVenta(Productos inventario) {
         initComponents();
-        this.productosInventario = productos;
+        this.productosInventario = inventario;
         this.productosVenta = new Productos();
+        this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
         llenarTabla();
@@ -145,7 +146,6 @@ public class PantallaVenta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblVenta.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tblVenta);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
@@ -247,36 +247,39 @@ public class PantallaVenta extends javax.swing.JFrame {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosInventario, productosVenta);
         busquedaProducto.setVisible(true);
+        llenarTabla();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        DlgTipoPago pago = new DlgTipoPago(this, rootPaneCheckingEnabled);
+        DlgTipoPago pago = new DlgTipoPago(this, true);
         pago.setVisible(true);
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     //Métodos 
     private void llenarTabla() {
-        List<Producto> listaProductos;
-        Productos productos = new Productos();
-        
-        listaProductos = productos.getProductos();
-        
         DefaultTableModel modelo = new DefaultTableModel();
         
         modelo.addColumn("ARTICULO");
         modelo.addColumn("CANTIDAD");
-        modelo.addColumn("IMPORTE");
+        modelo.addColumn("IMPORTE UNITARIO");
         
-        for (Producto producto : listaProductos) {
+        for (Producto producto : productosVenta.getProductos()) {
             Object[] fila = {
-                producto.getId(),
-                "Cantidad",
+                producto.getNombre(),
+                producto.getCantidad(),
                 producto.getCosto()
             };
             modelo.addRow(fila);
         }
+        
         tblVenta.setModel(modelo);
         TableColumnModel columnModel = tblVenta.getColumnModel();
+        
+        for (Producto producto : productosVenta.getProductos()) {
+            total += producto.getCantidad() * producto.getCosto();
+        }
+        
+        txtTotal.setText(total.toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
