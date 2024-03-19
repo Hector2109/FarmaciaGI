@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author MiFarmaciaGI
  */
 public class Producto {
-    
+
     private String nombre;
     private float costo;
     private String marca;
@@ -15,9 +15,10 @@ public class Producto {
 
     /**
      * Constructor para crear un producto
+     *
      * @param nombre
      * @param costo
-     * @param marca 
+     * @param marca
      */
     public Producto(String nombre, float costo, String marca, String id) {
         this.nombre = nombre;
@@ -28,6 +29,7 @@ public class Producto {
 
     /**
      * Método para obterner nombre del producto
+     *
      * @return nombre del producto
      */
     public String getNombre() {
@@ -36,6 +38,7 @@ public class Producto {
 
     /**
      * Método para modificar el nombre del producto
+     *
      * @param nombre nombre del producto
      */
     public void setNombre(String nombre) {
@@ -44,6 +47,7 @@ public class Producto {
 
     /**
      * Método para obterner costo del producto
+     *
      * @return costo del producto
      */
     public float getCosto() {
@@ -52,6 +56,7 @@ public class Producto {
 
     /**
      * Método para modificar costo del producto
+     *
      * @param costo costo del producto
      */
     public void setCosto(float costo) {
@@ -60,6 +65,7 @@ public class Producto {
 
     /**
      * Método para obterner la marca del producto
+     *
      * @return marca del producto
      */
     public String getMarca() {
@@ -68,6 +74,7 @@ public class Producto {
 
     /**
      * Método para modificar la marca del producto
+     *
      * @param marca marca del producto
      */
     public void setMarca(String marca) {
@@ -76,6 +83,7 @@ public class Producto {
 
     /**
      * Método para obtener el id del producto
+     *
      * @return regresa id del producto
      */
     public String getId() {
@@ -84,9 +92,9 @@ public class Producto {
 
     /**
      * Método para modificar el id del producto
+     *
      * @param id id del producto
      */
-     
     public void setId(String id) {
         this.id = id;
     }
@@ -112,8 +120,5 @@ public class Producto {
         final Producto other = (Producto) obj;
         return this.id.equalsIgnoreCase(other.id);
     }
-    
-    
 
-    
 }
