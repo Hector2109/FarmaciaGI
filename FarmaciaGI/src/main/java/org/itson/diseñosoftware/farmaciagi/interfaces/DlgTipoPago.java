@@ -1,7 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
-import java.awt.Color;
-
+/**
+ *
+ * @author renec
+ */
 public class DlgTipoPago extends javax.swing.JDialog {
 
     /**
@@ -10,8 +16,6 @@ public class DlgTipoPago extends javax.swing.JDialog {
     public DlgTipoPago(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        btnTarjeta.setBackground(Color.WHITE);
-        btnEfectivo.setBackground(Color.WHITE);
     }
 
     /**
@@ -25,58 +29,62 @@ public class DlgTipoPago extends javax.swing.JDialog {
 
         fondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnTarjeta = new javax.swing.JButton();
-        btnEfectivo = new javax.swing.JButton();
+        btnContinuar = new javax.swing.JButton();
+        btnContinuar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
-        fondo.setPreferredSize(new java.awt.Dimension(300, 250));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("TIPO DE PAGO");
 
-        btnTarjeta.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnTarjeta.setText("TARJETA");
-        btnTarjeta.setMaximumSize(new java.awt.Dimension(100, 30));
-        btnTarjeta.setPreferredSize(new java.awt.Dimension(173, 48));
-        btnTarjeta.addActionListener(new java.awt.event.ActionListener() {
+        btnContinuar.setBackground(new java.awt.Color(191, 191, 191));
+        btnContinuar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnContinuar.setText("TARJETA");
+        btnContinuar.setBorder(null);
+        btnContinuar.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnContinuar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTarjetaActionPerformed(evt);
+                btnContinuarActionPerformed(evt);
             }
         });
 
-        btnEfectivo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnEfectivo.setText("EFECTIVO");
-        btnEfectivo.setMaximumSize(new java.awt.Dimension(100, 30));
-        btnEfectivo.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnContinuar1.setBackground(new java.awt.Color(191, 191, 191));
+        btnContinuar1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnContinuar1.setText("EFECTIVO");
+        btnContinuar1.setBorder(null);
+        btnContinuar1.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnContinuar1.setPreferredSize(new java.awt.Dimension(173, 48));
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64))
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1))
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnContinuar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(btnEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(btnContinuar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,14 +102,14 @@ public class DlgTipoPago extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTarjetaActionPerformed
+    }//GEN-LAST:event_btnContinuarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEfectivo;
-    private javax.swing.JButton btnTarjeta;
+    private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnContinuar1;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
