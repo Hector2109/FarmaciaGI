@@ -249,6 +249,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosInventario, productosVenta);
         busquedaProducto.setVisible(true);
         llenarTabla();
+        establecerTotal();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
@@ -280,11 +281,12 @@ public class PantallaVenta extends javax.swing.JFrame {
         
         tblVenta.setModel(modelo);
         TableColumnModel columnModel = tblVenta.getColumnModel();
-        
+    }
+    
+    private void establecerTotal(){
         for (Producto producto : productosVenta.getProductos()) {
             total += producto.getCantidad() * producto.getCosto();
         }
-        
         txtTotal.setText(total.toString());
     }
 
