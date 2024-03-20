@@ -5,23 +5,36 @@ import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import org.itson.diseñosoftware.farmaciagi.control.Control;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
-    
+
     private Productos productosInventario;
     private Productos productosVenta;
     private Float total;
-    
-    public PantallaVenta(Productos inventario) {
+    Control control = new Control();
+
+    public PantallaVenta() {
         initComponents();
-        this.productosInventario = inventario;
+        this.productosInventario = control.agregarInventario();
         this.productosVenta = new Productos();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
         llenarTabla();
+    }
+
+    public static void main(String[] args) {
+        // Crear un inventario de productos para pasar a PantallaVenta
+        Productos inventario = new Productos();
+
+        // Crear una instancia de PantallaVenta y pasarle el inventario
+        PantallaVenta pantallaVenta = new PantallaVenta();
+
+        // Hacer visible la pantalla de venta
+        pantallaVenta.setVisible(true);
     }
 
     /**
@@ -247,10 +260,15 @@ public class PantallaVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosInventario, productosVenta);
-        busquedaProducto.setVisible(true);
-        llenarTabla();
-        establecerTotal();
+        if (!control.getInventario().getProductos().isEmpty()) {
+            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosInventario, productosVenta);
+            busquedaProducto.setVisible(true);
+            llenarTabla();
+            establecerTotal();
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "No hay inventario", "Error en persistencia", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
@@ -258,7 +276,7 @@ public class PantallaVenta extends javax.swing.JFrame {
             DlgTipoPago pago = new DlgTipoPago(this, true, total, this.productosVenta);
             pago.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.", 
+            JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
                     "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -266,11 +284,11 @@ public class PantallaVenta extends javax.swing.JFrame {
     //Métodos 
     private void llenarTabla() {
         DefaultTableModel modelo = new DefaultTableModel();
-        
+
         modelo.addColumn("ARTICULO");
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE UNITARIO");
-        
+
         for (Producto producto : productosVenta.getProductos()) {
             Object[] fila = {
                 producto.getNombre(),
@@ -279,19 +297,19 @@ public class PantallaVenta extends javax.swing.JFrame {
             };
             modelo.addRow(fila);
         }
-        
+
         tblVenta.setModel(modelo);
         TableColumnModel columnModel = tblVenta.getColumnModel();
     }
-    
-    private void establecerTotal(){
+
+    private void establecerTotal() {
         Float sumaTotal = 0.0F;
-        
+
         for (Producto producto : productosVenta.getProductos()) {
             sumaTotal += producto.getCantidad() * producto.getCosto();
         }
         float decimal = (float) Math.pow(10, 2);
-        total = Math.round(sumaTotal * decimal)/decimal;
+        total = Math.round(sumaTotal * decimal) / decimal;
         txtTotal.setText(total.toString());
     }
 

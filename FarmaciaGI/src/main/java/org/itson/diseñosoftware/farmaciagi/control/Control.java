@@ -1,8 +1,13 @@
 package org.itson.diseñosoftware.farmaciagi.control;
 
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.itson.diseñosoftware.farmaciagi.interfaces.PantallaVenta;
+import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
 /**
  *
@@ -10,31 +15,86 @@ import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
  */
 public class Control {
 
-    Productos inventario;
+    Productos inventario = new Productos();
     Productos venta = new Productos();
-    PantallaVenta pantallaVenta;
     
-    public Control(Productos inventario) {
+    public Control() {
+    }
+    
+    
+    
+    public Productos agregarInventario(){
+        try {
+            inventario.agregarProducto(new Producto("Paracetamol", 8.21F, "Ultra", "PCO-001", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Sildenafil", 25.04F, "Ultra", "SLD-541", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Naproxeno", 30.19F, "Amsa", "NPX-649", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Treda", 35.21F, "Amsa", "TDA-874", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Rebotril", 500F, "Psychopath", "RPL-871", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Ventanilo", 54.98F, "Psychopath", "VLP-405", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Simi Paletas", 40.87F, "Simi", "SMP-408", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Simi Fibra", 299.5F, "Simi", "SMF-740", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Diclofenaco", 84F, "Amsa", "DCA-471", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            inventario.agregarProducto(new Producto("Proctoacid", 121.04F, "Ultra", "PRD-450", 10));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return inventario;
+    }
+
+    public Productos getInventario() {
+        return inventario;
+    }
+
+    public void setInventario(Productos inventario) {
         this.inventario = inventario;
     }
-    
-    public void venta(){
-        if (!inventario.getProductos().isEmpty()){
-        this.pantallaVenta = new PantallaVenta (inventario);
-        this.pantallaVenta.setVisible(true);}
-        else{
-            JOptionPane.showMessageDialog(pantallaVenta, "No hay productos en el inventario", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+
+    public Productos getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Productos venta) {
+        this.venta = venta;
     }
     
     
-    
-    
-    
-    
-    
-    
-    
+   
     
     
 }
