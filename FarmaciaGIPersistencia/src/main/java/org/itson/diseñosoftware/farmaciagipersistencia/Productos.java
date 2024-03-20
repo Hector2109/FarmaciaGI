@@ -14,9 +14,7 @@ public class Productos {
     List<Producto> productos = new ArrayList<>();
     
     public Productos() {
-    }
-    
-    public Producto obtenerProducto(Producto producto) {
+    }public Producto obtenerProducto(Producto producto) {
         if (productos.contains(producto)) {
             return productos.get(productos.indexOf(producto));
         }

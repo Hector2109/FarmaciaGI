@@ -1,7 +1,5 @@
 package org.itson.diseñosoftware.farmaciagipersistencia.dtos;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import org.itson.diseñosoftware.farmaciagidominio.Cliente;
@@ -15,27 +13,16 @@ public class VentaDTO {
     private Cliente cliente;
     private List<Promocion> promociones;
     private Float total;
-    private Calendar fecha;
-    
-    public VentaDTO(String codigo, Calendar fecha){
-        this.codigo = codigo;
-        this.productos = new ArrayList<>();
-        this.promociones = new ArrayList<>();
-        this.total = 0.0F;
-        this.cliente = null;
-        this.fecha = fecha;
-    }
+    private GregorianCalendar fecha;
 
-    public VentaDTO(String codigo, List<Producto> productos, Float total, Calendar fecha) {
+    public VentaDTO(String codigo, List<Producto> productos, Float total, GregorianCalendar fecha) {
         this.codigo = codigo;
         this.productos = productos;
-        this.cliente = null;
-        this.promociones = null;
         this.total = total;
         this.fecha = fecha;
     }
 
-    public VentaDTO(String codigo, List<Producto> productos, Cliente cliente, List<Promocion> promociones, Float total, Calendar fecha) {
+    public VentaDTO(String codigo, List<Producto> productos, Cliente cliente, List<Promocion> promociones, Float total, GregorianCalendar fecha) {
         this.codigo = codigo;
         this.productos = productos;
         this.cliente = cliente;
@@ -56,7 +43,7 @@ public class VentaDTO {
         return total;
     }
 
-    public Calendar getFecha() {
+    public GregorianCalendar getFecha() {
         return fecha;
     }
 

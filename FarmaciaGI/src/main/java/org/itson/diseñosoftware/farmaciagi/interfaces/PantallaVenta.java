@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -9,11 +10,17 @@ import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
-    
+
+    private Productos productosInventario;
+    private Productos productosVenta;
+    private Float total;
     Control control = new Control();
 
     public PantallaVenta() {
         initComponents();
+        this.productosInventario = control.agregarInventario();
+        this.productosVenta = new Productos();
+        this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
         llenarTabla();
@@ -254,9 +261,10 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         if (!control.getInventario().getProductos().isEmpty()) {
-            control.buscarProducto(this);
-            control.establecerTotal();
+            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosInventario, productosVenta);
+            busquedaProducto.setVisible(true);
             llenarTabla();
+            establecerTotal();
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "No hay inventario", "Error en persistencia", JOptionPane.ERROR_MESSAGE);
@@ -264,27 +272,24 @@ public class PantallaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (control.getTotal() != 0.0F) {
-            control.iniciarTipoPago(this);
+        if (total != 0.0F) {
+            DlgTipoPago pago = new DlgTipoPago(this, true, total, this.productosVenta);
+            pago.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
                     "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
-
-    
     //Métodos 
     private void llenarTabla() {
-        
-        if (!control.getVenta().getProductos().isEmpty()){
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("ARTICULO");
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE UNITARIO");
 
-        for (Producto producto : control.getVenta().getProductos()) {
+        for (Producto producto : productosVenta.getProductos()) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),
@@ -295,11 +300,18 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         tblVenta.setModel(modelo);
         TableColumnModel columnModel = tblVenta.getColumnModel();
-        txtTotal.setText(control.getTotal().toString());
-        }
     }
 
-    
+    private void establecerTotal() {
+        Float sumaTotal = 0.0F;
+
+        for (Producto producto : productosVenta.getProductos()) {
+            sumaTotal += producto.getCantidad() * producto.getCosto();
+        }
+        float decimal = (float) Math.pow(10, 2);
+        total = Math.round(sumaTotal * decimal) / decimal;
+        txtTotal.setText(total.toString());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProducto;

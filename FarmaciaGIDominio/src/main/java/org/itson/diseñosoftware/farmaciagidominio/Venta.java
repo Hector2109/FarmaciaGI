@@ -1,6 +1,6 @@
 package org.itson.diseñosoftware.farmaciagidominio;
 
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,20 +11,16 @@ public class Venta {
     private Cliente cliente;
     private List<Promocion> promociones;
     private Float total;
-    private Calendar fecha;
+    private GregorianCalendar fecha;
 
-    public Venta(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public Venta(String codigo, List<Producto> productos, Float total, Calendar fecha) {
+    public Venta(String codigo, List<Producto> productos, Float total, GregorianCalendar fecha) {
         this.codigo = codigo;
         this.productos = productos;
         this.total = total;
         this.fecha = fecha;
     }
 
-    public Venta(String codigo, List<Producto> productos, Cliente cliente, List<Promocion> promociones, Float total, Calendar fecha) {
+    public Venta(String codigo, List<Producto> productos, Cliente cliente, List<Promocion> promociones, Float total, GregorianCalendar fecha) {
         this.codigo = codigo;
         this.productos = productos;
         this.cliente = cliente;
@@ -57,11 +53,11 @@ public class Venta {
         this.total = total;
     }
 
-    public Calendar getFecha() {
+    public GregorianCalendar getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(GregorianCalendar fecha) {
         this.fecha = fecha;
     }
 

@@ -1,10 +1,10 @@
 package org.itson.diseñosoftware.farmaciagi.control;
 
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import org.itson.diseñosoftware.farmaciagi.interfaces.DlgBuscarProducto;
-import org.itson.diseñosoftware.farmaciagi.interfaces.DlgTipoPago;
+import javax.swing.JOptionPane;
+import org.itson.diseñosoftware.farmaciagi.interfaces.PantallaVenta;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
@@ -17,13 +17,13 @@ public class Control {
 
     Productos inventario = new Productos();
     Productos venta = new Productos();
-    Float total;
-
+    
     public Control() {
-        agregarInventario();
     }
-
-    public Productos agregarInventario() {
+    
+    
+    
+    public Productos agregarInventario(){
         try {
             inventario.agregarProducto(new Producto("Paracetamol", 8.21F, "Ultra", "PCO-001", 10));
         } catch (PersistenciaException ex) {
@@ -92,40 +92,9 @@ public class Control {
     public void setVenta(Productos venta) {
         this.venta = venta;
     }
-
-    public void buscarProducto(JFrame frame) {
-        if (!getInventario().getProductos().isEmpty()) {
-            DlgBuscarProducto buscar = new DlgBuscarProducto(frame, true, inventario, venta);
-            buscar.setVisible(true);
-        }
-    }
-
-    public void iniciarTipoPago(JFrame frame) {
-
-        if (!getVenta().getProductos().isEmpty()) {
-            DlgTipoPago pago = new DlgTipoPago(frame, true, total);
-            pago.setVisible(true);
-        }
-
-    }
-
-    public void establecerTotal() {
-        this.total = 0.0F;
-
-        for (Producto producto : getVenta().getProductos()) {
-            this.total += producto.getCantidad() * producto.getCosto();
-        }
-        float decimal = (float) Math.pow(10, 2);
-        total = Math.round(total * decimal) / decimal;
-
-    }
-
-    public Float getTotal() {
-        return total;
-    }
-
-    public void setTotal(Float total) {
-        this.total = total;
-    }
-
+    
+    
+   
+    
+    
 }
