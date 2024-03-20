@@ -16,6 +16,8 @@ import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 public class DlgPagoEfectivo extends javax.swing.JDialog {
 
     private Float total;
+    private Float cambio = 0.0F;
+    private Float pago = 0.0F;
     private Productos productosVenta;
     
     
@@ -196,13 +198,13 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        Float pago = Float.parseFloat(txtPago.getText());
+        pago = Float.parseFloat(txtPago.getText());
         if (pago < total) {
             JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
         } else {
-            Float cambio = pago - total;
+            cambio = pago - total;
             txtCambio.setText(Float.toString(cambio));
-            DlgResumenVenta venta = new DlgResumenVenta (productosVenta, total);
+            DlgResumenVenta venta = new DlgResumenVenta (productosVenta, total,pago, cambio);
             venta.setVisible(true);
             dispose();
         }
