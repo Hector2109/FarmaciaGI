@@ -1,6 +1,5 @@
 package org.itson.diseñosoftware.farmaciagi.control;
 
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -19,14 +18,12 @@ public class Control {
     Productos inventario = new Productos();
     Productos venta = new Productos();
     Float total;
-    
+
     public Control() {
         agregarInventario();
     }
-    
-    
-    
-    public Productos agregarInventario(){
+
+    public Productos agregarInventario() {
         try {
             inventario.agregarProducto(new Producto("Paracetamol", 8.21F, "Ultra", "PCO-001", 10));
         } catch (PersistenciaException ex) {
@@ -95,25 +92,23 @@ public class Control {
     public void setVenta(Productos venta) {
         this.venta = venta;
     }
-    
-    public void buscarProducto(JFrame frame){
+
+    public void buscarProducto(JFrame frame) {
         if (!getInventario().getProductos().isEmpty()) {
             DlgBuscarProducto buscar = new DlgBuscarProducto(frame, true, inventario, venta);
             buscar.setVisible(true);
         }
     }
-    
-    
-    public void iniciarTipoPago(JFrame frame){
-        
-        if (!getVenta().getProductos().isEmpty()){
+
+    public void iniciarTipoPago(JFrame frame) {
+
+        if (!getVenta().getProductos().isEmpty()) {
             DlgTipoPago pago = new DlgTipoPago(frame, true, total);
             pago.setVisible(true);
         }
-        
+
     }
-   
-    
+
     public void establecerTotal() {
         this.total = 0.0F;
 
@@ -122,7 +117,7 @@ public class Control {
         }
         float decimal = (float) Math.pow(10, 2);
         total = Math.round(total * decimal) / decimal;
-        
+
     }
 
     public Float getTotal() {
@@ -132,8 +127,5 @@ public class Control {
     public void setTotal(Float total) {
         this.total = total;
     }
-    
-    
-    
-    
+
 }

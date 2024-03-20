@@ -9,9 +9,7 @@ import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
-
-
-
+    
     Control control = new Control();
 
     public PantallaVenta() {
