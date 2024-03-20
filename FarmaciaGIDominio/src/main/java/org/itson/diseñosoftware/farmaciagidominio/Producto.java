@@ -13,6 +13,14 @@ public class Producto {
     private Float costo;
     private String marca;
     private Integer cantidad;
+    
+    public Producto(String codigo, String nombre){
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.marca = null;
+        this.costo = null;
+        this.cantidad = null;
+    }
 
     /**
      * Constructor para crear un producto
@@ -150,19 +158,6 @@ public class Producto {
         }
         final Producto other = (Producto) obj;
         return this.codigo.equalsIgnoreCase(other.codigo);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Producto{");
-        sb.append("codigo=").append(codigo);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", costo=").append(costo);
-        sb.append(", marca=").append(marca);
-        sb.append(", cantidad=").append(cantidad);
-        sb.append('}');
-        return sb.toString();
     }
 
 }
