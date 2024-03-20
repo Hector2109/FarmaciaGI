@@ -198,7 +198,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        pago = Float.parseFloat(txtPago.getText());
+        pago = Float.valueOf(txtPago.getText());
         if (pago < total) {
             JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
         } else {
