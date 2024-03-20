@@ -12,11 +12,22 @@ public class Cliente {
     private Integer puntos;
     private Calendar fechaRegistro;
 
+    public Cliente(String codigo) {
+        this.codigo = codigo;
+        this.nombre = null;
+        this.apellidoPaterno = null;
+        this.apellidoMaterno = null;
+        this.fechaRegistro = null;
+        this.puntos = 0;
+    }
+
     public Cliente(String codigo, String nombre, String apellidoPaterno, Calendar fechaRegistro) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = "";
         this.fechaRegistro = fechaRegistro;
+        this.puntos = 0;
     }
 
     public Cliente(String codigo, String nombre, String apellidoPaterno, String apellidoMaterno, Calendar fechaRegistro) {
@@ -25,6 +36,16 @@ public class Cliente {
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaRegistro = fechaRegistro;
+        this.puntos = 0;
+    }
+    
+    public Cliente(String codigo, String nombre, String apellidoPaterno, String apellidoMaterno, Calendar fechaRegistro, Integer puntos) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaRegistro = fechaRegistro;
+        this.puntos = puntos;
     }
 
     public String getCodigo() {

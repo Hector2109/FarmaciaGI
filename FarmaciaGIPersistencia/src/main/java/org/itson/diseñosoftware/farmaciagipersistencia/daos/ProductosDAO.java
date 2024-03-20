@@ -15,33 +15,33 @@ public class ProductosDAO implements IProductosDAO {
     }
 
     @Override
-    public Producto obtenerProducto(ProductoDTO producto) throws PersistenciaException {
-        Producto productoBuscado = new Producto(producto.getCodigo(), producto.getNombre());
+    public Producto obtenerProducto(ProductoDTO productoBuscado) throws PersistenciaException {
+        Producto producto = new Producto(productoBuscado.getCodigo(), productoBuscado.getNombre());
 
-        if (productos.contains(productoBuscado)) {
-            return productos.get(productos.indexOf(productoBuscado));
+        if (productos.contains(producto)) {
+            return productos.get(productos.indexOf(producto));
         } else {
             throw new PersistenciaException("El producto no se encuentra en el inventario.");
         }
     }
 
     @Override
-    public void agregarProducto(ProductoDTO producto) throws PersistenciaException {
-        Producto productoNuevo = new Producto(producto.getNombre(), producto.getCosto(),
-                producto.getMarca(), producto.getCodigo(), producto.getCantidad());
+    public void agregarProducto(ProductoDTO productoNuevo) throws PersistenciaException {
+        Producto producto = new Producto(productoNuevo.getNombre(), productoNuevo.getCosto(),
+                productoNuevo.getMarca(), productoNuevo.getCodigo(), productoNuevo.getCantidad());
 
-        if (!productos.contains(productoNuevo)) {
-            productos.add(productoNuevo);
+        if (!productos.contains(producto)) {
+            productos.add(producto);
         } else {
             throw new PersistenciaException("El producto ya se encuentra en el inventario.");
         }
     }
 
     @Override
-    public void eliminarProducto(ProductoDTO producto) throws PersistenciaException {
-        Producto productoEliminar = new Producto(producto.getCodigo(), producto.getNombre());
+    public void eliminarProducto(ProductoDTO productoEliminar) throws PersistenciaException {
+        Producto producto = new Producto(productoEliminar.getCodigo(), productoEliminar.getNombre());
 
-        if (!productos.remove(productoEliminar)) {
+        if (!productos.remove(producto)) {
             throw new PersistenciaException("El producto no se encuentra en el inventario.");
         }
     }

@@ -15,7 +15,9 @@ public class ClienteDTO {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = "";
         this.fechaRegistro = fechaRegistro;
+        this.puntos = 0;
     }
 
     public ClienteDTO(String codigo, String nombre, String apellidoPaterno, String apellidoMaterno, Calendar fechaRegistro) {
@@ -24,6 +26,16 @@ public class ClienteDTO {
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaRegistro = fechaRegistro;
+        this.puntos = 0;
+    }
+    
+    public ClienteDTO(String codigo, String nombre, String apellidoPaterno, String apellidoMaterno, Calendar fechaRegistro, Integer puntos) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaRegistro = fechaRegistro;
+        this.puntos = puntos;
     }
 
     public String getCodigo() {
