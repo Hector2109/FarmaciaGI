@@ -2,11 +2,9 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 /**
@@ -19,6 +17,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     private Float cambio = 0.0F;
     private Float pago = 0.0F;
     private Productos productosVenta;
+    private Frame parent;
     
     
     /**
@@ -31,6 +30,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         btnAceptar.setBackground(Color.WHITE);
         btnCancelar.setBackground(Color.WHITE);
         this.total = total;
+        this.parent = parent;
         txtMontoTotal.setText(Float.toString(total));
         this.productosVenta = productosVenta;
     }
@@ -204,7 +204,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         } else {
             cambio = pago - total;
             txtCambio.setText(Float.toString(cambio));
-            DlgResumenVenta venta = new DlgResumenVenta (productosVenta, total,pago, cambio);
+            DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total,pago, cambio);
             venta.setVisible(true);
             dispose();
         }

@@ -36,6 +36,10 @@ public class PantallaVenta extends javax.swing.JFrame {
         // Hacer visible la pantalla de venta
         pantallaVenta.setVisible(true);
     }
+    
+    public void limpiarVenta(){
+        control.limpiarVenta();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -275,6 +279,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         if (total != 0.0F) {
             DlgTipoPago pago = new DlgTipoPago(this, true, total, this.productosVenta);
             pago.setVisible(true);
+            limpiarVenta();
         } else {
             JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
                     "Venta vacía", JOptionPane.INFORMATION_MESSAGE);

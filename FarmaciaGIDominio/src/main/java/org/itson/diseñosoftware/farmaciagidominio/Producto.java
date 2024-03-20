@@ -14,6 +14,14 @@ public class Producto {
     private String marca;
     private Integer cantidad;
     
+    public Producto(String codigo){
+        this.codigo = codigo;
+        this.nombre = null;
+        this.marca = null;
+        this.costo = null;
+        this.cantidad = null;
+    }
+    
     public Producto(String codigo, String nombre){
         this.codigo = codigo;
         this.nombre = nombre;
@@ -37,14 +45,6 @@ public class Producto {
         this.costo = costo;
         this.marca = marca;
         this.cantidad = cantidad;
-    }
-    
-    public Producto(Producto producto) {
-        this.codigo = producto.getCodigo();
-        this.nombre = producto.getNombre();
-        this.marca = producto.getMarca();
-        this.costo = producto.getCosto();
-        this.cantidad = producto.getCantidad();
     }
     
     /**

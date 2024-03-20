@@ -1,10 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.control;
 
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import org.itson.diseñosoftware.farmaciagi.interfaces.PantallaVenta;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
@@ -17,13 +14,11 @@ public class Control {
 
     Productos inventario = new Productos();
     Productos venta = new Productos();
-    
+
     public Control() {
     }
-    
-    
-    
-    public Productos agregarInventario(){
+
+    public Productos agregarInventario() {
         try {
             inventario.agregarProducto(new Producto("Paracetamol", 8.21F, "Ultra", "PCO-001", 10));
         } catch (PersistenciaException ex) {
@@ -93,8 +88,8 @@ public class Control {
         this.venta = venta;
     }
     
-    
-   
-    
-    
+    public void limpiarVenta(){
+        setVenta(new Productos());
+    }
+
 }

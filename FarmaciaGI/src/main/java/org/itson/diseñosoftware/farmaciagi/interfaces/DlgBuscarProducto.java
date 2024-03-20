@@ -2,7 +2,6 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Point;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -242,7 +241,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
     private void agregarProductoVenta(Producto producto) {
         if (productosVenta.obtenerProducto(producto) == null) {
-            Producto productoNuevo = new Producto(producto);
+            Producto productoNuevo = new Producto(producto.getNombre(), producto.getCosto(), producto.getMarca(), producto.getCodigo(), producto.getCantidad());
             productoNuevo.setCantidad(1);
             try {
                 productosVenta.agregarProducto(productoNuevo);

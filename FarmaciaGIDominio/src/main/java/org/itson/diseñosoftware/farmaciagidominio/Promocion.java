@@ -8,6 +8,12 @@ public class Promocion {
     private String descripcion;
     private Float descuento;
 
+    public Promocion(String codigo) {
+        this.codigo = codigo;
+        this.descripcion = null;
+        this.descuento = 0.0F;
+    }
+
     public Promocion(String codigo, String descripcion, Float descuento) {
         this.codigo = codigo;
         this.descripcion = descripcion;
