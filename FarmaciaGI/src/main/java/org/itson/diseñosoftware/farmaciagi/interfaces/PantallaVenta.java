@@ -11,14 +11,12 @@ import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
-    private Productos productosInventario;
     private Productos productosVenta;
     private Float total;
     Control control = new Control();
 
     public PantallaVenta() {
         initComponents();
-        this.productosInventario = control.agregarInventario();
         this.productosVenta = new Productos();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
@@ -262,6 +260,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         if (!control.getInventario().getProductos().isEmpty()) {
             control.buscarProducto(this);
+            actualizarListaVenta();
             llenarTabla();
             establecerTotal();
         }
@@ -280,6 +279,10 @@ public class PantallaVenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
+    public void actualizarListaVenta(){
+        productosVenta.setProductos(control.getVenta().getProductos());
+    }
+    
     //Métodos 
     private void llenarTabla() {
         DefaultTableModel modelo = new DefaultTableModel();
