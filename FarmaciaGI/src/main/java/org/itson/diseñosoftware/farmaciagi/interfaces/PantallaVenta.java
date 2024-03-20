@@ -261,8 +261,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         if (!control.getInventario().getProductos().isEmpty()) {
-            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosInventario, productosVenta);
-            busquedaProducto.setVisible(true);
+            control.buscarProducto(this);
             llenarTabla();
             establecerTotal();
         }

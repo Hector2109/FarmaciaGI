@@ -3,7 +3,10 @@ package org.itson.diseñosoftware.farmaciagi.control;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.itson.diseñosoftware.farmaciagi.interfaces.DlgBuscarProducto;
 import org.itson.diseñosoftware.farmaciagi.interfaces.PantallaVenta;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
@@ -93,7 +96,12 @@ public class Control {
         this.venta = venta;
     }
     
-    
+    public void buscarProducto(JFrame frame){
+        if (!getInventario().getProductos().isEmpty()) {
+            DlgBuscarProducto buscar = new DlgBuscarProducto(frame, true, inventario, venta);
+            buscar.setVisible(true);
+        }
+    }
    
     
     
