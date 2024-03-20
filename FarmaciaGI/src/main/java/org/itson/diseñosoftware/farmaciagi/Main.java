@@ -2,6 +2,7 @@ package org.itson.diseñosoftware.farmaciagi;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.itson.diseñosoftware.farmaciagi.control.Control;
 import org.itson.diseñosoftware.farmaciagi.interfaces.PantallaVenta;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
@@ -17,6 +18,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        Control control;
         Productos inventario = new Productos();
 
         try {
@@ -69,9 +72,12 @@ public class Main {
         } catch (PersistenciaException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        control = new Control (inventario);
+        control.venta();
 
-        PantallaVenta pantalla = new PantallaVenta(inventario);
-        pantalla.setVisible(true);
+//        PantallaVenta pantalla = new PantallaVenta(inventario);
+//        pantalla.setVisible(true);
     }
 
 }
