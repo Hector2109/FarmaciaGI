@@ -16,6 +16,7 @@ public class Control {
     Productos venta = new Productos();
 
     public Control() {
+        inventario = agregarInventario();
     }
 
     public Productos agregarInventario() {

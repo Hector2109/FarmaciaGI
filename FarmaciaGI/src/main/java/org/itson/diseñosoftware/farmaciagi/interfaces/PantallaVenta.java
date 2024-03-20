@@ -11,15 +11,11 @@ import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
-    private Productos productosInventario;
-    private Productos productosVenta;
     private Float total;
     Control control = new Control();
 
     public PantallaVenta() {
         initComponents();
-        this.productosInventario = control.agregarInventario();
-        this.productosVenta = new Productos();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
@@ -265,7 +261,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         if (!control.getInventario().getProductos().isEmpty()) {
-            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosInventario, productosVenta);
+            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, control.getInventario(), control.getVenta());
             busquedaProducto.setVisible(true);
             llenarTabla();
             establecerTotal();
@@ -277,9 +273,11 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (total != 0.0F) {
-            DlgTipoPago pago = new DlgTipoPago(this, true, total, this.productosVenta);
+            DlgTipoPago pago = new DlgTipoPago(this, true, total, control.getVenta());
             pago.setVisible(true);
             limpiarVenta();
+            llenarTabla();
+            establecerTotal();
         } else {
             JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
                     "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
@@ -288,13 +286,15 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     //Métodos 
     private void llenarTabla() {
+        
+
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("ARTICULO");
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE UNITARIO");
 
-        for (Producto producto : productosVenta.getProductos()) {
+        for (Producto producto : control.getVenta().getProductos()) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),
@@ -305,12 +305,13 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         tblVenta.setModel(modelo);
         TableColumnModel columnModel = tblVenta.getColumnModel();
+        
     }
 
     private void establecerTotal() {
         Float sumaTotal = 0.0F;
 
-        for (Producto producto : productosVenta.getProductos()) {
+        for (Producto producto : control.getVenta().getProductos()) {
             sumaTotal += producto.getCantidad() * producto.getCosto();
         }
         float decimal = (float) Math.pow(10, 2);
