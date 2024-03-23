@@ -1,15 +1,15 @@
-package org.itson.diseñosoftware.farmaciagipersistencia.daos;
+package org.itson.diseñosoftware.farmaciagipersistencia.gestores;
 
 import java.util.List;
 import org.itson.diseñosoftware.farmaciagidominio.Cliente;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ClienteDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
-public class ClientesDAO implements IClientesDAO {
+public class GestorClientes implements IGestorClientes {
 
     private List<Cliente> clientes;
 
-    public ClientesDAO(List<Cliente> clientes) {
+    public GestorClientes(List<Cliente> clientes) {
         this.clientes = clientes;
     }
 

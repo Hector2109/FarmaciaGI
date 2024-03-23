@@ -1,4 +1,4 @@
-package org.itson.diseñosoftware.farmaciagipersistencia.daos;
+package org.itson.diseñosoftware.farmaciagipersistencia.gestores;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,11 @@ import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
-public class ProductosDAO implements IProductosDAO {
+public class GestorProductos implements IGestorProductos {
 
     private List<Producto> productos;
 
-    public ProductosDAO(List<Producto> productos) {
+    public GestorProductos(List<Producto> productos) {
         this.productos = productos;
     }
 

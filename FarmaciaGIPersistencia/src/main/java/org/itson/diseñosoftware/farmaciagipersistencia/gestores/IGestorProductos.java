@@ -1,11 +1,11 @@
-package org.itson.diseñosoftware.farmaciagipersistencia.daos;
+package org.itson.diseñosoftware.farmaciagipersistencia.gestores;
 
 import java.util.List;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
-public interface IProductosDAO {
+public interface IGestorProductos {
 
     public Producto obtenerProducto(ProductoDTO producto) throws PersistenciaException;
 

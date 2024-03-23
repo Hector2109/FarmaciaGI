@@ -1,10 +1,10 @@
-package org.itson.diseñosoftware.farmaciagipersistencia.daos;
+package org.itson.diseñosoftware.farmaciagipersistencia.gestores;
 
 import org.itson.diseñosoftware.farmaciagidominio.Cliente;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ClienteDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
-public interface IClientesDAO {
+public interface IGestorClientes {
     
     public Cliente obtenerCliente(ClienteDTO cliente) throws PersistenciaException;
     

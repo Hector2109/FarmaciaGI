@@ -1,4 +1,4 @@
-package org.itson.diseñosoftware.farmaciagipersistencia.daos;
+package org.itson.diseñosoftware.farmaciagipersistencia.gestores;
 
 import org.itson.diseñosoftware.farmaciagidominio.Venta;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ClienteDTO;
@@ -7,7 +7,7 @@ import org.itson.diseñosoftware.farmaciagipersistencia.dtos.PromocionDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.VentaDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
-public interface IVentasDAO {
+public interface IGestorVentas {
     
     public Venta obtenerVenta(VentaDTO venta) throws PersistenciaException;
     

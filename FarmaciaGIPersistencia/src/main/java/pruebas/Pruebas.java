@@ -9,33 +9,33 @@ import org.itson.diseñosoftware.farmaciagidominio.Cliente;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagidominio.Promocion;
 import org.itson.diseñosoftware.farmaciagidominio.Venta;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.ClientesDAO;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.IClientesDAO;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.IProductosDAO;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.IPromocionesDAO;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.IVentasDAO;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.ProductosDAO;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.PromocionesDAO;
-import org.itson.diseñosoftware.farmaciagipersistencia.daos.VentasDAO;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorClientes;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorPromociones;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorVentas;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ClienteDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.PromocionDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorClientes;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorPromociones;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
 
 public class Pruebas {
     
     public static void main(String[] args) {
         
         List<Producto> productos = new ArrayList<>();
-        IProductosDAO productosDAO = new ProductosDAO(productos);
+        IGestorProductos productosDAO = new GestorProductos(productos);
         
         List<Promocion> promociones = new ArrayList<>();
-        IPromocionesDAO promocionesDAO = new PromocionesDAO(promociones);
+        IGestorPromociones promocionesDAO = new GestorPromociones(promociones);
         
         List<Cliente> clientes = new ArrayList<>();
-        IClientesDAO clientesDAO = new ClientesDAO(clientes);
+        IGestorClientes clientesDAO = new GestorClientes(clientes);
 
         List<Venta> ventas = new ArrayList<>();
-        IVentasDAO ventasDAO = new VentasDAO(ventas);
+        IGestorVentas ventasDAO = new GestorVentas(ventas);
         
         PromocionDTO promocionNueva = new PromocionDTO("P-001", "Paracetamol 2x1", 10.0F);
         try {
