@@ -3,16 +3,23 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Point;
+import javax.swing.JOptionPane;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class DlgPagoTarjeta extends javax.swing.JDialog {
 
-    Float total;
+    private Float total;
+    private Float cambio = 0.0F;
+    private Float pago = 0.0F;
+    private Productos productosVenta;
+    private Frame parent;
     
     /**
      * Creates new form DlgPagoTarjeta
      */
-    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, float total) {
+    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, float total, Productos productosVenta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
@@ -20,6 +27,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
         btnCancelar.setBackground(Color.WHITE);
         this.total = total;
         txtMontoTotal.setText(Float.toString(total));
+        this.productosVenta = productosVenta;
     }
     
     /**
@@ -145,7 +153,13 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        pago = total;
+
+        cambio = 0F;
+        DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, pago, cambio);
+        venta.setVisible(true);
+        dispose();
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

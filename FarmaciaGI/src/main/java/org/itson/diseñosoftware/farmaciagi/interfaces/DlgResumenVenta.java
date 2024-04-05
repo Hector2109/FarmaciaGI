@@ -26,7 +26,6 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         this.cambio = cambio;
         this.pago = pago;
         this.productosVenta = productosVenta;
-        
         initComponents();
         llenarTabla();
         actualizarFecha();
@@ -40,7 +39,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         btnCerrar.setBackground(Color.WHITE);
         btnImprimirTicket.setBackground(Color.WHITE);
     }
-    
+
     /**
      * Método para actualizar la cantidad de los productos de la lista
      * 
