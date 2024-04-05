@@ -153,10 +153,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        pago = total;
-
-        cambio = 0F;
-        DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, pago, cambio);
+        DlgTransferenciaExitosa venta = new DlgTransferenciaExitosa(parent, true, this.total, productosVenta);
         venta.setVisible(true);
         dispose();
 
