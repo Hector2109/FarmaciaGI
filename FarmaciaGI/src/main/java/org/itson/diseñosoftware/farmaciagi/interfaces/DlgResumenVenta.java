@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +15,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     private Float cambio;
     private Productos productosVenta;
     private int cantidad = 0;
+    private Frame parent;
     
     /**
      * Creates new form DlgResumenVenta
@@ -21,7 +23,10 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     public DlgResumenVenta(java.awt.Frame parent, boolean modal, Productos productosVenta, Float total,Float pago,Float cambio) {
         super(parent, modal);
         this.total = total;
+        this.cambio = cambio;
+        this.pago = pago;
         this.productosVenta = productosVenta;
+        
         initComponents();
         llenarTabla();
         actualizarFecha();
@@ -35,13 +40,21 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         btnCerrar.setBackground(Color.WHITE);
         btnImprimirTicket.setBackground(Color.WHITE);
     }
-
+    
+    /**
+     * Método para actualizar la cantidad de los productos de la lista
+     * 
+     */
     private void actualizarCantidad() {
         for (Producto producto : productosVenta.getProductos()) {
             cantidad += producto.getCantidad();
         }
     }
-
+    
+    /**
+     * Método para actualizar la fecha y adémas le asigna un formato.
+     * 
+     */
     public void actualizarFecha(){
         Date currentDate = new Date();
         // Formatear la fecha como una cadena de texto
@@ -50,6 +63,10 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         txtFecha.setText(formattedDate);
     }
     
+    /**
+     * Método para llenar la tabla que contiene a todos los productos de la venta
+     * 
+     */
     private void llenarTabla() {
         DefaultTableModel modelo = new DefaultTableModel();
 
@@ -289,7 +306,8 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirTicketActionPerformed
-        // TODO add your handling code here:
+            DlgTicket ticket = new DlgTicket(parent, rootPaneCheckingEnabled, total, pago, cambio, productosVenta);
+            ticket.setVisible(true);
     }//GEN-LAST:event_btnImprimirTicketActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
