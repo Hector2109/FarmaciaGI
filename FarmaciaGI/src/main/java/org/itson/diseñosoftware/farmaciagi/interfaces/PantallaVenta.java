@@ -5,14 +5,14 @@ import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import org.itson.diseñosoftware.farmaciagi.control.Control;
+import org.itson.diseñosoftware.farmaciagi.control.Inventario;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
     private Float total;
-    Control control = new Control();
+    Inventario control = new Inventario();
 
     public PantallaVenta() {
         initComponents();
