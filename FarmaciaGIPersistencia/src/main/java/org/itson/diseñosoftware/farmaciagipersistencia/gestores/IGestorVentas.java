@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagipersistencia.gestores;
 
 import org.itson.diseñosoftware.farmaciagidominio.Venta;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ClienteDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.PromocionDTO;
@@ -20,5 +21,7 @@ public interface IGestorVentas {
     public void agregarPromocion(VentaDTO venta, PromocionDTO promocion) throws PersistenciaException;
     
     public Float calcularCosto(VentaDTO ventaBuscada) throws PersistenciaException;
+    
+    public Productos agregarProductosAVista(Productos inventario, String filtro) throws PersistenciaException;
     
 }

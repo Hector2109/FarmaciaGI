@@ -11,15 +11,18 @@ import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorVentas;
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
     private Productos inventario;
     private Productos productosVenta;
+    private GestorVentas inventario2;
 
     public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos inventario, Productos productosVenta) {
         super(parent, modal);
         this.inventario = inventario;
+        this.inventario2 = new GestorVentas();
         this.productosVenta = productosVenta;
         initComponents();
         btnCerrar.setBackground(Color.WHITE);
@@ -171,9 +174,10 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         Productos productosBuscados = new Productos();
         if (!txtBuscar.getText().isBlank()) {
-            productosBuscados.setProductos(inventario.buscarProductosPorNombre(txtBuscar.getText()));
-            if (productosBuscados.getProductos().isEmpty()) {
-                productosBuscados.setProductos(inventario.buscarProductosPorId(txtBuscar.getText()));
+            try {
+                productosBuscados = inventario2.agregarProductosAVista(inventario, txtBuscar.getText());
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre o clave del producto",

@@ -1,20 +1,21 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import org.itson.diseñosoftware.farmaciagi.control.Inventario;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorProductos;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
     private Float total;
-    Inventario control = new Inventario();
+    GestorProductos control;
 
-    public PantallaVenta() {
+    public PantallaVenta() throws PersistenciaException {
+        this.control = new GestorProductos();
         initComponents();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
@@ -22,7 +23,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         llenarTabla();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PersistenciaException {
         // Crear un inventario de productos para pasar a PantallaVenta
         Productos inventario = new Productos();
 

@@ -5,6 +5,7 @@ import org.itson.diseñosoftware.farmaciagidominio.Cliente;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagidominio.Promocion;
 import org.itson.diseñosoftware.farmaciagidominio.Venta;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ClienteDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.PromocionDTO;
@@ -15,7 +16,7 @@ public class GestorVentas implements IGestorVentas {
 
     private List<Venta> ventas;
 
-    public GestorVentas(List<Venta> ventas) {
+    public GestorVentas() {
         this.ventas = ventas;
     }
 
@@ -56,7 +57,7 @@ public class GestorVentas implements IGestorVentas {
             throw new PersistenciaException(e.getMessage());
         }
     }
-
+     
     @Override
     public void agregarCliente(VentaDTO ventaBuscada, ClienteDTO clienteNuevo) throws PersistenciaException {
         try {
@@ -104,6 +105,16 @@ public class GestorVentas implements IGestorVentas {
         } catch (PersistenciaException e) {
             throw new PersistenciaException(e.getMessage());
         }
+    }
+
+    @Override
+    public Productos agregarProductosAVista(Productos inventario, String filtro) throws PersistenciaException {
+        Productos productosBuscados = new Productos();
+        productosBuscados.setProductos(inventario.buscarProductosPorNombre(filtro));
+            if (productosBuscados.getProductos().isEmpty()) {
+                productosBuscados.setProductos(inventario.buscarProductosPorId(filtro));
+            }
+        return productosBuscados;    
     }
     
 }
