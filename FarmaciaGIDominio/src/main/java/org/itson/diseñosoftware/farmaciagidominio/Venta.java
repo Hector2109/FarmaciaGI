@@ -8,8 +8,6 @@ public class Venta {
 
     private String codigo;
     private List<Producto> productos;
-    private Cliente cliente;
-    private List<Promocion> promociones;
     private Float total;
     private Calendar fecha;
 
@@ -20,15 +18,6 @@ public class Venta {
     public Venta(String codigo, List<Producto> productos, Float total, Calendar fecha) {
         this.codigo = codigo;
         this.productos = productos;
-        this.total = total;
-        this.fecha = fecha;
-    }
-
-    public Venta(String codigo, List<Producto> productos, Cliente cliente, List<Promocion> promociones, Float total, Calendar fecha) {
-        this.codigo = codigo;
-        this.productos = productos;
-        this.cliente = cliente;
-        this.promociones = promociones;
         this.total = total;
         this.fecha = fecha;
     }
@@ -63,22 +52,6 @@ public class Venta {
 
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<Promocion> getPromociones() {
-        return promociones;
-    }
-
-    public void setPromociones(List<Promocion> promociones) {
-        this.promociones = promociones;
     }
 
     @Override
