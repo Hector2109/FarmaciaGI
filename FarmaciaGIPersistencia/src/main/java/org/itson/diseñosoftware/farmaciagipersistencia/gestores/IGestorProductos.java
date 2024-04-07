@@ -1,12 +1,14 @@
 package org.itson.diseñosoftware.farmaciagipersistencia.gestores;
 
 import java.util.List;
+import org.itson.diseñosoftware.farmaciagidominio.Producto;
+import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
 public interface IGestorProductos {
 
-    public ProductoDTO obtenerProducto(ProductoDTO producto) throws PersistenciaException;
+    public Producto obtenerProducto(ProductoDTO producto) throws PersistenciaException;
 
     public void agregarProducto(ProductoDTO producto) throws PersistenciaException;
 
@@ -16,10 +18,12 @@ public interface IGestorProductos {
 
     public void restarCantidadProducto(ProductoDTO producto) throws PersistenciaException;
 
-    public List<ProductoDTO> buscarProductosPorNombre(String nombre) throws PersistenciaException;
+    public List<Producto> buscarProductosPorNombre(String nombre) throws PersistenciaException;
 
-    public List<ProductoDTO> buscarProductoPorCodigo(String codigo) throws PersistenciaException;
+    public List<Producto> buscarProductoPorCodigo(String codigo) throws PersistenciaException;
 
-    public List<ProductoDTO> obtenerProductos() throws PersistenciaException;
+    public List<Producto> obtenerProductos() throws PersistenciaException;
+    
+    public Productos agregarInventario() throws PersistenciaException;
 
 }
