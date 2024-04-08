@@ -108,7 +108,7 @@ public class GestorProductos implements IGestorProductos {
     public List<ProductoDTO> buscarProductosPorNombre(String nombre) {
         List<ProductoDTO> productosSemejantes = new LinkedList<>();
         for (Producto producto : inventario.getProductos()) {
-            if (producto.getNombre().contains(nombre)) {
+            if (producto.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
                 ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
                         producto.getCosto(), producto.getMarca(), producto.getCantidad());
 
@@ -122,7 +122,7 @@ public class GestorProductos implements IGestorProductos {
     public List<ProductoDTO> buscarProductosPorCodigo(String codigo) {
         List<ProductoDTO> productosSemejantes = new LinkedList<>();
         for (Producto producto : inventario.getProductos()) {
-            if (producto.getCodigo().contains(codigo)) {
+            if (producto.getCodigo().toLowerCase().contains(codigo.toLowerCase())) {
                 ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
                         producto.getCosto(), producto.getMarca(), producto.getCantidad());
 

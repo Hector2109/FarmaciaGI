@@ -173,11 +173,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         List<ProductoDTO> productosBuscados = new LinkedList<>();
         if (!txtBuscar.getText().isBlank()) {
-            try {
-                productosBuscados = gestorInventario.agregarProductosAVista(gestorInventario.obtenerProductos(), txtBuscar.getText());
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            productosBuscados = gestorInventario.agregarProductosAVista(gestorInventario.obtenerProductos(), txtBuscar.getText());
         } else {
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre o clave del producto",
                     "Asegurate de no tener la casila vacía", JOptionPane.INFORMATION_MESSAGE);
