@@ -11,18 +11,18 @@ import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorVentas;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorProductos;
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
     private Productos inventario;
     private Productos productosVenta;
-    private GestorVentas inventario2;
+    private GestorProductos gestorProductos;
 
     public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos inventario, Productos productosVenta) {
         super(parent, modal);
         this.inventario = inventario;
-        this.inventario2 = new GestorVentas();
+        this.gestorProductos = new GestorProductos(inventario);
         this.productosVenta = productosVenta;
         initComponents();
         btnCerrar.setBackground(Color.WHITE);
@@ -175,7 +175,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         Productos productosBuscados = new Productos();
         if (!txtBuscar.getText().isBlank()) {
             try {
-                productosBuscados = inventario2.agregarProductosAVista(inventario, txtBuscar.getText());
+                productosBuscados = gestorProductos.agregarProductosAVista(inventario, txtBuscar.getText());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
             }

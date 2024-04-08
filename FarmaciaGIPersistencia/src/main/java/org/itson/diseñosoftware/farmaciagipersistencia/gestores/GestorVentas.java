@@ -93,13 +93,4 @@ public class GestorVentas implements IGestorVentas {
         }
     }
 
-    public Productos agregarProductosAVista(Productos inventario, String filtro) throws PersistenciaException {
-        Productos productosBuscados = new Productos();
-        productosBuscados.setProductos(inventario.buscarProductosPorNombre(filtro));
-        if (productosBuscados.getProductos().isEmpty()) {
-            productosBuscados.setProductos(inventario.buscarProductosPorId(filtro));
-        }
-        return productosBuscados;
-    }
-
 }

@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
+import org.itson.diseñosoftware.farmaciagipersistencia.Inventario;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorProductos;
@@ -13,10 +14,15 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private Float total;
     GestorProductos control;
+    private Productos inventario;
+    private Productos productosVenta;
 
     public PantallaVenta() throws PersistenciaException {
-        this.control = new GestorProductos();
         initComponents();
+        Inventario inventario = new Inventario();
+        this.inventario = inventario.agregarInventario();
+        this.productosVenta = new Productos();
+        this.control = new GestorProductos(this.inventario);
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
@@ -35,7 +41,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     }
     
     public void limpiarVenta(){
-        control.limpiarVenta();
+        productosVenta.getProductos().clear();
     }
 
     /**
@@ -261,8 +267,8 @@ public class PantallaVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        if (!control.getInventario().getProductos().isEmpty()) {
-            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, control.getInventario(), control.getVenta());
+        if (!inventario.getProductos().isEmpty()) {
+            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, inventario, productosVenta);
             busquedaProducto.setVisible(true);
             llenarTabla();
             establecerTotal();
@@ -274,7 +280,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (total != 0.0F) {
-            DlgTipoPago pago = new DlgTipoPago(this, true, total, control.getVenta());
+            DlgTipoPago pago = new DlgTipoPago(this, true, total, productosVenta);
             pago.setVisible(true);
             limpiarVenta();
             llenarTabla();
@@ -295,7 +301,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE UNITARIO");
 
-        for (Producto producto : control.getVenta().getProductos()) {
+        for (Producto producto : productosVenta.getProductos()) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),
@@ -312,7 +318,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     private void establecerTotal() {
         Float sumaTotal = 0.0F;
 
-        for (Producto producto : control.getVenta().getProductos()) {
+        for (Producto producto : productosVenta.getProductos()) {
             sumaTotal += producto.getCantidad() * producto.getCosto();
         }
         float decimal = (float) Math.pow(10, 2);
