@@ -6,6 +6,9 @@ import java.awt.Frame;
 import java.awt.Point;
 import javax.swing.JOptionPane;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
 
 /**
  *
@@ -17,13 +20,15 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     private Float cambio = 0.0F;
     private Float pago = 0.0F;
     private Productos productosVenta;
+    private IGestorProductos gestorProductosVenta;
+    private IGestorVentas gestorVenta;
     private Frame parent;
     
     
     /**
      * Creates new form DlgPagoEfectivo
      */
-    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total, Productos productosVenta) {
+    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total, IGestorProductos gestorProductosVenta, IGestorVentas gestorVenta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
@@ -33,6 +38,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         this.parent = parent;
         txtMontoTotal.setText(Float.toString(total));
         this.productosVenta = productosVenta;
+        this.gestorProductosVenta = gestorProductosVenta;
+        this.gestorVenta = gestorVenta;
     }
     
     /**
@@ -185,7 +192,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
         } else {
             cambio = pago - total;
-            DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, pago, cambio);
+            DlgResumenVenta venta = new DlgResumenVenta(parent, true, gestorProductosVenta, gestorVenta, total, pago, cambio);
+
             venta.setVisible(true);
             dispose();
         }

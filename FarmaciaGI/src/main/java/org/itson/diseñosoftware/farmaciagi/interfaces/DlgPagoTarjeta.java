@@ -7,19 +7,21 @@ import java.awt.Frame;
 import java.awt.Point;
 import javax.swing.JOptionPane;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
 
 public class DlgPagoTarjeta extends javax.swing.JDialog {
 
     private Float total;
     private Float cambio = 0.0F;
     private Float pago = 0.0F;
-    private Productos productosVenta;
     private Frame parent;
-    
+    private IGestorProductos gestorProductosVenta;
+    private IGestorVentas gestorVenta;
     /**
      * Creates new form DlgPagoTarjeta
      */
-    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, float total, Productos productosVenta) {
+    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, float total, IGestorProductos gestorProductosVenta,IGestorVentas gestorVenta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
@@ -27,7 +29,8 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
         btnCancelar.setBackground(Color.WHITE);
         this.total = total;
         txtMontoTotal.setText(Float.toString(total));
-        this.productosVenta = productosVenta;
+        this.gestorProductosVenta = gestorProductosVenta;
+        this.gestorVenta = gestorVenta;
     }
     
     /**
@@ -153,7 +156,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        DlgTransferenciaExitosa venta = new DlgTransferenciaExitosa(parent, true, this.total, productosVenta);
+        DlgTransferenciaExitosa venta = new DlgTransferenciaExitosa(parent, true, this.total, gestorProductosVenta, gestorVenta);
         venta.setVisible(true);
         dispose();
 

@@ -41,7 +41,7 @@ public class GestorVentas implements IGestorVentas {
 
     @Override
     public void agregarVenta(VentaDTO ventaNueva) throws PersistenciaException {
-        if (registroVentas.obtenerVenta(new Venta(ventaNueva.getCodigo())) != null) {
+        if (registroVentas.obtenerVenta(new Venta(ventaNueva.getCodigo())) == null) {
             
             List<Producto> productosVenta = new LinkedList<>();
             for (ProductoDTO producto : ventaNueva.getProductos()) {

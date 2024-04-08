@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
 
 /**
  *
@@ -16,22 +18,23 @@ import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 public class DlgInsertaTarjeta extends javax.swing.JDialog {
 
     Float total;
-    Productos productosVenta;
+    private IGestorProductos gestorProductosVenta;
+    private IGestorVentas gestorVenta;
     private Timer timer;
 
     /**
      * Creates new form DlgInsertaTarjeta
      */
-    public DlgInsertaTarjeta(java.awt.Frame parent, boolean modal, float total, Productos productosVenta) {
+    public DlgInsertaTarjeta(java.awt.Frame parent, boolean modal, float total, IGestorProductos gestorProductosVenta, IGestorVentas gestorVenta) {
         super(parent, modal);
         this.total = total;
-        this.productosVenta = productosVenta;
-
+        this.gestorProductosVenta = gestorProductosVenta;
+        this.gestorVenta = gestorVenta;
         timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true, total, productosVenta);
+                DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true, total, gestorProductosVenta, gestorVenta);
                 pagoTarjeta.setVisible(true);
 
             }
