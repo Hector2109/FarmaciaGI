@@ -23,7 +23,7 @@ public class Productos {
         return null;
     }
 
-    public void agregarProducto(Producto producto) throws PersistenciaException {
+    public void agregarProducto(Producto producto) {
         productos.add(producto);
     }
 
