@@ -24,7 +24,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     public PantallaVenta() throws PersistenciaException {
         initComponents();
         Inventario inventarioAux = new Inventario();
-        this.inventario = inventarioAux.agregarInventario();
+        this.inventario = inventarioAux.getInventario();
         this.productosVenta = new Productos();
         this.gestorInventario = new GestorProductos(this.inventario);
         this.gestorVenta = new GestorProductos(this.productosVenta);
@@ -302,20 +302,17 @@ public class PantallaVenta extends javax.swing.JFrame {
         modelo.addColumn("");
         modelo.addColumn("IMPORTE UNITARIO");
 
-        try {
-            if (!gestorVenta.obtenerProductos().isEmpty()) {
-                for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
-                    Object[] fila = {
-                        producto.getNombre(),
-                        "-",
-                        producto.getCantidad(),
-                        "+",
-                        producto.getCosto()
-                    };
-                    modelo.addRow(fila);
-                }
+        if (!gestorVenta.obtenerProductos().isEmpty()) {
+            for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
+                Object[] fila = {
+                    producto.getNombre(),
+                    "-",
+                    producto.getCantidad(),
+                    "+",
+                    producto.getCosto()
+                };
+                modelo.addRow(fila);
             }
-        } catch (PersistenciaException ex) {
         }
 
         tblVenta.setModel(modelo);
@@ -342,7 +339,15 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         ButtonColumn botonSumar = new ButtonColumn("+", (e) -> {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
-
+            try {
+                ProductoDTO producto = gestorVenta.obtenerProducto(gestorVenta.obtenerProductos().get(fila));
+                producto.setCantidad(producto.getCantidad() + 1);
+                gestorVenta.actualizarProducto(producto);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            llenarTabla();
+            establecerTotal();
         });
         tblVenta.getColumnModel().getColumn(3).setCellRenderer(botonSumar);
         tblVenta.getColumnModel().getColumn(3).setCellEditor(botonSumar);
@@ -350,12 +355,8 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void establecerTotal() {
         Float sumaTotal = 0.0F;
-        try {
-            for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
-                sumaTotal += producto.getCantidad() * producto.getCosto();
-            }
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
+        for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
+            sumaTotal += producto.getCantidad() * producto.getCosto();
         }
         float decimal = (float) Math.pow(10, 2);
         total = Math.round(sumaTotal * decimal) / decimal;

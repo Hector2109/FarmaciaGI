@@ -36,7 +36,7 @@ public class GestorProductos implements IGestorProductos {
 
         if (inventario.obtenerProducto(producto) == null) {
             inventario.agregarProducto(producto);
-        } 
+        }
     }
 
     @Override
@@ -53,14 +53,14 @@ public class GestorProductos implements IGestorProductos {
     @Override
     public void actualizarProducto(ProductoDTO productoActualizado) throws PersistenciaException {
         Producto producto = inventario.obtenerProducto(new Producto(productoActualizado.getCodigo()));
-        
+
         if (producto != null) {
             producto.setCodigo(productoActualizado.getCodigo());
             producto.setNombre(productoActualizado.getNombre());
             producto.setCosto(productoActualizado.getCosto());
             producto.setMarca(productoActualizado.getMarca());
             producto.setCantidad(productoActualizado.getCantidad());
-            
+
             inventario.actualizarProducto(producto);
         } else {
             throw new PersistenciaException("El producto no se encuentra en el inventario.");
@@ -105,55 +105,46 @@ public class GestorProductos implements IGestorProductos {
     }
 
     @Override
-    public List<ProductoDTO> buscarProductosPorNombre(String nombre) throws PersistenciaException {
-        if (!inventario.getProductos().isEmpty()) {
-            List<ProductoDTO> productosSemejantes = new LinkedList<>();
-            for (Producto producto : inventario.getProductos()) {
-                if (producto.getNombre().contains(nombre)) {
-                    ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
-                            producto.getCosto(), producto.getMarca(), producto.getCantidad());
-
-                    productosSemejantes.add(productoSemejante);
-                }
-            }
-            return productosSemejantes;
-        }
-        throw new PersistenciaException("El inventario está vacío.");
-    }
-
-    @Override
-    public List<ProductoDTO> buscarProductosPorCodigo(String codigo) throws PersistenciaException {
-        if (!inventario.getProductos().isEmpty()) {
-            List<ProductoDTO> productosSemejantes = new LinkedList<>();
-            for (Producto producto : inventario.getProductos()) {
-                if (producto.getCodigo().contains(codigo)) {
-                    ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
-                            producto.getCosto(), producto.getMarca(), producto.getCantidad());
-
-                    productosSemejantes.add(productoSemejante);
-                }
-            }
-            return productosSemejantes;
-        }
-        throw new PersistenciaException("El inventario está vacío.");
-    }
-
-    @Override
-    public List<ProductoDTO> obtenerProductos() throws PersistenciaException {
-        if (!inventario.getProductos().isEmpty()) {
-            List<ProductoDTO> productosInventario = new LinkedList<>();
-            for (Producto producto : inventario.getProductos()) {
-                ProductoDTO productoInventario = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
+    public List<ProductoDTO> buscarProductosPorNombre(String nombre) {
+        List<ProductoDTO> productosSemejantes = new LinkedList<>();
+        for (Producto producto : inventario.getProductos()) {
+            if (producto.getNombre().contains(nombre)) {
+                ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
                         producto.getCosto(), producto.getMarca(), producto.getCantidad());
-                productosInventario.add(productoInventario);
+
+                productosSemejantes.add(productoSemejante);
             }
-            return productosInventario;
         }
-        throw new PersistenciaException("El inventario está vacío.");
+        return productosSemejantes;
     }
 
     @Override
-    public List<ProductoDTO> agregarProductosAVista(List<ProductoDTO> inventario, String filtro) throws PersistenciaException {
+    public List<ProductoDTO> buscarProductosPorCodigo(String codigo) {
+        List<ProductoDTO> productosSemejantes = new LinkedList<>();
+        for (Producto producto : inventario.getProductos()) {
+            if (producto.getCodigo().contains(codigo)) {
+                ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
+                        producto.getCosto(), producto.getMarca(), producto.getCantidad());
+
+                productosSemejantes.add(productoSemejante);
+            }
+        }
+        return productosSemejantes;
+    }
+
+    @Override
+    public List<ProductoDTO> obtenerProductos() {
+        List<ProductoDTO> productosInventario = new LinkedList<>();
+        for (Producto producto : inventario.getProductos()) {
+            ProductoDTO productoInventario = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
+                    producto.getCosto(), producto.getMarca(), producto.getCantidad());
+            productosInventario.add(productoInventario);
+        }
+        return productosInventario;
+    }
+
+    @Override
+    public List<ProductoDTO> agregarProductosAVista(List<ProductoDTO> inventario, String filtro) {
         List<ProductoDTO> productosBuscados = new LinkedList<>();
         productosBuscados.addAll(buscarProductosPorNombre(filtro));
         if (productosBuscados.isEmpty()) {
