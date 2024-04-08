@@ -12,14 +12,18 @@ public interface IGestorProductos {
 
     public void eliminarProducto(ProductoDTO producto) throws PersistenciaException;
 
+    public void actualizarProducto(ProductoDTO producto) throws PersistenciaException;
+    
     public void sumarCantidadProducto(ProductoDTO producto) throws PersistenciaException;
 
     public void restarCantidadProducto(ProductoDTO producto) throws PersistenciaException;
 
     public List<ProductoDTO> buscarProductosPorNombre(String nombre) throws PersistenciaException;
 
-    public List<ProductoDTO> buscarProductoPorCodigo(String codigo) throws PersistenciaException;
+    public List<ProductoDTO> buscarProductosPorCodigo(String codigo) throws PersistenciaException;
 
     public List<ProductoDTO> obtenerProductos() throws PersistenciaException;
+    
+    public List<ProductoDTO> agregarProductosAVista(List<ProductoDTO> inventario, String filtro) throws PersistenciaException;
 
 }

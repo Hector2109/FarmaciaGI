@@ -18,14 +18,14 @@ public class GestorProductos implements IGestorProductos {
     @Override
     public ProductoDTO obtenerProducto(ProductoDTO productoBuscado) throws PersistenciaException {
         Producto productoInventario = inventario.obtenerProducto(new Producto(productoBuscado.getCodigo()));
-        
+
         if (productoInventario != null) {
-            ProductoDTO producto = new ProductoDTO(productoInventario.getCodigo(), productoInventario.getNombre(), 
+            ProductoDTO producto = new ProductoDTO(productoInventario.getCodigo(), productoInventario.getNombre(),
                     productoInventario.getCosto(), productoInventario.getMarca(), productoInventario.getCantidad());
-            
+
             return producto;
         } else {
-            throw new PersistenciaException("El producto no se encuentra en el inventario.");
+            return null;
         }
     }
 
@@ -34,11 +34,9 @@ public class GestorProductos implements IGestorProductos {
         Producto producto = new Producto(productoNuevo.getNombre(), productoNuevo.getCosto(),
                 productoNuevo.getMarca(), productoNuevo.getCodigo(), productoNuevo.getCantidad());
 
-        if (inventario.obtenerProducto(producto) != null) {
+        if (inventario.obtenerProducto(producto) == null) {
             inventario.agregarProducto(producto);
-        } else {
-            throw new PersistenciaException("El producto ya se encuentra en el inventario.");
-        }
+        } 
     }
 
     @Override
@@ -53,10 +51,27 @@ public class GestorProductos implements IGestorProductos {
     }
 
     @Override
+    public void actualizarProducto(ProductoDTO productoActualizado) throws PersistenciaException {
+        Producto producto = inventario.obtenerProducto(new Producto(productoActualizado.getCodigo()));
+        
+        if (producto != null) {
+            producto.setCodigo(productoActualizado.getCodigo());
+            producto.setNombre(productoActualizado.getNombre());
+            producto.setCosto(productoActualizado.getCosto());
+            producto.setMarca(productoActualizado.getMarca());
+            producto.setCantidad(productoActualizado.getCantidad());
+            
+            inventario.actualizarProducto(producto);
+        } else {
+            throw new PersistenciaException("El producto no se encuentra en el inventario.");
+        }
+    }
+
+    @Override
     public void sumarCantidadProducto(ProductoDTO producto) throws PersistenciaException {
         try {
             Producto productoInventario = inventario.obtenerProducto(new Producto(producto.getCodigo()));
-            
+
             if (productoInventario != null) {
                 productoInventario.setCantidad(productoInventario.getCantidad() + producto.getCantidad());
 
@@ -74,7 +89,7 @@ public class GestorProductos implements IGestorProductos {
         try {
             Producto productoInventario = inventario.obtenerProducto(new Producto(producto.getCodigo()));
 
-            if (productoInventario != null) { 
+            if (productoInventario != null) {
                 if (productoInventario.getCantidad() - producto.getCantidad() < 0) {
                     throw new PersistenciaException("La cantidad del producto en el inventario no es suficiente.");
                 }
@@ -95,7 +110,7 @@ public class GestorProductos implements IGestorProductos {
             List<ProductoDTO> productosSemejantes = new LinkedList<>();
             for (Producto producto : inventario.getProductos()) {
                 if (producto.getNombre().contains(nombre)) {
-                    ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(), 
+                    ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
                             producto.getCosto(), producto.getMarca(), producto.getCantidad());
 
                     productosSemejantes.add(productoSemejante);
@@ -107,12 +122,12 @@ public class GestorProductos implements IGestorProductos {
     }
 
     @Override
-    public List<ProductoDTO> buscarProductoPorCodigo(String codigo) throws PersistenciaException {
+    public List<ProductoDTO> buscarProductosPorCodigo(String codigo) throws PersistenciaException {
         if (!inventario.getProductos().isEmpty()) {
             List<ProductoDTO> productosSemejantes = new LinkedList<>();
             for (Producto producto : inventario.getProductos()) {
                 if (producto.getCodigo().contains(codigo)) {
-                    ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(), 
+                    ProductoDTO productoSemejante = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
                             producto.getCosto(), producto.getMarca(), producto.getCantidad());
 
                     productosSemejantes.add(productoSemejante);
@@ -128,7 +143,7 @@ public class GestorProductos implements IGestorProductos {
         if (!inventario.getProductos().isEmpty()) {
             List<ProductoDTO> productosInventario = new LinkedList<>();
             for (Producto producto : inventario.getProductos()) {
-                ProductoDTO productoInventario = new ProductoDTO(producto.getCodigo(), producto.getNombre(), 
+                ProductoDTO productoInventario = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
                         producto.getCosto(), producto.getMarca(), producto.getCantidad());
                 productosInventario.add(productoInventario);
             }
@@ -136,12 +151,13 @@ public class GestorProductos implements IGestorProductos {
         }
         throw new PersistenciaException("El inventario está vacío.");
     }
-    
-    public Productos agregarProductosAVista(Productos inventario, String filtro) throws PersistenciaException {
-        Productos productosBuscados = new Productos();
-        productosBuscados.setProductos(inventario.buscarProductosPorNombre(filtro));
-        if (productosBuscados.getProductos().isEmpty()) {
-            productosBuscados.setProductos(inventario.buscarProductosPorId(filtro));
+
+    @Override
+    public List<ProductoDTO> agregarProductosAVista(List<ProductoDTO> inventario, String filtro) throws PersistenciaException {
+        List<ProductoDTO> productosBuscados = new LinkedList<>();
+        productosBuscados.addAll(buscarProductosPorNombre(filtro));
+        if (productosBuscados.isEmpty()) {
+            productosBuscados.addAll(buscarProductosPorCodigo(filtro));
         }
         return productosBuscados;
     }

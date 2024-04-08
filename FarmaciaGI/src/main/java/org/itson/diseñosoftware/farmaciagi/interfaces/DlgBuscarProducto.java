@@ -3,27 +3,26 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
-    private Productos inventario;
-    private Productos productosVenta;
-    private GestorProductos gestorProductos;
+    private IGestorProductos gestorInventario;
+    private IGestorProductos gestorVenta;
 
-    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, Productos inventario, Productos productosVenta) {
+    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, IGestorProductos gestorInventario, IGestorProductos gestorVenta) {
         super(parent, modal);
-        this.inventario = inventario;
-        this.gestorProductos = new GestorProductos(inventario);
-        this.productosVenta = productosVenta;
+        this.gestorInventario = gestorInventario;
+        this.gestorVenta = gestorVenta;
         initComponents();
         btnCerrar.setBackground(Color.WHITE);
         btnBuscarProducto.setBackground(Color.WHITE);
@@ -172,10 +171,10 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        Productos productosBuscados = new Productos();
+        List<ProductoDTO> productosBuscados = new LinkedList<>();
         if (!txtBuscar.getText().isBlank()) {
             try {
-                productosBuscados = gestorProductos.agregarProductosAVista(inventario, txtBuscar.getText());
+                productosBuscados = gestorInventario.agregarProductosAVista(gestorInventario.obtenerProductos(), txtBuscar.getText());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -183,7 +182,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre o clave del producto",
                     "Asegurate de no tener la casila vacía", JOptionPane.INFORMATION_MESSAGE);
         }
-        if (!productosBuscados.getProductos().isEmpty()) {
+        if (!productosBuscados.isEmpty()) {
             llenarTabla(productosBuscados);
         } else {
             JOptionPane.showMessageDialog(rootPane, "No hay productos en el inventario.",
@@ -196,7 +195,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     //Métodos 
-    private void llenarTabla(Productos productosBuscados) {
+    private void llenarTabla(List<ProductoDTO> productosBuscados) {
 
         DefaultTableModel modelo = new DefaultTableModel();
 
@@ -206,7 +205,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("");
 
-        for (Producto producto : productosBuscados.getProductos()) {
+        for (ProductoDTO producto : productosBuscados) {
             if (producto.getCantidad() > 0) {
                 Object[] fila = {
                     producto.getNombre(),
@@ -223,17 +222,13 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
         ButtonColumn buttonColumn = new ButtonColumn("AGREGAR", (e) -> {
             int fila = tblBusqueda.convertRowIndexToModel(tblBusqueda.getSelectedRow());
-            Producto producto = productosBuscados.getProductos().get(fila);
+            ProductoDTO producto = productosBuscados.get(fila);
 
             agregarProductoVenta(producto);
 
             producto.setCantidad(producto.getCantidad() - 1);
             if (producto.getCantidad() == 0) {
-                try {
-                    productosBuscados.elminarProducto(producto);
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                productosBuscados.remove(producto);
             }
             llenarTabla(productosBuscados);
         });
@@ -243,17 +238,24 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
     }
 
-    private void agregarProductoVenta(Producto producto) {
-        if (productosVenta.obtenerProducto(producto) == null) {
-            Producto productoNuevo = new Producto(producto.getNombre(), producto.getCosto(), producto.getMarca(), producto.getCodigo(), producto.getCantidad());
-            productoNuevo.setCantidad(1);
-            try {
-                productosVenta.agregarProducto(productoNuevo);
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
+    private void agregarProductoVenta(ProductoDTO producto) {
+        try {
+            if (gestorVenta.obtenerProducto(producto) == null) {
+                ProductoDTO productoNuevo = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
+                        producto.getCosto(), producto.getMarca(), producto.getCantidad());
+                productoNuevo.setCantidad(1);
+                try {
+                    gestorVenta.agregarProducto(productoNuevo);
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                ProductoDTO productoVenta = gestorVenta.obtenerProducto(producto);
+                productoVenta.setCantidad(productoVenta.getCantidad() + 1);
+                gestorVenta.actualizarProducto(productoVenta);
             }
-        } else {
-            productosVenta.obtenerProducto(producto).setCantidad(productosVenta.obtenerProducto(producto).getCantidad() + 1);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
