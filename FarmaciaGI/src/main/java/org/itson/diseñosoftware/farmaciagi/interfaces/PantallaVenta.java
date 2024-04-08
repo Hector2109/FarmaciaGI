@@ -8,16 +8,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.diseñosoftware.farmaciagipersistencia.Inventario;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.RegistroVentas;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorVentas;
 import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
     private Float total;
     private IGestorProductos gestorInventario;
-    private IGestorProductos gestorVenta;
+    private IGestorProductos gestorProductosVenta;
+    private IGestorVentas gestorVenta;
     private Productos inventario;
     private Productos productosVenta;
 
@@ -27,7 +31,8 @@ public class PantallaVenta extends javax.swing.JFrame {
         this.inventario = inventarioAux.getInventario();
         this.productosVenta = new Productos();
         this.gestorInventario = new GestorProductos(this.inventario);
-        this.gestorVenta = new GestorProductos(this.productosVenta);
+        this.gestorProductosVenta = new GestorProductos(this.productosVenta);
+        this.gestorVenta = new GestorVentas(new RegistroVentas());
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
@@ -270,7 +275,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         if (!inventario.getProductos().isEmpty()) {
-            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, gestorInventario, gestorVenta);
+            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, gestorInventario, gestorProductosVenta);
             busquedaProducto.setVisible(true);
             llenarTabla();
             establecerTotal();
@@ -281,7 +286,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (total != 0.0F) {
-            DlgTipoPago pago = new DlgTipoPago(this, true, total, productosVenta);
+            DlgTipoPago pago = new DlgTipoPago(this, true, total, gestorProductosVenta, gestorVenta);
             pago.setVisible(true);
             limpiarVenta();
             llenarTabla();
@@ -302,8 +307,8 @@ public class PantallaVenta extends javax.swing.JFrame {
         modelo.addColumn("");
         modelo.addColumn("IMPORTE UNITARIO");
 
-        if (!gestorVenta.obtenerProductos().isEmpty()) {
-            for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
+        if (!gestorProductosVenta.obtenerProductos().isEmpty()) {
+            for (ProductoDTO producto : gestorProductosVenta.obtenerProductos()) {
                 Object[] fila = {
                     producto.getNombre(),
                     "-",
@@ -320,13 +325,20 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         ButtonColumn botonRestar = new ButtonColumn("-", (e) -> {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
+            
             try {
-                ProductoDTO producto = gestorVenta.obtenerProducto(gestorVenta.obtenerProductos().get(fila));
+                ProductoDTO producto = gestorProductosVenta.obtenerProducto(gestorProductosVenta.obtenerProductos().get(fila));
                 producto.setCantidad(producto.getCantidad() - 1);
                 if (producto.getCantidad() == 0) {
-                    gestorVenta.eliminarProducto(producto);
+                    ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                    productoActual.setCantidad(productoActual.getCantidad()+1);
+                    gestorInventario.actualizarProducto(productoActual);
+                    gestorProductosVenta.eliminarProducto(producto);
                 } else {
-                    gestorVenta.actualizarProducto(producto);
+                    ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                    productoActual.setCantidad(productoActual.getCantidad()+1);
+                    gestorInventario.actualizarProducto(productoActual);
+                    gestorProductosVenta.actualizarProducto(producto);
                 }
             } catch (PersistenciaException ex) {
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -340,9 +352,20 @@ public class PantallaVenta extends javax.swing.JFrame {
         ButtonColumn botonSumar = new ButtonColumn("+", (e) -> {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
             try {
-                ProductoDTO producto = gestorVenta.obtenerProducto(gestorVenta.obtenerProductos().get(fila));
+                ProductoDTO producto = gestorProductosVenta.obtenerProducto(gestorProductosVenta.obtenerProductos().get(fila));
+                ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                
+                if (productoActual.getCantidad()>=1){
+                
+                productoActual.setCantidad(productoActual.getCantidad()-1);
+                gestorInventario.actualizarProducto(productoActual);
+                    
                 producto.setCantidad(producto.getCantidad() + 1);
-                gestorVenta.actualizarProducto(producto);
+                gestorProductosVenta.actualizarProducto(producto);
+                
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Ya no hay inventario unu", "Inventario", JOptionPane.WARNING_MESSAGE);
+                }
             } catch (PersistenciaException ex) {
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -355,7 +378,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void establecerTotal() {
         Float sumaTotal = 0.0F;
-        for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
+        for (ProductoDTO producto : gestorProductosVenta.obtenerProductos()) {
             sumaTotal += producto.getCantidad() * producto.getCosto();
         }
         float decimal = (float) Math.pow(10, 2);

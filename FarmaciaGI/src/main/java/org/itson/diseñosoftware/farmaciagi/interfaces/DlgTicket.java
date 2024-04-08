@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
 
 /**
  *
@@ -15,15 +17,15 @@ public class DlgTicket extends javax.swing.JDialog {
     private Float total;
     private Float pago;
     private Float cambio;
-    private Productos productosVenta;
+    private IGestorProductos gestorVenta;
     private int cantidad = 0;
 
-    public DlgTicket(java.awt.Frame parent, boolean modal, Float total, Float pago, Float cambio, Productos productosVenta) {
+    public DlgTicket(java.awt.Frame parent, boolean modal, Float total, Float pago, Float cambio, IGestorProductos gestorVenta) {
         super(parent, modal);
         this.cambio = cambio;
         this.total = total;
         this.pago = pago;
-        this.productosVenta = productosVenta;
+        this.gestorVenta = gestorVenta;
         initComponents();
         llenarTabla();
         actualizarDatos();
@@ -195,7 +197,7 @@ public class DlgTicket extends javax.swing.JDialog {
      * 
      */
     private void actualizarCantidad() {
-        for (Producto producto : productosVenta.getProductos()) {
+        for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
             cantidad += producto.getCantidad();
         }
     }
@@ -211,7 +213,7 @@ public class DlgTicket extends javax.swing.JDialog {
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE");
 
-        for (Producto producto : productosVenta.getProductos()) {
+        for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),

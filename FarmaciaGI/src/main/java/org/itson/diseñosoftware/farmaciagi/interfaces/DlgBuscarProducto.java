@@ -223,6 +223,11 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
             agregarProductoVenta(producto);
 
             producto.setCantidad(producto.getCantidad() - 1);
+            try {
+                gestorInventario.actualizarProducto(producto);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if (producto.getCantidad() == 0) {
                 productosBuscados.remove(producto);
             }

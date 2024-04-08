@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
+import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
 
 /**
  *
@@ -16,25 +18,26 @@ import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 public class DlgTransferenciaExitosa extends javax.swing.JDialog {
 
     Float total;
-    Productos productosVenta;
+    private IGestorProductos gestorProductosVenta;
+    private IGestorVentas gestorVenta;
     private Timer timer;
     
     /**
      * Creates new form DlgTransferenciaExitosa
      */
-    public DlgTransferenciaExitosa(java.awt.Frame parent, boolean modal, float total, Productos productosVenta) {
+    public DlgTransferenciaExitosa(java.awt.Frame parent, boolean modal, float total, IGestorProductos gestorProductosVenta, IGestorVentas gestorVenta) {
         super(parent, modal);
         initComponents();
         
 
         this.total = total;
-        this.productosVenta = productosVenta;
-
+        this.gestorProductosVenta = gestorProductosVenta;
+        this.gestorVenta = gestorVenta;
         timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, total, 0.0F);
+                DlgResumenVenta venta = new DlgResumenVenta(parent, true, gestorProductosVenta, gestorVenta, total, total, 0.0F);
                 venta.setVisible(true);
 
             }
