@@ -320,12 +320,19 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         ButtonColumn botonRestar = new ButtonColumn("-", (e) -> {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
+            
             try {
                 ProductoDTO producto = gestorVenta.obtenerProducto(gestorVenta.obtenerProductos().get(fila));
                 producto.setCantidad(producto.getCantidad() - 1);
                 if (producto.getCantidad() == 0) {
+                    ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                    productoActual.setCantidad(productoActual.getCantidad()+1);
+                    gestorInventario.actualizarProducto(productoActual);
                     gestorVenta.eliminarProducto(producto);
                 } else {
+                    ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                    productoActual.setCantidad(productoActual.getCantidad()+1);
+                    gestorInventario.actualizarProducto(productoActual);
                     gestorVenta.actualizarProducto(producto);
                 }
             } catch (PersistenciaException ex) {
@@ -341,8 +348,19 @@ public class PantallaVenta extends javax.swing.JFrame {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
             try {
                 ProductoDTO producto = gestorVenta.obtenerProducto(gestorVenta.obtenerProductos().get(fila));
+                ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                
+                if (productoActual.getCantidad()>=1){
+                
+                productoActual.setCantidad(productoActual.getCantidad()-1);
+                gestorInventario.actualizarProducto(productoActual);
+                    
                 producto.setCantidad(producto.getCantidad() + 1);
                 gestorVenta.actualizarProducto(producto);
+                
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Ya no hay inventario unu", "Inventario", JOptionPane.WARNING_MESSAGE);
+                }
             } catch (PersistenciaException ex) {
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
