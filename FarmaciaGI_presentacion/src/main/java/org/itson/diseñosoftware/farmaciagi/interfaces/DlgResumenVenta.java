@@ -5,35 +5,45 @@ import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_ventas.GestorVentas;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
+import org.itson.disenosoftware.farmaciagi_subsistema_ventas.excepciones.GestorVentasException;
 
 public class DlgResumenVenta extends javax.swing.JDialog {
 
     private Float total;
     private Float pago;
     private Float cambio;
-    private IGestorProductos gestorProductosVenta;
+    private List<ProductoDTO> productosVenta;
     private IGestorVentas gestorVentas;
     private int cantidad = 0;
     private Frame parent;
 
     /**
      * Creates new form DlgResumenVenta
+     * @param parent
+     * @param modal
+     * @param productosVenta
+     * @param total
+     * @param pago
+     * @param cambio
      */
-    public DlgResumenVenta(java.awt.Frame parent, boolean modal, IGestorProductos gestorProductosVenta,IGestorVentas gestorVenta ,Float total, Float pago, Float cambio) {
+    public DlgResumenVenta(java.awt.Frame parent, boolean modal, List<ProductoDTO> productosVenta, Float total, Float pago, Float cambio) {
         super(parent, modal);
         this.total = total;
         this.cambio = cambio;
         this.pago = pago;
-        this.gestorProductosVenta = gestorProductosVenta;
-        this.gestorVentas = gestorVenta;
+        this.productosVenta = productosVenta;
+        this.gestorVentas = new GestorVentas();
+        this.parent = parent;
         initComponents();
         llenarTabla();
         actualizarFecha();
@@ -46,7 +56,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         txtCambio.setText(cambioFormato.toString());
         btnCerrar.setBackground(Color.WHITE);
         btnImprimirTicket.setBackground(Color.WHITE);
-//        generarVenta();
+        generarVenta();
     }
 
     /**
@@ -54,7 +64,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      *
      */
     private void actualizarCantidad() {
-        for (ProductoDTO producto : gestorProductosVenta.obtenerProductos()) {
+        for (ProductoDTO producto : productosVenta) {
             cantidad += producto.getCantidad();
         }
     }
@@ -83,7 +93,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE");
 
-        for (ProductoDTO producto : gestorProductosVenta.obtenerProductos()) {
+        for (ProductoDTO producto : productosVenta) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),
@@ -93,10 +103,11 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         }
         tablaVenta.setModel(modelo);
     }
-    
+
     /**
-     * Método que nos ayuda a crear un código al azar
-     * con un formato de "AAA-123"
+     * Método que nos ayuda a crear un código al azar con un formato de
+     * "AAA-123"
+     *
      * @return codigo en formato "AAA-123"
      */
     private String generarCodigo() {
@@ -128,13 +139,15 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      * Método que nos ayuda a generar la venta y esta sea registrada y
      * administrada por su respectivo gestor.
      */
-//    private void generarVenta() {
-//        try {
-//            gestorVentas.agregarVenta(new VentaDTO(generarCodigo(), gestorProductosVenta.obtenerProductos(), total, new GregorianCalendar()));
-//        } catch (PersistenciaException ex) {
-//            Logger.getLogger(DlgResumenVenta.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    private void generarVenta() {
+        try {
+            gestorVentas.registrarVenta(new VentaDTO(generarCodigo(), productosVenta, total, new GregorianCalendar()));
+        } catch (GestorVentasException ex) {
+            JOptionPane.showMessageDialog(parent, "No se pudo realizar la venta.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(DlgResumenVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -356,14 +369,13 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirTicketActionPerformed
-        DlgTicket ticket = new DlgTicket(parent, rootPaneCheckingEnabled, total, pago, cambio, gestorProductosVenta);
+        DlgTicket ticket = new DlgTicket(parent, rootPaneCheckingEnabled, total, pago, cambio, productosVenta);
         ticket.setVisible(true);
     }//GEN-LAST:event_btnImprimirTicketActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;

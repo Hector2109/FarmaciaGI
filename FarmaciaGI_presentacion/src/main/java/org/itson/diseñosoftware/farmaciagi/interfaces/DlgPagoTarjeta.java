@@ -1,12 +1,11 @@
-
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Point;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
-import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
+import java.util.List;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 
 public class DlgPagoTarjeta extends javax.swing.JDialog {
 
@@ -14,12 +13,12 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     private Float cambio = 0.0F;
     private Float pago = 0.0F;
     private Frame parent;
-    private IGestorProductos gestorProductosVenta;
-    private IGestorVentas gestorVenta;
+    private List<ProductoDTO> productosVenta;
+
     /**
      * Creates new form DlgPagoTarjeta
      */
-    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, float total, IGestorProductos gestorProductosVenta,IGestorVentas gestorVenta) {
+    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
@@ -27,10 +26,9 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
         btnCancelar.setBackground(Color.WHITE);
         this.total = total;
         txtMontoTotal.setText(Float.toString(total));
-        this.gestorProductosVenta = gestorProductosVenta;
-        this.gestorVenta = gestorVenta;
+        this.productosVenta = productosVenta;
     }
-    
+
     /**
      * Este método centra el cuadro de dialogo sobre la ventana de la
      * aplicación.
@@ -154,10 +152,9 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        DlgTransferenciaExitosa venta = new DlgTransferenciaExitosa(parent, true, this.total, gestorProductosVenta, gestorVenta);
+        DlgTransferenciaExitosa venta = new DlgTransferenciaExitosa(parent, true, this.total, productosVenta);
         venta.setVisible(true);
         dispose();
-
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

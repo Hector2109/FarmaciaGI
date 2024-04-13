@@ -13,19 +13,16 @@ import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.GestorVentas;
-import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
     private Float total;
     private IGestorProductos gestorInventario;
-    private IGestorVentas gestorVenta;
     private List<ProductoDTO> productosVenta;
 
     public PantallaVenta() {
         initComponents();
         this.gestorInventario = new GestorProductos();
-        this.gestorVenta = new GestorVentas();
         this.productosVenta = new LinkedList<>();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
@@ -274,16 +271,16 @@ public class PantallaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-//        if (!productosVenta.isEmpty()) {
-//            DlgTipoPago pago = new DlgTipoPago(this, true, total, gestorProductosVenta, gestorVenta);
-//            pago.setVisible(true);
-//            limpiarVenta();
-//            llenarTabla();
-//            establecerTotal();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
-//                    "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
-//        }
+        if (!productosVenta.isEmpty()) {
+            DlgTipoPago pago = new DlgTipoPago(this, true, total, productosVenta);
+            pago.setVisible(true);
+            limpiarVenta();
+            llenarTabla();
+            establecerTotal();
+        } else {
+            JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
+                    "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     //Métodos 

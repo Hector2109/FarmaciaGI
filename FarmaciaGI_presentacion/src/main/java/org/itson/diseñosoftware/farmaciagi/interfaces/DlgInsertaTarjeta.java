@@ -1,39 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.Timer;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
-import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 
-/**
- *
- * @author Hector Espinoza
- */
 public class DlgInsertaTarjeta extends javax.swing.JDialog {
 
-    Float total;
-    private IGestorProductos gestorProductosVenta;
-    private IGestorVentas gestorVenta;
+    private Float total;
+    private List<ProductoDTO> productosVenta;
     private Timer timer;
 
     /**
      * Creates new form DlgInsertaTarjeta
+     * @param parent
+     * @param modal
+     * @param total
+     * @param productosVenta
      */
-    public DlgInsertaTarjeta(java.awt.Frame parent, boolean modal, float total, IGestorProductos gestorProductosVenta, IGestorVentas gestorVenta) {
+    public DlgInsertaTarjeta(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
         super(parent, modal);
         this.total = total;
-        this.gestorProductosVenta = gestorProductosVenta;
-        this.gestorVenta = gestorVenta;
+        this.productosVenta = productosVenta;
+        
         timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true, total, gestorProductosVenta, gestorVenta);
+                DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true, total, productosVenta);
                 pagoTarjeta.setVisible(true);
 
             }
@@ -73,7 +68,6 @@ public class DlgInsertaTarjeta extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

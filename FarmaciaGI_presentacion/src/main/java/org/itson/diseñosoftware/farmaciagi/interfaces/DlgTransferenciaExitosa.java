@@ -1,42 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.Timer;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
-import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 
-/**
- *
- * @author Hector Espinoza
- */
 public class DlgTransferenciaExitosa extends javax.swing.JDialog {
 
-    Float total;
-    private IGestorProductos gestorProductosVenta;
-    private IGestorVentas gestorVenta;
     private Timer timer;
     
     /**
      * Creates new form DlgTransferenciaExitosa
+     * @param parent
+     * @param modal
+     * @param total
+     * @param productosVenta
      */
-    public DlgTransferenciaExitosa(java.awt.Frame parent, boolean modal, float total, IGestorProductos gestorProductosVenta, IGestorVentas gestorVenta) {
+    public DlgTransferenciaExitosa(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
         super(parent, modal);
         initComponents();
         
-
-        this.total = total;
-        this.gestorProductosVenta = gestorProductosVenta;
-        this.gestorVenta = gestorVenta;
         timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DlgResumenVenta venta = new DlgResumenVenta(parent, true, gestorProductosVenta, gestorVenta, total, total, 0.0F);
+                DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, total, 0.0F);
                 venta.setVisible(true);
 
             }
@@ -75,7 +64,6 @@ public class DlgTransferenciaExitosa extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

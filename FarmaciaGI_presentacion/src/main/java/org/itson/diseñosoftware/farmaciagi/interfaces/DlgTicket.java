@@ -2,28 +2,24 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 
-/**
- *
- * @author Enrique Rodriguez
- */
 public class DlgTicket extends javax.swing.JDialog {
 
     private Float total;
     private Float pago;
     private Float cambio;
-    private IGestorProductos gestorVenta;
+    private List<ProductoDTO> productosVenta;
     private int cantidad = 0;
 
-    public DlgTicket(java.awt.Frame parent, boolean modal, Float total, Float pago, Float cambio, IGestorProductos gestorVenta) {
+    public DlgTicket(java.awt.Frame parent, boolean modal, Float total, Float pago, Float cambio, List<ProductoDTO> productosVenta) {
         super(parent, modal);
         this.cambio = cambio;
         this.total = total;
         this.pago = pago;
-        this.gestorVenta = gestorVenta;
+        this.productosVenta = productosVenta;
         initComponents();
         llenarTabla();
         actualizarDatos();
@@ -195,7 +191,7 @@ public class DlgTicket extends javax.swing.JDialog {
      * 
      */
     private void actualizarCantidad() {
-        for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
+        for (ProductoDTO producto : productosVenta) {
             cantidad += producto.getCantidad();
         }
     }
@@ -211,7 +207,7 @@ public class DlgTicket extends javax.swing.JDialog {
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE");
 
-        for (ProductoDTO producto : gestorVenta.obtenerProductos()) {
+        for (ProductoDTO producto : productosVenta) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),

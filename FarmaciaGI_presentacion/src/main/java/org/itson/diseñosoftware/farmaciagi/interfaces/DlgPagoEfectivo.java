@@ -4,40 +4,36 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Point;
+import java.util.List;
 import javax.swing.JOptionPane;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
-import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 
-/**
- *
- * @author renec
- */
 public class DlgPagoEfectivo extends javax.swing.JDialog {
 
     private Float total;
     private Float cambio = 0.0F;
     private Float pago = 0.0F;
-//    private Productos productosVenta;
-    private IGestorProductos gestorProductosVenta;
-    private IGestorVentas gestorVenta;
+    private List<ProductoDTO> productosVenta;
     private Frame parent;
     
     
     /**
      * Creates new form DlgPagoEfectivo
+     * @param parent
+     * @param modal
+     * @param total
+     * @param productosVenta
      */
-    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total, IGestorProductos gestorProductosVenta, IGestorVentas gestorVenta) {
+    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
         btnAceptar.setBackground(Color.WHITE);
         btnCancelar.setBackground(Color.WHITE);
+        txtMontoTotal.setText(Float.toString(total));
         this.total = total;
         this.parent = parent;
-        txtMontoTotal.setText(Float.toString(total));
-//        this.productosVenta = productosVenta;
-        this.gestorProductosVenta = gestorProductosVenta;
-        this.gestorVenta = gestorVenta;
+        this.productosVenta = productosVenta;
     }
     
     /**
@@ -190,8 +186,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
         } else {
             cambio = pago - total;
-            DlgResumenVenta venta = new DlgResumenVenta(parent, true, gestorProductosVenta, gestorVenta, total, pago, cambio);
-
+            DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, pago, cambio);
             venta.setVisible(true);
             dispose();
         }
