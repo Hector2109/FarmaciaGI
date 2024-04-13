@@ -5,10 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Point;
-import javax.swing.JOptionPane;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_ventas.IGestorVentas;
 
 public class DlgPagoTarjeta extends javax.swing.JDialog {
 

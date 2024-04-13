@@ -9,14 +9,11 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import org.itson.diseñosoftware.farmaciagidominio.Producto;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.VentaDTO;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.GestorVentas;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_ventas.IGestorVentas;
 
 public class DlgResumenVenta extends javax.swing.JDialog {
 

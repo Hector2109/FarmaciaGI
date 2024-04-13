@@ -2,9 +2,8 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Frame;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_ventas.IGestorVentas;
 
 public class DlgTipoPago extends javax.swing.JDialog {
 

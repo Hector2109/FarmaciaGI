@@ -7,9 +7,8 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorVentas;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_ventas.IGestorVentas;
 
 /**
  *

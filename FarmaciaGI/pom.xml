@@ -23,6 +23,16 @@
             <artifactId>FarmaciaGIDominio</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio</groupId>
+            <artifactId>FarmaciaGI_subsistema_productos</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio</groupId>
+            <artifactId>FarmaciaGI_subsistema_ventas</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

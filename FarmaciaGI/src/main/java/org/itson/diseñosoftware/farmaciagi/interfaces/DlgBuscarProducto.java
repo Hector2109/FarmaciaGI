@@ -10,9 +10,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
-import org.itson.diseñosoftware.farmaciagipersistencia.gestores.IGestorProductos;
+
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
