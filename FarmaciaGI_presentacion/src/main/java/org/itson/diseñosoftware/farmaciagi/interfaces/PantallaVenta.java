@@ -316,19 +316,21 @@ public class PantallaVenta extends javax.swing.JFrame {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
 
             try {
-                ProductoDTO producto = gestorInventario.obtenerProducto(productosVenta.get(fila));
-                producto.setCantidad(producto.getCantidad() - 1);
+                ProductoDTO productoVenta = productosVenta.get(fila);
+                productoVenta.setCantidad(productoVenta.getCantidad() - 1);
                 
-                if (producto.getCantidad() == 0) {
-                    ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                if (productoVenta.getCantidad() == 0) {
+                    
+                    ProductoDTO productoActual = gestorInventario.obtenerProducto(productoVenta);
                     productoActual.setCantidad(productoActual.getCantidad() + 1);
                     gestorInventario.actualizarProducto(productoActual);
-                    productosVenta.remove(producto);
+                    productosVenta.remove(productoVenta);
+                    
                 } else {
-                    ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                    ProductoDTO productoActual = gestorInventario.obtenerProducto(productoVenta);
                     productoActual.setCantidad(productoActual.getCantidad() + 1);
                     gestorInventario.actualizarProducto(productoActual);
-                    gestorInventario.actualizarProducto(producto);
+                    productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
                 }
             } catch (GestorProductosException ex) {
                 JOptionPane.showMessageDialog(this, "No se pudo modificar la cantidad del producto.",
@@ -344,16 +346,16 @@ public class PantallaVenta extends javax.swing.JFrame {
         ButtonColumn botonSumar = new ButtonColumn("+", (e) -> {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
             try {
-                ProductoDTO producto = gestorInventario.obtenerProducto(productosVenta.get(fila));
-                ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
+                ProductoDTO productoVenta = productosVenta.get(fila);
+                ProductoDTO productoInventario = gestorInventario.obtenerProducto(productoVenta);
 
-                if (productoActual.getCantidad() >= 1) {
+                if (productoInventario.getCantidad() >= 1) {
 
-                    productoActual.setCantidad(productoActual.getCantidad() - 1);
-                    gestorInventario.actualizarProducto(productoActual);
+                    productoInventario.setCantidad(productoInventario.getCantidad() - 1);
+                    gestorInventario.actualizarProducto(productoInventario);
 
-                    producto.setCantidad(producto.getCantidad() + 1);
-                    gestorInventario.actualizarProducto(producto);
+                    productoVenta.setCantidad(productoVenta.getCantidad() + 1);
+                    productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Cantidad del producto en inventario insuficiente.", 
