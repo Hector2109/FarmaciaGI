@@ -2,6 +2,7 @@ package org.itson.disenosoftware.farmaciagi_subsistema_productos;
 
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 
 /**
  *
@@ -9,7 +10,9 @@ import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
  */
 public interface IGestorProductos {
     
-    public ProductoDTO obtenerProducto(ProductoDTO producto) ;
+    public ProductoDTO obtenerProducto(ProductoDTO producto);
+    
+    public void actualizarProducto(ProductoDTO productoActualizado)throws GestorProductosException;
 
     public List<ProductoDTO> buscarProductosPorNombre(String nombre);
 

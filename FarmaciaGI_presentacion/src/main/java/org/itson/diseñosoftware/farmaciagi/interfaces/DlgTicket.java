@@ -3,8 +3,8 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
-import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
 
 /**
  *

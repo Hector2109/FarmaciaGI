@@ -9,10 +9,9 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
-import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
-import org.itson.diseñosoftware.farmaciagipersistencia.dtos.VentaDTO;
-import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
 
 public class DlgResumenVenta extends javax.swing.JDialog {
@@ -47,7 +46,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         txtCambio.setText(cambioFormato.toString());
         btnCerrar.setBackground(Color.WHITE);
         btnImprimirTicket.setBackground(Color.WHITE);
-        generarVenta();
+//        generarVenta();
     }
 
     /**
@@ -129,13 +128,13 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      * Método que nos ayuda a generar la venta y esta sea registrada y
      * administrada por su respectivo gestor.
      */
-    private void generarVenta() {
-        try {
-            gestorVentas.agregarVenta(new VentaDTO(generarCodigo(), gestorProductosVenta.obtenerProductos(), total, new GregorianCalendar()));
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(DlgResumenVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    private void generarVenta() {
+//        try {
+//            gestorVentas.agregarVenta(new VentaDTO(generarCodigo(), gestorProductosVenta.obtenerProductos(), total, new GregorianCalendar()));
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(DlgResumenVenta.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

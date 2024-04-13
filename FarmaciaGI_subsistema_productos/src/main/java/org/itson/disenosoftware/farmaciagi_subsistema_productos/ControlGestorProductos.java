@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_simulacionbd.SimuladorInventarioProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 
 class ControlGestorProductos {
@@ -29,6 +30,27 @@ class ControlGestorProductos {
             return producto;
         } else {
             return null;
+        }
+    }
+    
+    public void actualizarProducto(ProductoDTO productoActualizado) throws ControlProductosException {
+        Producto productoInventario = null;
+        for (Producto producto : inventario) {
+            if (producto.getCodigo().equals(productoActualizado.getCodigo())) {
+                productoInventario = producto;
+            }
+        }
+        
+        if (productoInventario != null) {
+            productoInventario.setCodigo(productoActualizado.getCodigo());
+            productoInventario.setNombre(productoActualizado.getNombre());
+            productoInventario.setCosto(productoActualizado.getCosto());
+            productoInventario.setMarca(productoActualizado.getMarca());
+            productoInventario.setCantidad(productoActualizado.getCantidad());
+            
+            inventario.set(inventario.indexOf(productoInventario), productoInventario);
+        } else {
+            throw new ControlProductosException("El producto no se encuentra en el inventario.");
         }
     }
 

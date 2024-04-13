@@ -1,13 +1,17 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.GestorVentas;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
 
@@ -16,11 +20,13 @@ public class PantallaVenta extends javax.swing.JFrame {
     private Float total;
     private IGestorProductos gestorInventario;
     private IGestorVentas gestorVenta;
+    private List<ProductoDTO> productosVenta;
 
     public PantallaVenta() {
         initComponents();
         this.gestorInventario = new GestorProductos();
         this.gestorVenta = new GestorVentas();
+        this.productosVenta = new LinkedList<>();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
@@ -30,13 +36,12 @@ public class PantallaVenta extends javax.swing.JFrame {
     public static void main(String[] args) {
         // Crear una instancia de PantallaVenta y pasarle el inventario
         PantallaVenta pantallaVenta = new PantallaVenta();
-
         // Hacer visible la pantalla de venta
         pantallaVenta.setVisible(true);
     }
 
     public void limpiarVenta() {
-        productosVenta.getProductos().clear();
+        productosVenta.clear();
     }
 
     /**
@@ -262,27 +267,23 @@ public class PantallaVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        if (!inventario.getProductos().isEmpty()) {
-            DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, gestorInventario, gestorProductosVenta);
-            busquedaProducto.setVisible(true);
-            llenarTabla();
-            establecerTotal();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "No hay inventario", "Error en persistencia", JOptionPane.ERROR_MESSAGE);
-        }
+//        DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true);
+//        busquedaProducto.setVisible(true);
+//        llenarTabla();
+//        establecerTotal();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (total != 0.0F) {
-            DlgTipoPago pago = new DlgTipoPago(this, true, total, gestorProductosVenta, gestorVenta);
-            pago.setVisible(true);
-            limpiarVenta();
-            llenarTabla();
-            establecerTotal();
-        } else {
-            JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
-                    "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
-        }
+//        if (!productosVenta.isEmpty()) {
+//            DlgTipoPago pago = new DlgTipoPago(this, true, total, gestorProductosVenta, gestorVenta);
+//            pago.setVisible(true);
+//            limpiarVenta();
+//            llenarTabla();
+//            establecerTotal();
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
+//                    "Venta vacía", JOptionPane.INFORMATION_MESSAGE);
+//        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     //Métodos 
@@ -295,8 +296,8 @@ public class PantallaVenta extends javax.swing.JFrame {
         modelo.addColumn("");
         modelo.addColumn("IMPORTE UNITARIO");
 
-        if (!gestorProductosVenta.obtenerProductos().isEmpty()) {
-            for (ProductoDTO producto : gestorProductosVenta.obtenerProductos()) {
+        if (!productosVenta.isEmpty()) {
+            for (ProductoDTO producto : productosVenta) {
                 Object[] fila = {
                     producto.getNombre(),
                     "-",
@@ -315,20 +316,23 @@ public class PantallaVenta extends javax.swing.JFrame {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
 
             try {
-                ProductoDTO producto = gestorProductosVenta.obtenerProducto(gestorProductosVenta.obtenerProductos().get(fila));
+                ProductoDTO producto = gestorInventario.obtenerProducto(productosVenta.get(fila));
                 producto.setCantidad(producto.getCantidad() - 1);
+                
                 if (producto.getCantidad() == 0) {
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
                     productoActual.setCantidad(productoActual.getCantidad() + 1);
                     gestorInventario.actualizarProducto(productoActual);
-                    gestorProductosVenta.eliminarProducto(producto);
+                    productosVenta.remove(producto);
                 } else {
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
                     productoActual.setCantidad(productoActual.getCantidad() + 1);
                     gestorInventario.actualizarProducto(productoActual);
-                    gestorProductosVenta.actualizarProducto(producto);
+                    gestorInventario.actualizarProducto(producto);
                 }
-            } catch (PersistenciaException ex) {
+            } catch (GestorProductosException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo modificar la cantidad del producto.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
             llenarTabla();
@@ -340,7 +344,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         ButtonColumn botonSumar = new ButtonColumn("+", (e) -> {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
             try {
-                ProductoDTO producto = gestorProductosVenta.obtenerProducto(gestorProductosVenta.obtenerProductos().get(fila));
+                ProductoDTO producto = gestorInventario.obtenerProducto(productosVenta.get(fila));
                 ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
 
                 if (productoActual.getCantidad() >= 1) {
@@ -349,12 +353,15 @@ public class PantallaVenta extends javax.swing.JFrame {
                     gestorInventario.actualizarProducto(productoActual);
 
                     producto.setCantidad(producto.getCantidad() + 1);
-                    gestorProductosVenta.actualizarProducto(producto);
+                    gestorInventario.actualizarProducto(producto);
 
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Ya no hay inventario unu", "Inventario", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Cantidad del producto en inventario insuficiente.", 
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (PersistenciaException ex) {
+            } catch (GestorProductosException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo modificar la cantidad del producto.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
             llenarTabla();
@@ -366,7 +373,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void establecerTotal() {
         Float sumaTotal = 0.0F;
-        for (ProductoDTO producto : gestorProductosVenta.obtenerProductos()) {
+        for (ProductoDTO producto : productosVenta) {
             sumaTotal += producto.getCantidad() * producto.getCosto();
         }
         float decimal = (float) Math.pow(10, 2);
