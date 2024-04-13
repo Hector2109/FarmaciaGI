@@ -181,6 +181,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        if (!txtPago.getText().isEmpty()) {
         pago = Float.valueOf(txtPago.getText());
         if (pago < total) {
             JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
@@ -189,6 +190,9 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
             DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, pago, cambio);
             venta.setVisible(true);
             dispose();
+        }
+        }else{
+            JOptionPane.showMessageDialog(parent, "Ingresar Monto a pagar");
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
