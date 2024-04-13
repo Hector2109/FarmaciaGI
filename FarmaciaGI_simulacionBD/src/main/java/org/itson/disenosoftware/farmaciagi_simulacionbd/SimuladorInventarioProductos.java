@@ -6,9 +6,10 @@ import org.itson.diseñosoftware.farmaciagidominio.Producto;
 
 public class SimuladorInventarioProductos {
 
+    private static SimuladorInventarioProductos simulador;
     private List<Producto> inventario;
 
-    public SimuladorInventarioProductos() {
+    private SimuladorInventarioProductos() {
         inventario = new LinkedList<>();
         agregarInventario();
     }
@@ -26,6 +27,13 @@ public class SimuladorInventarioProductos {
         inventario.add(new Producto("Proctoacid", 121.04F, "Ultra", "PRD-450", 10));
     }
 
+    public static SimuladorInventarioProductos getInstance(){
+        if (simulador == null) {
+            simulador = new SimuladorInventarioProductos();
+        }
+        return simulador;
+    }
+    
     public List<Producto> getInventario() {
         return inventario;
     }

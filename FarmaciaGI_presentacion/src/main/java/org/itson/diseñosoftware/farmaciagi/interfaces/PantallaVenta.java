@@ -10,37 +10,24 @@ import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.GestorVentas;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
-import org.itson.diseñosoftware.farmaciagipersistencia.Inventario;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
-import org.itson.diseñosoftware.farmaciagipersistencia.RegistroVentas;
-import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
-import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
-
 
 public class PantallaVenta extends javax.swing.JFrame {
 
     private Float total;
     private IGestorProductos gestorInventario;
-    private IGestorProductos gestorProductosVenta;
     private IGestorVentas gestorVenta;
-    private Productos inventario;
-    private Productos productosVenta;
 
-    public PantallaVenta() throws PersistenciaException {
+    public PantallaVenta() {
         initComponents();
-        Inventario inventarioAux = new Inventario();
-        this.inventario = inventarioAux.getInventario();
-        this.productosVenta = new Productos();
-        this.gestorInventario = new GestorProductos(this.inventario);
-        this.gestorProductosVenta = new GestorProductos(this.productosVenta);
-        this.gestorVenta = new GestorVentas(new RegistroVentas());
+        this.gestorInventario = new GestorProductos();
+        this.gestorVenta = new GestorVentas();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
         llenarTabla();
     }
 
-    public static void main(String[] args) throws PersistenciaException {
+    public static void main(String[] args) {
         // Crear una instancia de PantallaVenta y pasarle el inventario
         PantallaVenta pantallaVenta = new PantallaVenta();
 
@@ -326,18 +313,18 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         ButtonColumn botonRestar = new ButtonColumn("-", (e) -> {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
-            
+
             try {
                 ProductoDTO producto = gestorProductosVenta.obtenerProducto(gestorProductosVenta.obtenerProductos().get(fila));
                 producto.setCantidad(producto.getCantidad() - 1);
                 if (producto.getCantidad() == 0) {
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
-                    productoActual.setCantidad(productoActual.getCantidad()+1);
+                    productoActual.setCantidad(productoActual.getCantidad() + 1);
                     gestorInventario.actualizarProducto(productoActual);
                     gestorProductosVenta.eliminarProducto(producto);
                 } else {
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
-                    productoActual.setCantidad(productoActual.getCantidad()+1);
+                    productoActual.setCantidad(productoActual.getCantidad() + 1);
                     gestorInventario.actualizarProducto(productoActual);
                     gestorProductosVenta.actualizarProducto(producto);
                 }
@@ -355,16 +342,16 @@ public class PantallaVenta extends javax.swing.JFrame {
             try {
                 ProductoDTO producto = gestorProductosVenta.obtenerProducto(gestorProductosVenta.obtenerProductos().get(fila));
                 ProductoDTO productoActual = gestorInventario.obtenerProducto(producto);
-                
-                if (productoActual.getCantidad()>=1){
-                
-                productoActual.setCantidad(productoActual.getCantidad()-1);
-                gestorInventario.actualizarProducto(productoActual);
-                    
-                producto.setCantidad(producto.getCantidad() + 1);
-                gestorProductosVenta.actualizarProducto(producto);
-                
-                }else{
+
+                if (productoActual.getCantidad() >= 1) {
+
+                    productoActual.setCantidad(productoActual.getCantidad() - 1);
+                    gestorInventario.actualizarProducto(productoActual);
+
+                    producto.setCantidad(producto.getCantidad() + 1);
+                    gestorProductosVenta.actualizarProducto(producto);
+
+                } else {
                     JOptionPane.showMessageDialog(rootPane, "Ya no hay inventario unu", "Inventario", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (PersistenciaException ex) {

@@ -6,10 +6,18 @@ import org.itson.diseñosoftware.farmaciagidominio.Venta;
 
 public class SimuladorRegistroVentas {
 
+    private static SimuladorRegistroVentas simulador;
     private List<Venta> registro;
     
-    public SimuladorRegistroVentas(){
+    private SimuladorRegistroVentas(){
         registro = new LinkedList<>();
+    }
+    
+    public static SimuladorRegistroVentas getInstance(){
+        if (simulador == null) {
+            simulador = new SimuladorRegistroVentas();
+        }
+        return simulador;
     }
     
     public List<Venta> obtenerRegistro(){

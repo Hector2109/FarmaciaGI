@@ -4,13 +4,28 @@ import java.util.LinkedList;
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
+import org.itson.disenosoftware.farmaciagi_simulacionbd.SimuladorRegistroVentas;
+import org.itson.disenosoftware.farmaciagi_subsistema_ventas.excepciones.ControlVentasException;
 import org.itson.diseñosoftware.farmaciagidominio.Producto;
 import org.itson.diseñosoftware.farmaciagidominio.Venta;
 
 class ControlGestorVentas {
 
-    public void registrarVenta(VentaDTO ventaNueva) {
-        if (registroVentas.obtenerVenta(new Venta(ventaNueva.getCodigo())) == null) {
+    private List<Venta> registro;
+
+    public ControlGestorVentas() {
+        registro = SimuladorRegistroVentas.getInstance().obtenerRegistro();
+    }
+
+    public void registrarVenta(VentaDTO ventaNueva) throws ControlVentasException {
+        Venta ventaRegistro = null;
+        for (Venta venta : registro) {
+            if (venta.getCodigo().equals(ventaNueva.getCodigo())) {
+                ventaRegistro = venta;
+            }
+        }
+
+        if (ventaRegistro == null) {
 
             List<Producto> productosVenta = new LinkedList<>();
             for (ProductoDTO producto : ventaNueva.getProductos()) {
@@ -22,41 +37,49 @@ class ControlGestorVentas {
             Venta venta = new Venta(ventaNueva.getCodigo(), productosVenta,
                     ventaNueva.getTotal(), ventaNueva.getFecha());
 
-            registroVentas.agregarVenta(venta);
+            registro.add(venta);
         } else {
-//            throw new PersistenciaException("La venta ya se encuentra en el registro.");
+            throw new ControlVentasException("La venta no existe.");
         }
     }
-    
-    public void agregarProducto(VentaDTO ventaBuscada, ProductoDTO productoNuevo){
-        try {
-            Venta venta = registroVentas.obtenerVenta(new Venta(ventaBuscada.getCodigo()));
-            
-            Producto producto = new Producto(productoNuevo.getNombre(), productoNuevo.getCosto(), 
+
+    public void agregarProducto(VentaDTO ventaBuscada, ProductoDTO productoNuevo) throws ControlVentasException {
+        Venta ventaRegistro = null;
+        for (Venta venta : registro) {
+            if (venta.getCodigo().equals(ventaBuscada.getCodigo())) {
+                ventaRegistro = venta;
+            }
+        }
+
+        if (ventaRegistro != null) {
+            Producto producto = new Producto(productoNuevo.getNombre(), productoNuevo.getCosto(),
                     productoNuevo.getMarca(), productoNuevo.getCodigo(), productoNuevo.getCantidad());
 
-            if (!venta.getProductos().contains(producto)) {
-                venta.getProductos().add(producto);
-            } else {
-//                throw new PersistenciaException("El producto ya se encuentra en la venta.");
+            if (!ventaRegistro.getProductos().contains(producto)) {
+                ventaRegistro.getProductos().add(producto);
             }
-        } catch (PersistenciaException | NullPointerException e) {
-//            throw new PersistenciaException(e.getMessage());
+        } else {
+            throw new ControlVentasException("La venta no existe.");
         }
     }
-    
-    public Float calcularCosto(VentaDTO ventaBuscada){
-        try {
-            Venta venta = registroVentas.obtenerVenta(new Venta(ventaBuscada.getCodigo()));
 
-            List<Producto> productosVenta = venta.getProductos();
+    public Float calcularCosto(VentaDTO ventaBuscada) throws ControlVentasException {
+        Venta ventaRegistro = null;
+        for (Venta venta : registro) {
+            if (venta.getCodigo().equals(ventaBuscada.getCodigo())) {
+                ventaRegistro = venta;
+            }
+        }
+
+        if (ventaRegistro != null) {
+            List<Producto> productosVenta = ventaRegistro.getProductos();
             Float total = 0.0F;
             for (Producto producto : productosVenta) {
                 total += producto.getCantidad() * producto.getCosto();
             }
             return total;
-        } catch (NullPointerException e) {
-//            throw new PersistenciaException(e.getMessage());
+        } else {
+            throw new ControlVentasException("La venta no existe.");
         }
     }
 

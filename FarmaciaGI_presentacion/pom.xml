@@ -15,11 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>FarmaciaGIPersistencia</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>FarmaciaGIDominio</artifactId>
             <version>${project.version}</version>
         </dependency>
