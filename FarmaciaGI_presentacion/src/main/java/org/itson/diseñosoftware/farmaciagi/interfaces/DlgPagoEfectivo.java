@@ -6,7 +6,6 @@ import java.awt.Frame;
 import java.awt.Point;
 import javax.swing.JOptionPane;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
-import org.itson.diseñosoftware.farmaciagipersistencia.Productos;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
 
 /**
@@ -18,7 +17,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     private Float total;
     private Float cambio = 0.0F;
     private Float pago = 0.0F;
-    private Productos productosVenta;
+//    private Productos productosVenta;
     private IGestorProductos gestorProductosVenta;
     private IGestorVentas gestorVenta;
     private Frame parent;
@@ -36,7 +35,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         this.total = total;
         this.parent = parent;
         txtMontoTotal.setText(Float.toString(total));
-        this.productosVenta = productosVenta;
+//        this.productosVenta = productosVenta;
         this.gestorProductosVenta = gestorProductosVenta;
         this.gestorVenta = gestorVenta;
     }

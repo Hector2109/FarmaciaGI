@@ -267,10 +267,10 @@ public class PantallaVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-//        DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true);
-//        busquedaProducto.setVisible(true);
-//        llenarTabla();
-//        establecerTotal();
+        DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosVenta);
+        busquedaProducto.setVisible(true);
+        llenarTabla();
+        establecerTotal();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed

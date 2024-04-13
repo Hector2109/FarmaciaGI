@@ -14,7 +14,6 @@ import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
-import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
@@ -223,8 +222,14 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         ButtonColumn buttonColumn = new ButtonColumn("AGREGAR", (e) -> {
             int fila = tblBusqueda.convertRowIndexToModel(tblBusqueda.getSelectedRow());
             ProductoDTO producto = productosBuscados.get(fila);
+            ProductoDTO productoCopia = new ProductoDTO(
+                    producto.getCodigo(),
+                    producto.getNombre(),
+                    producto.getCosto(),
+                    producto.getMarca()
+                    );
 
-            productosVenta.add(producto);
+            agregarProductosAVenta(productoCopia);
 
             producto.setCantidad(producto.getCantidad() - 1);
 
@@ -242,6 +247,25 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
         tblBusqueda.getColumnModel().getColumn(tblBusqueda.getColumnCount() - 1).setCellRenderer(buttonColumn);
         tblBusqueda.getColumnModel().getColumn(tblBusqueda.getColumnCount() - 1).setCellEditor(buttonColumn);
+
+    }
+
+    private void agregarProductosAVenta(ProductoDTO producto) {
+
+        if (productosVenta.contains(producto)) {
+
+            int indice = productosVenta.indexOf(producto);
+
+            ProductoDTO productoEncontrado = productosVenta.get(indice);
+
+            productoEncontrado.setCantidad(productoEncontrado.getCantidad() + 1);
+
+            productosVenta.set(indice, productoEncontrado);
+
+        }else{
+            producto.setCantidad(1);
+            productosVenta.add(producto);
+        }
 
     }
 
