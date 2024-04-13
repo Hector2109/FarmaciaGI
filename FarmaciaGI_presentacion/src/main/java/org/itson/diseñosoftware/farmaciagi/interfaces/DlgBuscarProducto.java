@@ -10,20 +10,21 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 import org.itson.diseñosoftware.farmaciagipersistencia.excepciones.PersistenciaException;
-import org.itson.diseñosoftware.farmaciagipersistencia.dtos.ProductoDTO;
-
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
     private IGestorProductos gestorInventario;
-    private IGestorProductos gestorVenta;
+    private List<ProductoDTO> productosVenta;
 
-    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, IGestorProductos gestorInventario, IGestorProductos gestorVenta) {
+    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, List<ProductoDTO> productosVenta) {
         super(parent, modal);
-        this.gestorInventario = gestorInventario;
-        this.gestorVenta = gestorVenta;
+        this.gestorInventario = new GestorProductos();
+        this.productosVenta = productosVenta;
         initComponents();
         btnCerrar.setBackground(Color.WHITE);
         btnBuscarProducto.setBackground(Color.WHITE);
@@ -174,7 +175,9 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         List<ProductoDTO> productosBuscados = new LinkedList<>();
         if (!txtBuscar.getText().isBlank()) {
-            productosBuscados = gestorInventario.agregarProductosAVista(gestorInventario.obtenerProductos(), txtBuscar.getText());
+
+            productosBuscados = gestorInventario.buscarProductosPorNombre(txtBuscar.getText());
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "Debes ingresar el nombre o clave del producto",
                     "Asegurate de no tener la casila vacía", JOptionPane.INFORMATION_MESSAGE);
@@ -221,14 +224,16 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
             int fila = tblBusqueda.convertRowIndexToModel(tblBusqueda.getSelectedRow());
             ProductoDTO producto = productosBuscados.get(fila);
 
-            agregarProductoVenta(producto);
+            productosVenta.add(producto);
 
             producto.setCantidad(producto.getCantidad() - 1);
+
             try {
                 gestorInventario.actualizarProducto(producto);
-            } catch (PersistenciaException ex) {
+            } catch (GestorProductosException ex) {
                 Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
+
             if (producto.getCantidad() == 0) {
                 productosBuscados.remove(producto);
             }
@@ -240,26 +245,6 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
     }
 
-    private void agregarProductoVenta(ProductoDTO producto) {
-        try {
-            if (gestorVenta.obtenerProducto(producto) == null) {
-                ProductoDTO productoNuevo = new ProductoDTO(producto.getCodigo(), producto.getNombre(),
-                        producto.getCosto(), producto.getMarca(), producto.getCantidad());
-                productoNuevo.setCantidad(1);
-                try {
-                    gestorVenta.agregarProducto(productoNuevo);
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                ProductoDTO productoVenta = gestorVenta.obtenerProducto(producto);
-                productoVenta.setCantidad(productoVenta.getCantidad() + 1);
-                gestorVenta.actualizarProducto(productoVenta);
-            }
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProducto;
