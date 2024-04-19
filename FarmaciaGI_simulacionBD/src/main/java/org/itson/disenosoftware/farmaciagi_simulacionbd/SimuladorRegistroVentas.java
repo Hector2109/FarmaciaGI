@@ -2,12 +2,12 @@ package org.itson.disenosoftware.farmaciagi_simulacionbd;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.itson.diseñosoftware.farmaciagidominio.Venta;
+import org.itson.disenosoftware.farmaciagi_simulacionbd.objetos.VentaAux;
 
 public class SimuladorRegistroVentas {
 
     private static SimuladorRegistroVentas simulador;
-    private List<Venta> registro;
+    private List<VentaAux> registro;
     
     private SimuladorRegistroVentas(){
         registro = new LinkedList<>();
@@ -20,7 +20,7 @@ public class SimuladorRegistroVentas {
         return simulador;
     }
     
-    public List<Venta> obtenerRegistro(){
+    public List<VentaAux> obtenerRegistro(){
         return registro;
     }
     
