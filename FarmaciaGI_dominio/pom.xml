@@ -11,5 +11,5 @@
         <maven.compiler.target>19</maven.compiler.target>
         <exec.mainClass>org.itson.disenosoftware.farmaciagidominio.FarmaciaGIDominio</exec.mainClass>
     </properties>
-    <name>FarmaciaGI_dominio</name>
+    <name>FarmaciaGI_objetosNegocio</name>
 </project>

@@ -22,25 +22,4 @@ public class GestorVentas implements IGestorVentas {
         }
     }
 
-    @Override
-    public void agregarProducto(VentaDTO ventaBuscada, ProductoDTO productoNuevo) throws GestorVentasException {
-        try {
-            control.agregarProducto(ventaBuscada, productoNuevo);
-        } catch (ControlVentasException ex) {
-            throw new GestorVentasException("No se pudo agregar el producto a la venta.");
-        }
-    }
-
-    @Override
-    public Float calcularCosto(VentaDTO ventaBuscada) throws GestorVentasException {
-        Float costo;
-        try {
-            costo = control.calcularCosto(ventaBuscada);
-
-            return costo;
-        } catch (ControlVentasException ex) {
-            throw new GestorVentasException("No se pudo calcular el costo de la venta.");
-        }
-    }
-
 }

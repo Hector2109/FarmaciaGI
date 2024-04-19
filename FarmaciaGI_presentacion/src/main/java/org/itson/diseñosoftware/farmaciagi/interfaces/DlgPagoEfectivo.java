@@ -71,6 +71,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
 

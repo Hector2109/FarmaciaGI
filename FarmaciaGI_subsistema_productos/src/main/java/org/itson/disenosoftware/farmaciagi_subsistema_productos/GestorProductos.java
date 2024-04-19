@@ -2,8 +2,6 @@ package org.itson.disenosoftware.farmaciagi_subsistema_productos;
 
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 

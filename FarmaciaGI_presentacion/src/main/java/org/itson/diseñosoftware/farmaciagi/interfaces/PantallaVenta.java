@@ -12,7 +12,6 @@ import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
-import org.itson.disenosoftware.farmaciagi_subsistema_ventas.GestorVentas;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
@@ -66,6 +65,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Pantalla Venta"); // NOI18N
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(216, 215, 255));
 

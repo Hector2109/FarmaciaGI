@@ -43,44 +43,4 @@ class ControlGestorVentas {
         }
     }
 
-    public void agregarProducto(VentaDTO ventaBuscada, ProductoDTO productoNuevo) throws ControlVentasException {
-        Venta ventaRegistro = null;
-        for (Venta venta : registro) {
-            if (venta.getCodigo().equals(ventaBuscada.getCodigo())) {
-                ventaRegistro = venta;
-            }
-        }
-
-        if (ventaRegistro != null) {
-            Producto producto = new Producto(productoNuevo.getNombre(), productoNuevo.getCosto(),
-                    productoNuevo.getMarca(), productoNuevo.getCodigo(), productoNuevo.getCantidad());
-
-            if (!ventaRegistro.getProductos().contains(producto)) {
-                ventaRegistro.getProductos().add(producto);
-            }
-        } else {
-            throw new ControlVentasException("La venta no existe.");
-        }
-    }
-
-    public Float calcularCosto(VentaDTO ventaBuscada) throws ControlVentasException {
-        Venta ventaRegistro = null;
-        for (Venta venta : registro) {
-            if (venta.getCodigo().equals(ventaBuscada.getCodigo())) {
-                ventaRegistro = venta;
-            }
-        }
-
-        if (ventaRegistro != null) {
-            List<Producto> productosVenta = ventaRegistro.getProductos();
-            Float total = 0.0F;
-            for (Producto producto : productosVenta) {
-                total += producto.getCantidad() * producto.getCosto();
-            }
-            return total;
-        } else {
-            throw new ControlVentasException("La venta no existe.");
-        }
-    }
-
 }

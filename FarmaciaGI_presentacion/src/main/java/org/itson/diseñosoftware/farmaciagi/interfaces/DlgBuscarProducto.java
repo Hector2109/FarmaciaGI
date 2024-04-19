@@ -64,6 +64,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
         fondo.setMaximumSize(new java.awt.Dimension(812, 600));

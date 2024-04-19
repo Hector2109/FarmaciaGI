@@ -179,6 +179,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         btnImprimirTicket = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
 

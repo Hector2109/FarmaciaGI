@@ -13,16 +13,16 @@ public class Producto {
     private Float costo;
     private String marca;
     private Integer cantidad;
-    
-    public Producto(String codigo){
+
+    public Producto(String codigo) {
         this.codigo = codigo;
         this.nombre = null;
         this.marca = null;
         this.costo = null;
         this.cantidad = null;
     }
-    
-    public Producto(String codigo, String nombre){
+
+    public Producto(String codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.marca = null;
@@ -46,7 +46,7 @@ public class Producto {
         this.marca = marca;
         this.cantidad = cantidad;
     }
-    
+
     /**
      * Método para obtener el id del producto
      *
@@ -118,7 +118,6 @@ public class Producto {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-
 
     /**
      * Permite obtener la cantidad del producto

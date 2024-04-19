@@ -43,6 +43,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
         btnEfectivo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         fondo.setBackground(new java.awt.Color(216, 215, 255));
         fondo.setPreferredSize(new java.awt.Dimension(300, 250));
