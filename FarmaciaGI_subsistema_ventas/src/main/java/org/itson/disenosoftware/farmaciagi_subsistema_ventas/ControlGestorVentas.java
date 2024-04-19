@@ -10,6 +10,7 @@ class ControlGestorVentas {
     private Venta venta;
 
     public ControlGestorVentas() {
+        venta = new Venta();
     }
 
     public void registrarVenta(VentaDTO ventaNueva) throws ControlVentasException {
