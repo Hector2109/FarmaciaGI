@@ -15,7 +15,7 @@ public class Producto {
         this.inventario = SimuladorInventarioProductos.getInstance();
     }
 
-    public ProductoDTO getProducto(ProductoDTO productoBuscado){
+    public ProductoDTO obtenerProducto(ProductoDTO productoBuscado){
         ProductoAux productoInventario = null;
         for (ProductoAux producto : inventario.getInventario()) {
             if (producto.getCodigo().equals(productoBuscado.getCodigo())) {

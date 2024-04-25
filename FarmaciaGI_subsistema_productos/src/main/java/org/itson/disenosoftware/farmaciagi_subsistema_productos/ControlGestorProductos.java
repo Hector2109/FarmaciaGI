@@ -6,7 +6,6 @@ import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.Cont
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.Producto;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
-
 class ControlGestorProductos {
 
     private Producto producto;
@@ -16,7 +15,7 @@ class ControlGestorProductos {
     }
 
     public ProductoDTO obtenerProducto(ProductoDTO productoBuscado) {
-        return producto.getProducto(productoBuscado);
+        return producto.obtenerProducto(productoBuscado);
     }
     
     public void actualizarProducto(ProductoDTO productoActualizado) throws ControlProductosException {

@@ -27,7 +27,6 @@ public class DlgTransferenciaExitosa extends javax.swing.JDialog {
                 dispose();
                 DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, total, 0.0F);
                 venta.setVisible(true);
-
             }
         });
         timer.setRepeats(false); 

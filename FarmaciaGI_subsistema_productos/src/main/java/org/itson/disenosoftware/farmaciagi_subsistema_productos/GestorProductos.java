@@ -15,9 +15,7 @@ public class GestorProductos implements IGestorProductos{
 
     @Override
     public ProductoDTO obtenerProducto(ProductoDTO productoBuscado) {
-        ProductoDTO producto = control.obtenerProducto(productoBuscado);
-        
-        return producto;
+        return control.obtenerProducto(productoBuscado);
     }
     
     @Override
@@ -31,23 +29,17 @@ public class GestorProductos implements IGestorProductos{
 
     @Override
     public List<ProductoDTO> buscarProductosPorNombre(String nombre) {
-        List<ProductoDTO> productosSemejantes = control.buscarProductosPorNombre(nombre);
-        
-        return productosSemejantes;
+        return control.buscarProductosPorNombre(nombre);
     }
 
     @Override
     public List<ProductoDTO> buscarProductosPorCodigo(String codigo) {
-        List<ProductoDTO> productosSemejantes = control.buscarProductosPorCodigo(codigo);
-        
-        return productosSemejantes;
+        return control.buscarProductosPorCodigo(codigo);
     }
 
     @Override
     public List<ProductoDTO> obtenerProductos() {
-        List<ProductoDTO> productosInventario = control.obtenerProductos();
-        
-        return productosInventario;
+        return control.obtenerProductos();
     }
     
 }

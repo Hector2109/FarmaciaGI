@@ -2,6 +2,7 @@ package org.itson.disenosoftware.farmaciagi_dtos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class VentaDTO {
@@ -39,6 +40,16 @@ public class VentaDTO {
 
     public Calendar getFecha() {
         return fecha;
+    }
+    
+    public boolean isValid() {
+        if (total < 0) {
+            return false;
+        } 
+        if (fecha.after(new GregorianCalendar())) {
+            return false;
+        }
+        return true;
     }
 
 }
