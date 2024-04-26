@@ -24,7 +24,6 @@ public class ProductosDAO implements IProductosDAO {
 
     /**
      * Método el cual registra un proucto al inventario
-     *
      * @param nuevoProducto producto a registrar
      * @return producto registrado
      * @throws en caso de no lograr registrar el producto
@@ -32,8 +31,14 @@ public class ProductosDAO implements IProductosDAO {
     @Override
     public Producto registrarProducto(Producto nuevoProducto) throws PersistenciaException {
 
-        collection.insertOne(nuevoProducto);
-        return nuevoProducto;
+        
+        // Se verifica que el producto no exista antes de registrarlo
+        if (obtenerProducto(nuevoProducto) == null) {
+            collection.insertOne(nuevoProducto);
+            return nuevoProducto;
+        }else{
+            throw new PersistenciaException ("Error: El producto ya existe");
+        }
 
     }
 
@@ -93,19 +98,21 @@ public class ProductosDAO implements IProductosDAO {
         Producto productoI = obtenerProducto(producto);
 
         if (productoI != null) {
-            
+
             // Este if verifica que la suma o resta que se vaya a ejecutar no deje en cantidades negativas al producto
-            if ((producto.getCantidad()>0) || (productoI.getCantidad()>=(producto.getCantidad()*-1))){
-            
-            
-            UpdateResult updateResult = collection.updateOne(
-                    eq("codigo", productoI.getCodigo()), new Document("$set", new Document()
-             
-                            .append("cantidad", productoI.getCantidad() + producto.getCantidad())));
-            }else{
-                throw new PersistenciaException ("Error: Cantidad insuficiente de stock");
+            if ((producto.getCantidad() > 0) || (productoI.getCantidad() >= (producto.getCantidad() * -1))) {
+
+                UpdateResult updateResult = collection.updateOne(
+                        eq("codigo", productoI.getCodigo()), new Document("$set", new Document()
+                        .append("cantidad", productoI.getCantidad() + producto.getCantidad())));
+                
+                if (updateResult==null){
+                    throw new PersistenciaException ("Error: No se logro modificar la cantidad en stock");
+                }
+                
+            } else {
+                throw new PersistenciaException("Error: Cantidad insuficiente de stock");
             }
-            
 
         } else {
             throw new PersistenciaException("Error: Este producto no se encuentra en el inventario");
