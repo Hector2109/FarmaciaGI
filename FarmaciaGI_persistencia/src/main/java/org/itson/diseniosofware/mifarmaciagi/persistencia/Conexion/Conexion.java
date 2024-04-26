@@ -10,7 +10,6 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
-
 /**
  *
  * @author Hector Espinoza
@@ -19,8 +18,6 @@ public class Conexion implements IConexion {
 
     private static final String cadenaConexion = "mongodb://127.0.0.1:27017";
     private static final String baseDatosS = "MiFarmaciaGI";
-    
-   
 
     @Override
     public MongoDatabase crearConexion() {

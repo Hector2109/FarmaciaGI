@@ -2,45 +2,43 @@ package org.itson.diseñosoftware.farmaciagi_objetosNegocio;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.Conexion;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.IPromocionesDAO;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.PromocionesDAO;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Promocion;
 import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
-import org.itson.disenosoftware.farmaciagi_simulacionbd.SimuladorRegistroPromociones;
-import org.itson.disenosoftware.farmaciagi_simulacionbd.objetos.ProductoAux;
 import org.itson.disenosoftware.farmaciagi_simulacionbd.objetos.PromocionAux;
 
 public class PromocionBO {
 
-    private SimuladorRegistroPromociones registro;
+    private IPromocionesDAO promocionesDAO;
+    private IConexion conexion;
 
     public PromocionBO() {
-        registro = SimuladorRegistroPromociones.getInstance();
+        conexion = new Conexion();
+        promocionesDAO = new PromocionesDAO(conexion);
     }
 
     public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada) {
-        PromocionAux promocionRegistro = null;
-        for (PromocionAux promocion : registro.getRegistro()) {
-            if (promocion.getCodigo().equals(promocionBuscada.getCodigo())) {
-                promocionRegistro = promocion;
-            }
-        }
-
-        if (promocionRegistro != null) {
-            PromocionDTO promocion = new PromocionDTO(promocionRegistro.getCodigo(),
-                    promocionRegistro.getDescripcion(), promocionRegistro.getDescuento());
-
-            return promocion;
-        } else {
-            return null;
-        }
+        Promocion promocionRegistro = promocionesDAO.obtenerPromocion(promocionBuscada.getCodigo());
+    
+        PromocionDTO promocion = new PromocionDTO(promocionRegistro.getCodigo(), promocionRegistro.getDescripcion(),
+        promocionRegistro.getDescuento());
+        
+        return promocion;
     }
 
     public List<PromocionDTO> obtenerPromociones() {
-        List<PromocionDTO> promocionesRegistro = new LinkedList<>();
-        for (PromocionAux promocionRegistro : registro.getRegistro()) {
+        List<Promocion> promocionesRegistro = promocionesDAO.obtenerPromociones();
+        List<PromocionDTO> promociones = new LinkedList<>();
+        
+        for (Promocion promocionRegistro : promocionesRegistro) {
             PromocionDTO promocion = new PromocionDTO(promocionRegistro.getCodigo(), 
                     promocionRegistro.getDescripcion(), promocionRegistro.getDescuento());
-            promocionesRegistro.add(promocion);
+            promociones.add(promocion);
         }
-        return promocionesRegistro;
+        
+        return promociones;
     }
 }

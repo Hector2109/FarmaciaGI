@@ -2,14 +2,14 @@ package org.itson.disenosoftware.farmaciagi_subsistema_promociones;
 
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
-import org.itson.diseñosoftware.farmaciagi_objetosNegocio.Promocion;
+import org.itson.diseñosoftware.farmaciagi_objetosNegocio.PromocionBO;
 
 public class ControlGestorPromociones {
 
-    private Promocion promocion;
+    private PromocionBO promocion;
 
     public ControlGestorPromociones() {
-        promocion = new Promocion();
+        promocion = new PromocionBO();
     }
 
     public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada) {
