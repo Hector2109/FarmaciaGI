@@ -3,15 +3,15 @@ package org.itson.disenosoftware.farmaciagi_subsistema_productos;
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
-import org.itson.diseñosoftware.farmaciagi_objetosNegocio.Producto;
+import org.itson.diseñosoftware.farmaciagi_objetosNegocio.ProductoBO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
 class ControlGestorProductos {
 
-    private Producto producto;
+    private ProductoBO producto;
     
     public ControlGestorProductos() {
-        producto = new Producto();
+        producto = new ProductoBO();
     }
 
     public ProductoDTO obtenerProducto(ProductoDTO productoBuscado) {
