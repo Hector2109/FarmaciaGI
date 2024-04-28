@@ -25,6 +25,7 @@ public class ProductosDAO implements IProductosDAO {
 
     /**
      * Método el cual registra un proucto al inventario
+     *
      * @param nuevoProducto producto a registrar
      * @return producto registrado
      * @throws en caso de no lograr registrar el producto
@@ -32,27 +33,42 @@ public class ProductosDAO implements IProductosDAO {
     @Override
     public Producto registrarProducto(Producto nuevoProducto) throws PersistenciaException {
 
-        
         // Se verifica que el producto no exista antes de registrarlo
         if (obtenerProducto(nuevoProducto) == null) {
             collection.insertOne(nuevoProducto);
             return nuevoProducto;
-        }else{
-            throw new PersistenciaException ("Error: El producto ya existe");
+        } else {
+            throw new PersistenciaException("Error: El producto ya existe");
         }
 
     }
 
     /**
-     * Método el cual actualiza un producto del inventario
-     *
+     * Método el cual actualiza un producto del inventario,
+     * se actualiza el nombre, costo y marca 
      * @param productoActualizar producto a actualizar
      * @return producto actualizado
      * @throws PersistenciaException en caso de no lograr actualizar el producto
      */
     @Override
     public Producto actualizarProducto(Producto productoActualizar) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        Producto productoDeseado = obtenerProducto(productoActualizar);
+
+        if (productoDeseado != null) {
+
+            Producto productoActualizado = collection.findOneAndUpdate(new Document()
+                    .append("_id", productoDeseado.getId()),
+                     new Document("$set", new Document()
+                            .append("nombre", productoActualizar.getNombre())
+                            .append("marca", productoActualizar.getMarca())
+                            .append("costo", productoActualizar.getCosto())));
+            
+            return productoActualizado;
+
+        }
+        throw new PersistenciaException("Error: Esl producto no se encuentra en inventario");
+
     }
 
     /**
@@ -89,6 +105,7 @@ public class ProductosDAO implements IProductosDAO {
     /**
      * Método el cual modifica con una suma la cantidad del producto del
      * inventario
+     *
      * @param producto producto al que se le desea cambiar su cantidad en stock
      * @throws PersistenciaException en caso de no lograr modificar la cantidad
      */
@@ -104,11 +121,11 @@ public class ProductosDAO implements IProductosDAO {
                 UpdateResult updateResult = collection.updateOne(
                         eq("codigo", productoI.getCodigo()), new Document("$set", new Document()
                         .append("cantidad", productoI.getCantidad() + producto.getCantidad())));
-                
-                if (updateResult==null){
-                    throw new PersistenciaException ("Error: No se logro modificar la cantidad en stock");
+
+                if (updateResult == null) {
+                    throw new PersistenciaException("Error: No se logro modificar la cantidad en stock");
                 }
-                
+
             } else {
                 throw new PersistenciaException("Error: Cantidad insuficiente de stock");
             }

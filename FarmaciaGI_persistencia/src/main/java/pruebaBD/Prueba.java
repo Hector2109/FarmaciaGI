@@ -47,16 +47,28 @@ public class Prueba {
 
         IProductosDAO productosDAO= new ProductosDAO(conexion); 
         
-      
-
-        Promocion promocionNueva = new Promocion();
-        promocionNueva.setDescripcion("Paracetamol 2x1");
-        promocionNueva.setDescuento(20.0f);
+        Producto producto = new Producto();
+        
+        producto.setCodigo("AAA-000");
+        producto.setCosto(100F);
+        producto.setMarca("FarmaciaGI");
+        producto.setNombre("Paracetamol uwu");
         
         try {
-            promocionesDAO.agregarPromocion(promocionNueva);
+            productosDAO.actualizarProducto(producto);
             
-            Logger.getLogger(Prueba.class.getName()).log(Level.INFO, "Se agregó la promocion correctamente");
+            
+//        Promocion promocionNueva = new Promocion();
+//        promocionNueva.setDescripcion("Paracetamol 2x1");
+//        promocionNueva.setDescuento(20.0f);
+//        
+//        try {
+//            promocionesDAO.agregarPromocion(promocionNueva);
+//            
+//            Logger.getLogger(Prueba.class.getName()).log(Level.INFO, "Se agregó la promocion correctamente");
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         } catch (PersistenciaException ex) {
             Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
         }
