@@ -4,7 +4,9 @@ public class Promocion {
 
     private String codigo;
     private String descripcion;
-    private Float descuento;
+    private Producto producto;
+    private Integer cantidad;
+    private Float precioUnitario;
     
     public Promocion(){
     }
@@ -25,12 +27,28 @@ public class Promocion {
         this.descripcion = descripcion;
     }
 
-    public Float getDescuento() {
-        return descuento;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setDescuento(Float descuento) {
-        this.descuento = descuento;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Float getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(Float precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     @Override
@@ -39,7 +57,9 @@ public class Promocion {
         sb.append("Promocion{");
         sb.append("codigo=").append(codigo);
         sb.append(", descripcion=").append(descripcion);
-        sb.append(", descuento=").append(descuento);
+        sb.append(", producto=").append(producto);
+        sb.append(", cantidad=").append(cantidad);
+        sb.append(", precioUnitario=").append(precioUnitario);
         sb.append('}');
         return sb.toString();
     }

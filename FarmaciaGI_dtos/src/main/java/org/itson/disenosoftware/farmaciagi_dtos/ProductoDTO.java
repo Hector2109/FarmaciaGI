@@ -1,14 +1,16 @@
 package org.itson.disenosoftware.farmaciagi_dtos;
 
+import java.util.Objects;
+
 public class ProductoDTO {
-    
+
     private String codigo;
     private String nombre;
     private Float costo;
     private String marca;
     private Integer cantidad;
-    
-    public ProductoDTO(String codigo, String nombre, Float costo, String marca, Integer cantidad){
+
+    public ProductoDTO(String codigo, String nombre, Float costo, String marca, Integer cantidad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.costo = costo;
@@ -25,8 +27,6 @@ public class ProductoDTO {
 
     public ProductoDTO() {
     }
-    
-    
 
     public String getCodigo() {
         return codigo;
@@ -47,8 +47,8 @@ public class ProductoDTO {
     public Integer getCantidad() {
         return cantidad;
     }
-    
-    public void setCantidad(Integer cantidad){
+
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -67,10 +67,8 @@ public class ProductoDTO {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    
-    
-    
-    public boolean isValid(){
+
+    public boolean isValid() {
         if (cantidad < 0) {
             return false;
         }
@@ -78,6 +76,28 @@ public class ProductoDTO {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.codigo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ProductoDTO other = (ProductoDTO) obj;
+        return Objects.equals(this.codigo, other.codigo);
     }
 
     @Override
@@ -92,6 +112,5 @@ public class ProductoDTO {
         sb.append('}');
         return sb.toString();
     }
-    
-    
+
 }

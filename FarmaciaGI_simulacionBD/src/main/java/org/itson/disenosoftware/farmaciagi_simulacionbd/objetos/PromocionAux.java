@@ -6,18 +6,16 @@ public class PromocionAux {
 
     private String codigo;
     private String descripcion;
-    private Float descuento;
-    
-    public PromocionAux(String codigo) {
-        this.codigo = codigo;
-        this.descripcion = null;
-        this.descuento = 0.0F;
-    }
+    private ProductoAux producto;
+    private Integer cantidad;
+    private Float precioUnitario;
 
-    public PromocionAux(String codigo, String descripcion, Float descuento) {
+    public PromocionAux(String codigo, String descripcion, ProductoAux producto, Integer cantidad, Float precioUnitario) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.descuento = descuento;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
     }
 
     public String getCodigo() {
@@ -36,12 +34,28 @@ public class PromocionAux {
         this.descripcion = descripcion;
     }
 
-    public Float getDescuento() {
-        return descuento;
+    public ProductoAux getProducto() {
+        return producto;
     }
 
-    public void setDescuento(Float descuento) {
-        this.descuento = descuento;
+    public void setProducto(ProductoAux producto) {
+        this.producto = producto;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Float getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(Float precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     @Override

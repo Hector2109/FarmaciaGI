@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -9,24 +10,31 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
+import org.itson.disenosoftware.farmaciagi_subsistema_promociones.GestorPromociones;
+import org.itson.disenosoftware.farmaciagi_subsistema_promociones.IGestorPromociones;
 
 public class PantallaVenta extends javax.swing.JFrame {
 
     private Float total;
     private IGestorProductos gestorInventario;
+    private IGestorPromociones gestorPromociones;
     private List<ProductoDTO> productosVenta;
+    private List<PromocionDTO> promocionesVenta;
 
     public PantallaVenta() {
         initComponents();
         this.gestorInventario = new GestorProductos();
+        this.gestorPromociones = new GestorPromociones();
         this.productosVenta = new LinkedList<>();
+        this.promocionesVenta = new LinkedList<>();
         this.total = 0.0F;
         btnBuscarProducto.setBackground(Color.WHITE);
         btnContinuar.setBackground(Color.WHITE);
-        llenarTabla();
+        llenarTablaProductosVenta();
     }
 
     public static void main(String[] args) {
@@ -57,11 +65,14 @@ public class PantallaVenta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnVenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblVenta = new javax.swing.JTable();
+        tblProductosVenta = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         btnBuscarProducto = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
+        lblPromociones = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPromocionesVenta = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Pantalla Venta"); // NOI18N
@@ -145,8 +156,8 @@ public class PantallaVenta extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblVenta.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        tblVenta.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductosVenta.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        tblProductosVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -165,7 +176,7 @@ public class PantallaVenta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblVenta);
+        jScrollPane1.setViewportView(tblProductosVenta);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
         jLabel2.setText("TOTAL");
@@ -195,6 +206,27 @@ public class PantallaVenta extends javax.swing.JFrame {
             }
         });
 
+        lblPromociones.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblPromociones.setText("Promociones");
+
+        tblPromocionesVenta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DESCRIPCIÓN"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblPromocionesVenta);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -206,38 +238,41 @@ public class PantallaVenta extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnBuscarProducto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtTotal))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
+                    .addComponent(lblPromociones)
+                    .addComponent(jScrollPane2))
                 .addGap(0, 30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPromociones)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,7 +280,7 @@ public class PantallaVenta extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnBuscarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addGap(17, 17, 17))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,7 +301,8 @@ public class PantallaVenta extends javax.swing.JFrame {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosVenta);
         busquedaProducto.setVisible(true);
-        llenarTabla();
+        llenarTablaProductosVenta();
+        identificarPromocion();
         establecerTotal();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
@@ -275,7 +311,7 @@ public class PantallaVenta extends javax.swing.JFrame {
             DlgTipoPago pago = new DlgTipoPago(this, true, total, productosVenta);
             pago.setVisible(true);
             limpiarVenta();
-            llenarTabla();
+            llenarTablaProductosVenta();
             establecerTotal();
         } else {
             JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",
@@ -284,7 +320,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     //Métodos 
-    private void llenarTabla() {
+    private void llenarTablaProductosVenta() {
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("ARTICULO");
@@ -306,11 +342,11 @@ public class PantallaVenta extends javax.swing.JFrame {
             }
         }
 
-        tblVenta.setModel(modelo);
-        TableColumnModel columnModel = tblVenta.getColumnModel();
+        tblProductosVenta.setModel(modelo);
+        TableColumnModel columnModel = tblProductosVenta.getColumnModel();
 
         ButtonColumn botonRestar = new ButtonColumn("-", (e) -> {
-            int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
+            int fila = tblProductosVenta.convertRowIndexToModel(tblProductosVenta.getSelectedRow());
 
             try {
                 ProductoDTO productoVenta = productosVenta.get(fila);
@@ -329,19 +365,22 @@ public class PantallaVenta extends javax.swing.JFrame {
                     gestorInventario.modCantidadProducto(productoActual);
                     productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
                 }
+                
+                identificarPromocion();
+                
             } catch (GestorProductosException ex) {
                 JOptionPane.showMessageDialog(this, "No se pudo modificar la cantidad del producto.",
                         "Error", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
-            llenarTabla();
+            llenarTablaProductosVenta();
             establecerTotal();
         });
-        tblVenta.getColumnModel().getColumn(1).setCellRenderer(botonRestar);
-        tblVenta.getColumnModel().getColumn(1).setCellEditor(botonRestar);
+        tblProductosVenta.getColumnModel().getColumn(1).setCellRenderer(botonRestar);
+        tblProductosVenta.getColumnModel().getColumn(1).setCellEditor(botonRestar);
 
         ButtonColumn botonSumar = new ButtonColumn("+", (e) -> {
-            int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
+            int fila = tblProductosVenta.convertRowIndexToModel(tblProductosVenta.getSelectedRow());
             try {
                 ProductoDTO productoVenta = productosVenta.get(fila);
                 Integer cantidadVentaAct = productoVenta.getCantidad();
@@ -354,6 +393,8 @@ public class PantallaVenta extends javax.swing.JFrame {
 
                     productoVenta.setCantidad(cantidadVentaAct + 1);
                     productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
+                    
+                    identificarPromocion();
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Cantidad del producto en inventario insuficiente.", 
@@ -364,11 +405,47 @@ public class PantallaVenta extends javax.swing.JFrame {
                         "Error", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
-            llenarTabla();
+            llenarTablaProductosVenta();
             establecerTotal();
         });
-        tblVenta.getColumnModel().getColumn(3).setCellRenderer(botonSumar);
-        tblVenta.getColumnModel().getColumn(3).setCellEditor(botonSumar);
+        tblProductosVenta.getColumnModel().getColumn(3).setCellRenderer(botonSumar);
+        tblProductosVenta.getColumnModel().getColumn(3).setCellEditor(botonSumar);
+    }
+    
+    private void identificarPromocion(){
+        List<PromocionDTO> promocionesRegistro = gestorPromociones.obtenerPromociones();
+        for (PromocionDTO promocion : promocionesRegistro) {
+            Iterator<ProductoDTO> productos = productosVenta.iterator();
+            if (productos.hasNext()) {
+                ProductoDTO productoVenta = productos.next();
+                if (promocion.getProducto().equals(promocion.getProducto())) {
+                    if (productoVenta.getCantidad() == promocion.getCantidad()
+                            || (productoVenta.getCantidad() % promocion.getCantidad()) > 0) {
+                        productosVenta.get(productosVenta.indexOf(productoVenta)).setCosto(promocion.getPrecioUnitario());
+                        promocionesVenta.add(promocion);
+                        llenarTablaPromociones();
+                    }
+                }
+            }
+        }
+    }
+    
+    private void llenarTablaPromociones() {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("PROMOCIONES");
+
+        if (!promocionesVenta.isEmpty()) {
+            for (PromocionDTO promocion : promocionesVenta) {
+                Object[] fila = {
+                    promocion.getDescripcion()
+                };
+                modelo.addRow(fila);
+            }
+        }
+
+        tblPromocionesVenta.setModel(modelo);
+        TableColumnModel columnModel = tblPromocionesVenta.getColumnModel();
     }
 
     private void establecerTotal() {
@@ -393,7 +470,10 @@ public class PantallaVenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblVenta;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblPromociones;
+    private javax.swing.JTable tblProductosVenta;
+    private javax.swing.JTable tblPromocionesVenta;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

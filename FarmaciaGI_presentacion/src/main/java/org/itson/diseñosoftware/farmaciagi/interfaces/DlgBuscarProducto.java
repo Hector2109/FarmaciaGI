@@ -265,11 +265,8 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
     }
 
     private void agregarProductosAVenta(ProductoDTO producto) {
-
         if (productosVenta.contains(producto)) {
-
             int indice = productosVenta.indexOf(producto);
-
             ProductoDTO productoEncontrado = productosVenta.get(indice);
 
             productoEncontrado.setCantidad(productoEncontrado.getCantidad() + 1);
