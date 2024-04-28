@@ -2,31 +2,27 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.Timer;
-import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 
 public class DlgTransferenciaExitosa extends javax.swing.JDialog {
-
-    private Timer timer;
     
     /**
      * Creates new form DlgTransferenciaExitosa
      * @param parent
      * @param modal
-     * @param total
-     * @param productosVenta
+     * @param venta
      */
-    public DlgTransferenciaExitosa(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
+    public DlgTransferenciaExitosa(java.awt.Frame parent, boolean modal, VentaDTO venta) {
         super(parent, modal);
         initComponents();
         
-        timer = new Timer(3000, new ActionListener() {
+        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, total, 0.0F);
-                venta.setVisible(true);
+                DlgResumenVenta pResumenVenta = new DlgResumenVenta(parent, true, venta, 0.0F, 0.0F);
+                pResumenVenta.setVisible(true);
             }
         });
         timer.setRepeats(false); 

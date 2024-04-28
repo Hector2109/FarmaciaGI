@@ -12,10 +12,6 @@ public class ControlGestorPromociones {
         promocion = new PromocionBOAux();
     }
 
-    public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada) {
-        return promocion.obtenerPromocion(promocionBuscada);
-    }
-
     public List<PromocionDTO> obtenerPromociones() {
         return promocion.obtenerPromociones();
     }

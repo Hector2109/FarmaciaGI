@@ -4,38 +4,32 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Point;
-import java.util.List;
 import javax.swing.JOptionPane;
-import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 
 public class DlgPagoEfectivo extends javax.swing.JDialog {
 
-    private Float total;
-    private Float cambio = 0.0F;
-    private Float pago = 0.0F;
-    private List<ProductoDTO> productosVenta;
+    private VentaDTO venta;
     private Frame parent;
-    
-    
+
     /**
      * Creates new form DlgPagoEfectivo
+     *
      * @param parent
      * @param modal
-     * @param total
-     * @param productosVenta
+     * @param venta
      */
-    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
+    public DlgPagoEfectivo(java.awt.Frame parent, boolean modal, VentaDTO venta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
         btnAceptar.setBackground(Color.WHITE);
         btnCancelar.setBackground(Color.WHITE);
-        txtMontoTotal.setText(Float.toString(total));
-        this.total = total;
+        txtMontoTotal.setText(Float.toString(venta.getTotal()));
+        this.venta = venta;
         this.parent = parent;
-        this.productosVenta = productosVenta;
     }
-    
+
     /**
      * Este método centra el cuadro de dialogo sobre la ventana de la
      * aplicación.
@@ -182,17 +176,19 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        Float pago = 0.0F;
+        Float cambio = 0.0F;
         if (!txtPago.getText().isEmpty()) {
-        pago = Float.valueOf(txtPago.getText());
-        if (pago < total) {
-            JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
+            pago = Float.valueOf(txtPago.getText());
+            if (pago < venta.getTotal()) {
+                JOptionPane.showMessageDialog(null, "Ingresa un monto valido");
+            } else {
+                cambio = pago - venta.getTotal();
+                DlgResumenVenta pResumenVenta = new DlgResumenVenta(parent, true, venta, pago, cambio);
+                pResumenVenta.setVisible(true);
+                dispose();
+            }
         } else {
-            cambio = pago - total;
-            DlgResumenVenta venta = new DlgResumenVenta(parent, true, productosVenta, total, pago, cambio);
-            venta.setVisible(true);
-            dispose();
-        }
-        }else{
             JOptionPane.showMessageDialog(parent, "Ingresar Monto a pagar");
         }
     }//GEN-LAST:event_btnAceptarActionPerformed

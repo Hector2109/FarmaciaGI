@@ -2,33 +2,28 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.Timer;
-import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 
 public class DlgInsertaTarjeta extends javax.swing.JDialog {
 
-    private Float total;
-    private List<ProductoDTO> productosVenta;
-    private Timer timer;
+    private VentaDTO venta;
 
     /**
      * Creates new form DlgInsertaTarjeta
      * @param parent
      * @param modal
-     * @param total
-     * @param productosVenta
+     * @param venta
      */
-    public DlgInsertaTarjeta(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
+    public DlgInsertaTarjeta(java.awt.Frame parent, boolean modal, VentaDTO venta) {
         super(parent, modal);
-        this.total = total;
-        this.productosVenta = productosVenta;
+        this.venta = venta;
         
-        timer = new Timer(5000, new ActionListener() {
+        Timer timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true, total, productosVenta);
+                DlgPagoTarjeta pagoTarjeta = new DlgPagoTarjeta(parent, true, venta);
                 pagoTarjeta.setVisible(true);
 
             }

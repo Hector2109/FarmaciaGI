@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +17,9 @@ import org.itson.disenosoftware.farmaciagi_subsistema_ventas.excepciones.GestorV
 
 public class DlgResumenVenta extends javax.swing.JDialog {
 
-    private Float total;
+    private VentaDTO venta;
     private Float pago;
     private Float cambio;
-    private List<ProductoDTO> productosVenta;
     private IGestorVentas gestorVentas;
     private int cantidad = 0;
     private Frame parent;
@@ -31,17 +28,15 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      * Creates new form DlgResumenVenta
      * @param parent
      * @param modal
-     * @param productosVenta
-     * @param total
+     * @param venta
      * @param pago
      * @param cambio
      */
-    public DlgResumenVenta(java.awt.Frame parent, boolean modal, List<ProductoDTO> productosVenta, Float total, Float pago, Float cambio) {
+    public DlgResumenVenta(java.awt.Frame parent, boolean modal, VentaDTO venta, Float pago, Float cambio) {
         super(parent, modal);
-        this.total = total;
         this.cambio = cambio;
         this.pago = pago;
-        this.productosVenta = productosVenta;
+        this.venta = venta;
         this.gestorVentas = new GestorVentas();
         this.parent = parent;
         initComponents();
@@ -49,7 +44,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         actualizarFecha();
         actualizarCantidad();
         txtCantidad.setText(String.valueOf(cantidad));
-        txtTotal.setText(Float.toString(total));
+        txtTotal.setText(Float.toString(venta.getTotal()));
         txtPago.setText(Float.toString(pago));
         float decimal = (float) Math.pow(10, 2);
         Float cambioFormato = Math.round(cambio * decimal) / decimal;
@@ -64,7 +59,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      *
      */
     private void actualizarCantidad() {
-        for (ProductoDTO producto : productosVenta) {
+        for (ProductoDTO producto : venta.getProductos()) {
             cantidad += producto.getCantidad();
         }
     }
@@ -93,7 +88,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE");
 
-        for (ProductoDTO producto : productosVenta) {
+        for (ProductoDTO producto : venta.getProductos()) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),
@@ -141,7 +136,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      */
     private void generarVenta() {
         try {
-            gestorVentas.registrarVenta(new VentaDTO(generarCodigo(), productosVenta, total, new GregorianCalendar()));
+            gestorVentas.registrarVenta(venta);
         } catch (GestorVentasException ex) {
             JOptionPane.showMessageDialog(parent, "No se pudo realizar la venta.", 
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -370,7 +365,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirTicketActionPerformed
-        DlgTicket ticket = new DlgTicket(parent, rootPaneCheckingEnabled, total, pago, cambio, productosVenta);
+        DlgTicket ticket = new DlgTicket(parent, rootPaneCheckingEnabled, venta, pago, cambio);
         ticket.setVisible(true);
     }//GEN-LAST:event_btnImprimirTicketActionPerformed
 

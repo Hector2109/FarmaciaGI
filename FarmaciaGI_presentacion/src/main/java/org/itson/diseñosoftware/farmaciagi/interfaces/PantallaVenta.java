@@ -1,6 +1,7 @@
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
@@ -302,13 +304,13 @@ public class PantallaVenta extends javax.swing.JFrame {
         DlgBuscarProducto busquedaProducto = new DlgBuscarProducto(this, true, productosVenta);
         busquedaProducto.setVisible(true);
         llenarTablaProductosVenta();
-        identificarPromocion();
         establecerTotal();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (!productosVenta.isEmpty()) {
-            DlgTipoPago pago = new DlgTipoPago(this, true, total, productosVenta);
+            VentaDTO venta = new VentaDTO("VNT-001", productosVenta, promocionesVenta, total, new GregorianCalendar());
+            DlgTipoPago pago = new DlgTipoPago(this, true, venta);
             pago.setVisible(true);
             limpiarVenta();
             llenarTablaProductosVenta();
@@ -351,23 +353,20 @@ public class PantallaVenta extends javax.swing.JFrame {
             try {
                 ProductoDTO productoVenta = productosVenta.get(fila);
                 productoVenta.setCantidad(productoVenta.getCantidad() - 1);
-                
+
                 if (productoVenta.getCantidad() == 0) {
-                    
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(productoVenta);
-                    productoActual.setCantidad( 1);
+                    productoActual.setCantidad(1);
                     gestorInventario.modCantidadProducto(productoActual);
                     productosVenta.remove(productoVenta);
-                    
-                } else {//TODO PENDIENTE A PRUEBAS
+
+                } else {
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(productoVenta);
-                    productoActual.setCantidad( 1);
+                    productoActual.setCantidad(1);
                     gestorInventario.modCantidadProducto(productoActual);
                     productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
                 }
-                
-                identificarPromocion();
-                
+
             } catch (GestorProductosException ex) {
                 JOptionPane.showMessageDialog(this, "No se pudo modificar la cantidad del producto.",
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -381,6 +380,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         ButtonColumn botonSumar = new ButtonColumn("+", (e) -> {
             int fila = tblProductosVenta.convertRowIndexToModel(tblProductosVenta.getSelectedRow());
+
             try {
                 ProductoDTO productoVenta = productosVenta.get(fila);
                 Integer cantidadVentaAct = productoVenta.getCantidad();
@@ -393,11 +393,9 @@ public class PantallaVenta extends javax.swing.JFrame {
 
                     productoVenta.setCantidad(cantidadVentaAct + 1);
                     productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
-                    
-                    identificarPromocion();
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "Cantidad del producto en inventario insuficiente.", 
+                    JOptionPane.showMessageDialog(this, "Cantidad del producto en inventario insuficiente.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (GestorProductosException ex) {
@@ -411,25 +409,27 @@ public class PantallaVenta extends javax.swing.JFrame {
         tblProductosVenta.getColumnModel().getColumn(3).setCellRenderer(botonSumar);
         tblProductosVenta.getColumnModel().getColumn(3).setCellEditor(botonSumar);
     }
-    
-    private void identificarPromocion(){
+
+    private void identificarPromocion() {
         List<PromocionDTO> promocionesRegistro = gestorPromociones.obtenerPromociones();
-        for (PromocionDTO promocion : promocionesRegistro) {
-            Iterator<ProductoDTO> productos = productosVenta.iterator();
-            if (productos.hasNext()) {
-                ProductoDTO productoVenta = productos.next();
-                if (promocion.getProducto().equals(promocion.getProducto())) {
-                    if (productoVenta.getCantidad() == promocion.getCantidad()
-                            || (productoVenta.getCantidad() % promocion.getCantidad()) == 0) {
-                        productosVenta.get(productosVenta.indexOf(productoVenta)).setCosto(promocion.getPrecioUnitario());
+        for (ProductoDTO productoVenta : productosVenta) {
+            for (PromocionDTO promocion : promocionesRegistro) {
+                if (productoVenta.equals(promocion.getProducto())) {
+                    if ((productoVenta.getCantidad() % promocion.getCantidad()) == 0) {
+                        total -= productoVenta.getCantidad() * promocion.getPrecioUnitario();
+//                        if (!promocionesVenta.contains(promocion)) {
                         promocionesVenta.add(promocion);
-                        llenarTablaPromociones();
+//                        }
+                    } else {
+                        int division = productoVenta.getCantidad() / promocion.getCantidad();
+                        total -= division * productoVenta.getCosto();
                     }
                 }
             }
         }
+        llenarTablaPromociones();
     }
-    
+
     private void llenarTablaPromociones() {
         DefaultTableModel modelo = new DefaultTableModel();
 
@@ -455,6 +455,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         }
         float decimal = (float) Math.pow(10, 2);
         total = Math.round(sumaTotal * decimal) / decimal;
+        identificarPromocion();
         txtTotal.setText(total.toString());
     }
 

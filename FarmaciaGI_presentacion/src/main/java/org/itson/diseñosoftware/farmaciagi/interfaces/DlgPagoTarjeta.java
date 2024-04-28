@@ -4,29 +4,28 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Point;
-import java.util.List;
-import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 
 public class DlgPagoTarjeta extends javax.swing.JDialog {
-
-    private Float total;
-    private Float cambio = 0.0F;
-    private Float pago = 0.0F;
+    
     private Frame parent;
-    private List<ProductoDTO> productosVenta;
+    private VentaDTO venta;
 
     /**
      * Creates new form DlgPagoTarjeta
+     * @param parent
+     * @param modal
+     * @param venta
      */
-    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
+    public DlgPagoTarjeta(java.awt.Frame parent, boolean modal, VentaDTO venta) {
         super(parent, modal);
         initComponents();
         centraCuadroDialogo(parent);
         btnAceptar.setBackground(Color.WHITE);
         btnCancelar.setBackground(Color.WHITE);
-        this.total = total;
-        txtMontoTotal.setText(Float.toString(total));
-        this.productosVenta = productosVenta;
+        this.venta = venta;
+        txtMontoTotal.setText(Float.toString(venta.getTotal()));
+        
     }
 
     /**
@@ -153,8 +152,8 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        DlgTransferenciaExitosa venta = new DlgTransferenciaExitosa(parent, true, this.total, productosVenta);
-        venta.setVisible(true);
+        DlgTransferenciaExitosa pTransferenciaExistosa = new DlgTransferenciaExitosa(parent, true, venta);
+        pTransferenciaExistosa.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 

@@ -2,14 +2,12 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.awt.Frame;
-import java.util.List;
-import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 
 public class DlgTipoPago extends javax.swing.JDialog {
-
-    private Float total;
+    
     private Frame parent;
-    private List<ProductoDTO> productosVenta;
+    private VentaDTO venta;
 
     /**
      * Creates new form DlgTipoPago
@@ -17,15 +15,14 @@ public class DlgTipoPago extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public DlgTipoPago(java.awt.Frame parent, boolean modal, Float total, List<ProductoDTO> productosVenta) {
+    public DlgTipoPago(java.awt.Frame parent, boolean modal, VentaDTO venta) {
         super(parent, modal);
         this.parent = parent;
         initComponents();
         btnTarjeta.setBackground(Color.WHITE);
         btnEfectivo.setBackground(Color.WHITE);
         jLabel1.setForeground(Color.WHITE);
-        this.total = total;
-        this.productosVenta = productosVenta;
+        this.venta = venta;
     }
 
     /**
@@ -117,13 +114,13 @@ public class DlgTipoPago extends javax.swing.JDialog {
 
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
         dispose();
-        DlgInsertaTarjeta pagoTarjeta = new DlgInsertaTarjeta(parent, true, total, productosVenta);
+        DlgInsertaTarjeta pagoTarjeta = new DlgInsertaTarjeta(parent, true, venta);
         pagoTarjeta.setVisible(true);
     }//GEN-LAST:event_btnTarjetaActionPerformed
 
     private void btnEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectivoActionPerformed
         dispose();
-        DlgPagoEfectivo pagoEfectivo = new DlgPagoEfectivo(parent, true, total, productosVenta);
+        DlgPagoEfectivo pagoEfectivo = new DlgPagoEfectivo(parent, true, venta);
         pagoEfectivo.setVisible(true);
     }//GEN-LAST:event_btnEfectivoActionPerformed
 

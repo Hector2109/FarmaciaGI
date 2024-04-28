@@ -1,5 +1,7 @@
 package org.itson.disenosoftware.farmaciagi_dtos;
 
+import java.util.Objects;
+
 public class PromocionDTO {
 
     private String codigo;
@@ -48,4 +50,27 @@ public class PromocionDTO {
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.codigo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PromocionDTO other = (PromocionDTO) obj;
+        return Objects.equals(this.codigo, other.codigo);
+    }
+    
 }

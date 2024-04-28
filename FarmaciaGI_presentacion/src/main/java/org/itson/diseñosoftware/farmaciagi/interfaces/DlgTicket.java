@@ -2,24 +2,30 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 
 public class DlgTicket extends javax.swing.JDialog {
 
-    private Float total;
     private Float pago;
     private Float cambio;
-    private List<ProductoDTO> productosVenta;
+    private VentaDTO venta;
     private int cantidad = 0;
 
-    public DlgTicket(java.awt.Frame parent, boolean modal, Float total, Float pago, Float cambio, List<ProductoDTO> productosVenta) {
+    /**
+     * 
+     * @param parent
+     * @param modal
+     * @param venta
+     * @param pago
+     * @param cambio 
+     */
+    public DlgTicket(java.awt.Frame parent, boolean modal, VentaDTO venta, Float pago, Float cambio) {
         super(parent, modal);
         this.cambio = cambio;
-        this.total = total;
+        this.venta = venta;
         this.pago = pago;
-        this.productosVenta = productosVenta;
         initComponents();
         llenarTabla();
         actualizarDatos();
@@ -40,7 +46,7 @@ public class DlgTicket extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaVenta = new javax.swing.JTable();
+        tblProductosVenta = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -66,7 +72,7 @@ public class DlgTicket extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("ADMIN");
 
-        tablaVenta.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductosVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -77,7 +83,7 @@ public class DlgTicket extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaVenta);
+        jScrollPane1.setViewportView(tblProductosVenta);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Total:");
@@ -192,7 +198,7 @@ public class DlgTicket extends javax.swing.JDialog {
      * 
      */
     private void actualizarCantidad() {
-        for (ProductoDTO producto : productosVenta) {
+        for (ProductoDTO producto : venta.getProductos()) {
             cantidad += producto.getCantidad();
         }
     }
@@ -208,7 +214,7 @@ public class DlgTicket extends javax.swing.JDialog {
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("IMPORTE");
 
-        for (ProductoDTO producto : productosVenta) {
+        for (ProductoDTO producto : venta.getProductos()) {
             Object[] fila = {
                 producto.getNombre(),
                 producto.getCantidad(),
@@ -216,7 +222,7 @@ public class DlgTicket extends javax.swing.JDialog {
             };
             modelo.addRow(fila);
         }
-        tablaVenta.setModel(modelo);
+        tblProductosVenta.setModel(modelo);
     }
     
     /**
@@ -240,7 +246,7 @@ public class DlgTicket extends javax.swing.JDialog {
         actualizarCantidad();
         actualizarFecha();
         lblPago.setText("$" + pago.toString());
-        lblTotal.setText("$" + total.toString());
+        lblTotal.setText("$" + venta.getTotal().toString());
         float decimal = (float) Math.pow(10, 2);
         Float cambioFormato = Math.round(cambio * decimal)/decimal;
         lblCambio.setText("$" + cambioFormato.toString());
@@ -260,6 +266,6 @@ public class DlgTicket extends javax.swing.JDialog {
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblPago;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JTable tablaVenta;
+    private javax.swing.JTable tblProductosVenta;
     // End of variables declaration//GEN-END:variables
 }

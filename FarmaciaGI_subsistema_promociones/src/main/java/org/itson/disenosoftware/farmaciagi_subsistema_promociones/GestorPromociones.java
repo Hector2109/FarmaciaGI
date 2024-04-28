@@ -12,11 +12,6 @@ public class GestorPromociones implements IGestorPromociones {
     }
 
     @Override
-    public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada) {
-        return control.obtenerPromocion(promocionBuscada);
-    }
-
-    @Override
     public List<PromocionDTO> obtenerPromociones() {
         return control.obtenerPromociones();
     }

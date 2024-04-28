@@ -52,9 +52,12 @@ public class ProductoBO {
     public void modCantidadProducto (ProductoDTO productoActualizado) throws ObjetosNegocioException {
 
         Producto producto = new Producto();
-
+        
         producto.setCodigo(productoActualizado.getCodigo());
+        producto.setNombre(producto.getNombre());
+        producto.setMarca(producto.getMarca());
         producto.setCantidad(productoActualizado.getCantidad());
+        producto.setCosto(productoActualizado.getCosto());
 
         try {
             productosDAO.modCantidadProducto(producto);

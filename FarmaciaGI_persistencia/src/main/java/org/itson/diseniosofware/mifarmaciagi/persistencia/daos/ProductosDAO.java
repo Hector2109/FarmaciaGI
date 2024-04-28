@@ -30,7 +30,7 @@ public class ProductosDAO implements IProductosDAO {
      *
      * @param nuevoProducto producto a registrar
      * @return producto registrado
-     * @throws en caso de no lograr registrar el producto
+     * @throws PersistenciaException en caso de no lograr registrar el producto
      */
     @Override
     public Producto registrarProducto(Producto nuevoProducto) throws PersistenciaException {
@@ -46,31 +46,31 @@ public class ProductosDAO implements IProductosDAO {
     }
 
     /**
-     * Método el cual actualiza un producto del inventario,
-     * se actualiza el nombre, costo y marca 
+     * Método el cual actualiza un producto del inventario, se actualiza el
+     * nombre, costo y marca
+     *
      * @param productoActualizar producto a actualizar
      * @return producto actualizado
      * @throws PersistenciaException en caso de no lograr actualizar el producto
      */
     @Override
     public Producto actualizarProducto(Producto productoActualizar) throws PersistenciaException {
-
         Producto productoDeseado = obtenerProducto(productoActualizar);
 
         if (productoDeseado != null) {
 
             Producto productoActualizado = collection.findOneAndUpdate(new Document()
                     .append("_id", productoDeseado.getId()),
-                     new Document("$set", new Document()
+                    new Document("$set", new Document()
                             .append("nombre", productoActualizar.getNombre())
                             .append("marca", productoActualizar.getMarca())
-                            .append("costo", productoActualizar.getCosto())));
-            
+                            .append("costo", productoActualizar.getCosto())
+                            .append("cantidad", productoActualizar.getCantidad())));
+
             return productoActualizado;
 
         }
-        throw new PersistenciaException("Error: Esl producto no se encuentra en inventario");
-
+        throw new PersistenciaException("Error: El producto no se encuentra en inventario");
     }
 
     /**
@@ -87,6 +87,7 @@ public class ProductosDAO implements IProductosDAO {
 
     /**
      * Método el cual obtiene un producto del inventario
+     *
      * @param producto producto que se desea obtener
      * @return producto que se obtiene
      */
@@ -106,6 +107,7 @@ public class ProductosDAO implements IProductosDAO {
     /**
      * Método el cual modifica con una suma la cantidad del producto del
      * inventario
+     *
      * @param producto producto al que se le desea cambiar su cantidad en stock
      * @throws PersistenciaException en caso de no lograr modificar la cantidad
      */
@@ -113,25 +115,20 @@ public class ProductosDAO implements IProductosDAO {
     public void modCantidadProducto(Producto producto) throws PersistenciaException {
         Producto productoI = obtenerProducto(producto);
         Integer cantidad = producto.getCantidad();
-        
 
         if (productoI != null) {
-
             // Este if verifica que la suma o resta que se vaya a ejecutar no deje en cantidades negativas al producto
             if ((cantidad > 0) || (productoI.getCantidad() >= (cantidad * -1))) {
-
                 UpdateResult updateResult = collection.updateOne(
                         eq("codigo", productoI.getCodigo()), new Document("$set", new Document()
                         .append("cantidad", productoI.getCantidad() + cantidad)));
-
+                
                 if (updateResult == null) {
                     throw new PersistenciaException("Error: No se logro modificar la cantidad en stock");
                 }
-
             } else {
                 throw new PersistenciaException("Error: Cantidad insuficiente de stock");
             }
-
         } else {
             throw new PersistenciaException("Error: Este producto no se encuentra en el inventario");
         }
@@ -139,18 +136,20 @@ public class ProductosDAO implements IProductosDAO {
     }
 
     /**
-     * Método el cual obtiene los productos semejantes a un nombre en la base de datos
+     * Método el cual obtiene los productos semejantes a un nombre en la base de
+     * datos
+     *
      * @param producto producto que se desea encontrar
      * @return Lista de productos encontrados
      */
     @Override
-    public List<Producto> buscarProductosPorNombre(Producto producto) {  
-        List <Producto> productosEncontrados = new LinkedList<>();
-        
+    public List<Producto> buscarProductosPorNombre(Producto producto) {
+        List<Producto> productosEncontrados = new LinkedList<>();
+
         Pattern pattern = Pattern.compile(".*" + producto.getNombre() + ".*", Pattern.CASE_INSENSITIVE);
-        
+
         collection.find(new Document("nombre", pattern)).into(productosEncontrados);
-        
+
         return productosEncontrados;
     }
 

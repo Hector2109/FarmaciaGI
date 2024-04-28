@@ -5,8 +5,6 @@ import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
 
 public interface IGestorPromociones {
 
-    public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada);
-
     public List<PromocionDTO> obtenerPromociones();
 
 }

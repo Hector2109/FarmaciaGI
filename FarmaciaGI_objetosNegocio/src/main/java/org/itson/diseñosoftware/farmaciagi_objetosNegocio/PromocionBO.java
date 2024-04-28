@@ -21,20 +21,6 @@ public class PromocionBO {
         promocionesDAO = new PromocionesDAO(conexion);
     }
 
-    public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada) {
-        Promocion promocionRegistro = promocionesDAO.obtenerPromocion(promocionBuscada.getCodigo());
-
-        Producto productoPromocion = promocionRegistro.getProducto();
-
-        ProductoDTO producto = new ProductoDTO(productoPromocion.getCodigo(), productoPromocion.getNombre(),
-                productoPromocion.getCosto(), productoPromocion.getMarca(), productoPromocion.getCantidad());
-
-        PromocionDTO promocion = new PromocionDTO(promocionRegistro.getCodigo(), promocionRegistro.getDescripcion(),
-                producto, promocionRegistro.getCantidad(), promocionRegistro.getPrecioUnitario());
-
-        return promocion;
-    }
-
     public List<PromocionDTO> obtenerPromociones() {
         List<Promocion> promocionesRegistro = promocionesDAO.obtenerPromociones();
         List<PromocionDTO> promociones = new LinkedList<>();
