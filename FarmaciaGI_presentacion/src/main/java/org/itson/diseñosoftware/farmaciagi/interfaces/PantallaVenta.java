@@ -404,6 +404,7 @@ public class PantallaVenta extends javax.swing.JFrame {
                 Logger.getLogger(PantallaVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
             llenarTablaProductosVenta();
+            eliminarPromocion();
             establecerTotal();
         });
         tblProductosVenta.getColumnModel().getColumn(3).setCellRenderer(botonSumar);
@@ -417,9 +418,25 @@ public class PantallaVenta extends javax.swing.JFrame {
                 if (productoVenta.equals(promocion.getProducto())) {
                     if ((productoVenta.getCantidad() % promocion.getCantidad()) == 0) {
                         total -= productoVenta.getCantidad() * promocion.getPrecioUnitario();
-//                        if (!promocionesVenta.contains(promocion)) {
                         promocionesVenta.add(promocion);
-//                        }
+                    } else {
+                        int division = productoVenta.getCantidad() / promocion.getCantidad();
+                        total -= division * productoVenta.getCosto();
+                    }
+                }
+            }
+        }
+        llenarTablaPromociones();
+    }
+    
+    private void eliminarPromocion(){
+        List<PromocionDTO> promocionesRegistro = gestorPromociones.obtenerPromociones();
+        for (ProductoDTO productoVenta : productosVenta) {
+            for (PromocionDTO promocion : promocionesRegistro) {
+                if (productoVenta.equals(promocion.getProducto())) {
+                    if ((productoVenta.getCantidad() % promocion.getCantidad()) == 0) {
+                        total -= productoVenta.getCantidad() * promocion.getPrecioUnitario();
+                        promocionesVenta.add(promocion);
                     } else {
                         int division = productoVenta.getCantidad() / promocion.getCantidad();
                         total -= division * productoVenta.getCosto();

@@ -51,7 +51,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         txtCambio.setText(cambioFormato.toString());
         btnCerrar.setBackground(Color.WHITE);
         btnImprimirTicket.setBackground(Color.WHITE);
-        generarVenta();
+        registrarVenta();
     }
 
     /**
@@ -134,11 +134,11 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      * Método que nos ayuda a generar la venta y esta sea registrada y
      * administrada por su respectivo gestor.
      */
-    private void generarVenta() {
+    private void registrarVenta() {
         try {
             gestorVentas.registrarVenta(venta);
         } catch (GestorVentasException ex) {
-            JOptionPane.showMessageDialog(parent, "No se pudo realizar la venta.", 
+            JOptionPane.showMessageDialog(parent, "No se pudo registrar la venta.", 
                     "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(DlgResumenVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
