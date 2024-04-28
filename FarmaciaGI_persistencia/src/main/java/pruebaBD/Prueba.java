@@ -54,8 +54,11 @@ public class Prueba {
         producto.setMarca("FarmaciaGI");
         producto.setNombre("Paracetamol uwu");
         
-        try {
-            productosDAO.actualizarProducto(producto);
+        List <Producto> productos = productosDAO.buscarProductosPorNombre(producto);
+        
+        for (Producto productoo: productos) {
+            System.out.println(producto);
+        }
             
             
 //        Promocion promocionNueva = new Promocion();
@@ -69,9 +72,7 @@ public class Prueba {
 //        } catch (PersistenciaException ex) {
 //            Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
     }
     

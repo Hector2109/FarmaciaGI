@@ -16,7 +16,7 @@ public class Producto {
     private Integer cantidad; //cantidad del producto
 
     /**
-     * Constructor default de un objeti tipo producto
+     * Constructor default de un objeto tipo producto
      */
     public Producto() {
     }

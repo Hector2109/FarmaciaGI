@@ -22,6 +22,9 @@ public class ProductoDTO {
         this.costo = costo;
         this.marca = marca;
     }
+
+    public ProductoDTO() {
+    }
     
     
 
@@ -48,6 +51,24 @@ public class ProductoDTO {
     public void setCantidad(Integer cantidad){
         this.cantidad = cantidad;
     }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCosto(Float costo) {
+        this.costo = costo;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
+    
     
     public boolean isValid(){
         if (cantidad < 0) {
@@ -58,4 +79,19 @@ public class ProductoDTO {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ProductoDTO{");
+        sb.append("codigo=").append(codigo);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", costo=").append(costo);
+        sb.append(", marca=").append(marca);
+        sb.append(", cantidad=").append(cantidad);
+        sb.append('}');
+        return sb.toString();
+    }
+    
+    
 }

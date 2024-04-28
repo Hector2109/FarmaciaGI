@@ -1,6 +1,7 @@
 package org.itson.diseniosofware.mifarmaciagi.persistencia.daos;
 
 import com.mongodb.client.result.UpdateResult;
+import java.util.List;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
 
@@ -48,6 +49,13 @@ public interface IProductosDAO {
      * @return producto que se obtiene
      */
     public Producto obtenerProducto (Producto producto);
+    
+    /**
+     * Método el cual obtiene los productos semejantes a un nombre en la base de datos
+     * @param producto producto que se desea encontrar
+     * @return Lista de productos encontrados
+     */
+    public List <Producto> buscarProductosPorNombre (Producto producto);
     
     
 }

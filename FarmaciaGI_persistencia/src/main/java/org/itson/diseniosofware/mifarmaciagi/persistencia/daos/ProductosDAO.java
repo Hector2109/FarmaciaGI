@@ -1,10 +1,12 @@
 package org.itson.diseniosofware.mifarmaciagi.persistencia.daos;
 
-import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.IProductosDAO;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.result.UpdateResult;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Pattern;
 import org.bson.Document;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
@@ -85,7 +87,6 @@ public class ProductosDAO implements IProductosDAO {
 
     /**
      * Método el cual obtiene un producto del inventario
-     *
      * @param producto producto que se desea obtener
      * @return producto que se obtiene
      */
@@ -105,7 +106,6 @@ public class ProductosDAO implements IProductosDAO {
     /**
      * Método el cual modifica con una suma la cantidad del producto del
      * inventario
-     *
      * @param producto producto al que se le desea cambiar su cantidad en stock
      * @throws PersistenciaException en caso de no lograr modificar la cantidad
      */
@@ -134,6 +134,22 @@ public class ProductosDAO implements IProductosDAO {
             throw new PersistenciaException("Error: Este producto no se encuentra en el inventario");
         }
 
+    }
+
+    /**
+     * Método el cual obtiene los productos semejantes a un nombre en la base de datos
+     * @param producto producto que se desea encontrar
+     * @return Lista de productos encontrados
+     */
+    @Override
+    public List<Producto> buscarProductosPorNombre(Producto producto) {  
+        List <Producto> productosEncontrados = new LinkedList<>();
+        
+        Pattern pattern = Pattern.compile(".*" + producto.getNombre() + ".*", Pattern.CASE_INSENSITIVE);
+        
+        collection.find(new Document("nombre", pattern)).into(productosEncontrados);
+        
+        return productosEncontrados;
     }
 
 }
