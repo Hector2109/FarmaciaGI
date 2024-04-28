@@ -319,14 +319,14 @@ public class PantallaVenta extends javax.swing.JFrame {
                 if (productoVenta.getCantidad() == 0) {
                     
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(productoVenta);
-                    productoActual.setCantidad(productoActual.getCantidad() + 1);
-                    gestorInventario.actualizarProducto(productoActual);
+                    productoActual.setCantidad( 1);
+                    gestorInventario.modCantidadProducto(productoActual);
                     productosVenta.remove(productoVenta);
                     
-                } else {
+                } else {//TODO PENDIENTE A PRUEBAS
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(productoVenta);
-                    productoActual.setCantidad(productoActual.getCantidad() + 1);
-                    gestorInventario.actualizarProducto(productoActual);
+                    productoActual.setCantidad( 1);
+                    gestorInventario.modCantidadProducto(productoActual);
                     productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
                 }
             } catch (GestorProductosException ex) {
@@ -344,14 +344,15 @@ public class PantallaVenta extends javax.swing.JFrame {
             int fila = tblVenta.convertRowIndexToModel(tblVenta.getSelectedRow());
             try {
                 ProductoDTO productoVenta = productosVenta.get(fila);
+                Integer cantidadVentaAct = productoVenta.getCantidad();
                 ProductoDTO productoInventario = gestorInventario.obtenerProducto(productoVenta);
 
                 if (productoInventario.getCantidad() >= 1) {
 
-                    productoInventario.setCantidad(productoInventario.getCantidad() - 1);
-                    gestorInventario.actualizarProducto(productoInventario);
+                    productoInventario.setCantidad(- 1);
+                    gestorInventario.modCantidadProducto(productoInventario);
 
-                    productoVenta.setCantidad(productoVenta.getCantidad() + 1);
+                    productoVenta.setCantidad(cantidadVentaAct + 1);
                     productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
 
                 } else {

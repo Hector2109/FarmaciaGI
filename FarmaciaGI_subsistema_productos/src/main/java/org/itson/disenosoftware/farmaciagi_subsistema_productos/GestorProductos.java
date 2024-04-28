@@ -19,9 +19,9 @@ public class GestorProductos implements IGestorProductos{
     }
     
     @Override
-    public void actualizarProducto(ProductoDTO productoActualizado) throws GestorProductosException {
+    public void modCantidadProducto(ProductoDTO productoActualizado) throws GestorProductosException {
         try {
-            control.actualizarProducto(productoActualizado);
+            control.modCantidadProducto(productoActualizado);
         } catch (ControlProductosException ex) {
             throw new GestorProductosException("No se pudo actualizar el producto.");
         }
@@ -32,14 +32,6 @@ public class GestorProductos implements IGestorProductos{
         return control.buscarProductosPorNombre(nombre);
     }
 
-    @Override
-    public List<ProductoDTO> buscarProductosPorCodigo(String codigo) {
-        return control.buscarProductosPorCodigo(codigo);
-    }
 
-    @Override
-    public List<ProductoDTO> obtenerProductos() {
-        return control.obtenerProductos();
-    }
     
 }

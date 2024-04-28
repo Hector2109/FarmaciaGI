@@ -18,9 +18,9 @@ class ControlGestorProductos {
         return producto.obtenerProducto(productoBuscado);
     }
     
-    public void actualizarProducto(ProductoDTO productoActualizado) throws ControlProductosException {
+    public void modCantidadProducto(ProductoDTO productoActualizado) throws ControlProductosException {
         try {
-            producto.actualizarProducto(productoActualizado);
+            producto.modCantidadProducto(productoActualizado);
         } catch (ObjetosNegocioException ex) {
             throw new ControlProductosException(ex.getMessage());
         }
@@ -30,12 +30,6 @@ class ControlGestorProductos {
         return producto.buscarProductosPorNombre(nombre);
     }
 
-    public List<ProductoDTO> buscarProductosPorCodigo(String codigo) {
-        return producto.buscarProductosPorCodigo(codigo);
-    }
 
-    public List<ProductoDTO> obtenerProductos() {
-        return producto.obtenerProductos();
-    }
 
 }

@@ -242,10 +242,12 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
                 agregarProductosAVenta(productoCopia);
 
-                producto.setCantidad(producto.getCantidad() - 1);
+                Integer cantidad = producto.getCantidad();
+                producto.setCantidad(- 1);
 
                 try {
-                    gestorInventario.actualizarProducto(producto);
+                    gestorInventario.modCantidadProducto(producto);
+                    producto.setCantidad(cantidad-1);
                 } catch (GestorProductosException ex) {
                     Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
                 }

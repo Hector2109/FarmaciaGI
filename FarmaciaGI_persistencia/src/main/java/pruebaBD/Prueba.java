@@ -57,7 +57,7 @@ public class Prueba {
         List <Producto> productos = productosDAO.buscarProductosPorNombre(producto);
         
         for (Producto productoo: productos) {
-            System.out.println(producto);
+            System.out.println(productoo);
         }
             
             

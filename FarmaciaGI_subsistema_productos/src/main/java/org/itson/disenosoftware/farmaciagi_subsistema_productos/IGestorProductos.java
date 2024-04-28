@@ -12,12 +12,10 @@ public interface IGestorProductos {
     
     public ProductoDTO obtenerProducto(ProductoDTO producto);
     
-    public void actualizarProducto(ProductoDTO productoActualizado)throws GestorProductosException;
+    public void modCantidadProducto(ProductoDTO productoActualizado)throws GestorProductosException;
 
     public List<ProductoDTO> buscarProductosPorNombre(String nombre);
 
-    public List<ProductoDTO> buscarProductosPorCodigo(String codigo);
 
-    public List<ProductoDTO> obtenerProductos();
     
 }

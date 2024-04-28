@@ -112,15 +112,17 @@ public class ProductosDAO implements IProductosDAO {
     @Override
     public void modCantidadProducto(Producto producto) throws PersistenciaException {
         Producto productoI = obtenerProducto(producto);
+        Integer cantidad = producto.getCantidad();
+        
 
         if (productoI != null) {
 
             // Este if verifica que la suma o resta que se vaya a ejecutar no deje en cantidades negativas al producto
-            if ((producto.getCantidad() > 0) || (productoI.getCantidad() >= (producto.getCantidad() * -1))) {
+            if ((cantidad > 0) || (productoI.getCantidad() >= (cantidad * -1))) {
 
                 UpdateResult updateResult = collection.updateOne(
                         eq("codigo", productoI.getCodigo()), new Document("$set", new Document()
-                        .append("cantidad", productoI.getCantidad() + producto.getCantidad())));
+                        .append("cantidad", productoI.getCantidad() + cantidad)));
 
                 if (updateResult == null) {
                     throw new PersistenciaException("Error: No se logro modificar la cantidad en stock");
