@@ -36,43 +36,26 @@ public class Prueba {
 //            Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         
-//        Promocion promocionRegistro = promocionesDAO.obtenerPromocion("PR001");
-//        System.out.println(promocionRegistro);
-        
-//        List<Promocion> promociones = promocionesDAO.obtenerPromociones();
-//        for (Promocion promocion : promociones) {
-//            System.out.println(promocion);
-//        }
-        
-
-        IProductosDAO productosDAO= new ProductosDAO(conexion); 
-        
-        Producto producto = new Producto();
-        
-        producto.setCodigo("AAA-000");
-        producto.setCosto(100F);
-        producto.setMarca("FarmaciaGI");
-        producto.setNombre("Paracetamol uwu");
-        
-        List <Producto> productos = productosDAO.buscarProductosPorNombre(producto);
-        
-        for (Producto productoo: productos) {
-            System.out.println(productoo);
+        List<Promocion> promociones = promocionesDAO.obtenerPromociones();
+        for (Promocion promocion : promociones) {
+            System.out.println(promocion);
         }
-            
-            
-//        Promocion promocionNueva = new Promocion();
-//        promocionNueva.setDescripcion("Paracetamol 2x1");
-//        promocionNueva.setDescuento(20.0f);
-//        
-//        try {
-//            promocionesDAO.agregarPromocion(promocionNueva);
-//            
-//            Logger.getLogger(Prueba.class.getName()).log(Level.INFO, "Se agregó la promocion correctamente");
-//        } catch (PersistenciaException ex) {
-//            Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         
+//
+//        IProductosDAO productosDAO= new ProductosDAO(conexion); 
+//        
+//        Producto producto = new Producto();
+//        
+//        producto.setCodigo("AAA-000");
+//        producto.setCosto(100F);
+//        producto.setMarca("FarmaciaGI");
+//        producto.setNombre("Paracetamol uwu");
+//        
+//        List <Producto> productos = productosDAO.buscarProductosPorNombre(producto);
+//        
+//        for (Producto productoo: productos) {
+//            System.out.println(productoo);
+//        }
         
     }
     

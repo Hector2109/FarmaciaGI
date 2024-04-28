@@ -19,6 +19,9 @@ public class Conexion implements IConexion {
     private static final String cadenaConexion = "mongodb://127.0.0.1:27017";
     private static final String baseDatosS = "MiFarmaciaGI";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MongoDatabase crearConexion() {
         CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),

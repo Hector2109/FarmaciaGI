@@ -11,25 +11,25 @@ public class Pruebas {
 
     public static void main(String[] args) {
         
-//        PromocionBO promocionBO = new PromocionBO();
+        PromocionBO promocionBO = new PromocionBO();
 //        
 ////        PromocionDTO promocion = promocionBO.obtenerPromocion(new PromocionDTO("PR001", "", 0.0f));
 ////        System.out.println(promocion.getCodigo() + ", " + promocion.getDescripcion() + ", " + promocion.getDescuento());
 //        
-//        List<PromocionDTO> promociones = promocionBO.obtenerPromociones();
-//        for (PromocionDTO promocion : promociones) {
-//            System.out.println(promocion.getCodigo() + ", " + promocion.getDescripcion() + ", " + promocion.getDescuento());
-//        }
+        List<PromocionDTO> promociones = promocionBO.obtenerPromociones();
+        for (PromocionDTO promocion : promociones) {
+            System.out.println(promocion.getCodigo() + ", " + promocion.getDescripcion() + ", " + promocion.getProducto() + ", " + promocion.getCantidad() + ", " + promocion.getPrecioUnitario());
+        }
 
 
-        ProductoBO productoBO = new ProductoBO();
-        
-        ProductoDTO productoDTO = new ProductoDTO();
-        productoDTO.setCodigo("AAA-000");
-        
-        ProductoDTO productoEncontrado = productoBO.obtenerProducto(productoDTO);
-        
-        System.out.println(productoEncontrado);
+//        ProductoBO productoBO = new ProductoBO();
+//        
+//        ProductoDTO productoDTO = new ProductoDTO();
+//        productoDTO.setCodigo("AAA-000");
+//        
+//        ProductoDTO productoEncontrado = productoBO.obtenerProducto(productoDTO);
+//        
+//        System.out.println(productoEncontrado);
         
     }
     

@@ -7,10 +7,16 @@ public class GestorPromociones implements IGestorPromociones {
 
     private ControlGestorPromociones control;
 
+    /**
+     * Constructor.
+     */
     public GestorPromociones() {
         control = new ControlGestorPromociones();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PromocionDTO> obtenerPromociones() {
         return control.obtenerPromociones();
