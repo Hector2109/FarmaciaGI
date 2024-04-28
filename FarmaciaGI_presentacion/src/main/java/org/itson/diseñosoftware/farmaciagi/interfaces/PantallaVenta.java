@@ -420,7 +420,7 @@ public class PantallaVenta extends javax.swing.JFrame {
                 ProductoDTO productoVenta = productos.next();
                 if (promocion.getProducto().equals(promocion.getProducto())) {
                     if (productoVenta.getCantidad() == promocion.getCantidad()
-                            || (productoVenta.getCantidad() % promocion.getCantidad()) > 0) {
+                            || (productoVenta.getCantidad() % promocion.getCantidad()) == 0) {
                         productosVenta.get(productosVenta.indexOf(productoVenta)).setCosto(promocion.getPrecioUnitario());
                         promocionesVenta.add(promocion);
                         llenarTablaPromociones();
