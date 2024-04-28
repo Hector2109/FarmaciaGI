@@ -8,8 +8,11 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.IProductosDAO;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.IProductosDAO;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.IPromocionesDAO;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.IPromocionesDAO;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.ProductosDAO;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.PromocionesDAO;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.daos.PromocionesDAO;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Promocion;
 
@@ -41,6 +44,11 @@ public class Prueba {
 //            System.out.println(promocion);
 //        }
         
+
+        IProductosDAO productosDAO= new ProductosDAO(conexion); 
+        
+      
+
         Promocion promocionNueva = new Promocion();
         promocionNueva.setDescripcion("Paracetamol 2x1");
         promocionNueva.setDescuento(20.0f);
