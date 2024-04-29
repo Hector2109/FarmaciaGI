@@ -352,6 +352,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
             try {
                 ProductoDTO productoVenta = productosVenta.get(fila);
+                int cantidad = productoVenta.getCantidad();
                 productoVenta.setCantidad(productoVenta.getCantidad() - 1);
 
                 if (productoVenta.getCantidad() == 0) {
@@ -364,6 +365,7 @@ public class PantallaVenta extends javax.swing.JFrame {
                     ProductoDTO productoActual = gestorInventario.obtenerProducto(productoVenta);
                     productoActual.setCantidad(1);
                     gestorInventario.modCantidadProducto(productoActual);
+                    productoVenta.setCantidad(cantidad-1);
                     productosVenta.set(productosVenta.indexOf(productoVenta), productoVenta);
                 }
 
