@@ -2,7 +2,6 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
