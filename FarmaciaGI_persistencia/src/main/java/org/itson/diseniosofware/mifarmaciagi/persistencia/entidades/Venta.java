@@ -75,16 +75,16 @@ public class Venta {
      * Obtiene el costo total de la venta
      * @return costo total de venta
      */
-    public Float getCostoTotal() {
+    public Float getCosto_total() {
         return costo_total;
     }
 
     /**
      * Modifica el costo total de la venta
-     * @param costoTotal costo total de la venta
+     * @param costo_total costo total de la venta
      */
-    public void setCosto_total(Float costoTotal) {
-        this.costo_total = costoTotal;
+    public void setCosto_total(Float costo_total) {
+        this.costo_total = costo_total;
     }
 
     /**

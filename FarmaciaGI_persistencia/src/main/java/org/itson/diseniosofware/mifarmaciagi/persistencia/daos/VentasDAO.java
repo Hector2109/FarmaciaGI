@@ -35,12 +35,13 @@ public class VentasDAO implements IVentasDAO{
      */
     @Override
     public Venta registrarVenta(Venta venta) throws PersistenciaException{  
-//        if (encontrarVenta(venta.getCodigo_venta())==null){
+        if (encontrarVenta(venta.getCodigo_venta())==null){
             collection.insertOne(venta);
+           
             return venta;
-//        }else{
-//            throw new PersistenciaException ("ERROR: Esta venta ya esta registrada");
-//        }                    
+        }else{
+            throw new PersistenciaException ("ERROR: Esta venta ya esta registrada");
+        }                    
     }
 
     /**
