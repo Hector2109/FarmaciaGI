@@ -23,7 +23,7 @@ public class Conexion implements IConexion {
      * {@inheritDoc}
      */
     @Override
-    public MongoDatabase crearConexion() {
+    public MongoDatabase crearConexionPojo() {
         CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
@@ -34,6 +34,15 @@ public class Conexion implements IConexion {
 
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase baseDatos = mongoClient.getDatabase(baseDatosS);
+        return baseDatos;
+    }
+
+    @Override
+    public MongoDatabase crearConexion() {
+        MongoClient mongoClient= MongoClients.create();
+        
+        MongoDatabase baseDatos = mongoClient.getDatabase(baseDatosS);
+        
         return baseDatos;
     }
 

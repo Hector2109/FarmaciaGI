@@ -21,7 +21,7 @@ public class ProductosDAO implements IProductosDAO {
     MongoCollection<Producto> collection;
 
     public ProductosDAO(IConexion conexion) {
-        MongoDatabase baseDatos = conexion.crearConexion();
+        MongoDatabase baseDatos = conexion.crearConexionPojo();
         collection = baseDatos.getCollection("productos", Producto.class);
     }
 

@@ -11,35 +11,35 @@ import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNe
 
 public class VentaBO {
 
-    private SimuladorRegistroVentas registro;
+//    private SimuladorRegistroVentas registro;
     
     public VentaBO(){
-        registro = SimuladorRegistroVentas.getInstance();
+//        registro = SimuladorRegistroVentas.getInstance();
     }
     
     public void registrarVenta(VentaDTO ventaNueva) throws ObjetosNegocioException {
-        VentaAux ventaRegistro = null;
-        for (VentaAux venta : registro.obtenerRegistro()) {
-            if (venta.getCodigo().equals(ventaNueva.getCodigo())) {
-                ventaRegistro = venta;
-            }
-        }
-
-        if (ventaRegistro == null) {
-            List<ProductoAux> productosVenta = new LinkedList<>();
-            for (ProductoDTO producto : ventaNueva.getProductos()) {
-                ProductoAux productoVenta = new ProductoAux(producto.getNombre(), producto.getCosto(),
-                        producto.getMarca(), producto.getCodigo(), producto.getCantidad());
-                productosVenta.add(productoVenta);
-            }
-
-            VentaAux venta = new VentaAux(ventaNueva.getCodigo(), productosVenta,
-                    ventaNueva.getTotal(), ventaNueva.getFecha());
-
-            registro.obtenerRegistro().add(venta);
-        } else {
-            throw new ObjetosNegocioException("No se pudo registrar la venta.");
-        }
+//        VentaAux ventaRegistro = null;
+//        for (VentaAux venta : registro.obtenerRegistro()) {
+//            if (venta.getCodigo().equals(ventaNueva.getCodigo())) {
+//                ventaRegistro = venta;
+//            }
+//        }
+//
+//        if (ventaRegistro == null) {
+//            List<ProductoAux> productosVenta = new LinkedList<>();
+//            for (ProductoDTO producto : ventaNueva.getProductos()) {
+//                ProductoAux productoVenta = new ProductoAux(producto.getNombre(), producto.getCosto(),
+//                        producto.getMarca(), producto.getCodigo(), producto.getCantidad());
+//                productosVenta.add(productoVenta);
+//            }
+//
+//            VentaAux venta = new VentaAux(ventaNueva.getCodigo(), productosVenta,
+//                    ventaNueva.getTotal(), ventaNueva.getFecha());
+//
+//            registro.obtenerRegistro().add(venta);
+//        } else {
+//            throw new ObjetosNegocioException("No se pudo registrar la venta.");
+//        }
     }
     
 }
