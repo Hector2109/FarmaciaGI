@@ -7,19 +7,19 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Venta;
 
-/**
- *
- * @author Hector Espinoza
- */
 public class VentasDAO implements IVentasDAO {
 
-    MongoCollection<Venta> collection;
+    private MongoCollection<Venta> collection;
 
+    /**
+     * Constructor que recibe la conexión al mecanismo de persistencia.
+     *
+     * @param conexion La conexión al mecanismo de persistencia
+     */
     public VentasDAO(IConexion conexion) {
-        MongoDatabase baseDatos = conexion.crearConexionPojo();
+        MongoDatabase baseDatos = conexion.crearConexion();
 
         collection = baseDatos.getCollection("ventas", Venta.class);
-
     }
 
     /**

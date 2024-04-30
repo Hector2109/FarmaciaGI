@@ -12,16 +12,17 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
 
-/**
- *
- * @author Hector Espinoza
- */
 public class ProductosDAO implements IProductosDAO {
 
-    MongoCollection<Producto> collection;
+    private MongoCollection<Producto> collection;
 
+    /**
+     * Constructor que recibe la conexión al mecanismo de persistencia.
+     *
+     * @param conexion La conexión al mencanismo de persistencia
+     */
     public ProductosDAO(IConexion conexion) {
-        MongoDatabase baseDatos = conexion.crearConexionPojo();
+        MongoDatabase baseDatos = conexion.crearConexion();
         collection = baseDatos.getCollection("productos", Producto.class);
     }
 
@@ -122,7 +123,7 @@ public class ProductosDAO implements IProductosDAO {
                 UpdateResult updateResult = collection.updateOne(
                         eq("codigo", productoI.getCodigo()), new Document("$set", new Document()
                         .append("cantidad", productoI.getCantidad() + cantidad)));
-                
+
                 if (updateResult == null) {
                     throw new PersistenciaException("Error: No se logro modificar la cantidad en stock");
                 }

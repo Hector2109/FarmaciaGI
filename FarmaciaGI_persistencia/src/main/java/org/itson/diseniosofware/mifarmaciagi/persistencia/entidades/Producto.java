@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
  * @author Hector Espinoza
  */
 public class Producto {
-    
+
     private ObjectId _id; //id del producto
     private String nombre; //nombre delñ producto
     private String marca; //marca del producto
@@ -21,6 +21,16 @@ public class Producto {
     public Producto() {
     }
 
+    /**
+     * Constructor que recibe el nombre, la marca, el costo, el código y la
+     * cantidad del producto.
+     *
+     * @param nombre El nombre del producto
+     * @param marca La marca del producto
+     * @param costo El costo del producto
+     * @param codigo El código del producto
+     * @param cantidad La cantidad del producto
+     */
     public Producto(String nombre, String marca, Float costo, String codigo, Integer cantidad) {
         this.nombre = nombre;
         this.marca = marca;
@@ -28,11 +38,10 @@ public class Producto {
         this.codigo = codigo;
         this.cantidad = cantidad;
     }
-    
-    
 
     /**
      * Retorna el id del producto
+     *
      * @return id del producto
      */
     public ObjectId getId() {
@@ -41,6 +50,7 @@ public class Producto {
 
     /**
      * Establece el id del producto
+     *
      * @param _id id del producto
      */
     public void setId(ObjectId _id) {
@@ -49,6 +59,7 @@ public class Producto {
 
     /**
      * Retorna el el nombre del producto
+     *
      * @return nombre del producto
      */
     public String getNombre() {
@@ -57,6 +68,7 @@ public class Producto {
 
     /**
      * Establec el nombre del producto
+     *
      * @param nombre nombre del producto
      */
     public void setNombre(String nombre) {
@@ -65,14 +77,16 @@ public class Producto {
 
     /**
      * Retorna la marca del producto
+     *
      * @return marca del producto
      */
     public String getMarca() {
         return marca;
     }
-    
+
     /**
      * Establece la marca del producto
+     *
      * @param marca marca del producto
      */
     public void setMarca(String marca) {
@@ -81,6 +95,7 @@ public class Producto {
 
     /**
      * Retorna el costo del producto
+     *
      * @return coste del producto
      */
     public Float getCosto() {
@@ -89,6 +104,7 @@ public class Producto {
 
     /**
      * Establece el costo del producto
+     *
      * @param costo coste del producto
      */
     public void setCosto(Float costo) {
@@ -97,6 +113,7 @@ public class Producto {
 
     /**
      * Retorna el codigo del producto
+     *
      * @return codigo del producto
      */
     public String getCodigo() {
@@ -105,6 +122,7 @@ public class Producto {
 
     /**
      * Establece el código de producto
+     *
      * @param codigo código del producto
      */
     public void setCodigo(String codigo) {
@@ -113,6 +131,7 @@ public class Producto {
 
     /**
      * Retorna la cantidad del producto
+     *
      * @return cantidad del producto
      */
     public Integer getCantidad() {
@@ -121,17 +140,30 @@ public class Producto {
 
     /**
      * Establece la cantidad del producto
+     *
      * @param cantidad cantidad del producto
      */
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
+    /**
+     * Permite obtener una cadena de texto con los atributos del producto.
+     *
+     * @return Una cadena de texto con los atributos del producto
+     */
     @Override
     public String toString() {
-        return "Producto{" + "_id=" + _id + ", nombre=" + nombre + ", marca=" + marca + ", costo=" + costo + ", codigo=" + codigo + ", cantidad=" + cantidad + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Producto{");
+        sb.append("_id=").append(_id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", marca=").append(marca);
+        sb.append(", costo=").append(costo);
+        sb.append(", codigo=").append(codigo);
+        sb.append(", cantidad=").append(cantidad);
+        sb.append('}');
+        return sb.toString();
     }
-    
-    
-    
+
 }

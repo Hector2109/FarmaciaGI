@@ -14,6 +14,11 @@ public class VentaDTO {
     private Float total;
     private Calendar fecha;
 
+    /**
+     * Constructor que recibe el código de la venta.
+     *
+     * @param codigo El código de la venta
+     */
     public VentaDTO(String codigo) {
         this.codigo = codigo;
         this.productos = new LinkedList<>();
@@ -21,6 +26,15 @@ public class VentaDTO {
         this.fecha = null;
     }
 
+    /**
+     * Constructor que recibe el código, la lista de productos, el total y la
+     * fecha de la venta.
+     *
+     * @param codigo El código de la venta
+     * @param productos La lista de productos de la venta
+     * @param total El total de la venta
+     * @param fecha La fecha de la venta
+     */
     public VentaDTO(String codigo, List<ProductoDTO> productos, Float total, Calendar fecha) {
         this.codigo = codigo;
         this.productos = productos;
@@ -28,6 +42,16 @@ public class VentaDTO {
         this.fecha = fecha;
     }
 
+    /**
+     * Constructor que recibe el código, la lista de productos, el total y la
+     * fecha de la venta.
+     *
+     * @param codigo El código de la venta
+     * @param productos La lista de productos de la venta
+     * @param promociones La lista de promociones
+     * @param total El total de la venta
+     * @param fecha La fecha de la venta
+     */
     public VentaDTO(String codigo, List<ProductoDTO> productos, List<PromocionDTO> promociones, Float total, Calendar fecha) {
         this.codigo = codigo;
         this.productos = productos;
@@ -36,30 +60,65 @@ public class VentaDTO {
         this.fecha = fecha;
     }
 
+    /**
+     * Permite obtener el código de la venta.
+     *
+     * @return El código de la venta
+     */
     public String getCodigo() {
         return codigo;
     }
 
+    /**
+     * Permite obtener la lista de productos de la venta.
+     *
+     * @return La lista de productos de la venta
+     */
     public List<ProductoDTO> getProductos() {
         return productos;
     }
 
+    /**
+     * Permite obtener la lista de promociones de la venta.
+     *
+     * @return La lista de promociones de la venta
+     */
     public List<PromocionDTO> getPromociones() {
         return promociones;
     }
 
+    /**
+     * Permite establecer la lista de promociones de la venta.
+     *
+     * @param promociones La lista de promociones de la venta
+     */
     public void setPromociones(List<PromocionDTO> promociones) {
         this.promociones = promociones;
     }
 
+    /**
+     * Permite obtener el total de la venta.
+     *
+     * @return El total de la venta
+     */
     public Float getTotal() {
         return total;
     }
 
+    /**
+     * Permite obtener la fecha de la venta.
+     *
+     * @return La fecha de la venta
+     */
     public Calendar getFecha() {
         return fecha;
     }
 
+    /**
+     * Permite saber si la venta es válida o no.
+     *
+     * @return true si la venta es válida, false en caso contrario
+     */
     public boolean isValid() {
         if (total < 0) {
             return false;
@@ -70,24 +129,11 @@ public class VentaDTO {
         return true;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setProductos(List<ProductoDTO> productos) {
-        this.productos = productos;
-    }
-
-    public void setTotal(Float total) {
-        this.total = total;
-    }
-
-    public void setFecha(Calendar fecha) {
-        this.fecha = fecha;
-    }
-    
-    
-
+    /**
+     * Permite obtener un código hash de la venta.
+     *
+     * @return El código hash de la venta
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -95,6 +141,12 @@ public class VentaDTO {
         return hash;
     }
 
+    /**
+     * Permite saber si dos ventas son iguales.
+     *
+     * @param obj La venta con la que se comparará
+     * @return true si se trata de la misma venta, false en caso contrario
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

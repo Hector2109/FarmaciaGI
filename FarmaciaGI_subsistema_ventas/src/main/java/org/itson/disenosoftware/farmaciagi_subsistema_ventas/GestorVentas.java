@@ -8,10 +8,16 @@ public class GestorVentas implements IGestorVentas {
 
     private ControlGestorVentas control;
 
+    /**
+     * Constructor.
+     */
     public GestorVentas() {
         control = new ControlGestorVentas();
     }
 
+    /**
+     * {@inheritDoc }
+     */
     @Override
     public void registrarVenta(VentaDTO ventaNueva) throws GestorVentasException {
         try {

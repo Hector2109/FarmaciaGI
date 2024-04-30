@@ -10,6 +10,22 @@ public class ProductoDTO {
     private String marca;
     private Integer cantidad;
 
+    /**
+     * Constructor.
+     */
+    public ProductoDTO() {
+    }
+
+    /**
+     * Constructor que recibe el código, nombre, costro, marca y cantidad del
+     * producto.
+     *
+     * @param codigo El código del producto
+     * @param nombre El nombre del producto
+     * @param costo El costo del producto
+     * @param marca La marca del producto
+     * @param cantidad La cantidad del producto
+     */
     public ProductoDTO(String codigo, String nombre, Float costo, String marca, Integer cantidad) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -18,6 +34,14 @@ public class ProductoDTO {
         this.cantidad = cantidad;
     }
 
+    /**
+     * Constructor que recibe el código, nombre, costro y marca del producto.
+     *
+     * @param codigo El código del producto
+     * @param nombre El nombre del producto
+     * @param costo El costo del producto
+     * @param marca La marca del producto
+     */
     public ProductoDTO(String codigo, String nombre, Float costo, String marca) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -25,49 +49,101 @@ public class ProductoDTO {
         this.marca = marca;
     }
 
-    public ProductoDTO() {
-    }
-
+    /**
+     * Permite obtener el código del producto.
+     *
+     * @return El código del producto
+     */
     public String getCodigo() {
         return codigo;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public Float getCosto() {
-        return costo;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
+    /**
+     * Permite establecer el código del producto
+     *
+     * @param codigo El código del producto
+     */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
+    /**
+     * Permite obtener el nombre del producto.
+     *
+     * @return El nombre del producto
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Permite establecer el nombre del producto.
+     *
+     * @param nombre El nombre del producto
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Permite obtener el costo del producto.
+     *
+     * @return El costo del producto
+     */
+    public Float getCosto() {
+        return costo;
+    }
+
+    /**
+     * Permite establecer el costo del producto.
+     *
+     * @param costo El costo del producto
+     */
     public void setCosto(Float costo) {
         this.costo = costo;
     }
 
+    /**
+     * Permite obtener la marca del producto.
+     *
+     * @return La marca del producto
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * Permite establecer la marca del producto.
+     *
+     * @param marca La marca del producto
+     */
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
+    /**
+     * Permite obtener la cantidad del producto.
+     *
+     * @return La cantidad del producto
+     */
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * Permite establecer la cantidad del producto.
+     *
+     * @param cantidad La cantidad del producto
+     */
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    /**
+     * Permite sabe si el producto es válido o no.
+     *
+     * @return true si el producto es válido, false en caso contrario
+     */
     public boolean isValid() {
         if (cantidad < 0) {
             return false;
@@ -78,6 +154,11 @@ public class ProductoDTO {
         return true;
     }
 
+    /**
+     * Permite obtener un código hash que representa este producto.
+     *
+     * @return El código hash del producto
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -85,6 +166,13 @@ public class ProductoDTO {
         return hash;
     }
 
+    /**
+     * Permite comparar una promoción con otra y saber si son la misma
+     * promoción.
+     *
+     * @param obj La promoción con la que se comparará
+     * @return true si se trata de la misma promoción, false en caso contrario
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -98,19 +186,6 @@ public class ProductoDTO {
         }
         final ProductoDTO other = (ProductoDTO) obj;
         return Objects.equals(this.codigo, other.codigo);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("ProductoDTO{");
-        sb.append("codigo=").append(codigo);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", costo=").append(costo);
-        sb.append(", marca=").append(marca);
-        sb.append(", cantidad=").append(cantidad);
-        sb.append('}');
-        return sb.toString();
     }
 
 }

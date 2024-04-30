@@ -18,7 +18,7 @@ public class PromocionesDAO implements IPromocionesDAO {
      * @param conexion La conexión al mecanismo de persistencia
      */
     public PromocionesDAO(IConexion conexion) {
-        baseDatos = conexion.crearConexionPojo();
+        baseDatos = conexion.crearConexion();
         nombreColeccion = "promociones";
     }
 

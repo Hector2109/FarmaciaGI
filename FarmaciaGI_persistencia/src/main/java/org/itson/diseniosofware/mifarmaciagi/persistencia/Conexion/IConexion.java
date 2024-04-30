@@ -5,11 +5,9 @@ import com.mongodb.client.MongoDatabase;
 public interface IConexion {
 
     /**
-     * Permite crear una conexión al mecanismo de persistencia
-     * donde es posible usar clases pojo
+     * Permite crear una conexión al mecanismo de persistencia.
+     * 
      * @return Una conexión al mecanismo de persistencia
      */
-    public MongoDatabase crearConexionPojo();
-    
-     public MongoDatabase crearConexion();
+    public MongoDatabase crearConexion();
 }

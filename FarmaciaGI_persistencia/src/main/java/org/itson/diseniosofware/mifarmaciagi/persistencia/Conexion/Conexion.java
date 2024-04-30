@@ -10,10 +10,6 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
-/**
- *
- * @author Hector Espinoza
- */
 public class Conexion implements IConexion {
 
     private static final String cadenaConexion = "mongodb://127.0.0.1:27017";
@@ -23,7 +19,7 @@ public class Conexion implements IConexion {
      * {@inheritDoc}
      */
     @Override
-    public MongoDatabase crearConexionPojo() {
+    public MongoDatabase crearConexion() {
         CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
@@ -34,15 +30,6 @@ public class Conexion implements IConexion {
 
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase baseDatos = mongoClient.getDatabase(baseDatosS);
-        return baseDatos;
-    }
-
-    @Override
-    public MongoDatabase crearConexion() {
-        MongoClient mongoClient= MongoClients.create();
-        
-        MongoDatabase baseDatos = mongoClient.getDatabase(baseDatosS);
-        
         return baseDatos;
     }
 

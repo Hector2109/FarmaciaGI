@@ -9,10 +9,19 @@ class ControlGestorVentas {
     
     private VentaBO venta;
 
+    /**
+     * Constructor.
+     */
     public ControlGestorVentas() {
         venta = new VentaBO();
     }
 
+    /**
+     * Permite registrar una venta en el registro.
+     *
+     * @param venta La venta que se va a registrar
+     * @throws GestorVentasException Si no se puede registrar la venta
+     */
     public void registrarVenta(VentaDTO ventaNueva) throws ControlVentasException {
         try {
             venta.registrarVenta(ventaNueva);

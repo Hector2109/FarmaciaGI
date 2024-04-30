@@ -4,10 +4,6 @@ import java.util.List;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
 
-/**
- *
- * @author Hector Espinoza
- */
 public interface IProductosDAO {
 
     /**
