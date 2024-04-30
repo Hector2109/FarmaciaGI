@@ -21,6 +21,16 @@ public class Producto {
     public Producto() {
     }
 
+    public Producto(String nombre, String marca, Float costo, String codigo, Integer cantidad) {
+        this.nombre = nombre;
+        this.marca = marca;
+        this.costo = costo;
+        this.codigo = codigo;
+        this.cantidad = cantidad;
+    }
+    
+    
+
     /**
      * Retorna el id del producto
      * @return id del producto
