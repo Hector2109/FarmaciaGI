@@ -70,6 +70,24 @@ public class VentaDTO {
         return true;
     }
 
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setProductos(List<ProductoDTO> productos) {
+        this.productos = productos;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public void setFecha(Calendar fecha) {
+        this.fecha = fecha;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 7;
