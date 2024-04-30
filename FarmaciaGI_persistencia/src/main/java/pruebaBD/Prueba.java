@@ -61,11 +61,11 @@ public class Prueba {
         
         Venta venta = new Venta();
         
-        venta.setCodigo_venta("VEN-000");
+        venta.setCodigoVenta("VEN-000");
         venta.setProductos(productos);
         venta.setPromociones(promociones);
-        venta.setFecha_venta(Instant.now());
-        venta.setCosto_total(500.0F);
+        venta.setFechaVenta(Instant.now());
+        venta.setCostoTotal(500.0F);
         
         IVentasDAO ventasDAO = new VentasDAO(conexion);
         

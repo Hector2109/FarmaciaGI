@@ -9,13 +9,11 @@ import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.Gest
  * @author Mi FrmaciaGI
  */
 public interface IGestorProductos {
-    
+
     public ProductoDTO obtenerProducto(ProductoDTO producto);
-    
-    public void modCantidadProducto(ProductoDTO productoActualizado)throws GestorProductosException;
+
+    public void modCantidadProducto(ProductoDTO productoActualizado) throws GestorProductosException;
 
     public List<ProductoDTO> buscarProductosPorNombre(String nombre);
 
-
-    
 }

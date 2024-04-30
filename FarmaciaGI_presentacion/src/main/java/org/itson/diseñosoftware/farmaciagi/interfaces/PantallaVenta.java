@@ -47,6 +47,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     public void limpiarVenta() {
         productosVenta.clear();
+        promocionesVenta.clear();
     }
 
     /**
@@ -314,6 +315,7 @@ public class PantallaVenta extends javax.swing.JFrame {
             pago.setVisible(true);
             limpiarVenta();
             llenarTablaProductosVenta();
+            llenarTablaPromociones();
             establecerTotal();
         } else {
             JOptionPane.showMessageDialog(this, "Asegúrese de agregar productos a la venta.",

@@ -100,37 +100,6 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     }
 
     /**
-     * Método que nos ayuda a crear un código al azar con un formato de
-     * "AAA-123"
-     *
-     * @return codigo en formato "AAA-123"
-     */
-    private String generarCodigo() {
-        // Definir el conjunto de caracteres permitidos para las letras
-        String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        // Definir el generador de números aleatorios
-        Random random = new Random();
-        // Crear un StringBuilder para construir el código
-        StringBuilder codigo = new StringBuilder();
-
-        // Generar tres letras aleatorias
-        for (int i = 0; i < 3; i++) {
-            codigo.append(letras.charAt(random.nextInt(letras.length())));
-        }
-
-        // Generar tres dígitos aleatorios
-        for (int i = 0; i < 3; i++) {
-            codigo.append(random.nextInt(10)); // Dígitos del 0 al 9
-        }
-
-        // Agregar el guion entre las letras y los números
-        codigo.insert(3, "-");
-
-        // Convertir el StringBuilder a String y devolver el código generado
-        return codigo.toString();
-    }
-
-    /**
      * Método que nos ayuda a generar la venta y esta sea registrada y
      * administrada por su respectivo gestor.
      */
@@ -140,7 +109,6 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         } catch (GestorVentasException ex) {
             JOptionPane.showMessageDialog(parent, "No se pudo registrar la venta.", 
                     "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(DlgResumenVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
