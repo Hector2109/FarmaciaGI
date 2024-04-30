@@ -179,7 +179,6 @@ public class PantallaVenta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblProductosVenta.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tblProductosVenta);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
@@ -473,7 +472,8 @@ public class PantallaVenta extends javax.swing.JFrame {
             for (PromocionDTO promocion : promocionesVenta) {
                 if (promocion.getProducto().equals(producto)) {
                     if ((producto.getCantidad() % promocion.getCantidad()) == 0) {
-                        sumaTotal -= producto.getCantidad() * promocion.getPrecioUnitario();
+                        sumaTotal -= producto.getCantidad() * producto.getCosto();
+                        sumaTotal += producto.getCantidad() * promocion.getPrecioUnitario();
                     } else {
                         int division = producto.getCantidad() / promocion.getCantidad();
                         sumaTotal -= division * producto.getCosto();
