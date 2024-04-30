@@ -15,6 +15,9 @@ public class ProductoBO {
 
     private IProductosDAO productosDAO;
 
+    /**
+     * Constructor.
+     */
     public ProductoBO() {
         IConexion conexion = new Conexion();
         productosDAO = new ProductosDAO(conexion);
@@ -46,13 +49,19 @@ public class ProductoBO {
         } else {
             return null;
         }
-
     }
 
-    public void modCantidadProducto (ProductoDTO productoActualizado) throws ObjetosNegocioException {
+    /**
+     * Permite modificar la cantidad de un producto en el inventario.
+     *
+     * @param productoActualizado El producto con la cantidad modificada
+     * @throws ObjetosNegocioException Si no se puede modificar la cantidad del
+     * producto
+     */
+    public void modCantidadProducto(ProductoDTO productoActualizado) throws ObjetosNegocioException {
 
         Producto producto = new Producto();
-        
+
         producto.setCodigo(productoActualizado.getCodigo());
         producto.setNombre(producto.getNombre());
         producto.setMarca(producto.getMarca());
@@ -65,35 +74,34 @@ public class ProductoBO {
             throw new ObjetosNegocioException(ex.getMessage());
         }
     }
-    
+
+    /**
+     * Permite obtener una lista de los productos del inventario filtrados por
+     * su nombre.
+     *
+     * @param nombre El nombre de los productos que se desean obtener
+     * @return La lista de los productos consultados
+     */
     public List<ProductoDTO> buscarProductosPorNombre(String nombre) {
-        
+
         Producto producto = new Producto();
         producto.setNombre(nombre);
-        
+
         List<Producto> productosSemejantes = productosDAO.buscarProductosPorNombre(producto);
-        
-        List <ProductoDTO> productosDTO = new LinkedList<>();
-        
-        for (Producto productoSemejante: productosSemejantes) {
+
+        List<ProductoDTO> productosDTO = new LinkedList<>();
+
+        for (Producto productoSemejante : productosSemejantes) {
             ProductoDTO productoSemejanteDTO = new ProductoDTO();
             productoSemejanteDTO.setCantidad(productoSemejante.getCantidad());
             productoSemejanteDTO.setCodigo(productoSemejante.getCodigo());
             productoSemejanteDTO.setCosto(productoSemejante.getCosto());
             productoSemejanteDTO.setMarca(productoSemejante.getMarca());
             productoSemejanteDTO.setNombre(productoSemejante.getNombre());
-            
+
             productosDTO.add(productoSemejanteDTO);
         }
-        return productosDTO;                
+        return productosDTO;
     }
-    
-    
-//    public void modCantidadProducto (ProductoDTO producto){
-//        
-//        
-//        
-//    }
-
 
 }

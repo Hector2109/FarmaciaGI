@@ -21,11 +21,20 @@ public class VentaBO {
 
     private IVentasDAO ventasDAO;
 
+    /**
+     * Constructor.
+     */
     public VentaBO() {
         IConexion conexion = new Conexion();
         ventasDAO = new VentasDAO(conexion);
     }
 
+    /**
+     * Permite registrar una venta en el registro.
+     *
+     * @param ventaNueva La venta a registrar
+     * @throws ObjetosNegocioException Si no se puede registrar la venta
+     */
     public void registrarVenta(VentaDTO ventaNueva) throws ObjetosNegocioException {
         Venta venta = null;
         String codigo;
@@ -50,7 +59,7 @@ public class VentaBO {
     }
 
     /**
-     * Generador de código de venta
+     * Permite generar un código para una venta.
      *
      * @return código generado
      */
@@ -75,6 +84,12 @@ public class VentaBO {
         return venta;
     }
 
+    /**
+     * Permite convertir una lista de Producto DTO a Producto POJO
+     *
+     * @param productosDTO La lista de Producto DTO
+     * @return La lista de Producto POJO
+     */
     private List<Producto> productosDTOAProductosPOJO(List<ProductoDTO> productosDTO) {
 
         List<Producto> productos = new LinkedList<>();
@@ -91,6 +106,12 @@ public class VentaBO {
         return productos;
     }
 
+    /**
+     * Permite convertir una lista de Promocion DTO a Promocion POJO
+     *
+     * @param productosDTO La lista de Promocion DTO
+     * @return La lista de Promocion POJO
+     */
     private List<Promocion> promocionesDTOAPromocionesPOJO(List<PromocionDTO> promocionesDTO) {
         List<Promocion> promociones = new LinkedList<>();
 
@@ -101,7 +122,7 @@ public class VentaBO {
             promocion.setDescripcion(promocionDTO.getDescripcion());
             promocion.setPrecioUnitario(promocionDTO.getPrecioUnitario());
             promocion.setProducto(promocion.getProducto());
-            
+
             promociones.add(promocion);
         }
         return promociones;
