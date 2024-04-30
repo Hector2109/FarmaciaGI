@@ -81,6 +81,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         btnBuscarProducto.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         btnBuscarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Lupa_pequeña.png"))); // NOI18N
         btnBuscarProducto.setText("| BUSCAR");
+        btnBuscarProducto.setFocusPainted(false);
         btnBuscarProducto.setPreferredSize(new java.awt.Dimension(36, 36));
         btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +95,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
         btnCerrar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCerrar.setText("CERRAR");
+        btnCerrar.setFocusPainted(false);
         btnCerrar.setMaximumSize(new java.awt.Dimension(100, 30));
         btnCerrar.setPreferredSize(new java.awt.Dimension(173, 48));
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +224,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
                     producto.getCantidad(),
                     "AGREGAR"
                 };
-            } else{
+            } else {
                 fila = new Object[]{
                     producto.getNombre(),
                     producto.getMarca(),
@@ -254,7 +256,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
                 try {
                     gestorInventario.modCantidadProducto(productoAgregado);
-                    productoAgregado.setCantidad(cantidad-1);
+                    productoAgregado.setCantidad(cantidad - 1);
                 } catch (GestorProductosException ex) {
                     Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -280,17 +282,17 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
             productoEncontrado.setCantidad(productoEncontrado.getCantidad() + 1);
 
             productosVenta.set(indice, productoEncontrado);
-        }else{
+        } else {
             producto.setCantidad(1);
             productosVenta.add(producto);
         }
     }
-    
+
     private void agregarPromocion(ProductoDTO productoAgregado) {
         List<PromocionDTO> promocionesRegistro = gestorPromociones.obtenerPromociones();
         for (PromocionDTO promocion : promocionesRegistro) {
             if (productoAgregado.equals(promocion.getProducto())) {
-                if ((productoAgregado.getCantidad() % promocion.getCantidad()) == 0) {
+                if ((productosVenta.get(productosVenta.indexOf(productoAgregado)).getCantidad() % promocion.getCantidad()) == 0) {
                     promocionesVenta.add(promocion);
                 }
             }

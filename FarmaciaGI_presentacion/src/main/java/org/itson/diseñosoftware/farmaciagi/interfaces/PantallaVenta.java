@@ -138,6 +138,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         btnVenta.setBackground(new java.awt.Color(166, 164, 255));
         btnVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenVenta.png"))); // NOI18N
         btnVenta.setBorder(null);
+        btnVenta.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -178,6 +179,7 @@ public class PantallaVenta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblProductosVenta.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tblProductosVenta);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
@@ -193,6 +195,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         btnBuscarProducto.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnBuscarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Lupa.png"))); // NOI18N
         btnBuscarProducto.setText(" | BUSCAR PRODUCTO");
+        btnBuscarProducto.setFocusPainted(false);
         btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarProductoActionPerformed(evt);
@@ -201,6 +204,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
         btnContinuar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnContinuar.setText("CONTINUAR");
+        btnContinuar.setFocusPainted(false);
         btnContinuar.setPreferredSize(new java.awt.Dimension(173, 48));
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

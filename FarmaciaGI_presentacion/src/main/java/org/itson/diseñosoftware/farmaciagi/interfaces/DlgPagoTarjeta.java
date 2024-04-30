@@ -66,7 +66,9 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
         fondo.setBackground(new java.awt.Color(216, 215, 255));
 
         txtMontoTotal.setEditable(false);
+        txtMontoTotal.setBackground(new java.awt.Color(255, 255, 255));
         txtMontoTotal.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtMontoTotal.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtMontoTotal.setPreferredSize(new java.awt.Dimension(36, 37));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -79,6 +81,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
         btnCancelar.setText("CANCELAR");
+        btnCancelar.setFocusPainted(false);
         btnCancelar.setPreferredSize(new java.awt.Dimension(173, 48));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +91,7 @@ public class DlgPagoTarjeta extends javax.swing.JDialog {
 
         btnAceptar.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
         btnAceptar.setText("ACEPTAR");
+        btnAceptar.setFocusPainted(false);
         btnAceptar.setMaximumSize(new java.awt.Dimension(100, 30));
         btnAceptar.setPreferredSize(new java.awt.Dimension(173, 48));
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {

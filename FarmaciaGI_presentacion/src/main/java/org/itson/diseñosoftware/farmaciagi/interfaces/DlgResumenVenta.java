@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.GestorVentas;
 import org.itson.disenosoftware.farmaciagi_subsistema_ventas.IGestorVentas;
@@ -40,7 +38,8 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         this.gestorVentas = new GestorVentas();
         this.parent = parent;
         initComponents();
-        llenarTabla();
+        llenarTablaProductos();
+        llenarTablaPromociones();
         actualizarFecha();
         actualizarCantidad();
         txtCantidad.setText(String.valueOf(cantidad));
@@ -81,7 +80,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
      * venta
      *
      */
-    private void llenarTabla() {
+    private void llenarTablaProductos() {
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("ARTICULO");
@@ -97,6 +96,22 @@ public class DlgResumenVenta extends javax.swing.JDialog {
             modelo.addRow(fila);
         }
         tablaVenta.setModel(modelo);
+    }
+    
+    private void llenarTablaPromociones() {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("PROMOCIONES");
+        modelo.addColumn("DESCUENTO");
+
+        for (PromocionDTO promocion : venta.getPromociones()) {
+            Object[] fila = {
+                promocion.getDescripcion(),
+                promocion.getProducto().getCosto()
+            };
+            modelo.addRow(fila);
+        }
+        tblPromociones.setModel(modelo);
     }
 
     /**
@@ -138,6 +153,8 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txtCambio = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPromociones = new javax.swing.JTable();
         btnCerrar = new javax.swing.JButton();
         btnImprimirTicket = new javax.swing.JButton();
 
@@ -189,6 +206,16 @@ public class DlgResumenVenta extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setText("CANTIDAD DE PRODUCTOS");
 
+        tblPromociones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "PROMOCIONES"
+            }
+        ));
+        jScrollPane2.setViewportView(tblPromociones);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,14 +226,8 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,6 +254,14 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtPago)))))
                         .addGap(21, 21, 21))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +273,9 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -261,11 +292,12 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCambio))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         btnCerrar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCerrar.setText("CERRAR");
+        btnCerrar.setFocusPainted(false);
         btnCerrar.setMaximumSize(new java.awt.Dimension(100, 30));
         btnCerrar.setPreferredSize(new java.awt.Dimension(173, 48));
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -276,6 +308,7 @@ public class DlgResumenVenta extends javax.swing.JDialog {
 
         btnImprimirTicket.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnImprimirTicket.setText("IMPRIMIR TICKET");
+        btnImprimirTicket.setFocusPainted(false);
         btnImprimirTicket.setPreferredSize(new java.awt.Dimension(173, 48));
         btnImprimirTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,11 +323,11 @@ public class DlgResumenVenta extends javax.swing.JDialog {
             .addGroup(fondoLayout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(fondoLayout.createSequentialGroup()
                         .addComponent(btnImprimirTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35))
             .addGroup(fondoLayout.createSequentialGroup()
                 .addGap(215, 215, 215)
@@ -310,9 +343,9 @@ public class DlgResumenVenta extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnImprimirTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImprimirTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -353,9 +386,11 @@ public class DlgResumenVenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable tablaVenta;
+    private javax.swing.JTable tblPromociones;
     private javax.swing.JLabel txtCambio;
     private javax.swing.JLabel txtCantidad;
     private javax.swing.JLabel txtFecha;

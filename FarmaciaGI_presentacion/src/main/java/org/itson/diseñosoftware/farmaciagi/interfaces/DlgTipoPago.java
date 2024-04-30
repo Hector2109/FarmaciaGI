@@ -52,6 +52,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
 
         btnTarjeta.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnTarjeta.setText("TARJETA");
+        btnTarjeta.setFocusPainted(false);
         btnTarjeta.setMaximumSize(new java.awt.Dimension(100, 30));
         btnTarjeta.setPreferredSize(new java.awt.Dimension(173, 48));
         btnTarjeta.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +63,7 @@ public class DlgTipoPago extends javax.swing.JDialog {
 
         btnEfectivo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnEfectivo.setText("EFECTIVO");
+        btnEfectivo.setFocusPainted(false);
         btnEfectivo.setMaximumSize(new java.awt.Dimension(100, 30));
         btnEfectivo.setPreferredSize(new java.awt.Dimension(173, 48));
         btnEfectivo.addActionListener(new java.awt.event.ActionListener() {
