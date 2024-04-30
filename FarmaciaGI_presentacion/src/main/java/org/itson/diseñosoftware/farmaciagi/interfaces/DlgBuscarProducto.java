@@ -11,19 +11,26 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
+import org.itson.disenosoftware.farmaciagi_subsistema_promociones.GestorPromociones;
+import org.itson.disenosoftware.farmaciagi_subsistema_promociones.IGestorPromociones;
 
 public class DlgBuscarProducto extends javax.swing.JDialog {
 
     private IGestorProductos gestorInventario;
+    private IGestorPromociones gestorPromociones;
     private List<ProductoDTO> productosVenta;
+    private List<PromocionDTO> promocionesVenta;
 
-    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, List<ProductoDTO> productosVenta) {
+    public DlgBuscarProducto(java.awt.Frame parent, boolean modal, List<ProductoDTO> productosVenta, List<PromocionDTO> promocionesVenta) {
         super(parent, modal);
         this.gestorInventario = new GestorProductos();
+        this.gestorPromociones = new GestorPromociones();
         this.productosVenta = productosVenta;
+        this.promocionesVenta = promocionesVenta;
         initComponents();
         btnCerrar.setBackground(Color.WHITE);
         btnBuscarProducto.setBackground(Color.WHITE);
@@ -231,32 +238,33 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
         ButtonColumn buttonColumn = new ButtonColumn("AGREGAR", (e) -> {
             int fila = tblBusqueda.convertRowIndexToModel(tblBusqueda.getSelectedRow());
-            ProductoDTO producto = productosBuscados.get(fila);
-            if (producto.getCantidad() > 0) {
+            ProductoDTO productoAgregado = productosBuscados.get(fila);
+            if (productoAgregado.getCantidad() > 0) {
                 ProductoDTO productoCopia = new ProductoDTO(
-                        producto.getCodigo(),
-                        producto.getNombre(),
-                        producto.getCosto(),
-                        producto.getMarca()
+                        productoAgregado.getCodigo(),
+                        productoAgregado.getNombre(),
+                        productoAgregado.getCosto(),
+                        productoAgregado.getMarca()
                 );
 
-                agregarProductosAVenta(productoCopia);
+                agregarProductoVenta(productoCopia);
 
-                Integer cantidad = producto.getCantidad();
-                producto.setCantidad(- 1);
+                Integer cantidad = productoAgregado.getCantidad();
+                productoAgregado.setCantidad(- 1);
 
                 try {
-                    gestorInventario.modCantidadProducto(producto);
-                    producto.setCantidad(cantidad-1);
+                    gestorInventario.modCantidadProducto(productoAgregado);
+                    productoAgregado.setCantidad(cantidad-1);
                 } catch (GestorProductosException ex) {
                     Logger.getLogger(DlgBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                if (producto.getCantidad() == 0) {
-                    productosBuscados.remove(producto);
+                if (productoAgregado.getCantidad() == 0) {
+                    productosBuscados.remove(productoAgregado);
                 }
             }
             llenarTabla(productosBuscados);
+            agregarPromocion(productoAgregado);
         });
 
         tblBusqueda.getColumnModel().getColumn(tblBusqueda.getColumnCount() - 1).setCellRenderer(buttonColumn);
@@ -264,7 +272,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
     }
 
-    private void agregarProductosAVenta(ProductoDTO producto) {
+    private void agregarProductoVenta(ProductoDTO producto) {
         if (productosVenta.contains(producto)) {
             int indice = productosVenta.indexOf(producto);
             ProductoDTO productoEncontrado = productosVenta.get(indice);
@@ -272,12 +280,21 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
             productoEncontrado.setCantidad(productoEncontrado.getCantidad() + 1);
 
             productosVenta.set(indice, productoEncontrado);
-
         }else{
             producto.setCantidad(1);
             productosVenta.add(producto);
         }
-
+    }
+    
+    private void agregarPromocion(ProductoDTO productoAgregado) {
+        List<PromocionDTO> promocionesRegistro = gestorPromociones.obtenerPromociones();
+        for (PromocionDTO promocion : promocionesRegistro) {
+            if (productoAgregado.equals(promocion.getProducto())) {
+                if ((productoAgregado.getCantidad() % promocion.getCantidad()) == 0) {
+                    promocionesVenta.add(promocion);
+                }
+            }
+        }
     }
 
 
