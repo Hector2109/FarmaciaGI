@@ -1,6 +1,7 @@
 package org.itson.diseniosofware.mifarmaciagi.persistencia.entidades;
 
 import java.util.List;
+import java.util.Objects;
 import org.bson.types.ObjectId;
 
 public class Proveedor {
@@ -126,5 +127,29 @@ public class Proveedor {
         sb.append('}');
         return sb.toString();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this._id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Proveedor other = (Proveedor) obj;
+        return Objects.equals(this._id, other._id);
+    }
+    
+    
 
 }

@@ -8,9 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.bson.Document;
+import org.bson.types.ObjectId;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.Conexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 
 public class ProductosDAO implements IProductosDAO {
 
@@ -152,6 +155,56 @@ public class ProductosDAO implements IProductosDAO {
         collection.find(new Document("nombre", pattern)).into(productosEncontrados);
 
         return productosEncontrados;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void asignarProveedor(Producto producto, Proveedor proveedor) throws PersistenciaException {
+        producto = obtenerProducto(producto);
+        
+        if (producto!=null){
+            IConexion conexion = new Conexion();
+            IProveedoresDAO proveedoresDAO = new ProveedoresDAO(conexion);
+            proveedor = proveedoresDAO.obtenerProveedor(proveedor);
+            if (proveedor!=null){
+                LinkedList <ObjectId> proveedores = producto.getId_proveedores();
+                if (proveedores!=null){
+                    if (!proveedores.contains(proveedor.getId())){
+                        proveedores.add(proveedor.getId());
+                    }else{
+                        throw new PersistenciaException ("Error: Al producto ya se le asigno este proveedor");
+                    }
+                }else{
+                    proveedores = new LinkedList();
+                    proveedores.add(proveedor.getId());
+                }
+                actualizarProveedores(proveedores, producto);
+            }else{
+                throw new PersistenciaException ("Error: El proveedor no existe");
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Producto actualizarProveedores(List<ObjectId> proveedores, Producto producto) throws PersistenciaException {
+        Producto productoDeseado = obtenerProducto(producto);
+
+        if (productoDeseado != null) {
+
+            Producto productoActualizado = collection.findOneAndUpdate(new Document()
+                    .append("_id", productoDeseado.getId()),
+                    new Document("$set", new Document()
+                            .append("id_proveedores", proveedores)));
+
+            return productoActualizado;
+
+        }
+        throw new PersistenciaException("Error: El producto no se encuentra en inventario");
     }
 
 }
