@@ -13,18 +13,26 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Direccion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 import org.itson.disenosoftware.farmaciagi_dtos.DireccionDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
+import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
 public class ProveedorBO {
     
     private IProveedoresDAO provedoresDAO;
     private static final Logger LOG = Logger.getLogger(ProveedorBO.class.getName());
     
-
+    /**
+     * Constructor de la clase ProveedorBO que inicializa la conexión y el DAO de proveedores.
+     */
     public ProveedorBO() {
         IConexion conexion = new Conexion();
         this.provedoresDAO = new ProveedoresDAO(conexion);
     }
     
+    /**
+     * Registra un nuevo proveedor en la base de datos.
+     * @param proveedorNuevoDTO Datos del proveedor a registrar.
+     * @return Los datos del proveedor registrado o null si hay un error.
+     */
     public ProveedorDTO registrarProveedor(ProveedorDTO proveedorNuevoDTO){
         try {
             Proveedor proveedorRegistrar = new Proveedor(
@@ -52,18 +60,26 @@ public class ProveedorBO {
         }
     }
     
-    public void eliminarProveedor(ProveedorDTO proveedorEliminar){
+    /**
+     * Elimina un proveedor de la base de datos.
+     * @param proveedorEliminar Datos del proveedor a eliminar.
+     */
+    public void eliminarProveedor(ProveedorDTO proveedorEliminar) throws ObjetosNegocioException{
         Proveedor proveedor = new Proveedor();
         proveedor.setRfc(proveedorEliminar.getRfc());
         
         try {
             provedoresDAO.eliminarProveedor(proveedor);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(ProveedorBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage());
         }
     }
     
-    public void actualizarProveedor(ProveedorDTO proveedorActualizar) {
+    /**
+     * Actualiza los datos de un proveedor en la base de datos.
+     * @param proveedorActualizar Datos actualizados del proveedor.
+     */
+    public void actualizarProveedor(ProveedorDTO proveedorActualizar) throws ObjetosNegocioException{
         Proveedor proveedor = new Proveedor(
                 proveedorActualizar.getNombre(), 
                 new Direccion(
@@ -80,10 +96,15 @@ public class ProveedorBO {
         try {
             provedoresDAO.actualizarProveedor(proveedor);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(ProveedorBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage());
         }
     }
     
+    /**
+     * Busca un proveedor en la base de datos por su RFC.
+     * @param proveedorBuscar Datos del proveedor a buscar.
+     * @return Los datos del proveedor encontrado o null si no se encuentra.
+     */
     public ProveedorDTO buscarProveedor(ProveedorDTO proveedorBuscar){
         Proveedor proveedorBD = new Proveedor();
         proveedorBD.setRfc(proveedorBuscar.getRfc());
@@ -114,6 +135,10 @@ public class ProveedorBO {
             }
     }
     
+    /**
+     * Busca y devuelve todos los proveedores en la base de datos.
+     * @return Una lista de todos los proveedores encontrados o null si no hay ninguno.
+     */
     public List<ProveedorDTO> buscarProveedores(){
         List<ProveedorDTO> proveedores = new ArrayList<>();
         
