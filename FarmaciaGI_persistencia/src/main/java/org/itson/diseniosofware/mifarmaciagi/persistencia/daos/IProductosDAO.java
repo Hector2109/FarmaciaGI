@@ -1,8 +1,10 @@
 package org.itson.diseniosofware.mifarmaciagi.persistencia.daos;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 
 public interface IProductosDAO {
 
@@ -59,4 +61,20 @@ public interface IProductosDAO {
      */
     public List<Producto> buscarProductosPorNombre(Producto producto);
 
+    /**
+     * Este método asigna un proveedor a un producto 
+     * @param proveedor proveedor que se desea asignar
+     * @param producto producto al que se le desea asignar el proveedor
+     * @throws PersistenciaException en caso de algún error
+     */
+    public void asignarProveedor(Producto producto, Proveedor proveedor)throws PersistenciaException;
+    
+    /**
+     * Este método actualiza la lista actualde proveedores de un producto por otra lista
+     * @param proveedores nueva lista de proveedores
+     * @param producto producto que se desea modificar
+     * @return Producto actualizado
+     * @throws En caso de no actualizar la lista de proveedores
+     */
+    public Producto actualizarProveedores (List<ObjectId> proveedores, Producto producto) throws PersistenciaException;  
 }

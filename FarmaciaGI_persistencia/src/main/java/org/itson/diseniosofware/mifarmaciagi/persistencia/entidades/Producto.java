@@ -1,5 +1,6 @@
 package org.itson.diseniosofware.mifarmaciagi.persistencia.entidades;
 
+import java.util.LinkedList;
 import org.bson.types.ObjectId;
 
 /**
@@ -14,7 +15,10 @@ public class Producto {
     private Float costo; //costo del producto
     private String codigo; //codigo del producto
     private Integer cantidad; //cantidad del producto
+    private LinkedList <ObjectId> id_proveedores; //proveedores que suministtran el producto
 
+    
+    
     /**
      * Constructor default de un objeto tipo producto
      */
@@ -145,6 +149,22 @@ public class Producto {
      */
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
+    }
+    
+    /**
+     * Obtiene los proveedores del producto
+     * @return lista de los proveedores
+     */
+    public LinkedList<ObjectId> getId_proveedores() {
+        return id_proveedores;
+    }
+
+    /**
+     * Establece los proveedores del producto
+     * @param id_proveedores lista de proveedores
+     */
+    public void setId_proveedores(LinkedList<ObjectId> id_proveedores) {
+        this.id_proveedores = id_proveedores;
     }
 
     /**
