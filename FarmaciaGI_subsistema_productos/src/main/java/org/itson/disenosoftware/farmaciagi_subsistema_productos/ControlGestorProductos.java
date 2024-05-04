@@ -2,6 +2,7 @@ package org.itson.disenosoftware.farmaciagi_subsistema_productos;
 
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.ProductoBO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
@@ -50,5 +51,14 @@ class ControlGestorProductos {
     public List<ProductoDTO> buscarProductosPorNombre(String nombre) {
         return producto.buscarProductosPorNombre(nombre);
     }
+    
+    public void asignarProveedorAProducto (ProductoDTO productoDTO, ProveedorDTO proveedorDTO) throws ControlProductosException{
+        try {
+            producto.asignarProveedor(productoDTO, proveedorDTO);
+        } catch (ObjetosNegocioException ex) {
+            throw new ControlProductosException(ex.getMessage());
+        }
+    }
+   
 
 }

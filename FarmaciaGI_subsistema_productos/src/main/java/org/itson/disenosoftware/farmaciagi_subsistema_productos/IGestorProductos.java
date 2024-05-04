@@ -2,6 +2,7 @@ package org.itson.disenosoftware.farmaciagi_subsistema_productos;
 
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 
 /**
@@ -34,4 +35,11 @@ public interface IGestorProductos {
      */
     public List<ProductoDTO> buscarProductosPorNombre(String nombre);
 
+    /**
+     * Método que permite asignar un proveedor a un producto
+     * @param productoDTO producto al que se le desea asignar un proveedor
+     * @param proveedorDTO proveedor que se desea asignar 
+     * @throws GestorProductosException en caso de un error
+     */
+    public void asignarProveedorAProducto(ProductoDTO productoDTO, ProveedorDTO proveedorDTO) throws GestorProductosException;
 }
