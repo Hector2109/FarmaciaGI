@@ -27,10 +27,10 @@ public class pruebas {
         telefonos.add("6442522646");
         
         Proveedor proveedor = new Proveedor(
-                "Pfizer", 
-                new Direccion("Leandro", "Leandro valle", "54050", "85125", "Cd.Obregón"), 
+                "Similares", 
+                new Direccion("Sonora", "Centro", "5012", "85140", "Cd.Obregón"), 
                 telefonos, 
-                "RFC1235410"
+                "RFC4405010"
         );
         
         try {
@@ -41,15 +41,15 @@ public class pruebas {
         
         Producto producto = new Producto();
         
-        producto.setCodigo("AAA-000");
+//        producto.setCodigo("AAA-000");
         
-        try {
-            productosDAO.asignarProveedor(producto, proveedor);
-//        Proveedor proveedor = new Proveedor();
-//        proveedor.setNombre("Amazon");
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(pruebas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            productosDAO.asignarProveedor(producto, proveedor);
+////        Proveedor proveedor = new Proveedor();
+////        proveedor.setNombre("Amazon");
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(pruebas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
 //        try {
 //            System.out.println(provColeccion.obtenerProveedores());
