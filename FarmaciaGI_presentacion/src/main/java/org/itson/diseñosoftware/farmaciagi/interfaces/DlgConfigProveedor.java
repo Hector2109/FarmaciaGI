@@ -57,7 +57,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
                 telefonos.append(telefonosExistente).append(",");
             }
             if (telefonos.length() > 0) {
-                telefonos.delete(telefonos.length() - 2, telefonos.length());
+                telefonos.delete(telefonos.length() - 1, telefonos.length());
             }
             txtATelefonos.setText(telefonos.toString());
         }
@@ -441,7 +441,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         String telefonos = txtATelefonos.getText();
         String[] telefonosArray = telefonos.split(",");
 
-        String telefonoRegex = "^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$"; // Expresión regular para el formato de teléfono mexicano (10 dígitos)
+        String telefonoRegex = "^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"; // Expresión regular para el formato de teléfono mexicano (10 dígitos)
 
         for (String telefono : telefonosArray) {
             telefono = telefono.trim(); 

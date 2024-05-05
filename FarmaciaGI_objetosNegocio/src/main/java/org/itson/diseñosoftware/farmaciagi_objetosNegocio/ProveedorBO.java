@@ -15,7 +15,7 @@ import org.itson.disenosoftware.farmaciagi_dtos.DireccionDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
-public class ProveedorBO {
+public class ProveedorBO implements IProveedorBO{
     
     private IProveedoresDAO provedoresDAO;
     private static final Logger LOG = Logger.getLogger(ProveedorBO.class.getName());
@@ -33,6 +33,7 @@ public class ProveedorBO {
      * @param proveedorNuevoDTO Datos del proveedor a registrar.
      * @return Los datos del proveedor registrado o null si hay un error.
      */
+    @Override
     public ProveedorDTO registrarProveedor(ProveedorDTO proveedorNuevoDTO){
         try {
             Proveedor proveedorRegistrar = new Proveedor(
@@ -63,7 +64,9 @@ public class ProveedorBO {
     /**
      * Elimina un proveedor de la base de datos.
      * @param proveedorEliminar Datos del proveedor a eliminar.
+     * @throws org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException
      */
+    @Override
     public void eliminarProveedor(ProveedorDTO proveedorEliminar) throws ObjetosNegocioException{
         Proveedor proveedor = new Proveedor();
         proveedor.setRfc(proveedorEliminar.getRfc());
@@ -78,7 +81,9 @@ public class ProveedorBO {
     /**
      * Actualiza los datos de un proveedor en la base de datos.
      * @param proveedorActualizar Datos actualizados del proveedor.
+     * @throws org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException
      */
+    @Override
     public void actualizarProveedor(ProveedorDTO proveedorActualizar) throws ObjetosNegocioException{
         Proveedor proveedor = new Proveedor(
                 proveedorActualizar.getNombre(), 
@@ -105,6 +110,7 @@ public class ProveedorBO {
      * @param proveedorBuscar Datos del proveedor a buscar.
      * @return Los datos del proveedor encontrado o null si no se encuentra.
      */
+    @Override
     public ProveedorDTO buscarProveedor(ProveedorDTO proveedorBuscar){
         Proveedor proveedorBD = new Proveedor();
         proveedorBD.setRfc(proveedorBuscar.getRfc());
@@ -139,6 +145,7 @@ public class ProveedorBO {
      * Busca y devuelve todos los proveedores en la base de datos.
      * @return Una lista de todos los proveedores encontrados o null si no hay ninguno.
      */
+    @Override
     public List<ProveedorDTO> buscarProveedores(){
         List<ProveedorDTO> proveedores = new ArrayList<>();
         

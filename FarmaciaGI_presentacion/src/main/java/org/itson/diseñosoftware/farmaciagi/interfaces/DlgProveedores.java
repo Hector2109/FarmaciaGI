@@ -341,7 +341,7 @@ public class DlgProveedores extends javax.swing.JDialog {
                     telefonos.append(telefonosExistente).append(",");
                 }
                 if (telefonos.length() > 0) {
-                    telefonos.delete(telefonos.length() - 2, telefonos.length());
+                    telefonos.delete(telefonos.length() - 1, telefonos.length());
                 }
 
                 Object[] fila = {

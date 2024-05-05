@@ -3,11 +3,12 @@ package org.itson.disenosoftware.farmaciagi_subsistema_proveedores;
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_proveedores.excepciones.ControlProveedoresException;
+import org.itson.diseñosoftware.farmaciagi_objetosNegocio.IProveedorBO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.ProveedorBO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
 public class ControlGestorProveedores {
-    private ProveedorBO proveedor;
+    private IProveedorBO proveedor;
 
     public ControlGestorProveedores() {
         this.proveedor = new ProveedorBO();
@@ -25,6 +26,7 @@ public class ControlGestorProveedores {
     /**
      * Elimina un proveedor de la base de datos.
      * @param proveedorEliminar Datos del proveedor a eliminar.
+     * @throws org.itson.disenosoftware.farmaciagi_subsistema_proveedores.excepciones.ControlProveedoresException
      */
     public void eliminarProveedor(ProveedorDTO proveedorEliminar) throws ControlProveedoresException{
         try {
@@ -37,6 +39,7 @@ public class ControlGestorProveedores {
     /**
      * Actualiza los datos de un proveedor en la base de datos.
      * @param proveedorActualizar Datos actualizados del proveedor.
+     * @throws org.itson.disenosoftware.farmaciagi_subsistema_proveedores.excepciones.ControlProveedoresException
      */
     public void actualizarProveedor(ProveedorDTO proveedorActualizar) throws ControlProveedoresException{
         try {
