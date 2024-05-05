@@ -38,6 +38,11 @@
             <artifactId>FarmaciaGI_subsistema_promociones</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.itson.bdavanzadas</groupId>
+            <artifactId>FarmaciaGI_subsistema_proveedores</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

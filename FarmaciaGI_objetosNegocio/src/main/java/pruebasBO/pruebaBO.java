@@ -48,6 +48,6 @@ public class pruebaBO {
 //        ProveedorDTO proveedorNuevoDTO = new ProveedorDTO();
 //        proveedorNuevoDTO.setRfc("JGLOIUJ090");
                 
-        proveedorBO.actualizarProveedor(proveedorNuevoDTO);
+//        proveedorBO.actualizarProveedor(proveedorNuevoDTO);
     }
 }
