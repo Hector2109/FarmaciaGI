@@ -2,6 +2,7 @@ package org.itson.disenosoftware.farmaciagi_subsistema_productos;
 
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import java.util.List;
+import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 
@@ -42,6 +43,18 @@ public class GestorProductos implements IGestorProductos {
     @Override
     public List<ProductoDTO> buscarProductosPorNombre(String nombre) {
         return control.buscarProductosPorNombre(nombre);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void asignarProveedorAProducto(ProductoDTO productoDTO, ProveedorDTO proveedorDTO) throws GestorProductosException {
+        try {
+            control.asignarProveedorAProducto(productoDTO, proveedorDTO);
+        } catch (ControlProductosException ex) {
+            throw new GestorProductosException (ex.getMessage());
+        }
     }
 
 }
