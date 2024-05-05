@@ -285,6 +285,7 @@ public class DlgProveedores extends javax.swing.JDialog {
             // Mostrar un mensaje de advertencia si no hay fila seleccionada
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un proveedor de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
+        llenarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -305,11 +306,14 @@ public class DlgProveedores extends javax.swing.JDialog {
             // Mostrar un mensaje de advertencia si no hay fila seleccionada
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un proveedor de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
+        
+        llenarTabla();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor((JFrame) this.getParent(), true, ConstantesGUI.REGISTRAR, null);
         dlgConfigProveedor.setVisible(true);
+        llenarTabla();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
@@ -358,6 +362,8 @@ public class DlgProveedores extends javax.swing.JDialog {
         TableColumnModel columnModel = tblProveedores.getColumnModel();
         
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

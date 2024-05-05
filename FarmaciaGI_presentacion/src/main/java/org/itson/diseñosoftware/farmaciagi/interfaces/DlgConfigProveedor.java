@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import org.itson.disenosoftware.farmaciagi_dtos.DireccionDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_proveedores.GestorProveedores;
@@ -329,59 +332,138 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
 
     private void btnAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccionActionPerformed
         if (operacion == ConstantesGUI.REGISTRAR) {     
-            String telefonos = txtATelefonos.getText();
-            String[] telefonosArray = telefonos.split(",");
-            
-            List<String> listaTelefonos = new ArrayList<>();
-            for (String telefonosA : telefonosArray) {
-                listaTelefonos.add(telefonosA);
+            if (validarCampos()) {
+                String telefonos = txtATelefonos.getText();
+                String[] telefonosArray = telefonos.split(",");
+                
+                List<String> listaTelefonos = new ArrayList<>();
+                for (String telefonosA : telefonosArray) {
+                    listaTelefonos.add(telefonosA);
+                }
+                
+                proveedorSeleccionado = new ProveedorDTO(
+                        txtNombre.getText(),
+                        new DireccionDTO(
+                                txtCalle.getText(),
+                                txtColonia.getText(),
+                                txtNumero.getText(),
+                                txtCP.getText(),
+                                txtCiudad.getText()
+                        ),
+                        listaTelefonos,
+                        txtRFC.getText()
+                );
+                
+                gestorProveedores.registrarProveedor(proveedorSeleccionado);
+                dispose();
             }
-            
-            proveedorSeleccionado = new ProveedorDTO(
-                    txtNombre.getText(), 
-                    new DireccionDTO(
-                            txtCalle.getText(), 
-                            txtColonia.getText(), 
-                            txtNumero.getText(), 
-                            txtCP.getText(),
-                            txtCiudad.getText()
-                    ), 
-                    listaTelefonos, 
-                    txtRFC.getText()
-            );
-            
-            gestorProveedores.registrarProveedor(proveedorSeleccionado);
-            
         } else {
-            String telefonos = txtATelefonos.getText();
-            String[] telefonosArray = telefonos.split(",");
-            
-            List<String> listaTelefonos = new ArrayList<>();
-            for (String telefonosA : telefonosArray) {
-                listaTelefonos.add(telefonosA);
-            }
-            
-            proveedorSeleccionado = new ProveedorDTO(
-                    txtNombre.getText(), 
-                    new DireccionDTO(
-                            txtCalle.getText(), 
-                            txtColonia.getText(), 
-                            txtNumero.getText(), 
-                            txtCP.getText(),
-                            txtCiudad.getText()
-                    ), 
-                    listaTelefonos, 
-                    txtRFC.getText()
-            );
-            
-            try {
-                gestorProveedores.actualizarProveedor(proveedorSeleccionado);
-            } catch (GestorProveedoresException ex) {
-                Logger.getLogger(DlgConfigProveedor.class.getName()).log(Level.SEVERE, null, ex);
+            if (validarCampos()) {
+                String telefonos = txtATelefonos.getText();
+                String[] telefonosArray = telefonos.split(",");
+                
+                List<String> listaTelefonos = new ArrayList<>();
+                for (String telefonosA : telefonosArray) {
+                    listaTelefonos.add(telefonosA);
+                }
+                
+                proveedorSeleccionado = new ProveedorDTO(
+                        txtNombre.getText(),
+                        new DireccionDTO(
+                                txtCalle.getText(),
+                                txtColonia.getText(),
+                                txtNumero.getText(),
+                                txtCP.getText(),
+                                txtCiudad.getText()
+                        ),
+                        listaTelefonos,
+                        txtRFC.getText()
+                );
+                
+                try {
+                    gestorProveedores.actualizarProveedor(proveedorSeleccionado);
+                } catch (GestorProveedoresException ex) {
+                    Logger.getLogger(DlgConfigProveedor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dispose();
             }
         }
     }//GEN-LAST:event_btnAccionActionPerformed
 
+    public boolean validarCampos() {
+        if (txtNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo Nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (txtRFC.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo RFC no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (txtCalle.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo Calle no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (txtNumero.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo Número no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (txtColonia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo Colonia no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (txtCP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo codigo postal no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        String codigoPostal = txtCP.getText().trim();
+        String codigoPostalRegex = "\\d+";
+        if (!codigoPostal.matches(codigoPostalRegex)) {
+            JOptionPane.showMessageDialog(this, "El código postal debe contener solo números", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (txtCiudad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo Ciudad no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (txtATelefonos.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo Teléfonos no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        String telefonos = txtATelefonos.getText();
+        String[] telefonosArray = telefonos.split(",");
+
+        String telefonoRegex = "^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$"; // Expresión regular para el formato de teléfono mexicano (10 dígitos)
+
+        for (String telefono : telefonosArray) {
+            telefono = telefono.trim(); 
+            Pattern telefonoPattern = Pattern.compile(telefonoRegex);
+            Matcher telefonoMatcher = telefonoPattern.matcher(telefono);
+
+            if (!telefonoMatcher.matches()) {
+                JOptionPane.showMessageDialog(this, "El formato del teléfono '" + telefono + "' no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+
+        String rfcRegex = "[A-Z]{4}[0-9]{6}[A-Z0-9]{3}"; // Expresión regular para el formato de RFC
+        Pattern rfcPattern = Pattern.compile(rfcRegex);
+        Matcher rfcMatcher = rfcPattern.matcher(txtRFC.getText());
+        if (!rfcMatcher.matches()) {
+            JOptionPane.showMessageDialog(this, "El RFC ingresado no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccion;
