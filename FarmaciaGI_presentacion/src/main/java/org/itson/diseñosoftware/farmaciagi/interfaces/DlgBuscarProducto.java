@@ -216,7 +216,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
 
         for (ProductoDTO producto : productosBuscados) {
             Object[] fila;
-            if (producto.getCantidad() > 0) {
+            if (producto.getCantidad() != null && producto.getCantidad() > 0) {
                 fila = new Object[]{
                     producto.getNombre(),
                     producto.getMarca(),
@@ -241,7 +241,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
         ButtonColumn buttonColumn = new ButtonColumn("AGREGAR", (e) -> {
             int fila = tblBusqueda.convertRowIndexToModel(tblBusqueda.getSelectedRow());
             ProductoDTO productoAgregado = productosBuscados.get(fila);
-            if (productoAgregado.getCantidad() > 0) {
+            if (productoAgregado.getCantidad() != null && productoAgregado.getCantidad() > 0) {
                 ProductoDTO productoCopia = new ProductoDTO(
                         productoAgregado.getCodigo(),
                         productoAgregado.getNombre(),
@@ -264,9 +264,10 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
                 if (productoAgregado.getCantidad() == 0) {
                     productosBuscados.remove(productoAgregado);
                 }
+                agregarPromocion(productoAgregado);
             }
             llenarTabla(productosBuscados);
-            agregarPromocion(productoAgregado);
+
         });
 
         tblBusqueda.getColumnModel().getColumn(tblBusqueda.getColumnCount() - 1).setCellRenderer(buttonColumn);
