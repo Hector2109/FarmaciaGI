@@ -264,7 +264,7 @@ public class DlgBuscarProducto extends javax.swing.JDialog {
                 if (productoAgregado.getCantidad() == 0) {
                     productosBuscados.remove(productoAgregado);
                 }
-                agregarPromocion(productoAgregado);
+//                agregarPromocion(productoAgregado);
             }
             llenarTabla(productosBuscados);
 
