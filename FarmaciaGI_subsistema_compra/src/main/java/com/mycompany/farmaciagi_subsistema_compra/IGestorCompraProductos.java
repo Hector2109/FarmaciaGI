@@ -8,9 +8,10 @@ import com.mycompany.farmaciagi_subsistema_compra_excepciones.GestorCompraProduc
 import org.itson.disenosoftware.farmaciagi_dtos.CompraDTO;
 
 /**
- *
+ * Interfaz encargada de administrar los métodos para la compra.
+ * 
  * @author Enrique Rodriguez
  */
 public interface IGestorCompraProductos {
-    public void registrarVenta(CompraDTO compraNueva) throws GestorCompraProductosException;
+    public void registrarCompra(CompraDTO compraNueva) throws GestorCompraProductosException;
 }

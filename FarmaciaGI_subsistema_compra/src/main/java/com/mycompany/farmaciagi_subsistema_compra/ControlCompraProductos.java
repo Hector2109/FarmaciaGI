@@ -10,17 +10,28 @@ import org.itson.diseñosoftware.farmaciagi_objetosNegocio.CompraBO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
 /**
- *
+ * Clase control para el registro de compras.
+ * 
  * @author Enrique Rodriguez
  */
 public class ControlCompraProductos {
     private CompraBO compra;
-
-    public ControlCompraProductos(CompraBO compra) {
-        this.compra = compra;
+    
+    /**
+     * Constructor de la clase que inicializa el atributo de la clase
+     * 
+     */
+    public ControlCompraProductos() {
+        compra = new CompraBO();
     }
     
-
+    /**
+     * Método que permite registrar una compra haciendo llamado al método de
+     * la clase de negocio.
+     * 
+     * @param compraNueva compra a registrar.
+     * @throws ControlCompraProductosException en caso de no poder registrarla.
+     */
     public void registrarCompra(CompraDTO compraNueva) throws ControlCompraProductosException {
         try {
             compra.registrarCompra(compraNueva);

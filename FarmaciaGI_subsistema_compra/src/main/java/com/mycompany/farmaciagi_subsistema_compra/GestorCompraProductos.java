@@ -9,23 +9,34 @@ import com.mycompany.farmaciagi_subsistema_compra_excepciones.GestorCompraProduc
 import org.itson.disenosoftware.farmaciagi_dtos.CompraDTO;
 
 /**
- *
+ * Clase que administra la compra de productos.
  * @author Enrique Rodriguez
  */
 public class GestorCompraProductos implements IGestorCompraProductos{
 
     private ControlCompraProductos control;
-
-    public GestorCompraProductos(ControlCompraProductos control) {
-        this.control = control;
+    
+    /**
+     * Constructor de la clase que inicializa el atributo de la clase
+     * 
+     */
+    public GestorCompraProductos() {
+        control = new ControlCompraProductos();
     }
-
+    
+    /**
+     * Método que permite registrar una compra haciendo llamado al método de
+     * la clase control.
+     * 
+     * @param compraNueva compra a registrar.
+     * @throws GestorCompraProductosException en caso de no poder registrarla.
+     */
     @Override
-    public void registrarVenta(CompraDTO compraNueva) throws GestorCompraProductosException {
+    public void registrarCompra(CompraDTO compraNueva) throws GestorCompraProductosException {
         try {
             control.registrarCompra(compraNueva);
         } catch (ControlCompraProductosException ex) {
-            throw new GestorCompraProductosException("No se pudo registrar la venta.");
+            throw new GestorCompraProductosException("No se pudo registrar la compra.");
         }
     }
 }
