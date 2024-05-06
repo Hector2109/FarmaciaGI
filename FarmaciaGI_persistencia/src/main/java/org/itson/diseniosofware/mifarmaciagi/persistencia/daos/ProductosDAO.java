@@ -207,4 +207,16 @@ public class ProductosDAO implements IProductosDAO {
         throw new PersistenciaException("Error: El producto no se encuentra en inventario");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Producto> obtenerInventario() {
+        List <Producto> productos = new LinkedList<>();
+        
+        collection.find().into(productos);
+        
+        return productos;
+    }
+
 }

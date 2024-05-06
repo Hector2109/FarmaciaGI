@@ -76,5 +76,11 @@ public interface IProductosDAO {
      * @return Producto actualizado
      * @throws En caso de no actualizar la lista de proveedores
      */
-    public Producto actualizarProveedores (List<ObjectId> proveedores, Producto producto) throws PersistenciaException;  
+    public Producto actualizarProveedores (List<ObjectId> proveedores, Producto producto) throws PersistenciaException;
+    
+    /**
+     * Este método retorna todos los productos del inventario.
+     * @return Lista de productos registrados
+     */
+    public List<Producto> obtenerInventario();
 }
