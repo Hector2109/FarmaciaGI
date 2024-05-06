@@ -175,4 +175,31 @@ public class ProductoBO implements IProductoBO {
         
     }
 
+    /**
+     * Método que obtiene todos los productos del inventario
+     * @return lista de productos
+     */
+    @Override
+    public List<ProductoDTO> obtnerInventario() {
+        List <Producto> productos = productosDAO.obtenerInventario();
+        
+        if (!productos.isEmpty()){
+            List<ProductoDTO> productosDTO = new LinkedList<>();
+            
+            for (Producto p: productos) {
+                ProductoDTO producto = new ProductoDTO();
+                producto.setNombre(p.getNombre());
+                producto.setCodigo(p.getCodigo());
+                producto.setCosto(p.getCosto());
+                producto.setMarca(p.getMarca());
+                productosDTO.add(producto);
+            }
+            return productosDTO;
+            
+        }else{
+            return null;
+        }
+        
+    }
+
 }

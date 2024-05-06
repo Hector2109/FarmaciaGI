@@ -74,4 +74,13 @@ public class GestorProductos implements IGestorProductos {
         }
     }
 
+    /**
+     * Método para obtener el inventario de productos
+     * @return lista de productos en el inventario
+     */
+    @Override
+    public List<ProductoDTO> obtnerInventario() {
+        return control.obtenerInventario();
+    }
+
 }

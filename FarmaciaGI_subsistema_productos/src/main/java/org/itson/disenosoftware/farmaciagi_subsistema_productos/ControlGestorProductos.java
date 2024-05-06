@@ -76,6 +76,16 @@ class ControlGestorProductos {
             throw new ControlProductosException (ex.getMessage());
         }
     }
+    
+    /**
+     * Método para obtener el inventario de productos
+     * @return lista de productos en el inventario
+     */
+    public List <ProductoDTO> obtenerInventario(){
+        List <ProductoDTO> productos= producto.obtnerInventario();
+        return productos;
+        
+    }
    
 
 }

@@ -50,4 +50,10 @@ public interface IGestorProductos {
      * @throws GestorProductosException en caso de no lograr registrar el producto
      */
     public ProductoDTO registrarProducto(ProductoDTO productoDTO) throws GestorProductosException;
+    
+    /**
+     * Método para obtener el inventario de productos
+     * @return lista de productos en el inventario
+     */
+    public List <ProductoDTO> obtnerInventario();
 }

@@ -52,4 +52,10 @@ public interface IProductoBO {
      * @throws ObjetosNegocioException en caso de no lograr registrar el producto
      */
     public ProductoDTO registrarProducto (ProductoDTO productoDTO) throws ObjetosNegocioException;
+    
+    /**
+     * Método que obtiene todos los productos del inventario
+     * @return lista de productos
+     */
+    public List<ProductoDTO> obtnerInventario();
 }
