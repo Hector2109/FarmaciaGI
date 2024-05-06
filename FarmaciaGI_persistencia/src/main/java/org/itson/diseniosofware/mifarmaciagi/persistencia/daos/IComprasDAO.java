@@ -4,10 +4,13 @@
  */
 package org.itson.diseniosofware.mifarmaciagi.persistencia.daos;
 
+import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Compra;
+
 /**
  *
  * @author Enrique Rodriguez
  */
 public interface IComprasDAO {
-    
+    public Compra registrar(Compra compra) throws PersistenciaException;
 }

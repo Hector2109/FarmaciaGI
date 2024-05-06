@@ -16,6 +16,7 @@ import org.bson.types.ObjectId;
 public class Compra {
 
     private ObjectId _id;
+    private String codigo; 
     private List<Producto> productos;
     private List<Proveedor> proveedores;
     private Float costoTotal;
@@ -24,11 +25,20 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(List<Producto> productos, List<Proveedor> proveedores, Float costoTotal, Instant fecha) {
+    public Compra(String codigo, List<Producto> productos, List<Proveedor> proveedores, Float costoTotal, Instant fecha) {
+        this.codigo = codigo;
         this.productos = productos;
         this.proveedores = proveedores;
         this.costoTotal = costoTotal;
         this.fecha = fecha;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     
     public ObjectId getId() {
