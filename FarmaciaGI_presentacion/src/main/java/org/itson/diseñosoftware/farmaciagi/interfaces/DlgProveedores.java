@@ -290,7 +290,7 @@ public class DlgProveedores extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor((JFrame) this.getParent(), true, ConstantesGUI.REGISTRAR, null);
+        DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor(ConstantesGUI.REGISTRAR, null);
         dlgConfigProveedor.setVisible(true);
         llenarTabla();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -326,7 +326,7 @@ public class DlgProveedores extends javax.swing.JDialog {
             ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
 
             // Abrir el diálogo con la opción seleccionada y el proveedor seleccionado
-            DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor((JFrame)this.getParent(), true, ConstantesGUI.ACTUALIZAR, proveedorSeleccionado);
+            DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor(ConstantesGUI.ACTUALIZAR, proveedorSeleccionado);
             dlgConfigProveedor.setVisible(true);
         } else {
             // Mostrar un mensaje de advertencia si no hay fila seleccionada

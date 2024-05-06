@@ -30,8 +30,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
     /**
      * Creates new form DlgConfigProveedor
      */
-    public DlgConfigProveedor(java.awt.Frame parent, boolean modal, int operacion, ProveedorDTO provedorSeleccionado) {
-        super(parent, modal);
+    public DlgConfigProveedor(int operacion, ProveedorDTO provedorSeleccionado) {
         initComponents();
         this.operacion = operacion;
         this.proveedorSeleccionado = provedorSeleccionado;
