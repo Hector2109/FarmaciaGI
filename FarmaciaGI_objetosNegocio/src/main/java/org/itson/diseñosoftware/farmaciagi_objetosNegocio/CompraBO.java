@@ -40,9 +40,10 @@ public class CompraBO {
     public void registrarCompra(CompraDTO compraNueva) throws ObjetosNegocioException{
         Compra compra = null;
         String codigo;
+        
         do {
             codigo = generarCodigoCompra();
-            compra = encontrarVenta(codigo);
+            compra = encontrarCompra(codigo);
         } while (compra != null);
 
         compra = new Compra();
@@ -54,7 +55,7 @@ public class CompraBO {
         compra.setProductos(productosDTOAProductosPOJO(compraNueva.getProductos()));
 
         try {
-            comprasDAO.registrar(compra);
+            comprasDAO.registrarCompra(compra);
         } catch (PersistenciaException ex) {
             try {
                 throw new ObjetosNegocioException("No se pudo registrar la compra.");
@@ -63,7 +64,11 @@ public class CompraBO {
             }
         }
     }
-
+    
+    public void encontrarProveedores(){
+        
+    }
+    
     /**
      * Permite generar un código para una compra.
      *
@@ -136,8 +141,8 @@ public class CompraBO {
      * @param codigo código de venta
      * @return venta que se encuentra
      */
-    private Compra encontrarVenta(String codigo) {
-        Compra venta = comprasDAO.encontrarCompra(codigo);
-        return venta;
+    private Compra encontrarCompra(String codigo) {
+        Compra compra = comprasDAO.encontrarCompra(codigo);
+        return compra;
     }
 }

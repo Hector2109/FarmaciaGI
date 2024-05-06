@@ -6,10 +6,18 @@ package org.itson.diseniosofware.mifarmaciagi.persistencia.daos;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Compra;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 
 /**
  *
@@ -18,6 +26,7 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Compra;
 public class ComprasDAO implements IComprasDAO {
 
     private final MongoCollection<Compra> collection;
+    private final MongoCollection<Proveedor> collection2;
 
     /**
      * Constructor que recibe la conexión al mecanismo de persistencia.
@@ -28,6 +37,8 @@ public class ComprasDAO implements IComprasDAO {
         MongoDatabase baseDatos = conexion.crearConexion();
 
         collection = baseDatos.getCollection("compras", Compra.class);
+        collection2 = baseDatos.getCollection("proveedores", Proveedor.class);
+
     }
 
     /**
@@ -38,9 +49,9 @@ public class ComprasDAO implements IComprasDAO {
      * @throws PersistenciaException en caso de no poder registrarla
      */
     @Override
-    public Compra registrar(Compra compra) throws PersistenciaException {
+    public Compra registrarCompra(Compra compra) throws PersistenciaException {
         //añadir método para validar que no exista la compra
-        if (true) {
+        if (encontrarCompra(compra.getCodigo()) == null) {
             collection.insertOne(compra);
             return compra;
         } else {
@@ -67,5 +78,27 @@ public class ComprasDAO implements IComprasDAO {
         }
         return compraEncontrada;
 
+    }
+    
+    /**
+     * Método para encontrar a los proveedores que le pertenecen a la compra de
+     * un producto.
+     * 
+     * @param producto Producto que referencia proveedores.
+     * @return lista de proveedores
+     */
+    @Override
+    public List<Proveedor> encontrarProveedores(Producto producto) {
+        List<Proveedor> proveedores = new ArrayList<>();
+        LinkedList<ObjectId> proveedoresIds = producto.getId_proveedores();
+
+        for (ObjectId proveedorId : proveedoresIds) {
+            Proveedor proveedor = collection2.find(Filters.eq("_id", proveedorId)).first();
+            if (proveedor != null) {
+                proveedores.add(proveedor);
+                
+            }
+        }
+        return proveedores;
     }
 }

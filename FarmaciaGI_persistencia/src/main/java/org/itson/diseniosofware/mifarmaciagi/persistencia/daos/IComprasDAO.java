@@ -4,14 +4,18 @@
  */
 package org.itson.diseniosofware.mifarmaciagi.persistencia.daos;
 
+import java.util.List;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Compra;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 
 /**
  *
  * @author Enrique Rodriguez
  */
 public interface IComprasDAO {
-    public Compra registrar(Compra compra) throws PersistenciaException;
+    public Compra registrarCompra(Compra compra) throws PersistenciaException;
     public Compra encontrarCompra(String codigo);
+    public List<Proveedor>encontrarProveedores(Producto producto);
 }
