@@ -24,6 +24,19 @@ public class Producto {
      */
     public Producto() {
     }
+    
+    /**
+     * Constructor que recibe el nombre, el costo y el código del producto.
+     *
+     * @param nombre El nombre del producto
+     * @param costo El costo del producto
+     * @param codigo El código del producto
+     */
+    public Producto(String nombre, Float costo, String codigo) {
+        this.nombre = nombre;
+        this.costo = costo;
+        this.codigo = codigo;
+    }
 
     /**
      * Constructor que recibe el nombre, la marca, el costo, el código y la
