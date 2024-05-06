@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
+import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
 public class GestorProductos implements IGestorProductos {
 
@@ -60,10 +61,7 @@ public class GestorProductos implements IGestorProductos {
     }
 
     /**
-     * Este método registra un nuevo producto
-     * @param productoDTO producto que se desea registrar
-     * @return retorna el producto registrado
-     * @throws GestorProductosException en caso de no lograr registrar el producto
+     * {@inheritDoc }
      */
     @Override
     public ProductoDTO registrarProducto(ProductoDTO productoDTO) throws GestorProductosException {
@@ -75,12 +73,20 @@ public class GestorProductos implements IGestorProductos {
     }
 
     /**
-     * Método para obtener el inventario de productos
-     * @return lista de productos en el inventario
+     * {@inheritDoc }
      */
     @Override
     public List<ProductoDTO> obtnerInventario() {
         return control.obtenerInventario();
+    }
+
+    @Override
+    public void actualizarProducto(ProductoDTO producto) throws GestorProductosException {
+        try {
+            control.actualizarProducto(producto);
+        } catch (ObjetosNegocioException ex) {
+            throw new GestorProductosException(ex.getMessage());
+        }
     }
 
 }

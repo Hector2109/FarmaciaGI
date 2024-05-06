@@ -58,4 +58,10 @@ public interface IProductoBO {
      * @return lista de productos
      */
     public List<ProductoDTO> obtnerInventario();
+    
+    /**
+     * Método que modifica los atributos de un producto
+     * @param producto produto que se desea modificar
+     */
+    public void actualizarProducto (ProductoDTO producto) throws ObjetosNegocioException;
 }

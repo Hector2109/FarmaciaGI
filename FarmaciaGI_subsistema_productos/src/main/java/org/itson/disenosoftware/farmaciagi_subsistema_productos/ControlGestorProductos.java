@@ -86,6 +86,14 @@ class ControlGestorProductos {
         return productos;
         
     }
+    
+    public void actualizarProducto(ProductoDTO productoDTO) throws ObjetosNegocioException{
+        try {
+            producto.actualizarProducto(productoDTO);
+        } catch (ObjetosNegocioException ex) {
+            throw new ObjetosNegocioException (ex.getMessage());
+        }
+    }
    
 
 }

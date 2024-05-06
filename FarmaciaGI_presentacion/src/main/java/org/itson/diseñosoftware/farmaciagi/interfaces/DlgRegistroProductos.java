@@ -14,13 +14,30 @@ import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.Gest
 public class DlgRegistroProductos extends javax.swing.JDialog {
     
     private ProductoDTO producto;
-
+    private int constante;
+    
     /**
-     * Creates new form DlgRegistroProductos
+     * Constructor para el registro de los productos
      */
     public DlgRegistroProductos() {
         initComponents();
         producto = new ProductoDTO();
+    }
+    
+    /**
+     * Constructor para el funcinamiento de la actualización de un producto
+     * @param producto producto para actualizar
+     */
+    public DlgRegistroProductos(ProductoDTO producto){
+        initComponents();
+        this.producto = producto;
+        txtCodigo.setText(producto.getCodigo());
+        txtNombre.setText(producto.getNombre());
+        txtMarca.setText(producto.getMarca());
+        txtCosto.setText(String.valueOf(producto.getCosto()));
+        txtCodigo.setEditable(false);
+        btnRegistrar.setText("Actualizar");
+        
     }
 
     /**
@@ -53,6 +70,7 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
         txtMarca = new javax.swing.JTextField();
         txtCosto = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
+        btnRestaurar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro");
@@ -224,6 +242,14 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
 
         txtNombre.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
 
+        btnRestaurar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnRestaurar.setText("Restaurar");
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -236,22 +262,28 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 39, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 39, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(btnRestaurar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,10 +313,11 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnRestaurar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -307,26 +340,43 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        dispose();   
-        DlgProductosPrincipal productosPrincipal = new DlgProductosPrincipal();
-        productosPrincipal.setVisible(true);
+        volver();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (validarCampos()){
             GestorProductos gestor = new GestorProductos();
+            
+            if (producto.getCodigo()!=null){
+                
+                try {
+                    
+                    producto.setMarca(txtMarca.getText());
+                    producto.setCosto(Float.parseFloat(txtCosto.getText()));
+                    producto.setNombre(txtNombre.getText());
+                    gestor.actualizarProducto(producto);
+                    JOptionPane.showMessageDialog(rootPane, "Producto actualizado correctamente", "Tarea realizada", JOptionPane.INFORMATION_MESSAGE);
+                    volver();
+                } catch (GestorProductosException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "No fue posible realizar la actualización", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            }else{
+            
             producto.setCodigo(txtCodigo.getText());
             producto.setMarca(txtMarca.getText());
-            producto.setCosto(Float.valueOf(txtCosto.getText()));
+            producto.setCosto(Float.parseFloat(txtCosto.getText()));
             producto.setNombre(txtNombre.getText());
             producto.setCantidad(0);
             
             try {
                 producto = gestor.registrarProducto(producto);
+                JOptionPane.showMessageDialog(rootPane, "Producto actualizado correctamente", "Tarea realizada", JOptionPane.INFORMATION_MESSAGE);
+                volver();
             } catch (GestorProductosException ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error en registro", JOptionPane.ERROR_MESSAGE);
             }
-            
+            }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Asegurese de llenar todos los campos", "Error en registro", JOptionPane.WARNING_MESSAGE);
         }
@@ -346,6 +396,24 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProductosActionPerformed
 
+    private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
+        restaurar();
+    }//GEN-LAST:event_btnRestaurarActionPerformed
+
+    private void restaurar(){
+        if (producto.getCodigo()!=null){
+            txtNombre.setText(producto.getNombre());
+            txtMarca.setText(producto.getMarca());
+            txtCosto.setText(String.valueOf(producto.getCosto()));
+        }else{
+            txtCodigo.setText("");
+            txtNombre.setText("");
+            txtMarca.setText("");
+            txtCosto.setText("");
+        }
+    }
+    
+    
     
     private boolean validarCampos(){
         if (txtCodigo.getText().isBlank()
@@ -356,11 +424,18 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
         }
         return true;
     }
+    
+    private void volver(){
+        dispose();   
+        DlgProductosPrincipal productosPrincipal = new DlgProductosPrincipal();
+        productosPrincipal.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRestaurar;
     private javax.swing.JButton btnVenta;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;

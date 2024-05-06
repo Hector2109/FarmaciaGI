@@ -201,5 +201,29 @@ public class ProductoBO implements IProductoBO {
         }
         
     }
+    
+    /**
+     * Método que modifica los atributos de un producto
+     * @param producto produto que se desea modificar
+     * @return producto modificado
+     */
+    @Override
+    public void actualizarProducto(ProductoDTO producto) throws ObjetosNegocioException{
+        
+        Producto productoActualizar = new Producto();
+        
+        productoActualizar.setCodigo(producto.getCodigo());
+        productoActualizar.setCosto(producto.getCosto());
+        productoActualizar.setMarca(producto.getMarca());
+        productoActualizar.setNombre(producto.getNombre());
+        
+        
+        try {
+            productosDAO.actualizarProducto(productoActualizar) ;
+        } catch (PersistenciaException ex) {
+            throw new ObjetosNegocioException (ex.getMessage());
+        }
+        
+    }
 
 }

@@ -68,8 +68,7 @@ public class ProductosDAO implements IProductosDAO {
                     new Document("$set", new Document()
                             .append("nombre", productoActualizar.getNombre())
                             .append("marca", productoActualizar.getMarca())
-                            .append("costo", productoActualizar.getCosto())
-                            .append("cantidad", productoActualizar.getCantidad())));
+                            .append("costo", productoActualizar.getCosto())));
 
             return productoActualizado;
 

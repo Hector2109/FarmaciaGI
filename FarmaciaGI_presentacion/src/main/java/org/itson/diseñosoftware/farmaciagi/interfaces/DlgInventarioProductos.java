@@ -296,13 +296,20 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        dispose();   
+        dispose();
         DlgProductosPrincipal productosPrincipal = new DlgProductosPrincipal();
         productosPrincipal.setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-
+        dispose();
+        ProductoDTO producto = obtenerProductoSeleccionado();
+        if (producto != null) {
+            DlgRegistroProductos actualizar = new DlgRegistroProductos(producto);
+            actualizar.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Haga click en algún producto y seleccione continuar", "No se seleccino ningún producto", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void llenarTablaProductos() {
@@ -324,34 +331,34 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
 
         tblProductosInventario.setModel(modelo);
         TableColumnModel columnModel = tblProductosInventario.getColumnModel();
-        
+
     }
-    
+
     private ProductoDTO obtenerProductoSeleccionado() {
-        
-    int filaSeleccionada = tblProductosInventario.getSelectedRow();
-    
-    if (filaSeleccionada != -1) {
-        int filaModelo = tblProductosInventario.convertRowIndexToModel(filaSeleccionada);
-        
-        DefaultTableModel modelo = (DefaultTableModel) tblProductosInventario.getModel();
-        
-        String codigo = modelo.getValueAt(filaModelo, 0).toString();
-        String nombre = modelo.getValueAt(filaModelo, 1).toString();
-        String marca = modelo.getValueAt(filaModelo, 2).toString();
-        Float costo = Float.parseFloat(modelo.getValueAt(filaModelo, 3).toString());
-        
-        ProductoDTO productoSeleccionado = new ProductoDTO();
-        productoSeleccionado.setCodigo(codigo);
-        productoSeleccionado.setNombre(nombre);
-        productoSeleccionado.setMarca(marca);
-        productoSeleccionado.setCosto(costo);
-        
-        return productoSeleccionado;
-    } else {
-        return null;
+
+        int filaSeleccionada = tblProductosInventario.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            int filaModelo = tblProductosInventario.convertRowIndexToModel(filaSeleccionada);
+
+            DefaultTableModel modelo = (DefaultTableModel) tblProductosInventario.getModel();
+
+            String codigo = modelo.getValueAt(filaModelo, 0).toString();
+            String nombre = modelo.getValueAt(filaModelo, 1).toString();
+            String marca = modelo.getValueAt(filaModelo, 2).toString();
+            Float costo = Float.parseFloat(modelo.getValueAt(filaModelo, 3).toString());
+
+            ProductoDTO productoSeleccionado = new ProductoDTO();
+            productoSeleccionado.setCodigo(codigo);
+            productoSeleccionado.setNombre(nombre);
+            productoSeleccionado.setMarca(marca);
+            productoSeleccionado.setCosto(costo);
+
+            return productoSeleccionado;
+        } else {
+            return null;
+        }
     }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
