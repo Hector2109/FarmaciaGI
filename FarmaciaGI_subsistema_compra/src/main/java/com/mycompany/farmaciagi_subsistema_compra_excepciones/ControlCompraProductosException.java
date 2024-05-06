@@ -8,14 +8,14 @@ package com.mycompany.farmaciagi_subsistema_compra_excepciones;
  *
  * @author Enrique Rodriguez
  */
-public class ControlCompraProductos extends Exception{
+public class ControlCompraProductosException extends Exception{
 
     /**
      * Constructor que recibe el mensaje de la excepción.
      *
      * @param message El mensaje de la excepción
      */
-    public ControlCompraProductos(String message) {
+    public ControlCompraProductosException(String message) {
         super(message);
     }
 

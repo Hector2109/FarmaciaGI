@@ -5,6 +5,18 @@
     <artifactId>FarmaciaGI_subsistema_compra</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.itson.disenosoftware</groupId>
+            <artifactId>FarmaciaGIDominio</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.itson.bdavanzadas</groupId>
+            <artifactId>FarmaciaGI_dtos</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>19</maven.compiler.source>

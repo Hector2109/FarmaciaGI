@@ -37,7 +37,7 @@ public class CompraBO {
         comprasDAO = new ComprasDAO(conexion);
     }
 
-    public void registrarCompra(CompraDTO compraNueva) {
+    public void registrarCompra(CompraDTO compraNueva) throws ObjetosNegocioException{
         Compra compra = null;
         String codigo;
         do {
