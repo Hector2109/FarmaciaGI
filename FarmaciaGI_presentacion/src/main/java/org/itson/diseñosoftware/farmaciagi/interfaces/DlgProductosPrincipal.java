@@ -41,7 +41,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         btnRegistrarProducto = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -189,8 +189,13 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Registrar nuevo producto");
 
-        jButton1.setBackground(new java.awt.Color(216, 215, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar producto.png"))); // NOI18N
+        btnEditar.setBackground(new java.awt.Color(216, 215, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar producto.png"))); // NOI18N
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,7 +236,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(134, 134, 134)
-                                .addComponent(jButton1))
+                                .addComponent(btnEditar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(97, 97, 97)
                                 .addComponent(jLabel4))
@@ -251,7 +256,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton1)
+                        .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(24, 24, 24)
@@ -303,13 +308,19 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         registroProductos.setVisible(true);
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        dispose();
+        DlgInventarioProductos inventario = new DlgInventarioProductos();
+        inventario.setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRegistrarProducto;
     private javax.swing.JButton btnVenta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
