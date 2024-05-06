@@ -43,7 +43,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnAsignar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -201,8 +201,13 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Editar producto");
 
-        jButton2.setBackground(new java.awt.Color(216, 215, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asignar proveedor.png"))); // NOI18N
+        btnAsignar.setBackground(new java.awt.Color(216, 215, 255));
+        btnAsignar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asignar proveedor.png"))); // NOI18N
+        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,7 +247,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
                                 .addComponent(jLabel4))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(126, 126, 126)
-                                .addComponent(jButton2)))
+                                .addComponent(btnAsignar)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -260,7 +265,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(24, 24, 24)
-                        .addComponent(jButton2)
+                        .addComponent(btnAsignar)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -289,7 +294,9 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Ya te encuentras en esta ventana");
+        dispose();
+        PantallaVenta venta = new PantallaVenta();
+        venta.setVisible(true);
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
@@ -310,18 +317,24 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         dispose();
-        DlgInventarioProductos inventario = new DlgInventarioProductos();
+        DlgInventarioProductos inventario = new DlgInventarioProductos(ConstantesGUI.ACTUALIZAR);
         inventario.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
+        dispose();
+        DlgInventarioProductos inventario = new DlgInventarioProductos(ConstantesGUI.ASIGNAR_PROVEEDOR);
+        inventario.setVisible(true);
+    }//GEN-LAST:event_btnAsignarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRegistrarProducto;
     private javax.swing.JButton btnVenta;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

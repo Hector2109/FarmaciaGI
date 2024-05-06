@@ -4,30 +4,42 @@
  */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
+import org.itson.disenosoftware.farmaciagi_subsistema_proveedores.GestorProveedores;
+import org.itson.disenosoftware.farmaciagi_subsistema_proveedores.IGestorProveedores;
+import org.itson.disenosoftware.farmaciagi_subsistema_proveedores.excepciones.GestorProveedoresException;
 
 /**
  *
  * @author Hector Espinoza
  */
-public class DlgInventarioProductos extends javax.swing.JDialog {
+public class DlgInventarioProveedores extends javax.swing.JDialog {
 
     private IGestorProductos gestorProductos;
-    private int constante;
-
+    private IGestorProveedores gestorProveedores;
+    private ProductoDTO producto;
+    private List<ProveedorDTO> proveedores;
+    
+    
     /**
      * Creates new form DlgInventarioProductos
      */
-    public DlgInventarioProductos(int decision) {
+    public DlgInventarioProveedores(ProductoDTO producto) {
         gestorProductos = new GestorProductos();
-        this.constante = decision;
+        gestorProveedores = new GestorProveedores();
+        this.producto = producto;
         initComponents();
-        llenarTablaProductos();
+        llenarTabla();
     }
 
     /**
@@ -51,9 +63,9 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         btnVenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductosInventario = new javax.swing.JTable();
+        tblProveedores = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
+        btnAsignar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -185,8 +197,8 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblProductosInventario.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        tblProductosInventario.setModel(new javax.swing.table.DefaultTableModel(
+        tblProveedores.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        tblProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -194,10 +206,10 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "CÓDIGO", "NOMBRE", "MARCA", "COSTO"
+                "NOMBRE", "DIRECCION", "CONTACTO", "RFC"
             }
         ));
-        jScrollPane1.setViewportView(tblProductosInventario);
+        jScrollPane1.setViewportView(tblProveedores);
 
         btnVolver.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnVolver.setText("VOLVER");
@@ -209,13 +221,13 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
             }
         });
 
-        btnActualizar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        btnActualizar.setText("CONTINUAR");
-        btnActualizar.setFocusPainted(false);
-        btnActualizar.setPreferredSize(new java.awt.Dimension(173, 48));
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnAsignar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        btnAsignar.setText("ASIGNAR PROVEEDOR");
+        btnAsignar.setFocusPainted(false);
+        btnAsignar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnAsignarActionPerformed(evt);
             }
         });
 
@@ -237,7 +249,7 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -262,7 +274,7 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27))))
         );
 
@@ -300,62 +312,82 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        dispose();
-        DlgProductosPrincipal productosPrincipal = new DlgProductosPrincipal();
-        productosPrincipal.setVisible(true);
+        volver();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
+        // Obtener la fila seleccionada en la tabla
+        int filaSeleccionada = tblProveedores.getSelectedRow();
 
-        ProductoDTO producto = obtenerProductoSeleccionado();
+        if (filaSeleccionada != -1) { // Verificar que haya una fila seleccionada
+            // Obtener el proveedor seleccionado en la tabla
+            ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
 
-        if (producto != null) {
-
-            if (constante == ConstantesGUI.ASIGNAR_PROVEEDOR) {
-                dispose();
-                DlgInventarioProveedores proveedores = new DlgInventarioProveedores(producto);
-                proveedores.setVisible(true);
-            } else if (constante == ConstantesGUI.ACTUALIZAR){
-                dispose();
-                DlgRegistroProductos actualizar = new DlgRegistroProductos(producto);
-                actualizar.setVisible(true);
+            try {
+                // Abrir el diálogo con la opción seleccionada y el proveedor seleccionado
+                gestorProductos.asignarProveedorAProducto(producto, proveedorSeleccionado);
+                JOptionPane.showMessageDialog(rootPane, "Proveedor asignado correctamente al producto", "Proveedor asignado", JOptionPane.INFORMATION_MESSAGE);
+                volver();
+            } catch (GestorProductosException ex) {
+                Logger.getLogger(DlgInventarioProveedores.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Haga click en algún producto y seleccione continuar", "No se seleccino ningún producto", JOptionPane.WARNING_MESSAGE);
+            // Mostrar un mensaje de advertencia si no hay fila seleccionada
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un proveedor de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void llenarTablaProductos() {
+        llenarTabla();
+    }//GEN-LAST:event_btnAsignarActionPerformed
+
+    public void llenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel();
-
-        modelo.addColumn("CODIGO");
+        
         modelo.addColumn("NOMBRE");
-        modelo.addColumn("MARCA");
-        modelo.addColumn("COSTO");
+        modelo.addColumn("DIRECCION");
+        modelo.addColumn("CONTACTO");
+        modelo.addColumn("RFC");
+        
+        proveedores = gestorProveedores.buscarProveedores();
+        
+        if (!proveedores.isEmpty()) {
+            for (ProveedorDTO proveedor : proveedores) {
+                
+                List<String> telefonosExistentes = proveedor.getTelefonos();
+                StringBuilder telefonos = new StringBuilder();
+                for (String telefonosExistente : telefonosExistentes) {
+                    telefonos.append(telefonosExistente).append(",");
+                }
+                if (telefonos.length() > 0) {
+                    telefonos.delete(telefonos.length() - 1, telefonos.length());
+                }
 
-        for (ProductoDTO p : gestorProductos.obtnerInventario()) {
-            Object[] fila = {
-                p.getCodigo(),
-                p.getNombre(),
-                p.getMarca(),
-                p.getCosto(),};
-            modelo.addRow(fila);
+                Object[] fila = {
+                    proveedor.getNombre(),
+                    proveedor.getDireccion().getCalle()+","+ //TODO: Pensar si esto va de esta forma 
+                    proveedor.getDireccion().getColonia()+","+
+                    proveedor.getDireccion().getNumero()+","+
+                    proveedor.getDireccion().getCodigo_postal()+","+
+                    proveedor.getDireccion().getCiudad(),
+                    telefonos.toString(),
+                    proveedor.getRfc()
+                };
+                modelo.addRow(fila);
+            }
         }
-
-        tblProductosInventario.setModel(modelo);
-        TableColumnModel columnModel = tblProductosInventario.getColumnModel();
-
+        
+        tblProveedores.setModel(modelo);
+        TableColumnModel columnModel = tblProveedores.getColumnModel();
+        
     }
 
     private ProductoDTO obtenerProductoSeleccionado() {
 
-        int filaSeleccionada = tblProductosInventario.getSelectedRow();
+        int filaSeleccionada = tblProveedores.getSelectedRow();
 
         if (filaSeleccionada != -1) {
-            int filaModelo = tblProductosInventario.convertRowIndexToModel(filaSeleccionada);
+            int filaModelo = tblProveedores.convertRowIndexToModel(filaSeleccionada);
 
-            DefaultTableModel modelo = (DefaultTableModel) tblProductosInventario.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) tblProveedores.getModel();
 
             String codigo = modelo.getValueAt(filaModelo, 0).toString();
             String nombre = modelo.getValueAt(filaModelo, 1).toString();
@@ -373,9 +405,15 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
             return null;
         }
     }
+    
+    private void volver(){
+        dispose();
+        DlgProductosPrincipal productosPrincipal = new DlgProductosPrincipal();
+        productosPrincipal.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnVenta;
@@ -389,6 +427,6 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProductosInventario;
+    private javax.swing.JTable tblProveedores;
     // End of variables declaration//GEN-END:variables
 }

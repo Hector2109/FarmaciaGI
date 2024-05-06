@@ -168,7 +168,7 @@ public class DlgTicket extends javax.swing.JDialog {
                     .addComponent(jLabel6)
                     .addComponent(lblPago))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCambio)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
