@@ -15,7 +15,7 @@ import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
-public class ProductoBO {
+public class ProductoBO implements IProductoBO {
 
     private IProductosDAO productosDAO;
 
@@ -34,6 +34,7 @@ public class ProductoBO {
      * @param productoBuscado producto que se desea buscar
      * @return producto que se encontró
      */
+    @Override
     public ProductoDTO obtenerProducto(ProductoDTO productoBuscado) {
         Producto productoInventario = new Producto();
 
@@ -48,7 +49,7 @@ public class ProductoBO {
             productoBuscado.setMarca(productoEncontrado.getMarca());
             productoBuscado.setCosto(productoEncontrado.getCosto());
             productoBuscado.setCodigo(productoEncontrado.getCodigo());
-            
+
             return productoBuscado;
 
         } else {
@@ -63,6 +64,7 @@ public class ProductoBO {
      * @throws ObjetosNegocioException Si no se puede modificar la cantidad del
      * producto
      */
+    @Override
     public void modCantidadProducto(ProductoDTO productoActualizado) throws ObjetosNegocioException {
 
         Producto producto = new Producto();
@@ -79,42 +81,40 @@ public class ProductoBO {
             throw new ObjetosNegocioException(ex.getMessage());
         }
     }
-    
+
     /**
      * Método el cuál le asigna un proveedor al producto
+     *
      * @param producto producto al que se le desea asigar un proveedor
      * @param proveedor provedoor que se desea asignar
      */
-    public void asignarProveedor (ProductoDTO productoDTO, ProveedorDTO proveedorDTO) throws ObjetosNegocioException{
-        if (obtenerProducto(productoDTO) != null){
+    @Override
+    public void asignarProveedor(ProductoDTO productoDTO, ProveedorDTO proveedorDTO) throws ObjetosNegocioException {
+        if (obtenerProducto(productoDTO) != null) {
             Producto producto = new Producto();
             producto.setCodigo(productoDTO.getCodigo());
-            
-            ProveedorBO proveedorBO= new ProveedorBO();
-            
-            if (proveedorBO.buscarProveedor(proveedorDTO)!=null){
+
+            ProveedorBO proveedorBO = new ProveedorBO();
+
+            if (proveedorBO.buscarProveedor(proveedorDTO) != null) {
                 Proveedor proveedor = new Proveedor();
                 proveedor.setRfc(proveedorDTO.getRfc());
-                
+
                 try {
                     productosDAO.asignarProveedor(producto, proveedor);
                 } catch (PersistenciaException ex) {
                     throw new ObjetosNegocioException(ex.getMessage());
                 }
-                
-            }else{
-                throw new ObjetosNegocioException ("Error: El proveedor no esta registrado");
+
+            } else {
+                throw new ObjetosNegocioException("Error: El proveedor no esta registrado");
             }
-        }else{
-            throw new ObjetosNegocioException ("Error: El producto no esta registrado");
-            
+        } else {
+            throw new ObjetosNegocioException("Error: El producto no esta registrado");
+
         }
-        
-        
-        
-        
+
     }
-    
 
     /**
      * Permite obtener una lista de los productos del inventario filtrados por
@@ -123,6 +123,7 @@ public class ProductoBO {
      * @param nombre El nombre de los productos que se desean obtener
      * @return La lista de los productos consultados
      */
+    @Override
     public List<ProductoDTO> buscarProductosPorNombre(String nombre) {
 
         Producto producto = new Producto();
@@ -143,6 +144,35 @@ public class ProductoBO {
             productosDTO.add(productoSemejanteDTO);
         }
         return productosDTO;
+    }
+
+    /**
+     * Este método registra un nuevo producto
+     *
+     * @param productoDTO producto que se desea registrar
+     * @return retorna el producto registrado
+     * @throws ObjetosNegocioException en caso de no lograr registrar el
+     * producto
+     */
+    @Override
+    public ProductoDTO registrarProducto(ProductoDTO productoDTO) throws ObjetosNegocioException {
+
+        if (obtenerProducto(productoDTO) == null) {
+            Producto producto = new Producto();
+            producto.setCodigo(productoDTO.getCodigo());
+            producto.setNombre(productoDTO.getNombre());
+            producto.setMarca(productoDTO.getMarca());
+            producto.setCosto(productoDTO.getCosto());
+            try {
+                producto = productosDAO.registrarProducto(producto);
+                return productoDTO;
+            } catch (PersistenciaException ex) {
+                throw new ObjetosNegocioException("Error: No fue posible registrar el producto");
+            }
+        }else{
+            throw new ObjetosNegocioException("Error: No fue posible registrar el producto");
+        }
+        
     }
 
 }

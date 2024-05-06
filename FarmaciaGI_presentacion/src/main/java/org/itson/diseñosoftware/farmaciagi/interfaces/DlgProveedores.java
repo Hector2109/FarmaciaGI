@@ -18,8 +18,7 @@ public class DlgProveedores extends javax.swing.JDialog {
     private IGestorProveedores gestorProveedores;
     private List<ProveedorDTO> proveedores;
     
-    public DlgProveedores(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DlgProveedores() {
         initComponents();
         this.gestorProveedores = new GestorProveedores();
         this.proveedores = new LinkedList<>();
@@ -36,7 +35,6 @@ public class DlgProveedores extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -49,25 +47,13 @@ public class DlgProveedores extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(216, 215, 255));
-
-        jPanel2.setBackground(new java.awt.Color(166, 164, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(145, 145));
-        jPanel2.setRequestFocusEnabled(false);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
-        );
 
         jPanel3.setBackground(new java.awt.Color(166, 164, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(145, 145));
@@ -210,16 +196,53 @@ public class DlgProveedores extends javax.swing.JDialog {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(166, 164, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(145, 145));
+        jPanel2.setRequestFocusEnabled(false);
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Productos");
+
+        jButton1.setBackground(new java.awt.Color(166, 164, 255));
+        jButton1.setForeground(new java.awt.Color(166, 164, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prouctos1.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -237,7 +260,7 @@ public class DlgProveedores extends javax.swing.JDialog {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -266,27 +289,11 @@ public class DlgProveedores extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Ya te encuentras en esta ventana");
-    }//GEN-LAST:event_btnProveedoresActionPerformed
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // Obtener la fila seleccionada en la tabla
-        int filaSeleccionada = tblProveedores.getSelectedRow();
-
-        if (filaSeleccionada != -1) { // Verificar que haya una fila seleccionada
-            // Obtener el proveedor seleccionado en la tabla
-            ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
-
-            // Abrir el diálogo con la opción seleccionada y el proveedor seleccionado
-            DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor((JFrame)this.getParent(), true, ConstantesGUI.ACTUALIZAR, proveedorSeleccionado);
-            dlgConfigProveedor.setVisible(true);
-        } else {
-            // Mostrar un mensaje de advertencia si no hay fila seleccionada
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione un proveedor de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor((JFrame) this.getParent(), true, ConstantesGUI.REGISTRAR, null);
+        dlgConfigProveedor.setVisible(true);
         llenarTabla();
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // Obtener la fila seleccionada en la tabla
@@ -306,21 +313,41 @@ public class DlgProveedores extends javax.swing.JDialog {
             // Mostrar un mensaje de advertencia si no hay fila seleccionada
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un proveedor de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-        
+
         llenarTabla();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor((JFrame) this.getParent(), true, ConstantesGUI.REGISTRAR, null);
-        dlgConfigProveedor.setVisible(true);
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // Obtener la fila seleccionada en la tabla
+        int filaSeleccionada = tblProveedores.getSelectedRow();
+
+        if (filaSeleccionada != -1) { // Verificar que haya una fila seleccionada
+            // Obtener el proveedor seleccionado en la tabla
+            ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
+
+            // Abrir el diálogo con la opción seleccionada y el proveedor seleccionado
+            DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor((JFrame)this.getParent(), true, ConstantesGUI.ACTUALIZAR, proveedorSeleccionado);
+            dlgConfigProveedor.setVisible(true);
+        } else {
+            // Mostrar un mensaje de advertencia si no hay fila seleccionada
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un proveedor de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
         llenarTabla();
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
-       dispose();
-       PantallaVenta venta = new PantallaVenta();
-       venta.setVisible(true);
+        dispose();
+        PantallaVenta venta = new PantallaVenta();
+        venta.setVisible(true);
     }//GEN-LAST:event_btnVentaActionPerformed
+
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "Ya te encuentras en esta ventana");
+    }//GEN-LAST:event_btnProveedoresActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void llenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel();
@@ -371,8 +398,10 @@ public class DlgProveedores extends javax.swing.JDialog {
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVenta;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

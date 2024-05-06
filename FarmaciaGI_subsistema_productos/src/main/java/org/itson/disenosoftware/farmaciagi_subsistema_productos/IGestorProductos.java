@@ -42,4 +42,12 @@ public interface IGestorProductos {
      * @throws GestorProductosException en caso de un error
      */
     public void asignarProveedorAProducto(ProductoDTO productoDTO, ProveedorDTO proveedorDTO) throws GestorProductosException;
+    
+    /**
+     * Este método registra un nuevo producto
+     * @param productoDTO producto que se desea registrar
+     * @return retorna el producto registrado
+     * @throws GestorProductosException en caso de no lograr registrar el producto
+     */
+    public ProductoDTO registrarProducto(ProductoDTO productoDTO) throws GestorProductosException;
 }

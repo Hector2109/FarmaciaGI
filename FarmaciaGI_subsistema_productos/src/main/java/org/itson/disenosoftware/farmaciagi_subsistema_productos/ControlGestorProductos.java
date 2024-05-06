@@ -1,6 +1,8 @@
 package org.itson.disenosoftware.farmaciagi_subsistema_productos;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
@@ -57,6 +59,21 @@ class ControlGestorProductos {
             producto.asignarProveedor(productoDTO, proveedorDTO);
         } catch (ObjetosNegocioException ex) {
             throw new ControlProductosException(ex.getMessage());
+        }
+    }
+    
+    /**
+     * Este método registra un nuevo producto
+     * @param productoDTO producto que se desea registrar
+     * @return retorna el producto registrado
+     * @throws GestorProductosException en caso de no lograr registrar el producto
+     */
+    public ProductoDTO registrarProducto (ProductoDTO productoDTO) throws ControlProductosException{
+        try {
+            productoDTO = producto.registrarProducto(productoDTO);
+            return productoDTO;
+        } catch (ObjetosNegocioException ex) {
+            throw new ControlProductosException (ex.getMessage());
         }
     }
    
