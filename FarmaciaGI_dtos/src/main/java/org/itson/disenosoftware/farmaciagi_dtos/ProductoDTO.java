@@ -17,6 +17,19 @@ public class ProductoDTO {
     }
 
     /**
+     * Constructor que recibe el código, nombre y costo del producto.
+     *
+     * @param codigo El código del producto
+     * @param nombre El nombre del producto
+     * @param costo El costo del producto
+     */
+    public ProductoDTO(String codigo, String nombre, Float costo) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.costo = costo;
+    }
+
+    /**
      * Constructor que recibe el código, nombre, costro, marca y cantidad del
      * producto.
      *

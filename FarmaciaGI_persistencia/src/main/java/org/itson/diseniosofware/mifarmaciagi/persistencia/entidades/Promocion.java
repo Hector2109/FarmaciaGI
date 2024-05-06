@@ -1,12 +1,12 @@
 package org.itson.diseniosofware.mifarmaciagi.persistencia.entidades;
 
-import java.util.List;
+import java.util.Objects;
 
 public class Promocion {
 
     private String codigo;
     private String descripcion;
-    private List<String> producto;
+    private Producto producto;
     private Integer cantidad;
     private Float precioUnitario;
 
@@ -14,6 +14,34 @@ public class Promocion {
      * Constructor vacío.
      */
     public Promocion() {
+    }
+
+    /**
+     * Constructor que recibe el código de la promoción.
+     *
+     * @param codigo El código de la promoción
+     */
+    public Promocion(String codigo) {
+        this.codigo = codigo;
+    }
+
+    /**
+     * Constructor que recibe el código, la descripción, el producto, la
+     * cantidad mínima de producto, y el precio untario del producto de la
+     * promoción.
+     *
+     * @param codigo El código de la promoción
+     * @param descripcion La descripción de la promoción
+     * @param producto El producto de la promoción
+     * @param cantidad La cantidad mínima de producto de la promoción
+     * @param precioUnitario El precio unitario del producto de la promoción
+     */
+    public Promocion(String codigo, String descripcion, Producto producto, Integer cantidad, Float precioUnitario) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
     }
 
     /**
@@ -57,7 +85,7 @@ public class Promocion {
      *
      * @return El producto de la promoción
      */
-    public List<String> getProducto() {
+    public Producto getProducto() {
         return producto;
     }
 
@@ -66,7 +94,7 @@ public class Promocion {
      *
      * @param producto El producto de la promoción
      */
-    public void setProducto(List<String> producto) {
+    public void setProducto(Producto producto) {
         this.producto = producto;
     }
 
@@ -107,6 +135,39 @@ public class Promocion {
      */
     public void setPrecioUnitario(Float precioUnitario) {
         this.precioUnitario = precioUnitario;
+    }
+
+    /**
+     * Permite obtener el código hash de la promoción.
+     *
+     * @return El código hash de la promoción
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.codigo);
+        return hash;
+    }
+
+    /**
+     * Permite determinar si dos promociones son iguales o no.
+     *
+     * @param obj La promoción con la que se comparará esta promoción
+     * @return true si se trata de la misma promoción, false en caso contrario
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Promocion other = (Promocion) obj;
+        return Objects.equals(this.codigo, other.codigo);
     }
 
     /**

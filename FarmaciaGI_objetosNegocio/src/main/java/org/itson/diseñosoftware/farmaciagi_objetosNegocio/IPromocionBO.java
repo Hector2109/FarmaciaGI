@@ -1,10 +1,10 @@
-package org.itson.disenosoftware.farmaciagi_subsistema_promociones;
+package org.itson.diseñosoftware.farmaciagi_objetosNegocio;
 
 import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
-import org.itson.disenosoftware.farmaciagi_subsistema_promociones.excepciones.SubsistemaPromocionesException;
+import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
-public interface IGestorPromociones {
+public interface IPromocionBO {
 
     /**
      * Permite obtener una promoción del registro.
@@ -18,28 +18,26 @@ public interface IGestorPromociones {
      * Permite registrar una promoción nueva.
      *
      * @param promocionNueva La promoción a registrar
-     * @throws SubsistemaPromocionesException Si no se puede registrar la
-     * promoción
+     * @throws ObjetosNegocioException Si no se puede registrar la promoción
      */
-    public void registrarPromocion(PromocionDTO promocionNueva) throws SubsistemaPromocionesException;
+    public void registrarPromocion(PromocionDTO promocionNueva) throws ObjetosNegocioException;
 
     /**
      * Permite actualizar una promoción en el registro.
      *
      * @param promocionActualizada La promoción a actualizar
-     * @throws SubsistemaPromocionesException Si no se puede actualizar la
-     * promoción
+     * @throws ObjetosNegocioException Si no se puede actualizar la promoción
      */
-    public void actualizarPromocion(PromocionDTO promocionActualizada) throws SubsistemaPromocionesException;
+    public void actualizarPromocion(PromocionDTO promocionActualizada) throws ObjetosNegocioException;
 
     /**
      * Permite eliminar una promoción del registro.
      *
      * @param promocionEliminar La promoción a eliminar
-     * @throws SubsistemaPromocionesException Si no se puede eliminar la
-     * promoción del registro
+     * @throws ObjetosNegocioException Si no se puede eliminar la promoción del
+     * registro
      */
-    public void eliminarPromocion(PromocionDTO promocionEliminar) throws SubsistemaPromocionesException;
+    public void eliminarPromocion(PromocionDTO promocionEliminar) throws ObjetosNegocioException;
 
     /**
      * Permite obtener una lista con todas las promociones del registro.

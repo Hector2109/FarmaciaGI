@@ -11,6 +11,15 @@ public class PromocionDTO {
     private Float precioUnitario;
 
     /**
+     * Constructor que recibe el código de la promoción.
+     *
+     * @param codigo El código de la promoción.
+     */
+    public PromocionDTO(String codigo) {
+        this.codigo = codigo;
+    }
+
+    /**
      * Constructor que recibe el código, la descripción, el producto, la
      * cantidad mínima de producto, y el precio untario del producto de la
      * promoción.
