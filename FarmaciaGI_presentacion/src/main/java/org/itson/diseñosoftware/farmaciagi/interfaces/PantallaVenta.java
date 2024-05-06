@@ -64,6 +64,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnProductos = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        btnComprarProductos = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnProveedores = new javax.swing.JButton();
@@ -127,15 +128,28 @@ public class PantallaVenta extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(145, 145));
         jPanel3.setRequestFocusEnabled(false);
 
+        btnComprarProductos.setText("jButton1");
+        btnComprarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarProductosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(btnComprarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(btnComprarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(166, 164, 255));
@@ -395,6 +409,12 @@ public class PantallaVenta extends javax.swing.JFrame {
         menuProductos.setVisible(true);
     }//GEN-LAST:event_btnProductosActionPerformed
 
+    private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
+        dispose();
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
+        productosPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnComprarProductosActionPerformed
+
     //Métodos 
     private void llenarTablaProductosVenta() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -557,6 +577,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProducto;
+    private javax.swing.JButton btnComprarProductos;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
