@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.types.ObjectId;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.Conexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
@@ -57,16 +58,21 @@ public class CompraBO {
         try {
             comprasDAO.registrarCompra(compra);
         } catch (PersistenciaException ex) {
-            try {
-                throw new ObjetosNegocioException("No se pudo registrar la compra.");
-            } catch (ObjetosNegocioException ex1) {
-                Logger.getLogger(CompraBO.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+            throw new ObjetosNegocioException("No se pudo registrar la compra.");
         }
     }
     
-    public void encontrarProveedores(){
+    public void encontrarProveedores(ProductoDTO productoDTO) throws ObjetosNegocioException{
+        Producto producto = new Producto();
+        LinkedList lista_proveedores = productoDTO.getId_proveedores();
         
+        //Asignar los valores al producto
+        producto.setId_proveedores(lista_proveedores);
+        try {
+            comprasDAO.encontrarProveedores(producto);
+        } catch (PersistenciaException ex) {
+            throw new ObjetosNegocioException("No se pudo encontrar ningun proveedor.");
+        }
     }
     
     /**
@@ -143,6 +149,6 @@ public class CompraBO {
      */
     private Compra encontrarCompra(String codigo) {
         Compra compra = comprasDAO.encontrarCompra(codigo);
-        return compra;
+        return compra; 
     }
 }

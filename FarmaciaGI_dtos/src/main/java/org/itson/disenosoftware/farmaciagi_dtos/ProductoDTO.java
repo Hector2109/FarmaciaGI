@@ -1,5 +1,6 @@
 package org.itson.disenosoftware.farmaciagi_dtos;
 
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class ProductoDTO {
@@ -9,7 +10,7 @@ public class ProductoDTO {
     private Float costo;
     private String marca;
     private Integer cantidad;
-
+    private LinkedList <String> id_proveedores; 
     /**
      * Constructor.
      */
@@ -152,6 +153,16 @@ public class ProductoDTO {
         this.cantidad = cantidad;
     }
 
+    public LinkedList<String> getId_proveedores() {
+        return id_proveedores;
+    }
+
+    public void setId_proveedores(LinkedList<String> id_proveedores) {
+        this.id_proveedores = id_proveedores;
+    }
+    
+    
+    
     /**
      * Permite sabe si el producto es válido o no.
      *

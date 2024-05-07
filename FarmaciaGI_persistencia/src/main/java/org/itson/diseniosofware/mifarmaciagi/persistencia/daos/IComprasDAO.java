@@ -17,5 +17,5 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 public interface IComprasDAO {
     public Compra registrarCompra(Compra compra) throws PersistenciaException;
     public Compra encontrarCompra(String codigo);
-    public List<Proveedor>encontrarProveedores(Producto producto);
+    public List<Proveedor>encontrarProveedores(Producto producto) throws PersistenciaException;
 }
