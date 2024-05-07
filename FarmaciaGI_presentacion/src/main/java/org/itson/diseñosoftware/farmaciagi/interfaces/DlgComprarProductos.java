@@ -30,16 +30,13 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     /**
      * Creates new form DlgComprarProductos
      */
-    private IGestorProveedores gestorProveedores;
+
     private IGestorProductos gestorProductos;
-    private List<ProveedorDTO> proveedores;
     private List<ProductoDTO> productos;
 
     public DlgComprarProductos() {
-        this.gestorProveedores = new GestorProveedores();
         gestorProductos = new GestorProductos();
-        this.proveedores = new LinkedList<>();
-        this.proveedores = new LinkedList<>();
+        this.productos = new LinkedList<>();
         initComponents();
         llenarTablaProductos();
     }
