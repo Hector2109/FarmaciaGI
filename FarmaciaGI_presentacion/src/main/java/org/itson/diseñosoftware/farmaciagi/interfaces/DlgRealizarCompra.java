@@ -138,8 +138,11 @@ public class DlgRealizarCompra extends javax.swing.JDialog {
             //realizar la compra
             gestorCompras.registrarCompra(compra);
             
-            productoSeleccionado.setCantidad(productoSeleccionado.getCantidad()+ Integer.parseInt(txtCantidad.getText()));
-            gestorProductos.modCantidadProducto(productoSeleccionado);
+            ProductoDTO productoSuma = new ProductoDTO();
+            productoSuma.setCodigo(productoSeleccionado.getCodigo());
+            productoSuma.setCantidad(Integer.parseInt(txtCantidad.getText()));
+            
+            gestorProductos.modCantidadProducto(productoSuma);
             JOptionPane.showMessageDialog(rootPane, "¡Compra completa!");
         } catch (GestorCompraProductosException e) {
             JOptionPane.showMessageDialog(rootPane, "Compra rechazada");
