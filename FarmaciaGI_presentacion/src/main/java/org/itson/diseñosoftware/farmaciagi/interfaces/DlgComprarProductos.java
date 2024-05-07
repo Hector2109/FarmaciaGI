@@ -4,7 +4,17 @@
  */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_proveedores.GestorProveedores;
+import org.itson.disenosoftware.farmaciagi_subsistema_proveedores.IGestorProveedores;
 
 /**
  *
@@ -15,7 +25,14 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     /**
      * Creates new form DlgComprarProductos
      */
+    private IGestorProveedores gestorProveedores;
+    private IGestorProductos gestorProductos;
+    private List<ProveedorDTO> proveedores;
+    
     public DlgComprarProductos() {
+        this.gestorProveedores = new GestorProveedores();
+        gestorProductos = new GestorProductos();
+        this.proveedores = new LinkedList<>();
         initComponents();
     }
 
@@ -42,7 +59,7 @@ public class DlgComprarProductos extends javax.swing.JDialog {
         btnComprarProductos = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProductosInventario = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -208,7 +225,7 @@ public class DlgComprarProductos extends javax.swing.JDialog {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductosInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -219,7 +236,7 @@ public class DlgComprarProductos extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProductosInventario);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -300,23 +317,38 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
         JOptionPane.showMessageDialog(rootPane, "Ya se encuentra aquí");
     }//GEN-LAST:event_btnComprarProductosActionPerformed
+    
+    //Métodos
+        private void llenarTablaProductos() {
+        DefaultTableModel modelo = new DefaultTableModel();
 
+        modelo.addColumn("CODIGO");
+        modelo.addColumn("NOMBRE");
+        modelo.addColumn("MARCA");
+        modelo.addColumn("COSTO");
+
+        for (ProductoDTO p : gestorProductos.obtnerInventario()) {
+            Object[] fila = {
+                p.getCodigo(),
+                p.getNombre(),
+                p.getMarca(),
+                p.getCosto(),
+            };
+            modelo.addRow(fila);
+        }
+
+        tblProductosInventario.setModel(modelo);
+        TableColumnModel columnModel = tblProductosInventario.getColumnModel();
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprarProductos;
     private javax.swing.JButton btnProductos;
-    private javax.swing.JButton btnProveedores;
-    private javax.swing.JButton btnProveedores1;
-    private javax.swing.JButton btnProveedores2;
-    private javax.swing.JButton btnProveedores3;
     private javax.swing.JButton btnProveedores4;
     private javax.swing.JButton btnVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -324,12 +356,8 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblProductosInventario;
     // End of variables declaration//GEN-END:variables
 }
