@@ -4,7 +4,19 @@
  */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import com.mycompany.farmaciagi_subsistema_compra.GestorCompraProductos;
+import com.mycompany.farmaciagi_subsistema_compra.IGestorCompraProductos;
+import com.mycompany.farmaciagi_subsistema_compra_excepciones.GestorCompraProductosException;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.itson.disenosoftware.farmaciagi_dtos.CompraDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 
 /**
  *
@@ -13,9 +25,17 @@ import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 public class DlgRealizarCompra extends javax.swing.JDialog {
 
     private ProveedorDTO proveedorSeleccionado;
-    public DlgRealizarCompra(ProveedorDTO proveedorSeleccionado) {
-        this.proveedorSeleccionado = proveedorSeleccionado;
+    private ProductoDTO productoSeleccionado;
+    private IGestorCompraProductos gestorCompras;
+    private IGestorProductos gestorProductos;
+    
+    public DlgRealizarCompra(ProveedorDTO proveedorSeleccionado, ProductoDTO productoSeleccionado) {
         initComponents();
+        this.proveedorSeleccionado = proveedorSeleccionado;
+        this.productoSeleccionado = productoSeleccionado;
+        this.gestorProductos = new GestorProductos();
+        this.gestorCompras = new GestorCompraProductos();
+        lblProveedor.setText(proveedorSeleccionado.getNombre());
     }
 
     /**
@@ -27,23 +47,113 @@ public class DlgRealizarCompra extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnConfirmar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        lblProveedor = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(216, 215, 255));
+
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("COMPRA");
+
+        jLabel2.setText("Cantidad:");
+
+        lblProveedor.setText("Proveedor");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(lblProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(101, 101, 101)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 934, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        realizarCompra();
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    //Métodos
+    private void realizarCompra(){
+        CompraDTO compra = new CompraDTO();
+        compra.setProducto(productoSeleccionado);
+        compra.setProveedores(proveedorSeleccionado);
+        compra.setFecha(new GregorianCalendar());
+        compra.setCostoTotal(Integer.parseInt(txtCantidad.getText()) * productoSeleccionado.getCosto());
+        try {
+            //realizar la compra
+            gestorCompras.registrarCompra(compra);
+            
+            productoSeleccionado.setCantidad(productoSeleccionado.getCantidad()+ Integer.parseInt(txtCantidad.getText()));
+            gestorProductos.modCantidadProducto(productoSeleccionado);
+            JOptionPane.showMessageDialog(rootPane, "¡Compra completa!");
+        } catch (GestorCompraProductosException e) {
+            JOptionPane.showMessageDialog(rootPane, "Compra rechazada");
+        } catch (GestorProductosException ex) {
+            Logger.getLogger(DlgRealizarCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblProveedor;
+    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }
