@@ -86,13 +86,10 @@ public class CompraBO {
 
     public List<ProveedorDTO> encontrarProveedores(ProductoDTO productoDTO) throws ObjetosNegocioException {
         Producto producto = new Producto();
-        LinkedList lista_proveedores = productoDTO.getId_proveedores();
-
-        //Asignar los valores al producto
-        producto.setId_proveedores(lista_proveedores);
+        producto.setCodigo(productoDTO.getCodigo());
         try {
             List<Proveedor> proveedores = comprasDAO.encontrarProveedores(producto);
-            List<ProveedorDTO> proveedoresDTO = null;
+            List<ProveedorDTO> proveedoresDTO = new LinkedList<>();
             for (Proveedor proveedor : proveedores) {
                 //Asignar la direccion a direccionDTO
                 DireccionDTO direccion = new DireccionDTO();

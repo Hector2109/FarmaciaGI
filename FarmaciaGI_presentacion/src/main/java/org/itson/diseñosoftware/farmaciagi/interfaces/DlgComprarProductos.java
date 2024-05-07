@@ -357,8 +357,7 @@ public class DlgComprarProductos extends javax.swing.JDialog {
                 int filaSeleccionada = tblProductosInventario.getSelectedRow();
                 productos.get(filaSeleccionada);
                 
-                if (filaSeleccionada != -1) { // Verificar que haya una fila seleccionada
-                    // Obtener el proveedor seleccionado en la tabla
+                if (filaSeleccionada != -1) { 
                     ProductoDTO productoSeleccionado = productos.get(filaSeleccionada);
                     DlgOpcionesProveedores on = new DlgOpcionesProveedores(productoSeleccionado);
                     on.setVisible(true);

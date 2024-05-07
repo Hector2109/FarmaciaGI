@@ -26,6 +26,7 @@ public class ComprasDAO implements IComprasDAO {
 
     private final MongoCollection<Compra> collection;
     private final MongoCollection<Proveedor> collection2;
+    private IProductosDAO productosDAO;
 
     /**
      * Constructor que recibe la conexión al mecanismo de persistencia.
@@ -34,7 +35,7 @@ public class ComprasDAO implements IComprasDAO {
      */
     public ComprasDAO(IConexion conexion) {
         MongoDatabase baseDatos = conexion.crearConexion();
-
+        this.productosDAO = new ProductosDAO(conexion);
         collection = baseDatos.getCollection("compras", Compra.class);
         collection2 = baseDatos.getCollection("proveedores", Proveedor.class);
 
@@ -88,6 +89,7 @@ public class ComprasDAO implements IComprasDAO {
      */
     @Override
     public List<Proveedor> encontrarProveedores(Producto producto) {
+        producto = productosDAO.obtenerProducto(producto);
         List<Proveedor> proveedores = new ArrayList<>();
         LinkedList<ObjectId> proveedoresIds = producto.getId_proveedores();
 
