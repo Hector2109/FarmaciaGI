@@ -387,7 +387,6 @@ public class DlgProveedores extends javax.swing.JDialog {
         
         tblProveedores.setModel(modelo);
         TableColumnModel columnModel = tblProveedores.getColumnModel();
-        
     }
     
     

@@ -42,6 +42,8 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         } else {
             btnAccion.setText("Actualizar");
             this.setTitle("Actualizacion de Proveedores");
+            txtEjemplo.setText("");
+            
             txtNombre.setText(provedorSeleccionado.getNombre());
             txtRFC.setText(provedorSeleccionado.getRfc());
             txtCalle.setText(provedorSeleccionado.getDireccion().getCalle());
@@ -50,6 +52,8 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
             txtNumero.setText(provedorSeleccionado.getDireccion().getNumero());
             txtCP.setText(provedorSeleccionado.getDireccion().getCodigo_postal());
 
+            txtRFC.setEditable(false);
+            
             List<String> telefonosExistentes = provedorSeleccionado.getTelefonos();
             StringBuilder telefonos = new StringBuilder();
             for (String telefonosExistente : telefonosExistentes) {
@@ -94,6 +98,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         txtCiudad = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        txtEjemplo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,7 +132,6 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
             }
         });
 
-        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtNombre.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtNombre.setPreferredSize(new java.awt.Dimension(36, 37));
@@ -138,7 +142,6 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("RFC:");
 
-        txtRFC.setBackground(new java.awt.Color(255, 255, 255));
         txtRFC.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtRFC.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtRFC.setPreferredSize(new java.awt.Dimension(36, 37));
@@ -156,12 +159,10 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("CALLE:");
 
-        txtCalle.setBackground(new java.awt.Color(255, 255, 255));
         txtCalle.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCalle.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtCalle.setPreferredSize(new java.awt.Dimension(36, 37));
 
-        txtNumero.setBackground(new java.awt.Color(255, 255, 255));
         txtNumero.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtNumero.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtNumero.setPreferredSize(new java.awt.Dimension(36, 37));
@@ -172,7 +173,6 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("COLONIA");
 
-        txtColonia.setBackground(new java.awt.Color(255, 255, 255));
         txtColonia.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtColonia.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtColonia.setPreferredSize(new java.awt.Dimension(36, 37));
@@ -180,7 +180,6 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setText("CP:");
 
-        txtCP.setBackground(new java.awt.Color(255, 255, 255));
         txtCP.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCP.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtCP.setPreferredSize(new java.awt.Dimension(36, 37));
@@ -188,13 +187,15 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setText("CIUDAD:");
 
-        txtCiudad.setBackground(new java.awt.Color(255, 255, 255));
         txtCiudad.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCiudad.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtCiudad.setPreferredSize(new java.awt.Dimension(36, 37));
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("TELEFONOS:");
+
+        txtEjemplo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtEjemplo.setText("*Ejemplo: ABCD123456ABC");
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -261,6 +262,10 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(txtRFC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtEjemplo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,7 +278,9 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEjemplo)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +290,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
                             .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(txtCP, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,6 +492,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtColonia;
+    private javax.swing.JLabel txtEjemplo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRFC;
