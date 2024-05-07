@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import org.itson.disenosoftware.farmaciagi_dtos.DireccionDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
@@ -30,7 +31,8 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
     /**
      * Creates new form DlgConfigProveedor
      */
-    public DlgConfigProveedor(int operacion, ProveedorDTO provedorSeleccionado) {
+    public DlgConfigProveedor(JDialog parent , Boolean modal, int operacion, ProveedorDTO provedorSeleccionado) {
+        super(parent, modal);
         initComponents();
         this.operacion = operacion;
         this.proveedorSeleccionado = provedorSeleccionado;
