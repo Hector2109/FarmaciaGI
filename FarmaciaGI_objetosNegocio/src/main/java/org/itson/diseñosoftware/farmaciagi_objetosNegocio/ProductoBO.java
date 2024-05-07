@@ -192,6 +192,7 @@ public class ProductoBO implements IProductoBO {
                 producto.setCodigo(p.getCodigo());
                 producto.setCosto(p.getCosto());
                 producto.setMarca(p.getMarca());
+                producto.setCantidad(p.getCantidad());
                 productosDTO.add(producto);
             }
             return productosDTO;
