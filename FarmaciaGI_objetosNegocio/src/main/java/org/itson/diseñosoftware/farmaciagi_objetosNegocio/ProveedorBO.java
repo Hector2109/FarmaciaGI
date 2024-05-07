@@ -169,11 +169,11 @@ public class ProveedorBO implements IProveedorBO{
             if (!proveedores.isEmpty()) {
                 return proveedores;
             } else {
-                return null;
+                return new ArrayList<>();
             }
         } catch (PersistenciaException ex) {
             Logger.getLogger(ProveedorBO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            return new ArrayList<>();
         }
     }
 }

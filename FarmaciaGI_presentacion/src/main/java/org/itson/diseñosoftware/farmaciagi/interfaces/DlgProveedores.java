@@ -49,7 +49,7 @@ public class DlgProveedores extends javax.swing.JDialog {
         btnRegistrar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnProductos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -204,12 +204,12 @@ public class DlgProveedores extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Productos");
 
-        jButton1.setBackground(new java.awt.Color(166, 164, 255));
-        jButton1.setForeground(new java.awt.Color(166, 164, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prouctos1.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnProductos.setBackground(new java.awt.Color(166, 164, 255));
+        btnProductos.setForeground(new java.awt.Color(166, 164, 255));
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prouctos1.png"))); // NOI18N
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnProductosActionPerformed(evt);
             }
         });
 
@@ -217,7 +217,7 @@ public class DlgProveedores extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
@@ -227,7 +227,7 @@ public class DlgProveedores extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addContainerGap(9, Short.MAX_VALUE))
@@ -290,7 +290,7 @@ public class DlgProveedores extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor(ConstantesGUI.REGISTRAR, null);
+        DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor(this,true,ConstantesGUI.REGISTRAR, null);
         dlgConfigProveedor.setVisible(true);
         llenarTabla();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -326,7 +326,7 @@ public class DlgProveedores extends javax.swing.JDialog {
             ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
 
             // Abrir el diálogo con la opción seleccionada y el proveedor seleccionado
-            DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor(ConstantesGUI.ACTUALIZAR, proveedorSeleccionado);
+            DlgConfigProveedor dlgConfigProveedor = new DlgConfigProveedor(this,true,ConstantesGUI.ACTUALIZAR, proveedorSeleccionado);
             dlgConfigProveedor.setVisible(true);
         } else {
             // Mostrar un mensaje de advertencia si no hay fila seleccionada
@@ -345,9 +345,11 @@ public class DlgProveedores extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(rootPane, "Ya te encuentras en esta ventana");
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+        dispose();
+        DlgProductosPrincipal productos = new DlgProductosPrincipal();
+        productos.setVisible(true);
+    }//GEN-LAST:event_btnProductosActionPerformed
 
     public void llenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel();
@@ -387,7 +389,6 @@ public class DlgProveedores extends javax.swing.JDialog {
         
         tblProveedores.setModel(modelo);
         TableColumnModel columnModel = tblProveedores.getColumnModel();
-        
     }
     
     
@@ -395,10 +396,10 @@ public class DlgProveedores extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVenta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
