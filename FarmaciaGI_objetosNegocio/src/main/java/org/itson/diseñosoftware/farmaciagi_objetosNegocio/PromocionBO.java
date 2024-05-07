@@ -31,6 +31,7 @@ public class PromocionBO implements IPromocionBO {
      */
     @Override
     public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada) {
+        System.out.println("siu");
         Promocion promocionAuxiliar = new Promocion(promocionBuscada.getCodigo());
 
         Promocion promocionRegistro = promocionesDAO.obtenerPromocion(promocionAuxiliar);
