@@ -8,9 +8,6 @@ import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.bson.types.ObjectId;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.Conexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
@@ -39,10 +36,10 @@ public class CompraBO {
         comprasDAO = new ComprasDAO(conexion);
     }
 
-    public void registrarCompra(CompraDTO compraNueva) throws ObjetosNegocioException{
+    public void registrarCompra(CompraDTO compraNueva) throws ObjetosNegocioException {
         Compra compra = null;
         String codigo;
-        
+
         do {
             codigo = generarCodigoCompra();
             compra = encontrarCompra(codigo);
@@ -53,8 +50,32 @@ public class CompraBO {
         compra.setCostoTotal(compraNueva.getCostoTotal());
         long millis = compraNueva.getFecha().getTimeInMillis();
         compra.setFecha(Instant.ofEpochMilli(millis));
-        compra.setProveedores(proveedoresDTOAProveedoresPOJO(compraNueva.getProveedores()));
-        compra.setProductos(productosDTOAProductosPOJO(compraNueva.getProductos()));
+
+        //Establecer los valores del proveedor
+        Proveedor proveedor = new Proveedor();
+        proveedor.setNombre(compraNueva.getProveedor().getNombre());
+        proveedor.setTelefonos(compraNueva.getProveedor().getTelefonos());
+        proveedor.setRfc(compraNueva.getProveedor().getRfc());
+        
+        //Establecer los valores de dirección
+        Direccion direccion = new Direccion();
+        direccion.setCalle(compraNueva.getProveedor().getDireccion().getCalle());
+        direccion.setCiudad(compraNueva.getProveedor().getDireccion().getCiudad());
+        direccion.setCodigo_postal(compraNueva.getProveedor().getDireccion().getCodigo_postal());
+        direccion.setColonia(compraNueva.getProveedor().getDireccion().getColonia());
+        direccion.setNumero(compraNueva.getProveedor().getDireccion().getNumero()); 
+        proveedor.setDireccion(direccion);
+        
+        compra.setProveedor(proveedor);
+        
+        Producto producto = new Producto();
+        producto.setCantidad(compraNueva.getProducto().getCantidad());
+        producto.setCodigo(compraNueva.getProducto().getCodigo());
+        producto.setCosto(compraNueva.getProducto().getCosto());
+        producto.setMarca(compraNueva.getProducto().getMarca());
+        producto.setNombre(compraNueva.getProducto().getNombre());
+
+        compra.setProducto(producto);
 
         try {
             comprasDAO.registrarCompra(compra);
@@ -62,11 +83,11 @@ public class CompraBO {
             throw new ObjetosNegocioException("No se pudo registrar la compra.");
         }
     }
-    
-    public List<ProveedorDTO> encontrarProveedores(ProductoDTO productoDTO) throws ObjetosNegocioException{
+
+    public List<ProveedorDTO> encontrarProveedores(ProductoDTO productoDTO) throws ObjetosNegocioException {
         Producto producto = new Producto();
         LinkedList lista_proveedores = productoDTO.getId_proveedores();
-        
+
         //Asignar los valores al producto
         producto.setId_proveedores(lista_proveedores);
         try {
@@ -80,14 +101,14 @@ public class CompraBO {
                 direccion.setCodigo_postal(proveedor.getDireccion().getCodigo_postal());
                 direccion.setColonia(proveedor.getDireccion().getColonia());
                 direccion.setNumero(proveedor.getDireccion().getNumero());
-                
+
                 //Asignar los valores
                 ProveedorDTO proveedorDTO = new ProveedorDTO();
                 proveedorDTO.setNombre(proveedor.getNombre());
                 proveedorDTO.setRfc(proveedor.getRfc());
                 proveedorDTO.setTelefonos(proveedor.getTelefonos());
                 proveedorDTO.setDireccion(direccion);
-                
+
                 //Agregar el proveedor DTO creado
                 proveedoresDTO.add(proveedorDTO);
             }
@@ -95,9 +116,9 @@ public class CompraBO {
         } catch (PersistenciaException ex) {
             throw new ObjetosNegocioException("No se pudo encontrar ningun proveedor.");
         }
-        
+
     }
-    
+
     /**
      * Permite generar un código para una compra.
      *
@@ -134,8 +155,8 @@ public class CompraBO {
         }
         return productos;
     }
-    
-        /**
+
+    /**
      * Permite convertir una lista de Proveedores DTO a Proveedores POJO
      *
      * @param proveedoresDTO La lista de Proveedor DTO
@@ -146,16 +167,16 @@ public class CompraBO {
         List<Proveedor> proveedores = new LinkedList<>();
 
         for (ProveedorDTO proveedorDTO : proveedoresDTO) {
-            
+
             Direccion direccion = new Direccion();
             direccion.setCalle(proveedorDTO.getDireccion().getCalle());
             direccion.setCiudad(proveedorDTO.getDireccion().getCiudad());
             direccion.setCodigo_postal(proveedorDTO.getDireccion().getCodigo_postal());
             direccion.setColonia(proveedorDTO.getDireccion().getColonia());
             direccion.setNumero(proveedorDTO.getDireccion().getNumero());
-            
+
             Proveedor proveedor = new Proveedor();
-            
+
             proveedor.setNombre(proveedorDTO.getNombre());
             proveedor.setRfc(proveedorDTO.getRfc());
             proveedor.setTelefonos(proveedorDTO.getTelefonos());
@@ -173,6 +194,6 @@ public class CompraBO {
      */
     private Compra encontrarCompra(String codigo) {
         Compra compra = comprasDAO.encontrarCompra(codigo);
-        return compra; 
+        return compra;
     }
 }

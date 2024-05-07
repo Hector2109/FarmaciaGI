@@ -17,18 +17,18 @@ public class Compra {
 
     private ObjectId _id;
     private String codigo; 
-    private List<Producto> productos;
-    private List<Proveedor> proveedores;
+    private Producto producto;
+    private Proveedor proveedor;
     private Float costoTotal;
     private Instant fecha;
 
     public Compra() {
     }
 
-    public Compra(String codigo, List<Producto> productos, List<Proveedor> proveedores, Float costoTotal, Instant fecha) {
+    public Compra(String codigo, Producto producto, Proveedor proveedor, Float costoTotal, Instant fecha) {
         this.codigo = codigo;
-        this.productos = productos;
-        this.proveedores = proveedores;
+        this.producto = producto;
+        this.proveedor = proveedor;
         this.costoTotal = costoTotal;
         this.fecha = fecha;
     }
@@ -49,20 +49,20 @@ public class Compra {
         this._id = _id;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public List<Proveedor> getProveedores() {
-        return proveedores;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setProveedores(List<Proveedor> proveedores) {
-        this.proveedores = proveedores;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     public Float getCostoTotal() {
@@ -86,8 +86,8 @@ public class Compra {
         StringBuilder sb = new StringBuilder();
         sb.append("Compra{");
         sb.append("_id=").append(_id);
-        sb.append(", productos=").append(productos);
-        sb.append(", proveedores=").append(proveedores);
+        sb.append(", productos=").append(producto);
+        sb.append(", proveedores=").append(proveedor);
         sb.append(", costoTotal=").append(costoTotal);
         sb.append(", fecha=").append(fecha);
         sb.append('}');
@@ -98,8 +98,8 @@ public class Compra {
     public int hashCode() {
         int hash = 5;
         hash = 43 * hash + Objects.hashCode(this._id);
-        hash = 43 * hash + Objects.hashCode(this.productos);
-        hash = 43 * hash + Objects.hashCode(this.proveedores);
+        hash = 43 * hash + Objects.hashCode(this.producto);
+        hash = 43 * hash + Objects.hashCode(this.proveedor);
         hash = 43 * hash + Objects.hashCode(this.costoTotal);
         hash = 43 * hash + Objects.hashCode(this.fecha);
         return hash;
@@ -120,10 +120,10 @@ public class Compra {
         if (!Objects.equals(this._id, other._id)) {
             return false;
         }
-        if (!Objects.equals(this.productos, other.productos)) {
+        if (!Objects.equals(this.producto, other.producto)) {
             return false;
         }
-        if (!Objects.equals(this.proveedores, other.proveedores)) {
+        if (!Objects.equals(this.proveedor, other.proveedor)) {
             return false;
         }
         if (!Objects.equals(this.costoTotal, other.costoTotal)) {

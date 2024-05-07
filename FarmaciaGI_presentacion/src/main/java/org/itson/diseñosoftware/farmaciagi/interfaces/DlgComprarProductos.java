@@ -4,11 +4,16 @@
  */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
@@ -28,12 +33,15 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     private IGestorProveedores gestorProveedores;
     private IGestorProductos gestorProductos;
     private List<ProveedorDTO> proveedores;
-    
+    private List<ProductoDTO> productos;
+
     public DlgComprarProductos() {
         this.gestorProveedores = new GestorProveedores();
         gestorProductos = new GestorProductos();
         this.proveedores = new LinkedList<>();
+        this.proveedores = new LinkedList<>();
         initComponents();
+        llenarTablaProductos();
     }
 
     /**
@@ -317,22 +325,25 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
         JOptionPane.showMessageDialog(rootPane, "Ya se encuentra aquí");
     }//GEN-LAST:event_btnComprarProductosActionPerformed
-    
+
     //Métodos
-        private void llenarTablaProductos() {
+    private void llenarTablaProductos() {
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("CODIGO");
         modelo.addColumn("NOMBRE");
         modelo.addColumn("MARCA");
         modelo.addColumn("COSTO");
-
-        for (ProductoDTO p : gestorProductos.obtnerInventario()) {
+        modelo.addColumn("");
+        
+        productos = gestorProductos.obtnerInventario();
+        for (ProductoDTO p : productos) {
             Object[] fila = {
                 p.getCodigo(),
                 p.getNombre(),
                 p.getMarca(),
                 p.getCosto(),
+                "Ver opciones"
             };
             modelo.addRow(fila);
         }
@@ -340,7 +351,25 @@ public class DlgComprarProductos extends javax.swing.JDialog {
         tblProductosInventario.setModel(modelo);
         TableColumnModel columnModel = tblProductosInventario.getColumnModel();
 
+        ButtonColumn modificarButtonColumn = new ButtonColumn("Ver opciones", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = tblProductosInventario.getSelectedRow();
+                productos.get(filaSeleccionada);
+                
+                if (filaSeleccionada != -1) { // Verificar que haya una fila seleccionada
+                    // Obtener el proveedor seleccionado en la tabla
+                    ProductoDTO productoSeleccionado = productos.get(filaSeleccionada);
+                    DlgOpcionesProveedores on = new DlgOpcionesProveedores(productoSeleccionado);
+                    on.setVisible(true);
+                }
+                
+            }
+        });
+        columnModel.getColumn(4).setCellRenderer(modificarButtonColumn);
+        columnModel.getColumn(4).setCellEditor(modificarButtonColumn);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprarProductos;

@@ -5,7 +5,6 @@
 package org.itson.disenosoftware.farmaciagi_dtos;
 
 import java.util.Calendar;
-import java.util.List;
 
 /**
  *
@@ -13,8 +12,8 @@ import java.util.List;
  */
 public class CompraDTO {
     private String codigo; 
-    private List<ProductoDTO> productos;
-    private List<ProveedorDTO> proveedores;
+    private ProductoDTO producto;
+    private ProveedorDTO proveedor;
     private Float costoTotal;
     private Calendar fecha;
 
@@ -26,20 +25,20 @@ public class CompraDTO {
         this.codigo = codigo;
     }
 
-    public List<ProductoDTO> getProductos() {
-        return productos;
+    public ProductoDTO getProducto() {
+        return producto;
     }
 
-    public void setProductos(List<ProductoDTO> productos) {
-        this.productos = productos;
+    public void setProducto(ProductoDTO producto) {
+        this.producto = producto;
     }
 
-    public List<ProveedorDTO> getProveedores() {
-        return proveedores;
+    public ProveedorDTO getProveedor() {
+        return proveedor;
     }
 
-    public void setProveedores(List<ProveedorDTO> proveedores) {
-        this.proveedores = proveedores;
+    public void setProveedores(ProveedorDTO proveedor) {
+        this.proveedor = proveedor;
     }
 
     public Float getCostoTotal() {
@@ -60,10 +59,10 @@ public class CompraDTO {
     
     // Contructores
 
-    public CompraDTO(String codigo, List<ProductoDTO> productos, List<ProveedorDTO> proveedores, Float costoTotal, Calendar fecha) {
+    public CompraDTO(String codigo, ProductoDTO producto, ProveedorDTO proveedor, Float costoTotal, Calendar fecha) {
         this.codigo = codigo;
-        this.productos = productos;
-        this.proveedores = proveedores;
+        this.producto = producto;
+        this.proveedor = proveedor;
         this.costoTotal = costoTotal;
         this.fecha = fecha;
     }
