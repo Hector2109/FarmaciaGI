@@ -127,7 +127,7 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
             proveedores.get(filaSeleccionada);
             if (filaSeleccionada != -1) {
                     ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
-                    DlgRealizarCompra on = new DlgRealizarCompra(proveedorSeleccionado);
+                    DlgRealizarCompra on = new DlgRealizarCompra(proveedorSeleccionado, productoSeleccionado);
                     on.setVisible(true);
                 }
             

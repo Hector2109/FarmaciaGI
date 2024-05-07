@@ -17,6 +17,9 @@ public class CompraDTO {
     private Float costoTotal;
     private Calendar fecha;
 
+    public CompraDTO() {
+    }
+    
     public String getCodigo() {
         return codigo;
     }
