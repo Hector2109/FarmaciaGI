@@ -28,6 +28,7 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
     private List<ProveedorDTO> proveedores;
     private IGestorCompraProductos gestorCompras;
     private ProductoDTO productoSeleccionado;
+
     public DlgOpcionesProveedores(ProductoDTO productoSeleccionado) {
         initComponents();
         this.productoSeleccionado = productoSeleccionado;
@@ -121,37 +122,24 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        try {
-            int filaSeleccionada = tblProveedores.getSelectedRow();
-            proveedores = gestorCompras.encontrarProveedores(productoSeleccionado);
-            proveedores.get(filaSeleccionada);
-            if (filaSeleccionada != -1) {
-                    ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
-                    DlgRealizarCompra on = new DlgRealizarCompra(proveedorSeleccionado, productoSeleccionado);
-                    on.setVisible(true);
-                }
-            
-            
-        } catch (GestorCompraProductosException ex) {
-            Logger.getLogger(DlgOpcionesProveedores.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        seleccionarProveedor();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     //Métodos
-    public void llenarTabla(){
+    public void llenarTabla() {
         try {
             DefaultTableModel modelo = new DefaultTableModel();
-            
+
             modelo.addColumn("NOMBRE");
             modelo.addColumn("DIRECCION");
             modelo.addColumn("CONTACTO");
             modelo.addColumn("RFC");
-            
+
             proveedores = gestorCompras.encontrarProveedores(productoSeleccionado);
-            
+
             if (!proveedores.isEmpty()) {
                 for (ProveedorDTO proveedor : proveedores) {
-                    
+
                     List<String> telefonosExistentes = proveedor.getTelefonos();
                     StringBuilder telefonos = new StringBuilder();
                     for (String telefonosExistente : telefonosExistentes) {
@@ -160,27 +148,48 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
                     if (telefonos.length() > 0) {
                         telefonos.delete(telefonos.length() - 1, telefonos.length());
                     }
-                    
+
                     Object[] fila = {
                         proveedor.getNombre(),
-                        proveedor.getDireccion().getCalle()+","+ //TODO: Pensar si esto va de esta forma
-                            proveedor.getDireccion().getColonia()+","+
-                            proveedor.getDireccion().getNumero()+","+
-                            proveedor.getDireccion().getCodigo_postal()+","+
-                            proveedor.getDireccion().getCiudad(),
+                        proveedor.getDireccion().getCalle() + ","
+                        + //TODO: Pensar si esto va de esta forma
+                        proveedor.getDireccion().getColonia() + ","
+                        + proveedor.getDireccion().getNumero() + ","
+                        + proveedor.getDireccion().getCodigo_postal() + ","
+                        + proveedor.getDireccion().getCiudad(),
                         telefonos.toString(),
                         proveedor.getRfc()
                     };
                     modelo.addRow(fila);
                 }
             }
-            
+
             tblProveedores.setModel(modelo);
             TableColumnModel columnModel = tblProveedores.getColumnModel();
         } catch (GestorCompraProductosException ex) {
             Logger.getLogger(DlgOpcionesProveedores.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+    
+    /**
+     * Método para seleccionar a un proveedor.
+     * 
+     */
+    private void seleccionarProveedor() {
+        try {
+            int filaSeleccionada = tblProveedores.getSelectedRow();
+            proveedores = gestorCompras.encontrarProveedores(productoSeleccionado);
+            proveedores.get(filaSeleccionada);
+            if (filaSeleccionada != -1) {
+                ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
+                DlgRealizarCompra on = new DlgRealizarCompra(proveedorSeleccionado, productoSeleccionado);
+                on.setVisible(true);
+            }
+
+        } catch (GestorCompraProductosException ex) {
+            Logger.getLogger(DlgOpcionesProveedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
