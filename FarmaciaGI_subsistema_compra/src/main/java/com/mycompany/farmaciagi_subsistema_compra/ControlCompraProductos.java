@@ -5,7 +5,10 @@
 package com.mycompany.farmaciagi_subsistema_compra;
 
 import com.mycompany.farmaciagi_subsistema_compra_excepciones.ControlCompraProductosException;
+import java.util.List;
 import org.itson.disenosoftware.farmaciagi_dtos.CompraDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.CompraBO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
@@ -37,6 +40,24 @@ public class ControlCompraProductos {
             compra.registrarCompra(compraNueva);
         } catch (ObjetosNegocioException ex) {
             throw new ControlCompraProductosException("No se pudo registrar la venta.");
+        }
+    }
+    
+    /**
+     * Método para encontrar una serie de proveedores que estén ligados a un 
+     * producto en cuestión.
+     * 
+     * @param productoNuevo producto a evaluar.
+     * @return lista de proveedores
+     * @throws ControlCompraProductosException en caso de no poder encontrar a 
+     * ningun proveedor.
+     */
+    public List<ProveedorDTO> encontrarProveedores(ProductoDTO productoNuevo) throws ControlCompraProductosException{
+        try {
+            List<ProveedorDTO> proveedores = compra.encontrarProveedores(productoNuevo);
+            return proveedores;
+        } catch (ObjetosNegocioException e) {
+            throw new ControlCompraProductosException("No se pudo encontrar a ningun proveedor.");
         }
     }
 }

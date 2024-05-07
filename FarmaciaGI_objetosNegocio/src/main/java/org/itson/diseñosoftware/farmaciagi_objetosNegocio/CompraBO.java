@@ -21,6 +21,7 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Direccion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 import org.itson.disenosoftware.farmaciagi_dtos.CompraDTO;
+import org.itson.disenosoftware.farmaciagi_dtos.DireccionDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
@@ -62,17 +63,39 @@ public class CompraBO {
         }
     }
     
-    public void encontrarProveedores(ProductoDTO productoDTO) throws ObjetosNegocioException{
+    public List<ProveedorDTO> encontrarProveedores(ProductoDTO productoDTO) throws ObjetosNegocioException{
         Producto producto = new Producto();
         LinkedList lista_proveedores = productoDTO.getId_proveedores();
         
         //Asignar los valores al producto
         producto.setId_proveedores(lista_proveedores);
         try {
-            comprasDAO.encontrarProveedores(producto);
+            List<Proveedor> proveedores = comprasDAO.encontrarProveedores(producto);
+            List<ProveedorDTO> proveedoresDTO = null;
+            for (Proveedor proveedor : proveedores) {
+                //Asignar la direccion a direccionDTO
+                DireccionDTO direccion = new DireccionDTO();
+                direccion.setCalle(proveedor.getDireccion().getCalle());
+                direccion.setCiudad(proveedor.getDireccion().getCiudad());
+                direccion.setCodigo_postal(proveedor.getDireccion().getCodigo_postal());
+                direccion.setColonia(proveedor.getDireccion().getColonia());
+                direccion.setNumero(proveedor.getDireccion().getNumero());
+                
+                //Asignar los valores
+                ProveedorDTO proveedorDTO = new ProveedorDTO();
+                proveedorDTO.setNombre(proveedor.getNombre());
+                proveedorDTO.setRfc(proveedor.getRfc());
+                proveedorDTO.setTelefonos(proveedor.getTelefonos());
+                proveedorDTO.setDireccion(direccion);
+                
+                //Agregar el proveedor DTO creado
+                proveedoresDTO.add(proveedorDTO);
+            }
+            return proveedoresDTO;
         } catch (PersistenciaException ex) {
             throw new ObjetosNegocioException("No se pudo encontrar ningun proveedor.");
         }
+        
     }
     
     /**
@@ -123,6 +146,7 @@ public class CompraBO {
         List<Proveedor> proveedores = new LinkedList<>();
 
         for (ProveedorDTO proveedorDTO : proveedoresDTO) {
+            
             Direccion direccion = new Direccion();
             direccion.setCalle(proveedorDTO.getDireccion().getCalle());
             direccion.setCiudad(proveedorDTO.getDireccion().getCiudad());
