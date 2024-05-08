@@ -405,7 +405,7 @@ public class PantallaVenta extends javax.swing.JFrame {
 
     private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
         dispose();
-        DlgComprarProductos productosPrincipal = new DlgComprarProductos(this, true);
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
         productosPrincipal.setVisible(true);
     }//GEN-LAST:event_btnComprarProductosActionPerformed
 

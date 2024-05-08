@@ -29,12 +29,10 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     private List<ProductoDTO> productos;
     private Frame parent;
     
-    public DlgComprarProductos(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DlgComprarProductos() {
         gestorProductos = new GestorProductos();
         this.productos = new LinkedList<>();
-        this.parent = parent;
-        
+
         initComponents();
         llenarTablaProductos();
     }
@@ -330,6 +328,7 @@ public class DlgComprarProductos extends javax.swing.JDialog {
                     ProductoDTO productoSeleccionado = productos.get(filaSeleccionada);
                     DlgOpcionesProveedores on = new DlgOpcionesProveedores(productoSeleccionado);
                     on.setVisible(true);
+                    
                 }
                 
             }

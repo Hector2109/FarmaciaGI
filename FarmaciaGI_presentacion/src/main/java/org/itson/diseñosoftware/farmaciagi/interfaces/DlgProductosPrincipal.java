@@ -352,7 +352,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
 
     private void btnComprarProductos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductos2ActionPerformed
         dispose();
-        DlgComprarProductos productosPrincipal = new DlgComprarProductos(parent, true);
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
         productosPrincipal.setVisible(true);
     }//GEN-LAST:event_btnComprarProductos2ActionPerformed
 
@@ -364,7 +364,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
 
     private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
         dispose();
-        DlgComprarProductos productosPrincipal = new DlgComprarProductos(parent, true);
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
         productosPrincipal.setVisible(true);
     }//GEN-LAST:event_btnComprarProductosActionPerformed
 

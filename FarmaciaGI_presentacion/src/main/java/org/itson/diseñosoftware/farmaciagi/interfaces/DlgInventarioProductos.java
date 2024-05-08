@@ -330,7 +330,7 @@ public class DlgInventarioProductos extends javax.swing.JDialog {
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
         dispose();
-        DlgComprarProductos productosPrincipal = new DlgComprarProductos(parent, true);
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
         productosPrincipal.setVisible(true);
     }//GEN-LAST:event_btnComprasActionPerformed
 

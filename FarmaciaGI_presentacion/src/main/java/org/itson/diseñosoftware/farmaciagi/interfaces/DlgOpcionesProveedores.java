@@ -141,7 +141,7 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(rootPane, "Seleccione un proveedor");
         }
-        
+
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -184,20 +184,23 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
                         proveedor.getRfc()
                     };
                     modelo.addRow(fila);
+                    tblProveedores.setModel(modelo);
+                    TableColumnModel columnModel = tblProveedores.getColumnModel();
                 }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Sin proveedores de momento");
+                this.dispose();
             }
 
-            tblProveedores.setModel(modelo);
-            TableColumnModel columnModel = tblProveedores.getColumnModel();
         } catch (GestorCompraProductosException ex) {
             Logger.getLogger(DlgOpcionesProveedores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
     /**
      * Método para seleccionar a un proveedor.
-     * 
+     *
      */
     private void seleccionarProveedor() {
         try {
@@ -215,7 +218,7 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
             Logger.getLogger(DlgOpcionesProveedores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton jButton1;
