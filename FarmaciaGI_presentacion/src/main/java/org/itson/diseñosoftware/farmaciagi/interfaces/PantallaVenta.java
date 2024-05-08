@@ -524,9 +524,18 @@ public class PantallaVenta extends javax.swing.JFrame {
                         promocionesVenta.remove(promocion);
                         break;
                     }
-                    if ((productoEliminado.getCantidad() % promocion.getCantidad()) != 0) {
+                    if (productoEliminado.getCantidad() < promocion.getCantidad()) {
                         promocionesVenta.remove(promocion);
                         break;
+                    } else {
+                        float division = productoEliminado.getCantidad().floatValue() / promocion.getCantidad().floatValue();
+                        int parteEntera = (int) division;
+                        float parteDecimal = division - parteEntera;
+                        
+                        if (parteDecimal != 0 && promocionesVenta.subList(promocionesVenta.indexOf(promocion), promocionesVenta.lastIndexOf(promocion) + 1).toArray().length != parteEntera) {
+                            promocionesVenta.remove(promocion);
+                            break;
+                        }
                     }
                 }
             }
