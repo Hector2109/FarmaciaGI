@@ -520,6 +520,10 @@ public class PantallaVenta extends javax.swing.JFrame {
         if (productoEliminado != null) {
             for (PromocionDTO promocion : promocionesVenta) {
                 if (promocion.getProducto().equals(productoEliminado)) {
+                    if (promocion.getCantidad() == 1) {
+                        promocionesVenta.remove(promocion);
+                        break;
+                    }
                     if ((productoEliminado.getCantidad() % promocion.getCantidad()) != 0) {
                         promocionesVenta.remove(promocion);
                         break;
