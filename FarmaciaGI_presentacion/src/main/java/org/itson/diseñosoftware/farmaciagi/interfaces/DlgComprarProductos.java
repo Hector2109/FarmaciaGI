@@ -327,7 +327,6 @@ public class DlgComprarProductos extends javax.swing.JDialog {
                 if (filaSeleccionada != -1) {                    
                     ProductoDTO productoSeleccionado = productos.get(filaSeleccionada);
                     DlgOpcionesProveedores on = new DlgOpcionesProveedores(productoSeleccionado);
-                    on.setVisible(true);
                     
                 }
                 

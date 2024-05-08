@@ -37,6 +37,7 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
         this.gestorCompras = new GestorCompraProductos();
         this.proveedores = new LinkedList<>();
         llenarTabla();
+        
     }
 
     /**
@@ -161,6 +162,7 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
             proveedores = gestorCompras.encontrarProveedores(productoSeleccionado);
 
             if (!proveedores.isEmpty()) {
+                this.setVisible(true);
                 for (ProveedorDTO proveedor : proveedores) {
 
                     List<String> telefonosExistentes = proveedor.getTelefonos();
