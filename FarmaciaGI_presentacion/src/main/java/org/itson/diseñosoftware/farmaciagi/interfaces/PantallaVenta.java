@@ -65,6 +65,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnComprarProductos = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnProveedores = new javax.swing.JButton();
@@ -113,7 +114,7 @@ public class PantallaVenta extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,12 +130,17 @@ public class PantallaVenta extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(145, 145));
         jPanel3.setRequestFocusEnabled(false);
 
-        btnComprarProductos.setText("jButton1");
+        btnComprarProductos.setBackground(new java.awt.Color(166, 164, 255));
+        btnComprarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icono_carrito.png"))); // NOI18N
         btnComprarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarProductosActionPerformed(evt);
             }
         });
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Compra");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -144,13 +150,19 @@ public class PantallaVenta extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(btnComprarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btnComprarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(166, 164, 255));
@@ -420,17 +432,17 @@ public class PantallaVenta extends javax.swing.JFrame {
         menuProductos.setVisible(true);
     }//GEN-LAST:event_btnProductosActionPerformed
 
-    private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
-        dispose();
-        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
-        productosPrincipal.setVisible(true);
-    }//GEN-LAST:event_btnComprarProductosActionPerformed
-
     private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
         DlgPromociones pPromociones = new DlgPromociones(this, true);
         pPromociones.setVisible(true);
         llenarTablaPromociones();
     }//GEN-LAST:event_btnPromocionesActionPerformed
+
+    private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
+        dispose();
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
+        productosPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnComprarProductosActionPerformed
 
     //Métodos 
     private void llenarTablaProductosVenta() {
@@ -604,6 +616,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
