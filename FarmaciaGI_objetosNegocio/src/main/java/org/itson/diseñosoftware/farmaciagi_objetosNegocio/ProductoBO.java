@@ -2,8 +2,6 @@ package org.itson.diseñosoftware.farmaciagi_objetosNegocio;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.Conexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
@@ -85,8 +83,8 @@ public class ProductoBO implements IProductoBO {
     /**
      * Método el cuál le asigna un proveedor al producto
      *
-     * @param producto producto al que se le desea asigar un proveedor
-     * @param proveedor provedoor que se desea asignar
+     * @param productoDTO producto al que se le desea asigar un proveedor
+     * @param proveedorDTO provedoor que se desea asignar
      */
     @Override
     public void asignarProveedor(ProductoDTO productoDTO, ProveedorDTO proveedorDTO) throws ObjetosNegocioException {
@@ -169,62 +167,57 @@ public class ProductoBO implements IProductoBO {
             } catch (PersistenciaException ex) {
                 throw new ObjetosNegocioException("Error: No fue posible registrar el producto");
             }
-        }else{
+        } else {
             throw new ObjetosNegocioException("Error: No fue posible registrar el producto");
         }
-        
+
     }
 
     /**
      * Método que obtiene todos los productos del inventario
+     *
      * @return lista de productos
      */
     @Override
     public List<ProductoDTO> obtnerInventario() {
-        List <Producto> productos = productosDAO.obtenerInventario();
-        
-        if (!productos.isEmpty()){
-            List<ProductoDTO> productosDTO = new LinkedList<>();
-            
-            for (Producto p: productos) {
-                ProductoDTO producto = new ProductoDTO();
-                producto.setNombre(p.getNombre());
-                producto.setCodigo(p.getCodigo());
-                producto.setCosto(p.getCosto());
-                producto.setMarca(p.getMarca());
-                producto.setCantidad(p.getCantidad());
-                productosDTO.add(producto);
-            }
-            return productosDTO;
-            
-        }else{
-            return null;
+        List<Producto> productos = productosDAO.obtenerInventario();
+        List<ProductoDTO> productosDTO = new LinkedList<>();
+
+        for (Producto p : productos) {
+            ProductoDTO producto = new ProductoDTO();
+            producto.setNombre(p.getNombre());
+            producto.setCodigo(p.getCodigo());
+            producto.setCosto(p.getCosto());
+            producto.setMarca(p.getMarca());
+            producto.setCantidad(p.getCantidad());
+            productosDTO.add(producto);
         }
-        
+        return productosDTO;
+
     }
-    
+
     /**
      * Método que modifica los atributos de un producto
+     *
      * @param producto produto que se desea modificar
      * @return producto modificado
      */
     @Override
-    public void actualizarProducto(ProductoDTO producto) throws ObjetosNegocioException{
-        
+    public void actualizarProducto(ProductoDTO producto) throws ObjetosNegocioException {
+
         Producto productoActualizar = new Producto();
-        
+
         productoActualizar.setCodigo(producto.getCodigo());
         productoActualizar.setCosto(producto.getCosto());
         productoActualizar.setMarca(producto.getMarca());
         productoActualizar.setNombre(producto.getNombre());
-        
-        
+
         try {
-            productosDAO.actualizarProducto(productoActualizar) ;
+            productosDAO.actualizarProducto(productoActualizar);
         } catch (PersistenciaException ex) {
-            throw new ObjetosNegocioException (ex.getMessage());
+            throw new ObjetosNegocioException(ex.getMessage());
         }
-        
+
     }
 
 }

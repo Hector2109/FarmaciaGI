@@ -17,6 +17,7 @@
             <groupId>org.itson.bdavanzadas</groupId>
             <artifactId>FarmaciaGI_dtos</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.itson.disenioSofware.MiFarmaciaGI.persistencia</groupId>

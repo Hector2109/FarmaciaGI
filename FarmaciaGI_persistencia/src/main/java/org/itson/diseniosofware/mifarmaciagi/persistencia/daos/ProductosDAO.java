@@ -211,7 +211,7 @@ public class ProductosDAO implements IProductosDAO {
      */
     @Override
     public List<Producto> obtenerInventario() {
-        List <Producto> productos = new LinkedList<>();
+        List<Producto> productos = new LinkedList<>();
         
         collection.find().into(productos);
         

@@ -80,6 +80,7 @@ public class PantallaVenta extends javax.swing.JFrame {
         lblPromociones = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPromocionesVenta = new javax.swing.JTable();
+        btnPromociones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Pantalla Venta"); // NOI18N
@@ -112,7 +113,7 @@ public class PantallaVenta extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,6 +300,13 @@ public class PantallaVenta extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblPromocionesVenta);
 
+        btnPromociones.setText("jButton1");
+        btnPromociones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromocionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -313,6 +321,8 @@ public class PantallaVenta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnBuscarProducto)
+                        .addGap(141, 141, 141)
+                        .addComponent(btnPromociones)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -351,7 +361,8 @@ public class PantallaVenta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnBuscarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPromociones))
                         .addGap(17, 17, 17))))
         );
 
@@ -414,6 +425,13 @@ public class PantallaVenta extends javax.swing.JFrame {
         DlgComprarProductos productosPrincipal = new DlgComprarProductos();
         productosPrincipal.setVisible(true);
     }//GEN-LAST:event_btnComprarProductosActionPerformed
+
+    private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
+        setVisible(false);
+        DlgPromociones pPromociones = new DlgPromociones(this, true);
+        pPromociones.setVisible(true);
+        setVisible(true);
+    }//GEN-LAST:event_btnPromocionesActionPerformed
 
     //Métodos 
     private void llenarTablaProductosVenta() {
@@ -580,6 +598,7 @@ public class PantallaVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnComprarProductos;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnPromociones;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnVenta;
     private javax.swing.JLabel jLabel1;
