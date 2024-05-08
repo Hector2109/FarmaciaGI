@@ -251,7 +251,9 @@ public class DlgPromociones extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
+        DlgModificarPromociones pModificarPromociones = new DlgModificarPromociones(parent, true);
+        pModificarPromociones.setVisible(true);
+        llenarTabla();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed

@@ -11,7 +11,8 @@ public class ProductoDTO {
     private Float costo;
     private String marca;
     private Integer cantidad;
-    private LinkedList <String> id_proveedores; 
+    private LinkedList<String> id_proveedores;
+
     /**
      * Constructor.
      */
@@ -161,9 +162,7 @@ public class ProductoDTO {
     public void setId_proveedores(LinkedList<String> id_proveedores) {
         this.id_proveedores = id_proveedores;
     }
-    
-    
-    
+
     /**
      * Permite sabe si el producto es válido o no.
      *
@@ -217,9 +216,5 @@ public class ProductoDTO {
     public String toString() {
         return nombre + ", " + marca + ", " + NumberFormat.getCurrencyInstance().format(costo);
     }
-    
-   
-    
-    
 
 }

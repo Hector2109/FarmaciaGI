@@ -31,7 +31,6 @@ public class PromocionBO implements IPromocionBO {
      */
     @Override
     public PromocionDTO obtenerPromocion(PromocionDTO promocionBuscada) {
-        System.out.println("siu");
         Promocion promocionAuxiliar = new Promocion(promocionBuscada.getCodigo());
 
         Promocion promocionRegistro = promocionesDAO.obtenerPromocion(promocionAuxiliar);
@@ -39,6 +38,8 @@ public class PromocionBO implements IPromocionBO {
         if (promocionRegistro == null) {
             return null;
         }
+        
+        
 
         ProductoDTO productoAuxiliar = new ProductoDTO(
                 promocionRegistro.getProducto().getCodigo(),
@@ -69,7 +70,7 @@ public class PromocionBO implements IPromocionBO {
 
             Promocion promocion = new Promocion(promocionNueva.getCodigo(), promocionNueva.getDescripcion(),
                     producto, promocionNueva.getCantidad(), promocionNueva.getPrecioUnitario());
-
+            
             try {
                 promocionesDAO.registrarPromocion(promocion);
             } catch (PersistenciaException ex) {

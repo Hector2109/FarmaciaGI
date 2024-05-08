@@ -91,7 +91,13 @@ public class PromocionDTO {
      * @return true si la promoción es válida, false en caso contrario
      */
     public boolean isValid() {
+        if (descripcion.isBlank()) {
+            return false;
+        }
         if (precioUnitario < 0) {
+            return false;
+        }
+        if (precioUnitario.isNaN()) {
             return false;
         }
         if (producto == null) {
@@ -135,6 +141,11 @@ public class PromocionDTO {
         }
         final PromocionDTO other = (PromocionDTO) obj;
         return Objects.equals(this.codigo, other.codigo);
+    }
+
+    @Override
+    public String toString() {
+        return descripcion + ", " + producto;
     }
 
 }

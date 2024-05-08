@@ -2,39 +2,36 @@ package org.itson.diseñosoftware.farmaciagi.interfaces;
 
 import java.awt.Color;
 import java.util.InputMismatchException;
-import java.util.Random;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
-import org.itson.disenosoftware.farmaciagi_subsistema_productos.IGestorProductos;
 import org.itson.disenosoftware.farmaciagi_subsistema_promociones.GestorPromociones;
 import org.itson.disenosoftware.farmaciagi_subsistema_promociones.IGestorPromociones;
 import org.itson.disenosoftware.farmaciagi_subsistema_promociones.excepciones.SubsistemaPromocionesException;
 
-public class DlgAgregarPromocion extends javax.swing.JDialog {
+public class DlgActualizarPromocion extends javax.swing.JDialog {
 
     private IGestorPromociones gestorPromociones;
-    private IGestorProductos gestorProductos;
-
+    private PromocionDTO promocionActualizar;
+    
     /**
-     * Creates new form DlgAgregarPromocion
-     *
+     * Creates new form DlgActualizarPromocion
      * @param parent
      * @param modal
      */
-    public DlgAgregarPromocion(java.awt.Frame parent, boolean modal) {
+    public DlgActualizarPromocion(java.awt.Frame parent, boolean modal, PromocionDTO promocionActualizar) {
         super(parent, modal);
         initComponents();
-
-        btnAgregar.setBackground(Color.WHITE);
+        
+        btnAceptar.setBackground(Color.WHITE);
         btnCancelar.setBackground(Color.WHITE);
-
+        txtProducto.setBackground(Color.WHITE);
+        txtDescripcion.setText(promocionActualizar.getDescripcion());
+        txtProducto.setText(promocionActualizar.getProducto().toString());
+        txtCantidad.setText(promocionActualizar.getCantidad().toString());
+        txtPrecioUnitario.setText(promocionActualizar.getPrecioUnitario().toString());
+        
         gestorPromociones = new GestorPromociones();
-        gestorProductos = new GestorProductos();
-        DefaultComboBoxModel listaProductos = productosComboBoxModel();
-        cbxProductos.setModel(listaProductos);
+        this.promocionActualizar = promocionActualizar;
     }
 
     /**
@@ -48,7 +45,7 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
 
         fondo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         txtDescripcion = new javax.swing.JTextField();
         lblDescripcion = new javax.swing.JLabel();
         lblProductos = new javax.swing.JLabel();
@@ -57,7 +54,7 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
         txtPrecioUnitario = new javax.swing.JTextField();
         lblPrecioUnitario = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
-        cbxProductos = new javax.swing.JComboBox<>();
+        txtProducto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,16 +64,16 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
 
         lblTitulo.setFont(new java.awt.Font("Arial", 1, 38)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("AGREGAR PROMOCIÓN");
+        lblTitulo.setText("ACTUALIZAR PROMOCIÓN");
 
-        btnAgregar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        btnAgregar.setText("AGREGAR");
-        btnAgregar.setFocusPainted(false);
-        btnAgregar.setMaximumSize(new java.awt.Dimension(100, 30));
-        btnAgregar.setPreferredSize(new java.awt.Dimension(173, 48));
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        btnAceptar.setText("ACEPTAR");
+        btnAceptar.setFocusPainted(false);
+        btnAceptar.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnAceptar.setPreferredSize(new java.awt.Dimension(173, 48));
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
 
@@ -112,7 +109,10 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
             }
         });
 
-        cbxProductos.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtProducto.setEditable(false);
+        txtProducto.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtProducto.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtProducto.setPreferredSize(new java.awt.Dimension(36, 37));
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -121,14 +121,14 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
-                .addGap(205, 205, 205))
+                .addGap(180, 180, 180))
             .addGroup(fondoLayout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(fondoLayout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(fondoLayout.createSequentialGroup()
                             .addComponent(lblPrecioUnitario)
@@ -143,9 +143,9 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
                                 .addComponent(lblCantidad)
                                 .addComponent(lblProductos))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                                .addComponent(cbxProductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         fondoLayout.setVerticalGroup(
@@ -157,11 +157,11 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescripcion)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(44, 44, 44)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProductos)
-                    .addComponent(cbxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCantidad)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +171,7 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
                     .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -191,22 +191,22 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(this, "¿Deseas confirmar la creación de la promoción?",
-                "Confirmar", JOptionPane.YES_NO_OPTION);
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Deseas confirmar la actualización de la promoción?",
+            "Confirmar", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
             try {
-                PromocionDTO promocionNueva = new PromocionDTO(generarCodigo(), txtDescripcion.getText(), (ProductoDTO) cbxProductos.getSelectedItem(),
+                PromocionDTO promocionActualizada = new PromocionDTO(promocionActualizar.getCodigo(), txtDescripcion.getText(), promocionActualizar.getProducto(),
                         Integer.valueOf(txtCantidad.getText()), Float.valueOf(txtPrecioUnitario.getText()));
 
-                if (promocionNueva.isValid()) {
+                if (promocionActualizada.isValid()) {
                     try {
-                        gestorPromociones.registrarPromocion(promocionNueva);
-                        JOptionPane.showMessageDialog(this, "Se registró correctamente la promoción.",
-                                "Información", JOptionPane.INFORMATION_MESSAGE);
+                        gestorPromociones.actualizarPromocion(promocionActualizada);
+                        JOptionPane.showMessageDialog(this, "Se actualizó correctamente la promoción.",
+                            "Información", JOptionPane.INFORMATION_MESSAGE);
                     } catch (SubsistemaPromocionesException ex) {
-                        JOptionPane.showMessageDialog(this, "No se pudo registrar la promoción.",
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "No se pudo actualizar la promoción.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     dispose();
                 } else {
@@ -216,39 +216,15 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Asegúrese de ingresar la información de la promoción correctamente.");
             }
         }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private String generarCodigo() {
-        Random rand = new Random();
-        int numeroAleatorio = rand.nextInt(100000);
-
-        String numeroFormateado = String.format("%05d", numeroAleatorio);
-        String codigoGenerado = "PRO-" + numeroFormateado;
-
-        return codigoGenerado;
-    }
-
-    private DefaultComboBoxModel<ProductoDTO> productosComboBoxModel() {
-        DefaultComboBoxModel<ProductoDTO> defaultComboBoxModel = new DefaultComboBoxModel<>();
-        if (!gestorProductos.obtnerInventario().isEmpty()) {
-            // Para cada elemento de la Lista 
-            for (int i = 0; i < gestorProductos.obtnerInventario().size(); i++) {
-                // Agregalo a la instancia de la clase DefaultComboBoxModel 
-                defaultComboBoxModel.addElement(gestorProductos.obtnerInventario().get(i));
-            }
-            return defaultComboBoxModel;
-        }
-        return null;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JComboBox<String> cbxProductos;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblDescripcion;
@@ -258,5 +234,6 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecioUnitario;
+    private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
 }
