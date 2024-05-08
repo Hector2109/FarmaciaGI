@@ -41,6 +41,7 @@ public class ProductosDAO implements IProductosDAO {
 
         // Se verifica que el producto no exista antes de registrarlo
         if (obtenerProducto(nuevoProducto) == null) {
+            nuevoProducto.setCantidad(0);
             collection.insertOne(nuevoProducto);
             return nuevoProducto;
         } else {
