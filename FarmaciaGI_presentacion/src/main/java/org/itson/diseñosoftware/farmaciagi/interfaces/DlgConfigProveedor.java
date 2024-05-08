@@ -367,6 +367,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
                 );
                 
                 gestorProveedores.registrarProveedor(proveedorSeleccionado);
+                JOptionPane.showMessageDialog(null, "Proveedor registrado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
         } else {
@@ -394,6 +395,7 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
                 
                 try {
                     gestorProveedores.actualizarProveedor(proveedorSeleccionado);
+                    JOptionPane.showMessageDialog(null, "Proveedor actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 } catch (GestorProveedoresException ex) {
                     Logger.getLogger(DlgConfigProveedor.class.getName()).log(Level.SEVERE, null, ex);
                 }
