@@ -339,7 +339,7 @@ public class DlgInventarioProveedores extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Proveedor asignado correctamente al producto", "Proveedor asignado", JOptionPane.INFORMATION_MESSAGE);
                 volver();
             } catch (GestorProductosException ex) {
-                Logger.getLogger(DlgInventarioProveedores.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(parent, ex.getMessage(), "Error: No es posible asignar proveedor", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             // Mostrar un mensaje de advertencia si no hay fila seleccionada

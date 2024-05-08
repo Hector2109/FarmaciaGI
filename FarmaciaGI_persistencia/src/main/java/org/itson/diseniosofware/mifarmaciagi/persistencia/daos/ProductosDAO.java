@@ -41,6 +41,9 @@ public class ProductosDAO implements IProductosDAO {
 
         // Se verifica que el producto no exista antes de registrarlo
         if (obtenerProducto(nuevoProducto) == null) {
+            List <ObjectId> proveedores = new LinkedList<>();
+            nuevoProducto.setId_proveedores ((LinkedList<ObjectId>) proveedores);
+            nuevoProducto.setCantidad(0);
             collection.insertOne(nuevoProducto);
             return nuevoProducto;
         } else {

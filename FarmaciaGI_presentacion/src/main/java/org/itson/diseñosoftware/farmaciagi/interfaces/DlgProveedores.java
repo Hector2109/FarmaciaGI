@@ -310,18 +310,34 @@ public class DlgProveedores extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // Obtener la fila seleccionada en la tabla
+        /// Obtener la fila seleccionada en la tabla
         int filaSeleccionada = tblProveedores.getSelectedRow();
 
         if (filaSeleccionada != -1) { // Verificar que haya una fila seleccionada
-            // Obtener el proveedor seleccionado en la tabla
-            ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
+            
+            // Preguntar al usuario si está seguro de eliminar
+            Object[] options = {"Sí, estoy seguro", "Cancelar"};
+            int confirmacion = JOptionPane.showOptionDialog(
+                    null,
+                    "¿Está seguro de que desea eliminar este proveedor?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
 
-            try {
-                // Abrir el diálogo con la opción seleccionada y el proveedor seleccionado
-                gestorProveedores.eliminarProveedor(proveedorSeleccionado);
-            } catch (GestorProveedoresException ex) {
-                Logger.getLogger(DlgProveedores.class.getName()).log(Level.SEVERE, null, ex);
+            if (confirmacion == JOptionPane.YES_OPTION) { // Si el usuario confirma
+                // Obtener el proveedor seleccionado en la tabla
+                ProveedorDTO proveedorSeleccionado = proveedores.get(filaSeleccionada);
+
+                try {
+                    // Abrir el diálogo con la opción seleccionada y el proveedor seleccionado
+                    gestorProveedores.eliminarProveedor(proveedorSeleccionado);
+                } catch (GestorProveedoresException ex) {
+                    Logger.getLogger(DlgProveedores.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             // Mostrar un mensaje de advertencia si no hay fila seleccionada

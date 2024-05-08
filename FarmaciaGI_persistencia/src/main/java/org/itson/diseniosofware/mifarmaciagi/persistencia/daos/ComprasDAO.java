@@ -11,6 +11,8 @@ import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.plaf.RootPaneUI;
 import org.bson.types.ObjectId;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
@@ -79,11 +81,11 @@ public class ComprasDAO implements IComprasDAO {
         return compraEncontrada;
 
     }
-    
+
     /**
      * Método para encontrar a los proveedores que le pertenecen a la compra de
      * un producto.
-     * 
+     *
      * @param producto Producto que referencia proveedores.
      * @return lista de proveedores
      */
@@ -92,14 +94,14 @@ public class ComprasDAO implements IComprasDAO {
         producto = productosDAO.obtenerProducto(producto);
         List<Proveedor> proveedores = new ArrayList<>();
         LinkedList<ObjectId> proveedoresIds = producto.getId_proveedores();
-
         for (ObjectId proveedorId : proveedoresIds) {
             Proveedor proveedor = collection2.find(Filters.eq("_id", proveedorId)).first();
             if (proveedor != null) {
                 proveedores.add(proveedor);
-                
+
             }
         }
         return proveedores;
+
     }
 }

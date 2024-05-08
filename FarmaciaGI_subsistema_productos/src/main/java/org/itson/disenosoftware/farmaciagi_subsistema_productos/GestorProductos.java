@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
+import org.itson.disenosoftware.farmaciagi_subsistema_productos.Validaciones.ExpresionesRegulares;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.ControlProductosException;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.excepciones.GestorProductosException;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
@@ -65,10 +66,15 @@ public class GestorProductos implements IGestorProductos {
      */
     @Override
     public ProductoDTO registrarProducto(ProductoDTO productoDTO) throws GestorProductosException {
-        try {
-            return control.registrarProducto(productoDTO);
-        } catch (ControlProductosException ex) {
-            throw new GestorProductosException(ex.getMessage());
+        productoDTO.setCodigo(productoDTO.getCodigo().toUpperCase());
+        if (ExpresionesRegulares.validarCodigo(productoDTO.getCodigo())) {
+            try {
+                return control.registrarProducto(productoDTO);
+            } catch (ControlProductosException ex) {
+                throw new GestorProductosException(ex.getMessage());
+            }
+        } else {
+            throw new GestorProductosException("Error: el código debe estar en formato AAA-###");
         }
     }
 
@@ -87,6 +93,7 @@ public class GestorProductos implements IGestorProductos {
         } catch (ObjetosNegocioException ex) {
             throw new GestorProductosException(ex.getMessage());
         }
+
     }
 
 }

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.itson.disenosoftware.farmaciagi_dtos.CompraDTO;
+
 import org.itson.disenosoftware.farmaciagi_dtos.ProductoDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.disenosoftware.farmaciagi_subsistema_productos.GestorProductos;
@@ -29,6 +30,12 @@ public class DlgRealizarCompra extends javax.swing.JDialog {
     private IGestorCompraProductos gestorCompras;
     private IGestorProductos gestorProductos;
     
+    /**
+     * Método constructor del DLG que inicializa diferentes gestores y atributos.
+     * 
+     * @param proveedorSeleccionado ProveedorDTO
+     * @param productoSeleccionado ProductoDTO
+     */
     public DlgRealizarCompra(ProveedorDTO proveedorSeleccionado, ProductoDTO productoSeleccionado) {
         initComponents();
         this.proveedorSeleccionado = proveedorSeleccionado;
@@ -163,14 +170,23 @@ public class DlgRealizarCompra extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if (txtCantidad.getText().isBlank() || txtCantidad.getText() == "" || txtCantidad.getText().equalsIgnoreCase("0")) {
-            JOptionPane.showMessageDialog(rootPane, "No puede dejar el campo vacio");
+        String cantidad = txtCantidad.getText().trim();
+        
+        if (cantidad.isBlank() || cantidad.equals("") || cantidad.equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un dato válido");
         } else {
-            realizarCompra();
+            if (cantidad.matches("^\\d+$")) {
+                realizarCompra();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese un número entero válido");
+            }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    //Métodos
+    /**
+     * Método para realizar la compra, este se comunica con los gestores pertinentes.
+     * 
+     */
     private void realizarCompra(){
         CompraDTO compra = new CompraDTO();
         compra.setProducto(productoSeleccionado);
