@@ -28,6 +28,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnComprarProductos2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -39,12 +40,22 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         btnProductos = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        btnComprarProductos3 = new javax.swing.JButton();
         btnRegistrarProducto = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnAsignar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+
+        btnComprarProductos2.setBackground(new java.awt.Color(166, 164, 255));
+        btnComprarProductos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icono_carrito.png"))); // NOI18N
+        btnComprarProductos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarProductos2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -166,15 +177,37 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(145, 145));
         jPanel3.setRequestFocusEnabled(false);
 
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Compra");
+
+        btnComprarProductos3.setBackground(new java.awt.Color(166, 164, 255));
+        btnComprarProductos3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icono_carrito.png"))); // NOI18N
+        btnComprarProductos3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarProductos3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnComprarProductos3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnComprarProductos3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(22, 22, 22))
         );
 
         btnRegistrarProducto.setBackground(new java.awt.Color(216, 215, 255));
@@ -327,9 +360,25 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         inventario.setVisible(true);
     }//GEN-LAST:event_btnAsignarActionPerformed
 
+    private void btnComprarProductos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductos2ActionPerformed
+        dispose();
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
+        productosPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnComprarProductos2ActionPerformed
+
+    private void btnComprarProductos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductos3ActionPerformed
+        dispose();
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos();
+        productosPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnComprarProductos3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignar;
+    private javax.swing.JButton btnComprarProductos;
+    private javax.swing.JButton btnComprarProductos1;
+    private javax.swing.JButton btnComprarProductos2;
+    private javax.swing.JButton btnComprarProductos3;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
@@ -341,6 +390,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
