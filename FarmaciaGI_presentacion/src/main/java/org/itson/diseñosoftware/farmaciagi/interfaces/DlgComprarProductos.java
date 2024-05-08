@@ -29,6 +29,9 @@ public class DlgComprarProductos extends javax.swing.JDialog {
     private List<ProductoDTO> productos;
     private Frame parent;
     
+    /**
+     * Método constructor del DLG que inicializa diferentes gestores y atributos.
+     */
     public DlgComprarProductos() {
         gestorProductos = new GestorProductos();
         this.productos = new LinkedList<>();
@@ -293,7 +296,9 @@ public class DlgComprarProductos extends javax.swing.JDialog {
         dlgPromociones.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    //Métodos
+    /**
+     * Método para llenar la tabla de productos existentes
+     */
     private void llenarTablaProductos() {
         DefaultTableModel modelo = new DefaultTableModel();
         

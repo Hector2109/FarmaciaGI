@@ -29,6 +29,12 @@ public class DlgRealizarCompra extends javax.swing.JDialog {
     private IGestorCompraProductos gestorCompras;
     private IGestorProductos gestorProductos;
     
+    /**
+     * Método constructor del DLG que inicializa diferentes gestores y atributos.
+     * 
+     * @param proveedorSeleccionado ProveedorDTO
+     * @param productoSeleccionado ProductoDTO
+     */
     public DlgRealizarCompra(ProveedorDTO proveedorSeleccionado, ProductoDTO productoSeleccionado) {
         initComponents();
         this.proveedorSeleccionado = proveedorSeleccionado;
@@ -176,7 +182,10 @@ public class DlgRealizarCompra extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    //Métodos
+    /**
+     * Método para realizar la compra, este se comunica con los gestores pertinentes.
+     * 
+     */
     private void realizarCompra(){
         CompraDTO compra = new CompraDTO();
         compra.setProducto(productoSeleccionado);

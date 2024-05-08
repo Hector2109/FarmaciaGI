@@ -30,6 +30,11 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
     private IGestorCompraProductos gestorCompras;
     private ProductoDTO productoSeleccionado;
 
+    /**
+     * Método constructor del DLG que inicializa diferentes gestores y atributos.
+     * 
+     * @param productoSeleccionado ProductoDTO
+     */
     public DlgOpcionesProveedores(ProductoDTO productoSeleccionado) {
         initComponents();
         this.productoSeleccionado = productoSeleccionado;
@@ -149,7 +154,10 @@ public class DlgOpcionesProveedores extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    //Métodos
+    /**
+     * Método de llenado de tabla, dependiendo del producto que tiene la clase
+     * establecido en su atributo productoSeleccionado
+     */
     public void llenarTabla() {
         try {
             DefaultTableModel modelo = new DefaultTableModel();
