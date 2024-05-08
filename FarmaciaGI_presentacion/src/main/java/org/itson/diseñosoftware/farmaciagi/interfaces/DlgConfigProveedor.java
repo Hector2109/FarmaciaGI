@@ -4,6 +4,7 @@
  */
 package org.itson.diseñosoftware.farmaciagi.interfaces;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,11 +39,14 @@ public class DlgConfigProveedor extends javax.swing.JDialog {
         this.proveedorSeleccionado = provedorSeleccionado;
         this.gestorProveedores = new GestorProveedores();
         
+        btnAccion.setBackground(Color.WHITE);
+        btnCancelar.setBackground(Color.WHITE);
+        
         if (operacion == ConstantesGUI.REGISTRAR) {
-            btnAccion.setText("Registrar");
+            btnAccion.setText("REGISTRAR");
             this.setTitle("Registro de Proveedores");
         } else {
-            btnAccion.setText("Actualizar");
+            btnAccion.setText("ACTUALIZAR");
             this.setTitle("Actualizacion de Proveedores");
             txtEjemplo.setText("");
             
