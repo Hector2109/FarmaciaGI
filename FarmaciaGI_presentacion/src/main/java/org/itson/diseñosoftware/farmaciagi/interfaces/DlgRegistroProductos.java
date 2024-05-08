@@ -49,6 +49,10 @@ public class DlgRegistroProductos extends javax.swing.JDialog {
         txtCosto.setText(String.valueOf(producto.getCosto()));
         txtCodigo.setEditable(false);
         btnRegistrar.setText("Actualizar");
+        
+        btnVolver.setBackground(Color.WHITE);
+        btnRestaurar.setBackground(Color.WHITE);
+        btnRegistrar.setBackground(Color.WHITE);
     }
 
     /**

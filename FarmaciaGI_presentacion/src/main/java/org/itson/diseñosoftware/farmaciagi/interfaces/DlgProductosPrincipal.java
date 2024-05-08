@@ -45,7 +45,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         btnProductos = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        btnComprarProductos3 = new javax.swing.JButton();
+        btnComprarProductos = new javax.swing.JButton();
         btnRegistrarProducto = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
@@ -53,7 +53,7 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         btnAsignar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnPromociones = new javax.swing.JButton();
 
         btnComprarProductos2.setBackground(new java.awt.Color(166, 164, 255));
         btnComprarProductos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icono_carrito.png"))); // NOI18N
@@ -148,13 +148,13 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(145, 145));
         jPanel3.setRequestFocusEnabled(false);
 
-        btnComprarProductos3.setBackground(new java.awt.Color(166, 164, 255));
-        btnComprarProductos3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icono_carrito.png"))); // NOI18N
-        btnComprarProductos3.setBorderPainted(false);
-        btnComprarProductos3.setFocusPainted(false);
-        btnComprarProductos3.addActionListener(new java.awt.event.ActionListener() {
+        btnComprarProductos.setBackground(new java.awt.Color(166, 164, 255));
+        btnComprarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icono_carrito.png"))); // NOI18N
+        btnComprarProductos.setBorderPainted(false);
+        btnComprarProductos.setFocusPainted(false);
+        btnComprarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComprarProductos3ActionPerformed(evt);
+                btnComprarProductosActionPerformed(evt);
             }
         });
 
@@ -162,11 +162,11 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnComprarProductos3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnComprarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnComprarProductos3, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+            .addComponent(btnComprarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
         );
 
         btnRegistrarProducto.setBackground(new java.awt.Color(216, 215, 255));
@@ -209,14 +209,14 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jPanel4.setPreferredSize(new java.awt.Dimension(145, 145));
         jPanel4.setRequestFocusEnabled(false);
 
-        jButton1.setBackground(new java.awt.Color(166, 164, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tagIcon.png"))); // NOI18N
-        jButton1.setActionCommand("btnPromociones");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPromociones.setBackground(new java.awt.Color(166, 164, 255));
+        btnPromociones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tagIcon.png"))); // NOI18N
+        btnPromociones.setActionCommand("btnPromociones");
+        btnPromociones.setBorderPainted(false);
+        btnPromociones.setFocusPainted(false);
+        btnPromociones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPromocionesActionPerformed(evt);
             }
         });
 
@@ -224,11 +224,11 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+            .addComponent(btnPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -356,28 +356,28 @@ public class DlgProductosPrincipal extends javax.swing.JDialog {
         productosPrincipal.setVisible(true);
     }//GEN-LAST:event_btnComprarProductos2ActionPerformed
 
-    private void btnComprarProductos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductos3ActionPerformed
-        dispose();
-        DlgComprarProductos productosPrincipal = new DlgComprarProductos(parent, true);
-        productosPrincipal.setVisible(true);
-    }//GEN-LAST:event_btnComprarProductos3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
         dispose();
         DlgPromociones dlgPromociones = new DlgPromociones(parent, true);
         dlgPromociones.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPromocionesActionPerformed
+
+    private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
+        dispose();
+        DlgComprarProductos productosPrincipal = new DlgComprarProductos(parent, true);
+        productosPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnComprarProductosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignar;
+    private javax.swing.JButton btnComprarProductos;
     private javax.swing.JButton btnComprarProductos2;
-    private javax.swing.JButton btnComprarProductos3;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnPromociones;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRegistrarProducto;
     private javax.swing.JButton btnVenta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
