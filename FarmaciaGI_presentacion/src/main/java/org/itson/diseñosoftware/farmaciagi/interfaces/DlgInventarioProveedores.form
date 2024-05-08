@@ -60,7 +60,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btnVolver" min="-2" pref="190" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnAsignar" min="-2" pref="302" max="-2" attributes="0"/>
+                          <Component id="btnAsignar" min="-2" pref="320" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
                   </Group>
