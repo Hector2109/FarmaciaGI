@@ -65,6 +65,7 @@ public class PromocionBO implements IPromocionBO {
                     promocionNueva.getProducto().getNombre(),
                     promocionNueva.getProducto().getCosto(),
                     promocionNueva.getProducto().getCodigo());
+            producto.setMarca(promocionNueva.getProducto().getMarca());
 
             Promocion promocion = new Promocion(promocionNueva.getCodigo(), promocionNueva.getDescripcion(),
                     producto, promocionNueva.getCantidad(), promocionNueva.getPrecioUnitario());

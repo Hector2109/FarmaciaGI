@@ -34,6 +34,7 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
         gestorPromociones = new GestorPromociones();
         gestorProductos = new GestorProductos();
         listaProductos = productosComboBoxModel();
+        cbxProductos.setModel(listaProductos);
     }
 
     /**
@@ -55,8 +56,8 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
         lblCantidad = new javax.swing.JLabel();
         txtPrecioUnitario = new javax.swing.JTextField();
         lblPrecioUnitario = new javax.swing.JLabel();
-        cbxProductos = new javax.swing.JComboBox<>();
         btnCancelar = new javax.swing.JButton();
+        cbxProductos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,9 +101,6 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
         lblPrecioUnitario.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblPrecioUnitario.setText("PRECIO UNITARIO");
 
-        cbxProductos.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        cbxProductos.setModel(listaProductos);
-
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnCancelar.setText("CANCELAR");
         btnCancelar.setFocusPainted(false);
@@ -113,6 +111,8 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
                 btnCancelarActionPerformed(evt);
             }
         });
+
+        cbxProductos.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -157,11 +157,11 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescripcion)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(45, 45, 45)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProductos)
                     .addComponent(cbxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(45, 45, 45)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCantidad)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,6 +204,8 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "No se pudo registrar la promoción",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
+            dispose();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -223,7 +225,7 @@ public class DlgAgregarPromocion extends javax.swing.JDialog {
     
     private DefaultComboBoxModel<ProductoDTO> productosComboBoxModel() {
         DefaultComboBoxModel<ProductoDTO> defaultComboBoxModel = new DefaultComboBoxModel<>();
-        if (gestorProductos.obtnerInventario() != null) {
+        if (!gestorProductos.obtnerInventario().isEmpty()) {
             // Para cada elemento de la Lista 
             for (int i = 0; i < gestorProductos.obtnerInventario().size(); i++) {
                 // Agregalo a la instancia de la clase DefaultComboBoxModel 

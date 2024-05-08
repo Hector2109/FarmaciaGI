@@ -1,5 +1,6 @@
 package org.itson.disenosoftware.farmaciagi_dtos;
 
+import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.Objects;
 
@@ -211,5 +212,14 @@ public class ProductoDTO {
         final ProductoDTO other = (ProductoDTO) obj;
         return Objects.equals(this.codigo, other.codigo);
     }
+
+    @Override
+    public String toString() {
+        return nombre + ", " + marca + ", " + NumberFormat.getCurrencyInstance().format(costo);
+    }
+    
+   
+    
+    
 
 }

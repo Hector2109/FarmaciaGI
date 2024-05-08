@@ -261,6 +261,7 @@ public class DlgPromociones extends javax.swing.JDialog {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         DlgAgregarPromocion pAgregarPromocion = new DlgAgregarPromocion(parent, true);
         pAgregarPromocion.setVisible(true);
+        llenarTabla();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void llenarTabla() {

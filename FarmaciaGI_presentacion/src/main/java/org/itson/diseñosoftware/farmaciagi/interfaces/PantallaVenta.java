@@ -427,10 +427,9 @@ public class PantallaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComprarProductosActionPerformed
 
     private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
-        setVisible(false);
         DlgPromociones pPromociones = new DlgPromociones(this, true);
         pPromociones.setVisible(true);
-        setVisible(true);
+        llenarTablaPromociones();
     }//GEN-LAST:event_btnPromocionesActionPerformed
 
     //Métodos 
