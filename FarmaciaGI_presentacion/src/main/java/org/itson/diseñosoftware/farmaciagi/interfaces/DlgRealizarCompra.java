@@ -163,7 +163,7 @@ public class DlgRealizarCompra extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if (txtCantidad.getText().isBlank() || txtCantidad.getText() == "") {
+        if (txtCantidad.getText().isBlank() || txtCantidad.getText() == "" || txtCantidad.getText().equalsIgnoreCase("0")) {
             JOptionPane.showMessageDialog(rootPane, "No puede dejar el campo vacio");
         } else {
             realizarCompra();
