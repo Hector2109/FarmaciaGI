@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.Conexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
@@ -41,8 +42,8 @@ public class ProductosDAO implements IProductosDAO {
 
         // Se verifica que el producto no exista antes de registrarlo
         if (obtenerProducto(nuevoProducto) == null) {
-            List <ObjectId> proveedores = new LinkedList<>();
-            nuevoProducto.setId_proveedores ((LinkedList<ObjectId>) proveedores);
+            List<ObjectId> proveedores = new LinkedList<>();
+            nuevoProducto.setId_proveedores((LinkedList<ObjectId>) proveedores);
             nuevoProducto.setCantidad(0);
             collection.insertOne(nuevoProducto);
             return nuevoProducto;
@@ -165,26 +166,26 @@ public class ProductosDAO implements IProductosDAO {
     @Override
     public void asignarProveedor(Producto producto, Proveedor proveedor) throws PersistenciaException {
         producto = obtenerProducto(producto);
-        
-        if (producto!=null){
+
+        if (producto != null) {
             IConexion conexion = new Conexion();
             IProveedoresDAO proveedoresDAO = new ProveedoresDAO(conexion);
             proveedor = proveedoresDAO.obtenerProveedor(proveedor);
-            if (proveedor!=null){
-                LinkedList <ObjectId> proveedores = producto.getId_proveedores();
-                if (proveedores!=null){
-                    if (!proveedores.contains(proveedor.getId())){
+            if (proveedor != null) {
+                LinkedList<ObjectId> proveedores = producto.getId_proveedores();
+                if (proveedores != null) {
+                    if (!proveedores.contains(proveedor.getId())) {
                         proveedores.add(proveedor.getId());
-                    }else{
-                        throw new PersistenciaException ("Error: Al producto ya se le asigno este proveedor");
+                    } else {
+                        throw new PersistenciaException("Error: Al producto ya se le asigno este proveedor");
                     }
-                }else{
+                } else {
                     proveedores = new LinkedList();
                     proveedores.add(proveedor.getId());
                 }
                 actualizarProveedores(proveedores, producto);
-            }else{
-                throw new PersistenciaException ("Error: El proveedor no existe");
+            } else {
+                throw new PersistenciaException("Error: El proveedor no existe");
             }
         }
     }
@@ -215,10 +216,38 @@ public class ProductosDAO implements IProductosDAO {
     @Override
     public List<Producto> obtenerInventario() {
         List<Producto> productos = new LinkedList<>();
-        
+
         collection.find().into(productos);
-        
+
         return productos;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void eliminarProveedor(Proveedor proveedor) {
+
+        List<Producto> productos = new LinkedList<>();
+        ObjectId proveedorId= proveedor.getId();
+        
+        Bson filtro = eq("id_proveedores", proveedorId);
+
+        collection.find(filtro).into(productos);
+
+        if (!productos.isEmpty()) {
+
+            for (Producto p : productos) {
+
+                List<ObjectId> proveedores = p.getId_proveedores();
+                proveedores.remove(proveedorId);
+
+                collection.findOneAndUpdate(new Document()
+                        .append("_id", p.getId()),
+                        new Document("$set", new Document()
+                                .append("id_proveedores", proveedores)));
+            }
+        }
     }
 
 }

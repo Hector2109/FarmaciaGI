@@ -195,8 +195,10 @@ public class Producto {
         sb.append(", costo=").append(costo);
         sb.append(", codigo=").append(codigo);
         sb.append(", cantidad=").append(cantidad);
+        sb.append(", id_proveedores=").append(id_proveedores);
         sb.append('}');
         return sb.toString();
     }
+    
 
 }

@@ -83,4 +83,10 @@ public interface IProductosDAO {
      * @return Lista de productos registrados
      */
     public List<Producto> obtenerInventario();
+    
+    /**
+     * Este método elimina un proveedor de todos los productos que lo contengan
+     * @param proveedor proveedor a eiminar
+     */
+    public void eliminarProveedor(Proveedor proveedor);
 }

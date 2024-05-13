@@ -52,7 +52,8 @@ public class ProveedoresDAO implements IProveedoresDAO {
      */
     @Override
     public void eliminarProveedor(Proveedor proveedor) throws PersistenciaException {
-        if (obtenerProveedor(proveedor) != null) {
+        proveedor = obtenerProveedor(proveedor);
+        if (proveedor != null) {
             Bson filtro = eq("rfc", proveedor.getRfc());
             collection.deleteOne(filtro);
             logger.log(Level.INFO, "Proveedor eliminado");
