@@ -17,7 +17,7 @@ import org.itson.disenosoftware.farmaciagi_dtos.PromocionDTO;
 import org.itson.disenosoftware.farmaciagi_dtos.VentaDTO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
-public class VentaBO {
+public class VentaBO implements IVentaBO{
 
     private IVentasDAO ventasDAO;
 
@@ -30,11 +30,9 @@ public class VentaBO {
     }
 
     /**
-     * Permite registrar una venta en el registro.
-     *
-     * @param ventaNueva La venta a registrar
-     * @throws ObjetosNegocioException Si no se puede registrar la venta
+     * {@inheritDoc }
      */
+    @Override
     public void registrarVenta(VentaDTO ventaNueva) throws ObjetosNegocioException {
         Venta venta = null;
         String codigo;
