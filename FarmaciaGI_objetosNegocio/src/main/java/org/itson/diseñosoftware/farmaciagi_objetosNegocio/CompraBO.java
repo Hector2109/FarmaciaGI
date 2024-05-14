@@ -24,7 +24,9 @@ import org.itson.disenosoftware.farmaciagi_dtos.ProveedorDTO;
 import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNegocioException;
 
 /**
- *
+ * Clase de Compras BO, esta clase maneja los objetos negocio que conforman a una
+ * compra
+ * 
  * @author Enrique Rodriguez
  */
 public class CompraBO implements ICompraBO{

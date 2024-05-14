@@ -21,7 +21,9 @@ import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Producto;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.entidades.Proveedor;
 
 /**
- *
+ * Clase DAO para compras, esta clase esta encargada de la gestion y conexión
+ * con la base de datos, todo referente a compras.
+ * 
  * @author Enrique Rodriguez
  */
 public class ComprasDAO implements IComprasDAO {
