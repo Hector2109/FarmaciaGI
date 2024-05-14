@@ -87,6 +87,11 @@ class ControlGestorProductos {
         
     }
     
+    /**
+     * Métod para actualizar un producto del registro
+     * @param productoDTO producto a actualizar
+     * @throws GestorProductosException en caso de algun error
+     */
     public void actualizarProducto(ProductoDTO productoDTO) throws ObjetosNegocioException{
         try {
             producto.actualizarProducto(productoDTO);

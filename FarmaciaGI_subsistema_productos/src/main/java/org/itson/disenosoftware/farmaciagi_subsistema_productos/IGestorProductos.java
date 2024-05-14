@@ -57,10 +57,10 @@ public interface IGestorProductos {
      */
     public List <ProductoDTO> obtnerInventario();
     
-    /**
-     * Método para actualizar un producto 
+   /**
+     * Método para actualizar un producto del registro
      * @param producto producto a actualizar
-     * @throws GestorProductosException en caso de algún error
+     * @throws GestorProductosException en caso de algun error
      */
     public void actualizarProducto (ProductoDTO producto) throws GestorProductosException;
 }

@@ -86,6 +86,11 @@ public class GestorProductos implements IGestorProductos {
         return control.obtenerInventario();
     }
 
+    /**
+     * Métod para actualizar un producto del registro
+     * @param producto producto a actualizar
+     * @throws GestorProductosException en caso de algun error
+     */
     @Override
     public void actualizarProducto(ProductoDTO producto) throws GestorProductosException {
         try {
