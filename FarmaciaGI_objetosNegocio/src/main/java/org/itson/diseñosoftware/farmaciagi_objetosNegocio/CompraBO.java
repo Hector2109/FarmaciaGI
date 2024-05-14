@@ -27,7 +27,7 @@ import org.itson.diseñosoftware.farmaciagi_objetosNegocio.excepciones.ObjetosNe
  *
  * @author Enrique Rodriguez
  */
-public class CompraBO {
+public class CompraBO implements ICompraBO{
 
     private IComprasDAO comprasDAO;
 
@@ -36,6 +36,14 @@ public class CompraBO {
         comprasDAO = new ComprasDAO(conexion);
     }
 
+    /**
+     * Método para registrar una compra
+     *
+     * @param compraNueva compra a registrar.
+     *
+     * @throws ObjetosNegocioException En caso de no poder agregar
+     */
+    @Override
     public void registrarCompra(CompraDTO compraNueva) throws ObjetosNegocioException {
         Compra compra = null;
         String codigo;
@@ -56,18 +64,18 @@ public class CompraBO {
         proveedor.setNombre(compraNueva.getProveedor().getNombre());
         proveedor.setTelefonos(compraNueva.getProveedor().getTelefonos());
         proveedor.setRfc(compraNueva.getProveedor().getRfc());
-        
+
         //Establecer los valores de dirección
         Direccion direccion = new Direccion();
         direccion.setCalle(compraNueva.getProveedor().getDireccion().getCalle());
         direccion.setCiudad(compraNueva.getProveedor().getDireccion().getCiudad());
         direccion.setCodigo_postal(compraNueva.getProveedor().getDireccion().getCodigo_postal());
         direccion.setColonia(compraNueva.getProveedor().getDireccion().getColonia());
-        direccion.setNumero(compraNueva.getProveedor().getDireccion().getNumero()); 
+        direccion.setNumero(compraNueva.getProveedor().getDireccion().getNumero());
         proveedor.setDireccion(direccion);
-        
+
         compra.setProveedor(proveedor);
-        
+
         Producto producto = new Producto();
         producto.setCantidad(compraNueva.getProducto().getCantidad());
         producto.setCodigo(compraNueva.getProducto().getCodigo());
@@ -83,7 +91,15 @@ public class CompraBO {
             throw new ObjetosNegocioException("No se pudo registrar la compra.");
         }
     }
-
+    
+    /**
+     * Método para encontrar una serie de proveedores asociados a un producto
+     * 
+     * @param productoDTO producto a evaluar.
+     * @return lista de proveedores
+     * @throws ObjetosNegocioException 
+     */
+    @Override
     public List<ProveedorDTO> encontrarProveedores(ProductoDTO productoDTO) throws ObjetosNegocioException {
         Producto producto = new Producto();
         producto.setCodigo(productoDTO.getCodigo());
