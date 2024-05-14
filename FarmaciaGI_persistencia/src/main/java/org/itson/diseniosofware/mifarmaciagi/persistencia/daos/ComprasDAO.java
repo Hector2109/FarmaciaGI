@@ -11,8 +11,6 @@ import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.plaf.RootPaneUI;
 import org.bson.types.ObjectId;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Conexion.IConexion;
 import org.itson.diseniosofware.mifarmaciagi.persistencia.Exception.PersistenciaException;
